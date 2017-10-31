@@ -31,8 +31,7 @@ In order to test the precision of the MPS formalism and the ITensor library, the
         \includegraphics[width=\textwidth]{Figures/Confrac_exactvsMPS.pdf}
         \caption{\textit{Absolute difference between the condensate fraction calculated using MPS and using exact diagonalisation.}}
         \label{fig:Condfrac_exactvsMPS}
-    \end{subfigure}
-    
+    \end{subfigure}    
 \end{figure}
 Figure \ref{fig:Condfrac_4to10} shows the condensate fraction for various $U/J$ calculated using MPS. In the limit $U/J = 0$ the condensate fraction is 1 as expected, thus confirming that the system is in the SF state. Meanwhile, in the limit $U/J = 50$ the condensate fraction is dependent on the number of particles, however, this is just as equation \ref{eq:MI_lim} describes.\\
 Comparing the results of the MPS calculation with exact diagonalisation yields figure \ref{fig:Condfrac_exactvsMPS}, which displays the absolute difference between the two calculations. It is clear, that the two approaches yields very similar results for low particle-number.\\
@@ -44,3 +43,24 @@ One of the great advantages of MPS is its ability to accurately describe states 
 	\label{fig:Condfrac_4to50}
 \end{figure}
 Figure \ref{fig:Condfrac_4to50} shows the results of the DMRG calculations for up to 50 particles. The condensate fraction behaves as expected in the $U/J \gg 1$ limit, as it tends towards zero for larger particle numbers. However, in the SF limit the results are not at all as described by equation \ref{eq:SF_lim}. This is due to a flaw of the MPS description, as correlation functions of an MPS \textit{always} will decay exponentially, thus limiting the correlation length $\xi$. As the systems grows in size, its length exceeds the correlation length of the MPS. This is an issue when describing a pure SF state, as it exhibits very long range correlations. Thus, the MPS is unable to describe the long-range correlation functions of the SF state, resulting in the abnormal behaviour of the result in the $U/J \ll 1$ limit.
+
+\subsection{Visualization of density matrices}
+One way of displaying the correlations of the system is to plot its density matrix, whose entries are given by
+\begin{equation}
+	\rho_{i,j} = \bra{\psi} \hat{a}_{i}^{\dag} \hat{a}_j \ket{\psi} \; .
+\end{equation}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{Figures/DensityMatSF.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 0.1$.}}
+        \label{fig:DensityMatSF}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{Figures/DensityMatMI.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 12$.}}
+        \label{fig:DensityMatMI}
+    \end{subfigure}    
+\end{figure}
+Figures \ref{fig:DensityMatSF} and \ref{fig:DensityMatMI} show the density matrix of the 50 particle system plotted for the Superfluid and the Mott-Insulator limit respectively. In the SF limit long-range correlations are present, which is seen by large off-diagonal elements. However, as discussed previously, in the MPS description all correlations decay exponentially, which causes issues for the elements furthest from the diagonal (top-right and bottom-left corner). In the MI limit no interaction takes place between sites, hence the correlation length is zero. This leads to a correlation matrix consisting only of diagonal elements of equal magnitude. Figure \ref{eq:MI_lim} shows some off-diagonal elements of low, but not zero, magnitude, since it is made for $U/J = 12$, hence the system is not a pure Mott-Insulator.
