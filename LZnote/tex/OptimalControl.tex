@@ -1,4 +1,4 @@
-\chapter{Optimal Control}
+\chapter{Quantum Optimal Control Theory}
 The fundamental problem of Quantum Optimal Control Theory is to transfer the population from an initial state $\ket{\psi_0}$ to $\ket{\psi_{\mathrm{target}}}$ by adjusting a set of control parameters within the Hamiltonian used to evolve the system. Consider the Hamiltonian
 \begin{equation}
 	\hat{H}(\boldsymbol{u}(t)) = \hat{H}_0 = \sum_{i = 1}^{m} u_i(t) f(u_i(t)) \hat{H} \; ,
@@ -49,7 +49,7 @@ optimization schemes,” Physical Review A, vol. 90, p. 033628, 2014.]. This cos
 where $m$ is the number of control parameters at each instance of time, and $u_n$ is the n'th entry in $\boldsymbol{u}(t)$. The first term of the cost functional is half the fidelity, while the second term is a regularization, which penalizes large variations in the control. Thus, increasing $\gamma$ will favor a very smooth control, while keeping it low allows the control to vary greatly.\\
 In order to force the time evolution to satisfy the Schrödinger equation, one can introduce a Lagrange multiplier, $\ket{\chi}$, which yields the optimization Lagrangian
 \begin{equation}
-	L = J \Re \left[ \int_{0}^{T} \bra{\chi} \left( i \ket{\dot{\psi}} - \hat{H} \ket{\psi} \right) \mathrm{d}t \right] \; ,
+	L = J + \Re \left[ \int_{0}^{T} \bra{\chi} \left( i \ket{\dot{\psi}} - \hat{H} \ket{\psi} \right) \mathrm{d}t \right] \; ,
 \end{equation} 
 where $\ket{\dot{\psi}}$ is the time-derivative of the state $\ket{\psi}$. The optimal solutions are the stationary points of $L$, where
 \begin{equation}
