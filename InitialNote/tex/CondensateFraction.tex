@@ -38,7 +38,7 @@ In figure \ref{fig:Condfrac_exactvsMPS} the results of the MPS calculation is co
 One of the great advantages of MPS is its ability to accurately describe states with a large number of particles, which is unfeasible with exact diagonalisation. 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.9\textwidth]{Figures/placeholder.jpg}
+	\includegraphics[width=0.9\textwidth]{Figures/Condfrac_4to50.pdf}
 	\caption{\textit{Condensate fraction calculated from an MPS after performing 20 DMRG sweeps.}}
 	\label{fig:Condfrac_4to50}
 \end{figure}
@@ -86,19 +86,11 @@ where $K_b$ is the Tomonaga-Luttinger parameter [https://journals.aps.org/pra/pd
 Some measures can be taken when using the DMRG algorithm in order to minimize errors. Since the algorithm only takes two sites into account at a time, accurately describing the correlation between two sites far apart requires multiple sweeps, due to variational nature of the algorithm. Figure \ref{fig:sweepdependence} displays the condensate fraction in the Superfluid limit as a function of number of sweeps. Clearly, performing more sweeps yields a better result.
 \begin{figure}[h!]
     \centering
-    \begin{subfigure}[t]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{Figures/placeholder.jpg}
-        \caption{\textit{SF condensate fraction as a function of number of sweeps of the DMRG algorithm. A max bond dimension of 250 was used.}}
-        \label{fig:sweepdependence}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{Figures/placeholder.jpg}
-        \caption{\textit{SF condensate fraction as a function of maximal bond dimension. 10 sweeps of the DMRG algorithm were done.}}
-        \label{fig:bonddependence}
-    \end{subfigure}    
+    \includegraphics[width=0.9\textwidth]{Figures/condFracSweeps.pdf}
+    \caption{\textit{SF condensate fraction as a function of number of sweeps of the DMRG algorithm. A max bond dimension of 250 was used.}}
+    \label{fig:sweepdependence}
 \end{figure}
-Furthermore, one observes numerically, that increasing the maximal bond dimension $D$ results in a more accurate long-range representation of correlations. Thus, calculating correlation functions for various values of $D$ is a great way of estimating the convergence of the correlations for a given length scale [Schollwock]. Figure \ref{fig:bonddependence} illustrates this, as it shows the calculated condensate fraction as a function of the maximal bond dimension.
+Furthermore, one observes numerically, that increasing the maximal bond dimension $D$ results in a more accurate long-range representation of correlations. Thus, calculating correlation functions for various values of $D$ is a great way of estimating the convergence of the correlations for a given length scale [Schollwock].
 
 
 \subsection{Visualization of density matrices}
@@ -109,8 +101,8 @@ One way of displaying the correlations of the system is to plot its density matr
 \begin{figure}[h!]
     \centering
     \begin{subfigure}[t]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{Figures/placeholder.jpg}
-        \caption{\textit{Norm value of density matrix entries for $U/J = 0.1$.}}
+        \includegraphics[width=\textwidth]{Figures/DensityMatSF20sweeps.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 0$.}}
         \label{fig:DensityMatSF}
     \end{subfigure}
     ~
@@ -124,7 +116,7 @@ Figures \ref{fig:DensityMatSF} and \ref{fig:DensityMatMI} show the density matri
 In the MI limit no interaction takes place between sites and the correlation length is zero,  leading to a correlation matrix consisting only of diagonal elements of equal magnitude. Figure \ref{eq:MI_lim} shows some off-diagonal elements of low, but not zero, magnitude, since it is made for $U/J = 12$, meaning the system is not a pure Mott-Insulator.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.9\textwidth]{Figures/placeholder.jpg}
+	\includegraphics[width=0.9\textwidth]{Figures/row7DensityMatSF.pdf}
 	\caption{\textit{Correlation function plotted as a function of distance. The data is from the Superfluid correlation-matrix displayed in figure \ref{fig:DensityMatSF}.}}
 	\label{fig:expDecayCorrFunc}
 \end{figure}
