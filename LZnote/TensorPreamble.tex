@@ -1,0 +1,82 @@
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.7}
+
+\usetikzlibrary{arrows,calc,shapes}
+\tikzset{>=latex}
+	
+
+	%% --------- Nodes ----------- %%
+	
+\tikzstyle{tensor}=[rectangle,draw=blue!50,fill=blue!20,thick,minimum height=0.55cm,minimum width=0.55cm]
+
+\tikzstyle{matrix}=[diamond,draw=blue!50,fill=blue!20,thick,minimum height=0.5cm,minimum width=0.5cm]
+
+\tikzstyle{operator}=[circle,draw=blue!50,fill=blue!20,thick,minimum height=0.6cm]
+
+\tikzstyle{twositeop}=[draw=blue!50,fill=blue!20,thick,minimum height=0.6cm,rounded corners=0.3cm]
+
+
+	%% --------- Custom Shapes ---------%%
+
+\newcommand{\Left}[3]{
+ 	\pgfmathparse{#1 + #3}
+ 	\node[tensor] (tens) at (#1 , #2) {};
+	\node (d1) at (\pgfmathresult , #2 + 1.5) {};
+ 	\node (d2) at (\pgfmathresult , #2 - 1.5) {};
+ 	\node (d3) at (\pgfmathresult , #2) {};    
+    
+    \draw[-] (d1.west) .. controls (#1, #2 + 1.5) .. (tens.north);
+    \draw[-] (d2.west) .. controls (#1, #2 - 1.5) .. (tens.south);
+	\draw[-] (tens) -- (d3);
+}
+
+\newcommand{\Right}[3]{
+ 	\pgfmathparse{#1 - #3}
+ 	\node[tensor] (tens) at (#1 , #2) {};
+	\node (d1) at (\pgfmathresult , #2 + 1.5) {};
+ 	\node (d2) at (\pgfmathresult , #2 - 1.5) {};
+ 	\node (d3) at (\pgfmathresult , #2) {};    
+    
+    \draw[-] (d1.east) .. controls (#1, #2 + 1.5) .. (tens.north);
+    \draw[-] (d2.east) .. controls (#1, #2 - 1.5) .. (tens.south);
+	\draw[-] (tens) -- (d3);
+}
+
+\newcommand{\SVD}[3]{
+ 	\node[tensor] (U) at (#1 , #2) {};
+	\node (Ulabel) at (#1 , #2 + 0.6) {$U$};
+	\draw[-] (U) -- (#1 -0.8, #2);
+	\draw[-] (U) -- (#1 , #2 - 0.8); 	
+ 	
+ 	\node[matrix] (S) at (#1 + #3, #2) {};
+ 	\node (Slabel) at (#1 + #3 , #2 + 0.6) {$S$};	
+ 	
+ 	\node[tensor] (V) at (#1 + #3 *2 , #2) {};
+ 	\node (Vlabel) at (#1 + #3 *2 , #2 + 0.6) {$V^{\dag}$};
+ 	\draw[-] (V) -- (#1 + #3 *2 +0.8, #2);
+	\draw[-] (V) -- (#1 + #3 *2 , #2 - 0.8);
+	
+	\draw[-] (U) -- (S);
+	\draw[-] (V) -- (S);
+}
+
+\newcommand{\Lfix}[4]{
+ 	\pgfmathparse{#1 + #3}
+ 	\node[matrix] (tens) at (#1 , #2) {$\boldsymbol{l}$};
+	\node (d1) at (\pgfmathresult , #2 + #4) {};
+ 	\node (d2) at (\pgfmathresult , #2 - #4) {};    
+    
+    \draw[-] (d1.west) .. controls (#1 + 0.5 * #3, #2 + 0.5 * #4) .. (tens.north);
+    \draw[-] (d2.west) .. controls (#1 + 0.5 * #3, #2 - 0.5 * #4) .. (tens.south);
+}
+
+\newcommand{\Rfix}[4]{
+ 	\pgfmathparse{#1 - #3}
+ 	\node[matrix] (tens) at (#1 , #2) {$\boldsymbol{r}$};
+	\node (d1) at (\pgfmathresult , #2 + #4) {};
+ 	\node (d2) at (\pgfmathresult , #2 - #4) {};
+    
+    \draw[-] (d1.east) .. controls (#1 - 0.5 * #3, #2 + 0.5 * #4) .. (tens.north);
+    \draw[-] (d2.east) .. controls (#1 - 0.5 * #3, #2 - 0.5 * #4) .. (tens.south);
+}
