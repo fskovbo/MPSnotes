@@ -10,3 +10,8 @@ LZnote/main.out
 LZnote/main.synctex.gz
 LZnote/main.toc
 LZnote/main.aux
+*.aux*
+*.log*
+*.out*
+*.synctex.gz*
+*.toc*
