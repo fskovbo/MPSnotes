@@ -110,13 +110,19 @@ One way of displaying the correlations of the system is to plot its density matr
         \includegraphics[width=\textwidth]{Figures/DensityMatMI.pdf}
         \caption{\textit{Norm value of density matrix entries for $U/J = 12$.}}
         \label{fig:DensityMatMI}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{Figures/U050.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 0.5$.}}
+        \label{fig:DensityMat05}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=0.9\textwidth]{Figures/correlationlength.pdf}
+	\caption{\textit{Correlation function plotted as a function of distance from the diagonal element of the correlation matrix.}}
+	\label{fig:expDecayCorrFunc}
     \end{subfigure}    
 \end{figure}
 Figures \ref{fig:DensityMatSF} and \ref{fig:DensityMatMI} show the density matrix of the 50 particle system plotted for the Superfluid and the Mott-Insulator limit respectively. In the SF limit long-range correlations are present, which is seen by large off-diagonal elements. However, as discussed previously, in the MPS approximation all correlations decay exponentially, which causes issues when trying to approximate the very long range correlations of the system. Figure \ref{fig:expDecayCorrFunc} shows the correlations to the 7'th site. The correlations decrease rapidly at the edges due to the open boundary conditions, however, in the middle the correlation is almost constant indicating a very long correlation length, which is expected for the Superfluid. The humps appearing on the graph are artifacts of the DMRG algorithm trying to approximate the correct solutions as a linear combination of exponential functions, as described by \ref{eq:corrfunction}.\\
 In the MI limit no interaction takes place between sites and the correlation length is zero,  leading to a correlation matrix consisting only of diagonal elements of equal magnitude. Figure \ref{eq:MI_lim} shows some off-diagonal elements of low, but not zero, magnitude, since it is made for $U/J = 12$, meaning the system is not a pure Mott-Insulator.
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.9\textwidth]{Figures/row7DensityMatSF.pdf}
-	\caption{\textit{Correlation function plotted as a function of distance. The data is from the Superfluid correlation-matrix displayed in figure \ref{fig:DensityMatSF}.}}
-	\label{fig:expDecayCorrFunc}
-\end{figure}
