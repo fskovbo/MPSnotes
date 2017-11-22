@@ -1,7 +1,7 @@
 \chapter{Quantum Optimal Control Theory}
 The fundamental problem of Quantum Optimal Control Theory is to transfer the population from an initial state $\ket{\psi_0}$ to $\ket{\psi_{\mathrm{target}}}$ by adjusting a set of control parameters within the Hamiltonian used to evolve the system. Consider the Hamiltonian
 \begin{equation}
-	\hat{H}(\boldsymbol{u}(t)) = \hat{H}_0 = \sum_{i = 1}^{m} u_i(t) f(u_i(t)) \hat{H} \; ,
+	\hat{H}(\boldsymbol{u}(t)) = \hat{H}_0 + \sum_{i = 1}^{m} f_i(u_i(t)) \hat{H} \; ,
 \end{equation} 
 where $\hat{H}_0$ is an uncontrollable drift of the Hamiltonian, $\boldsymbol{u}(t)$ is the control, and $f(\boldsymbol{u}(t))$ is some function. Thus, a control must be found such that 
 \begin{equation}
