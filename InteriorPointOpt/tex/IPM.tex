@@ -9,19 +9,17 @@ A general bound, constrained minimization problem can be stated as
 							& \; x \geq 0
 \end{align*}
 where $E$ and $I$ is the set of equalities and inequalities respectively, and $f \; . \; \mathbb{R}^n \to \mathbb{R}$.
-In practice working with equality constraints is often easier. Hence, the inequality constraint are often turned into equality constraints through the use of \textit{slack variables}, which make up the difference between the left and right side [http://drops.dagstuhl.de/volltexte/2009/2089/pdf/09061.WaechterAndreas.Paper.2089.pdf]. Thus,
+In practice working with equality constraints is often easier. Hence, the inequality constraint are often turned into equality constraints through the use of \textit{slack variables}, which make up the difference between the left and right side \cite{ipopt}. Thus, transforming the inequality $A x \leq b$ into
 \begin{align*}
-	A x & \leq b \\
 	A x + u &= b \\
 	u & \geq 0 \; .
 \end{align*}
-   
+Although this does introduce the additional variable $u$, having only equality conditions for boundaries is generally easier to work with.
 
 \section{Karush–Kuhn–Tucker Conditions}
-A central theorem in mathematical optimization are the Karush–Kuhn–Tucker conditions, or KKT conditions, which are first-order conditions for for a solution of a nonlinear problem to be an optimum. The KKT conditions allow inequality constraints, thus being more general than Lagrange multipliers, which only allow equalities. The KKT conditions can be stated as follows:
-
+A central theorem in mathematical optimization are the Karush–Kuhn–Tucker conditions, or KKT conditions, which are first-order conditions for for a solution of a nonlinear problem to be an optimum. The KKT conditions allow inequality constraints, thus being more general than Lagrange multipliers, which only allow equalities. The KKT conditions can be stated as follows \cite{wright}
 \begin{theorem}
-	Suppose that $x^*$ is a local solution of the objective function $f \; . \; \mathbb{R}^n \to \mathbb{R}$ with respect to a collection of constraints $\{ c_i(x) \in \mathcal{E} \vee c_i(x) \in \mathcal{I} \}_{i=1}^{m}$, where $c_i \; . \; \mathbb{R}^n \to \mathbb{R}$. Let $\mathcal{L}$ be the Lagrangian of the problem. If the subset of the constraints $\{ c_i(x) \in \mathcal{E}\}$ has the property that $\{ \nabla c_i(x^*)\}$ is linear independent, then there is a vector of Langrange multipliers, $\lambda^*$, for which the following holds[http://bme2.aut.ac.ir/~towhidkhah/MPC/Springer-Verlag%20Numerical%20Optimization.pdf]:
+	Suppose that $x^*$ is a local solution of the objective function $f \; . \; \mathbb{R}^n \to \mathbb{R}$ with respect to a collection of constraints $\{ c_i(x) \in \mathcal{E} \vee c_i(x) \in \mathcal{I} \}_{i=1}^{m}$, where $c_i \; . \; \mathbb{R}^n \to \mathbb{R}$. Let $\mathcal{L}$ be the Lagrangian of the problem. If the subset of the constraints $\{ c_i(x) \in \mathcal{E}\}$ has the property that $\{ \nabla c_i(x^*)\}$ is linear independent, then there is a vector of Lagrange multipliers, $\lambda^*$, for which the following holds:
 	\begin{subequations}	
 	\begin{align}
 		\nabla_x \mathcal{L}(x^*,\lambda^*) &= 0 \; ,  \\
@@ -49,9 +47,9 @@ which will be denoted as the \textit{primal} problem. The \textit{dual} to this 
 							& \; s \geq 0 \; .
 \end{align*}
 This is another linear optimum problem with the unique property, that the Lagrange multipliers of the primal problem are the optimal variables of the dual problem and vice versa. Thus, the dual problem allows a lot of information to be obtained about the primal problem. Note, that the dual problem of the dual is nothing but the initial primal problem.
-An important property of the dual problem is, that it has the exact same KKT conditions as the primal, thus prompting the following theorem:
+An important property of the dual problem is, that it has the exact same KKT conditions as the primal, thus prompting the following theorem \cite{wright}:
 \begin{theorem}
-If either the primal or the dual problem has a solution, then so does the other, and the objective values are equal. If either problem is unbounded, then the other problem is infeasible. If a solution exists, then the optimal solution to the dual problem are the Lagrange multipliers to the primal problem and vice versa. [https://www.cs.toronto.edu/~robere/paper/interiorpoint.pdf]
+If either the primal or the dual problem has a solution, then so does the other, and the objective values are equal. If either problem is unbounded, then the other problem is infeasible. If a solution exists, then the optimal solution to the dual problem are the Lagrange multipliers to the primal problem and vice versa.
 \end{theorem}
 
 Therefore, for primal-dual algorithms one utilizes a triplet of variables $(x , \lambda , s)$ when computing the optimum of a function.
@@ -66,7 +64,7 @@ where the barrier parameter $\mu > 0$ determines how "sharp" the boundary of the
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.6\textwidth]{Figures/barrier.png}
-	\caption{\textit{Barrier term for various $\mu$ (here $u$). At $\mu \to 0$ the barrier turns into the strict inequality constraint of the original problem. [https://web.stanford.edu/class/ee364a/lectures/barrier.pdf]}}
+	\caption{\textit{Barrier term for various $\mu$ (here $u$). At $\mu \to 0$ the barrier turns into the strict inequality constraint of the original problem.}}
 	\label{fig:barrier}
 \end{figure}
 Instead of minimizing the old problem, it is now of interest of solving the barrier problem 
@@ -94,12 +92,12 @@ Comparing these to the KKT conditions of the original problem
 	x_i s_i &= 0 \; \text{for } i = 1, \ldots , n  \; ,
 \end{align}
 \end{subequations}
-one can easily see that the $\mu$ of the barrier function has "relaxed" the KKT complementary condition [https://www.cs.toronto.edu/~robere/paper/interiorpoint.pdf]. Again, for $\mu \to 0$ one returns to the original problem. 
+one can easily see that the $\mu$ of the barrier function has "relaxed" the KKT complementary condition \cite{ipnote}. Again, for $\mu \to 0$ one returns to the original problem. 
 
 
 \section{Primal-Dual Interior Point Method}
 By considering the previously explained concepts, one can alter the classical Newton's method to take into account the constraints of the problem, such that one can compute a constrained Newton step, which allows iteration of the parameters towards the optimum.
-By solving the \textit{barrier subproblem} for a given $\mu$, one will find the optimum solution of said subproblem. Thus, solving these subproblems iteratively for ever decreasing $\mu$ using the previous solution as starting point, one will approach the optimal solution of the original problem $x^*$ as $\mu \to 0$ [http://drops.dagstuhl.de/volltexte/2009/2089/pdf/09061.WaechterAndreas.Paper.2089.pdf].\\
+By solving the \textit{barrier subproblem} for a given $\mu$, one will find the optimum solution of said subproblem. Thus, solving these subproblems iteratively for ever decreasing $\mu$ using the previous solution as starting point, one will approach the optimal solution of the original problem $x^*$ as $\mu \to 0$ \cite{ipopt}.\\
 In the linear case the Primal-Dual Interior Point Method solves two problems  simultaneously:\\
 \textbf{Primal:}
  \begin{align*}
@@ -160,7 +158,7 @@ Thus, one can iteratively update the parameters in the algorithm using the Newto
 	(x_{k+1} , \lambda_{k+1} , s _{k+1}) = (x_{k} , \lambda_{k} , s _{k}) + \alpha  (x_B , \lambda_B , s_B) \; , \label{eq:newtonstep}
 \end{equation}
 where $alpha$ can be found using a line-search or other more sophisticated methods.
-The procedure above can be summarized in the following algorithm [https://www.cs.toronto.edu/~robere/paper/interiorpoint.pdf]:\\
+The procedure above can be summarized in the following algorithm \cite{ipnote}:\\
 \begin{algorithmic}
 \State Choose $\sigma \in (0,1)$ and $\mu_0 > 0$.
 \State Choose point $(x_0 , \lambda_0 , s_0)$ within feasible region.
@@ -171,4 +169,4 @@ The procedure above can be summarized in the following algorithm [https://www.cs
 	\State $x_{k+1} \gets \alpha p_b$
 \EndFor
 \end{algorithmic}
-The name of the method should now be easily understood, as the methods starts in the interior of the feasible region and works it way towards the boundary. The path that the algorithm traces out through the feasible region is called the \textit{central path} and can be used for proving the convergence of the algorithm. [http://bme2.aut.ac.ir/~towhidkhah/MPC/Springer-Verlag%20Numerical%20Optimization.pdf]
+The name of the method should now be easily understood, as the methods starts in the interior of the feasible region and works it way towards the boundary. The path that the algorithm traces out through the feasible region is called the \textit{central path} and can be used for proving the convergence of the algorithm \cite{wright}.

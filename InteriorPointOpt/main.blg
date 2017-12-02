@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: mybib.bib
+Warning--to sort, need author, organization, or key in ipopt
+Warning--to sort, need author, editor, or key in wright
+Warning--empty author and editor in wright
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            508 strings with 4176 characters,
+and the built_in function-call counts, 528 in all, are:
+= -- 44
+> -- 9
+< -- 0
++ -- 5
+- -- 2
+* -- 26
+:= -- 78
+add.period$ -- 5
+call.type$ -- 3
+change.case$ -- 8
+chr.to.int$ -- 0
+cite$ -- 6
+duplicate$ -- 28
+empty$ -- 66
+format.name$ -- 2
+if$ -- 117
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 1
+newline$ -- 14
+num.names$ -- 2
+pop$ -- 21
+preamble$ -- 1
+purify$ -- 7
+quote$ -- 0
+skip$ -- 20
+stack$ -- 0
+substring$ -- 15
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 10
+warning$ -- 3
+while$ -- 2
+width$ -- 4
+write$ -- 23
+(There were 3 warnings)

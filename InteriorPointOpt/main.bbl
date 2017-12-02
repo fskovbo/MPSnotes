@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{ipopt}
+{\em Short Tutorial: Getting Started With Ipopt in 90 Minutes}.
+
+\bibitem{wright}
+{\em Numerical Optimization}.
+\newblock Springer, 1999.
+
+\bibitem{ipnote}
+Robert Robere.
+\newblock Interior point methods and linear programming, 2012.
+
+\end{thebibliography}
