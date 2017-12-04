@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{wright}
+Jorge Nocedal and Stephen~J. Wright.
+\newblock {\em Numerical Optimization}.
+\newblock Springer, New York, NY, USA, second edition, 2006.
+
+\bibitem{ipnote}
+Robert Robere.
+\newblock Interior point methods and linear programming, 2012.
+
+\bibitem{ipopt}
+Andreas W{\"a}chter.
+\newblock Short tutorial: Getting started with ipopt in 90 minutes.
+\newblock In Uwe Naumann, Olaf Schenk, Horst~D. Simon, and Sivan Toledo,
+  editors, {\em Combinatorial Scientific Computing}, number 09061 in Dagstuhl
+  Seminar Proceedings, Dagstuhl, Germany, 2009. Schloss Dagstuhl -
+  Leibniz-Zentrum fuer Informatik, Germany.
+
+\end{thebibliography}
