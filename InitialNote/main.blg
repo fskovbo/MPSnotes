@@ -1,47 +1,51 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-I found no \bibdata command---while reading file main.aux
-I found no \bibstyle command---while reading file main.aux
-You've used 1 entry,
-            0 wiz_defined-function locations,
-            84 strings with 489 characters,
-and the built_in function-call counts, 0 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 0
-:= -- 0
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+The style file: plain.bst
+Database file #1: BHmodel.bib
+Warning--I didn't find a database entry for "cmplx_t"
+Warning--empty school in greiner
+Warning--empty booktitle in grimm
+Warning--can't use both volume and number fields in grimm
+You've used 18 entries,
+            2118 wiz_defined-function locations,
+            631 strings with 6741 characters,
+and the built_in function-call counts, 6050 in all, are:
+= -- 595
+> -- 278
+< -- 2
++ -- 111
+- -- 92
+* -- 466
+:= -- 1030
+add.period$ -- 57
+call.type$ -- 18
+change.case$ -- 96
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 0
-format.name$ -- 0
-if$ -- 0
+cite$ -- 21
+duplicate$ -- 212
+empty$ -- 466
+format.name$ -- 92
+if$ -- 1233
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 0
-num.names$ -- 0
-pop$ -- 0
-preamble$ -- 0
-purify$ -- 0
+int.to.str$ -- 18
+missing$ -- 20
+newline$ -- 94
+num.names$ -- 36
+pop$ -- 85
+preamble$ -- 1
+purify$ -- 82
 quote$ -- 0
-skip$ -- 0
+skip$ -- 135
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 432
+swap$ -- 29
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 0
-(There were 2 error messages)
+type$ -- 66
+warning$ -- 3
+while$ -- 58
+width$ -- 20
+write$ -- 200
+(There were 4 warnings)

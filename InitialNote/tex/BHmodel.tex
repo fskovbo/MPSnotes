@@ -1,0 +1,127 @@
+\chapter{Bose-Hubbard Model}
+The Bose-Hubbard model describes weakly interacting bosons in a periodic lattice in the tight binding limit. Bosons are particles of integer spin, whose statistics obey those of a Bose-Einstein distribution. This allows for a macroscopic population of the ground state below a critical temperature, $T_C$, a phenomenon known as a Bose-Einstein Condensate (BEC). 
+
+\section{Second-Quantization}
+In the Bose-Hubbard model it is very convenient to work in second quantization, which describes the number of particle in each state rather than the state of each particle.\\
+First, consider a basis of single particle states $\{ \ket{n} \}$, namely a Fock basis. In this space particles are created or annihilated through their respective operators
+\begin{equation}
+	\hat{a}_{\mu}^{\dag} \ket{0_\mu} = \ket{1_\mu} \; .
+\end{equation}
+For bosons the creation and annihilation operators fulfill the commutation relations
+\begin{equation}
+[\hat{a}_\nu,\hat{a}_\mu]=[\hat{a}_\nu^\dagger,\hat{a}_\mu^\dagger]=0 \hspace{0.2cm},  \label{eq:com_a_0}
+\end{equation}
+%
+\begin{equation}
+[\hat{a}_\nu,\hat{a}_\mu^\dagger]=\delta_{\nu,\mu} \hspace{0.2cm} ,\label{eq:com_a_1}
+\end{equation}
+with the number operator given as
+\begin{equation}
+	\hat{n}_{\mu} = \hat{a}_{\mu}^{\dag} \hat{a}_{\mu} \; .
+\end{equation}
+In second quantization many-body states are described by the occupation of the individual Fock states. Thus, a creation operator will raise the number of particles in its corresponding state by one, while the annihilation operator will lower it:
+\begin{align}
+\hat{a}^\dagger \ket{N_0,N_1, \ldots , N_{\nu},\ldots}&= \sqrt{N_\nu+1}\ket{N_0,N_1, \ldots , N_{\nu}+1,\ldots} \\
+\hat{a} \ket{N_0,N_1, \ldots , N_{\nu},\ldots}&= \sqrt{N_\nu}\ket{N_0,N_1, \ldots , N_{\nu}-1,\ldots} .
+\end{align}Likewise, the number operator $\hat{n}_{\mu}$ will count the number of particles in its corresponding state.\\
+These operators can be combined with an orthonormal basis of spatial wavefunctions $\{ \phi_k \}$ in order to create field operators
+\begin{align}
+	\hat{\psi}(\boldsymbol{r}) =& \; \sum_{k} \phi_k \hat{a}_{k} \\
+	\hat{\psi}^{\dag}(\boldsymbol{r}) =& \; \sum_{k} \phi_{k}^{*} \hat{a}_{k}^{\dag} \; ,
+\end{align}
+where $\hat{\psi}(\boldsymbol{r})$ will create a particle at location $\boldsymbol{r}$. For bosons the field operators fulfil the commutation relations \cite{bruus}
+\begin{align}
+	\left[ \hat{\psi}(\boldsymbol{r}) \; , \; \hat{\psi}^{\dag}(\boldsymbol{r'}) \right] =& \; \delta(\boldsymbol{r} - \boldsymbol{r}') \\
+	\left[ \hat{\psi}(\boldsymbol{r}) \; , \; \hat{\psi}(\boldsymbol{r'}) \right] =& \; 0
+\end{align}
+Now consider a basic Hamiltonian without any any interactions
+\begin{equation}
+	\hat{H}_0 = \sum_{k} = \epsilon_k \hat{n}_k \; ,
+\end{equation}
+where $\epsilon$ is the energy of the $k$'th state. Due to the completeness of the basis $\{ \phi_k \}$, the creation can be expressed as
+\begin{equation}
+	\hat{a}_k = \int \mathrm{d^3} r \phi_{k}^*(\boldsymbol{r}) \hat{\psi}(\boldsymbol{r}) \; .
+\end{equation}
+Using this the Hamiltonian can be written as
+\begin{align}
+	\hat{H}_0 =& \; \sum_{k} \epsilon_k \hat{a}_{k}^{\dag} \hat{a}_{k} \\
+		=& \;  \sum_{k} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2 \epsilon_k \phi_k (\boldsymbol{r_1}) \phi_{k}^* (\boldsymbol{r_2}) \hat{\psi}^{\dag} (\boldsymbol{r_1}) \hat{\psi} (\boldsymbol{r_2}) \\
+		=& \; \int \mathrm{d^3}r \hat{\psi}^{\dag}(\boldsymbol{r}) \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r})\right) \hat{\psi}(\boldsymbol{r})
+		\label{hamil2nd}
+\end{align}
+
+\section{Weakly Interacting Particles}
+A characteristic of a BEC is its low temperature and density. Thus, is it a valid approximation to only consider two-particle interactions
+\begin{equation}
+	\hat{H}^{(2)} = \frac{1}{2} \sum_{i \neq j} V(\boldsymbol{r_i} - \boldsymbol{r_j}) \; .
+\end{equation}
+At low energies all interactions can be considered of s-wave nature, thus prompting the use of a pseudo-potential
+\begin{equation}
+	V(\boldsymbol{r} - \boldsymbol{r'}) = g \delta(\boldsymbol{r} - \boldsymbol{r'}) = \frac{4 \pi \hbar^2 a}{m} \delta(\boldsymbol{r} - \boldsymbol{r'}) \; ,
+\end{equation}
+which results in the same scattering phase as the real, way more complicated scattering potential.\\
+Introducing the density operator
+\begin{equation}
+	\hat{\rho}(\boldsymbol{r}) = \hat{\psi}^{\dag}(\boldsymbol{r}) \hat{\psi}(\boldsymbol{r}) \; ,
+\end{equation}
+allows for writing $\hat{H}^{(2)}$ in second quantization
+\begin{align}
+	\hat{H}^{(2)} &= \frac{1}{2} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2 V(\boldsymbol{r_1} - \boldsymbol{r_2}) \hat{\psi}^{\dag}(\boldsymbol{r_1}) \hat{\psi}(\boldsymbol{r_1}) \left( \hat{\psi}^{\dag}(\boldsymbol{r_2}) \hat{\psi}(\boldsymbol{r_2}) - \delta(\boldsymbol{r_1} - \boldsymbol{r_2}) \right) \\
+	&= \frac{1}{2} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2  \hat{\psi}^{\dag}(\boldsymbol{r_1}) \hat{\psi}^{\dag}(\boldsymbol{r_2}) V(\boldsymbol{r_1} - \boldsymbol{r_2}) \hat{\psi}(\boldsymbol{r_1}) \hat{\psi}(\boldsymbol{r_2}) \; .
+\end{align}
+Combining this with the basic Hamiltonian of equation \ref{hamil2nd} gives the full Hamiltonian in second quantization
+\begin{align}
+	\hat{H} &= \hat{H}_0 + \hat{H}^{(2)} \\
+	& = \int \mathrm{d^3}r \ \hat{\psi}^{\dag}(\boldsymbol{r}) \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r})\right) \hat{\psi}(\boldsymbol{r}) + \frac{1}{2} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2  \ \hat{\psi}^{\dag}(\boldsymbol{r_1}) \hat{\psi}^{\dag}(\boldsymbol{r_2}) V(\boldsymbol{r_1} - \boldsymbol{r_2}) \hat{\psi}(\boldsymbol{r_1}) \hat{\psi}(\boldsymbol{r_2})
+	\label{hamilint}
+\end{align}
+
+Using this Hamiltonian to try and solve the Heisenberg equations of motion for the field operators leads to
+\begin{equation}
+	i \hbar \frac{\partial }{\partial t} \hat{\psi}(\boldsymbol{r}) = \left[ \hat{\psi}(\boldsymbol{r}) \; , \; \hat{H}  \right] = \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r}) + g \hat{\psi}^{\dag}(\boldsymbol{r}) \hat{\psi}(\boldsymbol{r}) \right) \hat{\psi}(\boldsymbol{r}) \; ,
+\end{equation}
+which is not solvable in general. However, in the scenario of a BEC the scattering length $a$ is much less than the mean inter-particle distance, such that $n a^3 \ll 1$, where $n$ is the density of the gas. In this regime the mean-field approximation is viable
+\begin{equation}
+	\hat{\psi}(\boldsymbol{r}) = \psi(\boldsymbol{r}) + \delta \hat{\psi}(\boldsymbol{r}) \; ,
+\end{equation}
+where $\psi(\boldsymbol{r})$ is the mean-field, and $\delta \hat{\psi}(\boldsymbol{r})$ is fluctuations from the mean. If $\braket{\delta \hat{\psi}(\boldsymbol{r})} = 0$, the fluctuations can be neglected, leading to the Gross-Pitaevskii equation \cite{Gross1961,Pitaevskii}
+\begin{equation}
+	i \hbar \frac{\partial }{\partial t} \hat{\psi}(\boldsymbol{r}) = \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r}) + g |\psi(\boldsymbol{r})|^2 \right) \psi(\boldsymbol{r}) \; .
+\end{equation}
+The Gross-Pitaevsky is very similar to the Schrödinger equation with exception of the non-linear term $g |\psi(\boldsymbol{r})|^2$, which can make the equation hard to solve in regions of low density.
+
+
+\section{The Bose-Hubbard Hamiltonian}
+As mentioned earlier the Bose-Hubbard model describes weakly interacting bosons in a periodic lattice in the tight binding limit. In the following consider a one dimensional lattice. In the tight binding limit a Wannier basis centered on the lattice sites, $w(x-x_i)$, constitutes an orthonormal basis. Expanding the field operators of the Hamiltonian in equation \ref{hamilint} in  the Wannier basis yields \cite{Jaksch}
+\begin{align}
+	\hat{H} &= \int \mathrm{d}x \sum_{i j} w^*(x-x_i) \hat{a}_{i}^{\dag} \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \hat{a}_j \nonumber \\
+	& \quad + g \int \mathrm{d}x \sum_{i j k l} w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) \hat{a}_{i}^{\dag} \hat{a}_{j}^{\dag} \hat{a}_{k} \hat{a}_{l} \\
+	&= - \sum_{i j } J_{i j} \hat{a}_{i}^{\dag} \hat{a}_{j} + \sum_{i j k l} U_{i j k l} \hat{a}_{i}^{\dag} \hat{a}_{j}^{\dag} \hat{a}_{k} \hat{a}_{l} \; ,
+\end{align}
+where
+\begin{align}
+	J_{i j} &= - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \\
+	U_{i j k l} &= g \int \mathrm{d}x \ w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) 
+\end{align}
+Since the system is periodic, one can consider a single site, $i = 0$, as representative for the entire lattice. In this way the different terms of the Hamiltonian can be interpreted as follows:
+\begin{align}
+	J_{0 0} &= \text{constant energy offset} \nonumber \\
+	J_{0 1} &= \text{"overlap matrix element" to neighbouring site} \nonumber \\
+	J_{0 2 - 0 \infty} &= \text{"overlap matrix element" to further sites} \nonumber \\
+	U_{0 0 0 0} &= \text{on-site interaction for two particles} \nonumber \\
+	U_{0 i i 0} &= \text{interaction off-site} \nonumber \\
+	U_{0 0 0 1} &= \text{interaction  + tunnelling , off-site} \nonumber 
+\end{align}
+In the tight-binding limit off-site matrix elements will decrease exponentially with distance due to how well localized the wavefunctions are on the lattice sites. Dropping all exponentially suppressed terms except $J_{0 1}$ yields the Bose-Hubbard Hamiltonian
+\begin{equation}
+	\hat{H} = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} + \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) + \sum_{i} \varepsilon_i \hat{n}_i \; ,
+	\label{BHhamil}
+\end{equation}
+where $J = J_{0 1}$, $\langle i,j \rangle$ only counts neighboring pairs, and
+\begin{equation}
+	U = U_{0 0 0 0} = g \int \mathrm{d}x \ |w(x)|^4 \; .
+\end{equation}
+The first term of the Bose-Hubbard Hamiltonian is the kinetic part, which describes hopping between neighboring sites, which is achieved by annihilating a particle at site $j$ while creating a particle at site $i$. The second term is the interaction between particles within a single site, and the last term $\sum_{i} \varepsilon_i \hat{n}_i$ takes into account a possible potential offset at different sites.
+\\
+During the process of deriving the Bose-Hubbard Hamiltonian multiple assumptions have been made.\\
+The main assumption is the localization of the wavefunctions causing hopping over multiple sites to drop out of the model. Allowing two-site hopping can drastically change the energy spectrum of the Hamiltonian.

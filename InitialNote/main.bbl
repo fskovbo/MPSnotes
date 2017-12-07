@@ -1,0 +1,103 @@
+\begin{thebibliography}{10}
+
+\bibitem{manybodyBloch}
+Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
+\newblock Many-body physics with ultracold gases.
+\newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
+
+\bibitem{bruus}
+H.~Bruus and K.~Flensberg.
+\newblock {\em Many-Body Quantum Theory in Condensed Matter Physics: An
+  Introduction}.
+\newblock Oxford Graduate Texts. OUP Oxford, 2004.
+
+\bibitem{Cramer}
+J.~Eisert, M.~Cramer, and M.~B. Plenio.
+\newblock Colloquium: Area laws for the entanglement entropy.
+\newblock {\em Rev. Mod. Phys.}, 82:277--306, Feb 2010.
+
+\bibitem{characPhases}
+Satoshi Ejima, Holger Fehske, Florian Gebhard, Kevin zu~M\"unster, Michael
+  Knap, Enrico Arrigoni, and Wolfgang von~der Linden.
+\newblock Characterization of mott-insulating and superfluid phases in the
+  one-dimensional bose-hubbard model.
+\newblock {\em Phys. Rev. A}, 85:053644, May 2012.
+
+\bibitem{greiner}
+Markus Greiner.
+\newblock {\em Ultracold quantum gases in three-dimensional optical lattice
+  potentials}.
+\newblock PhD thesis, April 2003.
+
+\bibitem{grimm}
+Rudolf Grimm, Matthias Weidemüller, and Yurii~B. Ovchinnikov.
+\newblock Optical dipole traps for neutral atoms.
+\newblock volume~42 of {\em Advances In Atomic, Molecular, and Optical
+  Physics}, pages 95 -- 170. Academic Press, 2000.
+
+\bibitem{Gross1961}
+E.~P. Gross.
+\newblock Structure of a quantized vortex in boson systems.
+\newblock {\em Il Nuovo Cimento (1955-1965)}, 20(3):454--477, May 1961.
+
+\bibitem{Jaksch}
+D.~Jaksch, C.~Bruder, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
+\newblock Cold bosonic atoms in optical lattices.
+\newblock {\em Phys. Rev. Lett.}, 81:3108--3111, Oct 1998.
+
+\bibitem{Kashurnikov2002}
+V.~A. Kashurnikov, N.~V. Prokof'ev, and B.~V. Svistunov.
+\newblock Revealing the superfluid\char21{}mott-insulator transition in an
+  optical lattice.
+\newblock {\em Phys. Rev. A}, 66:031601, Sep 2002.
+
+\bibitem{kittel}
+C.~Kittel.
+\newblock {\em Introduction to Solid State Physics}.
+\newblock Wiley, 2004.
+
+\bibitem{Kollath2004}
+C.~Kollath, U.~Schollw\"ock, J.~von Delft, and W.~Zwerger.
+\newblock Spatial correlations of trapped one-dimensional bosons in an optical
+  lattice.
+\newblock {\em Phys. Rev. A}, 69:031601, Mar 2004.
+
+\bibitem{Kuhner2000}
+Till~D. K\"uhner, Steven~R. White, and H.~Monien.
+\newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
+\newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
+
+\bibitem{Lanczos}
+Cornelius Lanczos.
+\newblock {An iteration method for the solution of the eigenvalue problem of
+  linear differential and integral operators}.
+\newblock {\em J. Res. Natl. Bur. Stand. B}, 45:255--282, 1950.
+
+\bibitem{PenroseOnsager}
+Oliver Penrose and Lars Onsager.
+\newblock Bose-einstein condensation and liquid helium.
+\newblock {\em Phys. Rev.}, 104:576--584, Nov 1956.
+
+\bibitem{Pitaevskii}
+L.P. Pitaevskii.
+\newblock Vortex lines in an imperfect bose gas.
+\newblock {\em Soviet Physics JETP}, 13(2):451--454, August 1961.
+
+\bibitem{plischke}
+M.~Plischke and B.~Bergersen.
+\newblock {\em Equilibrium Statistical Physics}.
+\newblock World Scientific, 2006.
+
+\bibitem{schollwock}
+Ulrich Schollwöck.
+\newblock The density-matrix renormalization group in the age of matrix product
+  states.
+\newblock {\em Annals of Physics}, 326(1):96 -- 192, 2011.
+\newblock January 2011 Special Issue.
+
+\bibitem{vanoosten}
+D.~van Oosten, P.~van~der Straten, and H.~T.~C. Stoof.
+\newblock Quantum phases in an optical lattice.
+\newblock {\em Phys. Rev. A}, 63:053601, Apr 2001.
+
+\end{thebibliography}
