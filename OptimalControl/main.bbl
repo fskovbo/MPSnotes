@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{manybodyBloch}
+Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
+\newblock Many-body physics with ultracold gases.
+\newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
+
+\bibitem{Doria2011}
+Patrick Doria, Tommaso Calarco, and Simone Montangero.
+\newblock Optimal control technique for many-body quantum dynamics.
+\newblock {\em Phys. Rev. Lett.}, 106:190501, May 2011.
+
+\bibitem{JakschZoller}
+D.~Jaksch and P.~Zoller.
+\newblock The cold atom hubbard toolbox.
+\newblock {\em Annals of Physics}, 315(1):52 -- 79, 2005.
+\newblock Special Issue.
+
+\bibitem{FrankBloch}
+S~Van~Frank, M~Bonneau, J~Schmiedmayer, Sebastian Hild, Christian Gross, Marc
+  Cheneau, Immanuel Bloch, T~Pichler, A~Negretti, T~Calarco, et~al.
+\newblock Optimal control of complex atomic quantum systems.
+\newblock {\em Scientific reports}, 6, 2016.
+
+\bibitem{Vidal2003}
+Guifr\'e Vidal.
+\newblock Efficient classical simulation of slightly entangled quantum
+  computations.
+\newblock {\em Phys. Rev. Lett.}, 91:147902, Oct 2003.
+
+\end{thebibliography}
