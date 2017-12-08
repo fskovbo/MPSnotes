@@ -2,14 +2,14 @@ This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: plain.bst
-Database file #1: BHmodel.bib
+Database file #1: ../config/references.bib
 Warning--I didn't find a database entry for "cmplx_t"
 Warning--empty school in greiner
 Warning--empty booktitle in grimm
 Warning--can't use both volume and number fields in grimm
 You've used 19 entries,
             2118 wiz_defined-function locations,
-            637 strings with 6908 characters,
+            637 strings with 6921 characters,
 and the built_in function-call counts, 6389 in all, are:
 = -- 627
 > -- 296
