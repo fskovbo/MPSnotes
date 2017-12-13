@@ -16,8 +16,7 @@ to a final state,
 \end{equation}
 at time $T$, seeking to find the lowest $T$ for which such a transition is possible.
 
-In [Gerhard C. Hegerfeldt. Driving at the quantum speed limit: Optimal control of a
-two-level system. Phys. Rev. Lett., 111:260501, Dec 2013], the optimal time-development operator is found to be,
+In \cite{QOCTtwolevel}, the optimal time-development operator is found to be,
 \begin{equation}
 \hat{U}_H(T,0)=e^{-i\phi_T\hat{\sigma}_z}e^{-i\Omega\hat{\sigma}_xT}e^{i\phi_0\hat{\sigma}_z},
 \end{equation}
@@ -86,9 +85,9 @@ From equation \ref{eq:timeEvoTwoLevel} one sees that $\ket{\psi (T)} = \ket{\psi
     \end{subfigure}    
 \end{figure}
 Indeed, performing the optimization for $T = \frac{\pi}{2}$ yields a complete transfer of the initial state into the target state, while $T_1 < T$ fails to converge. Starting with an initial control varying linearly, the optimized control is very different as seen in figure \ref{fig:control}: For the first third of the timespan it remains at zero, which, as described earlier, is the optimal solution when neglecting boundaries. But since it is required that $u(T) = 2 T$ and that $u(t)$ be continuous, the control first decreases to compensate for the following sharp increase.
-The resulting path on the Bloch sphere is displayed in figure \ref{fig:path}. Had the control not decreased (resulting in a negative rotation around the z-axis) first, the large upswing in the end would have made the state miss its target. Consequently, the faster an increase in the control allowed, the lesser the need is for the preceeding negative rotation to correct the trajectory. The limit of this increase would be $u(t)=0$ for all (arbitrarily small) timesteps except the last, where it jumps to $u(T)=2T$, as is the analytical solution.
+The resulting path on the Bloch sphere is displayed in figure \ref{fig:path}. Had the control not decreased (resulting in a negative rotation around the z-axis) first, the large upswing in the end would have made the state miss its target. Consequently, the faster an increase in the control allowed, the lesser the need is for the preceding negative rotation to correct the trajectory. The limit of this increase would be $u(t)=0$ for all (arbitrarily small) timesteps except the last, where it jumps to $u(T)=2T$, as is the analytical solution.
 
-Just how smooth the transfer between the initial and target state is is made clear in figure \ref{fig:population}, where the population inversion, $w = |\braket{1|\psi}|^2 - |\braket{0|\psi}|^2$, is plotted. Although the path on the Bloch sphere is not completely straight, the population inversion is showing the same characteristics as the Rabi oscillations ($|\braket{1|\psi}|^2 \propto \sin \left( \Omega t / 2 \right)$). However, as $T$ is equal to half the period of the Rabi oscillation, the similarity between the solution and Rabi oscillations is to be expected.
+Just how smooth the transfer between the initial and target state is is made clear in figure \ref{fig:population}, where the population inversion, $w = |\braket{1|\psi}|^2 - |\braket{0|\psi}|^2$, is plotted. Although the path on the Bloch sphere is not completely straight, the population inversion is showing the same characteristics as the Rabi oscillations ($|\braket{1|\psi}|^2 \propto \sin \left( \Omega t / 2 \right)$). However, as $T$ is equal to half the period of the Rabi oscillation, the similarity between the solution and Rabi oscillations is to be expected. Furthermore, in \cite{Caneva2011} infidelities for solutions of various problems at the QSL show a $I(t)= \cos^2\left(t/T_{\mathrm{QSL}}\right)$ dependence. This further affirms that the solution indeed is at the QSL.\\
 Finally, figure \ref{fig:cost} illustrates, how the algorithm finds increasingly better solutions, as the reduced cost functional is gradually decreasing. Since $\gamma = 0$, one can read the fidelity directly of the figure as $F = 1 - 2 J$. Thus, this solution yields a fidelity $F \sim 0.999$, however, since the cost has not yet converged on this figure, an even higher fidelity could be reached with more iterations of the algorithm. 
 
 
@@ -120,6 +119,6 @@ Finally, figure \ref{fig:cost} illustrates, how the algorithm finds increasingly
     \end{subfigure}     
 \end{figure} 
 As described earlier, the GRAPE method will produce a solution, which steers the initial into the target state at $t = T$. Thus, running the algorithm for $T_2 > T_{\mathrm{QSL}}$ should produce a more indirect solution.
-This is indeed the case, as seen in figure \ref{fig:control2}, where an Gaussian-like profile has been added on top of the previous solution in order to reach the target state at the desired time. This addition of course leads to a more indirect path, as illustrated in figure \ref{fig:path2}. Hence, the population inversion of figure \ref{fig:population2} is no longer similar to that of a Rabi oscillation.
+This is indeed the case, as seen in figure \ref{fig:control2}, where an Gaussian-like profile has been added on top of the previous solution in order to reach the target state at the desired time. This addition of course leads to a more indirect path, as illustrated in figure \ref{fig:path2}. Hence, the population inversion of figure \ref{fig:population2} is no longer comparable to cosine behavior for solutions near the QSL.
 
 Nevertheless, it should be noted that this is a completely valid solution, as it meets all the set requirements.

@@ -11,6 +11,12 @@ A.~Borzì and U.~Hohenester.
   control problems.
 \newblock {\em SIAM Journal on Scientific Computing}, 30(1):441--462, 2008.
 
+\bibitem{Caneva2009}
+T.~Caneva, M.~Murphy, T.~Calarco, R.~Fazio, S.~Montangero, V.~Giovannetti, and
+  G.~E. Santoro.
+\newblock Optimal control at the quantum speed limit.
+\newblock {\em Phys. Rev. Lett.}, 103:240501, Dec 2009.
+
 \bibitem{beyondQSL}
 Miroslav Gajdacz, Kunal~K. Das, Jan Arlt, Jacob~F. Sherson, and Tom\'a\ifmmode
   \check{s}\else~\v{s}\fi{} Opatrn\'y.
@@ -36,5 +42,11 @@ Lev~B. Levitin and Tommaso Toffoli.
 \newblock Fundamental limit on the rate of quantum dynamics: The unified bound
   is tight.
 \newblock {\em Phys. Rev. Lett.}, 103:160502, Oct 2009.
+
+\bibitem{Mandelstam1991}
+L.~Mandelstam and Ig. Tamm.
+\newblock {\em The Uncertainty Relation Between Energy and Time in
+  Non-relativistic Quantum Mechanics}, pages 115--123.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1991.
 
 \end{thebibliography}
