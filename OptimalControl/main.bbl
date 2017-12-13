@@ -5,6 +5,12 @@ Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
 \newblock Many-body physics with ultracold gases.
 \newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
 
+\bibitem{Caneva2011}
+Tommaso Caneva, Tommaso Calarco, Rosario Fazio, Giuseppe~E. Santoro, and Simone
+  Montangero.
+\newblock Speeding up critical system dynamics through optimized evolution.
+\newblock {\em Phys. Rev. A}, 84:012312, Jul 2011.
+
 \bibitem{Doria2011}
 Patrick Doria, Tommaso Calarco, and Simone Montangero.
 \newblock Optimal control technique for many-body quantum dynamics.
@@ -15,6 +21,11 @@ D.~Jaksch and P.~Zoller.
 \newblock The cold atom hubbard toolbox.
 \newblock {\em Annals of Physics}, 315(1):52 -- 79, 2005.
 \newblock Special Issue.
+
+\bibitem{Kuhner2000}
+Till~D. K\"uhner, Steven~R. White, and H.~Monien.
+\newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
+\newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
 
 \bibitem{FrankBloch}
 S~Van~Frank, M~Bonneau, J~Schmiedmayer, Sebastian Hild, Christian Gross, Marc
