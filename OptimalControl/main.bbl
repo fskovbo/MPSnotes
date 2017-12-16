@@ -27,6 +27,12 @@ Till~D. K\"uhner, Steven~R. White, and H.~Monien.
 \newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
 \newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
 
+\bibitem{NumericalRecipes}
+William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, and Brian~P.
+  Flannery.
+\newblock {\em Numerical Recipes 3rd Edition: The Art of Scientific Computing}.
+\newblock Cambridge University Press, New York, NY, USA, 3 edition, 2007.
+
 \bibitem{FrankBloch}
 S~Van~Frank, M~Bonneau, J~Schmiedmayer, Sebastian Hild, Christian Gross, Marc
   Cheneau, Immanuel Bloch, T~Pichler, A~Negretti, T~Calarco, et~al.
@@ -38,5 +44,11 @@ Guifr\'e Vidal.
 \newblock Efficient classical simulation of slightly entangled quantum
   computations.
 \newblock {\em Phys. Rev. Lett.}, 91:147902, Oct 2003.
+
+\bibitem{Winckel2008}
+G~von Winckel and A~Borzì.
+\newblock Computational techniques for a quantum control problem with h 1
+  -cost.
+\newblock {\em Inverse Problems}, 24(3):034007, 2008.
 
 \end{thebibliography}
