@@ -112,7 +112,7 @@ In order to test the precision of MPS formalism and the ITensor library, the con
 \end{figure}
 Figure \ref{fig:Condfrac_4to10} shows the condensate fraction for various $U/J$ calculated using MPS. In the limit $U/J = 0$ the condensate fraction is unit as expected, thus confirming that the system is indeed in the SF state. The condensate fraction never reaches zero, as this is only achieved in the thermodynamic limit as described by equation \ref{eq:MI_lim}. However, the condensate fraction does decrease with increasing particle number as would be expected.\\
 In figure \ref{fig:Condfrac_exactvsMPS} the results of the MPS calculation is compared to exact diagonalisation by displaying the absolute difference between the two calculations. It is clear that the two approaches yield very similar results for low particle-number.\\
-Attempting to use exact diagonalisation for large particle numbers is futile due to the exponential scaling of the Hilbert space, however, as mentioned, this is not an issue using matrix product states, since low contributing eigenstates are truncated. 
+Attempting to use exact diagonalisation for large particle numbers is futile due to the exponential scaling of the Hilbert space \cite{Vidal2003}, however, as mentioned, this is not an issue using matrix product states, since low contributing eigenstates are truncated. 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{Figures/Condfrac_4to50.pdf}

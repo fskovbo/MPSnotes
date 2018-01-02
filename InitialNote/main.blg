@@ -7,45 +7,45 @@ Warning--I didn't find a database entry for "cmplx_t"
 Warning--empty school in greiner
 Warning--empty booktitle in grimm
 Warning--can't use both volume and number fields in grimm
-You've used 19 entries,
+You've used 20 entries,
             2118 wiz_defined-function locations,
-            637 strings with 6921 characters,
-and the built_in function-call counts, 6389 in all, are:
-= -- 627
-> -- 296
+            643 strings with 7035 characters,
+and the built_in function-call counts, 6661 in all, are:
+= -- 654
+> -- 303
 < -- 2
-+ -- 118
-- -- 98
-* -- 494
-:= -- 1089
-add.period$ -- 60
-call.type$ -- 19
-change.case$ -- 102
++ -- 121
+- -- 100
+* -- 513
+:= -- 1136
+add.period$ -- 63
+call.type$ -- 20
+change.case$ -- 106
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 223
-empty$ -- 491
-format.name$ -- 98
-if$ -- 1301
+cite$ -- 23
+duplicate$ -- 234
+empty$ -- 516
+format.name$ -- 100
+if$ -- 1357
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 21
-newline$ -- 99
-num.names$ -- 38
-pop$ -- 89
+int.to.str$ -- 20
+missing$ -- 22
+newline$ -- 104
+num.names$ -- 40
+pop$ -- 91
 preamble$ -- 1
-purify$ -- 87
+purify$ -- 90
 quote$ -- 0
-skip$ -- 142
+skip$ -- 149
 stack$ -- 0
-substring$ -- 455
-swap$ -- 30
+substring$ -- 478
+swap$ -- 31
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 70
+type$ -- 74
 warning$ -- 3
-while$ -- 61
-width$ -- 21
-write$ -- 211
+while$ -- 64
+width$ -- 22
+write$ -- 222
 (There were 4 warnings)

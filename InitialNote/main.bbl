@@ -106,4 +106,10 @@ D.~van Oosten, P.~van~der Straten, and H.~T.~C. Stoof.
 \newblock Quantum phases in an optical lattice.
 \newblock {\em Phys. Rev. A}, 63:053601, Apr 2001.
 
+\bibitem{Vidal2003}
+Guifr\'e Vidal.
+\newblock Efficient classical simulation of slightly entangled quantum
+  computations.
+\newblock {\em Phys. Rev. Lett.}, 91:147902, Oct 2003.
+
 \end{thebibliography}

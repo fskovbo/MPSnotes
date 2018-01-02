@@ -15,7 +15,7 @@ Solutions to this problem are called optimal controls.[JJ del A]
 
 
 \section{Quantum Speed Limit}
-A subtlety of the above problem is that one is only searching for the control, $\boldsymbol{u}(t)$, which steers the initial state into the target-state at time $t = T$. It is often desirable to obtain the desired state in the shortest timespan possible, however, if a solution exists at $t= T_1 > T_2$, it might not exist at $t = T_2$. The shortest duration for which a solution can be found is called the \textit{quantum speed limit} (QSL). This is due to the fact that quantum mechanics dictates that there is a limit of how many orthogonal states a system can pass through per unit time. A large energy difference to orthogonal states allows for fast oscillations within the system, however, as these differences cannot be arbitrarily large, a lower bound of how fast a system can evolve exists, which in turn leads to the QSL.\\
+A subtlety of the above problem is that one is only searching for the control, $\boldsymbol{u}(t)$, which steers the initial state into the target-state at time $t = T$. It is often desirable to obtain the desired state in the shortest timespan possible, however, if a solution exists at $t= T_1 > T_2$, it might not exist at $t = T_2$. The shortest duration for which a solution can be found is called the \textit{quantum speed limit} (QSL). This is due to the fact that quantum mechanics dictates that there is a limit of how many orthogonal states a system can pass through per unit time. A large energy difference to orthogonal states allows for fast oscillations within the system, however, as these differences cannot be arbitrarily large, a lower bound of how fast a system can evolve exists, which in turn leads to the QSL \cite{Caneva2009}.\\
 There are several ways of approximating the quantum speed limit, however, there is no known way to reliably estimate the QSL for a general state. Thus, the best option is often to just solve the problem at increasingly shorter durations until a solution no longer can be found [JJ]. 
 If the initial state,$\ket{\psi_0}$, and the target-state, $\ket{\psi_{\mathrm{target}}}$, are orthogonal, one can estimate the QSL from the orthogonalization time, which is how long it takes for a state to become orthogonal to itself.
 Consider $\ket{\psi (0)} = \sum_{n}^{\infty} c_n \ket{\phi _n}$, where $\hat{H} \ket{\phi _n} = E_n \ket{\phi _n}$. Following \cite{QSLtoffoli} the norm squared of the survival probability is given as
@@ -24,7 +24,7 @@ Consider $\ket{\psi (0)} = \sum_{n}^{\infty} c_n \ket{\phi _n}$, where $\hat{H} 
 	&\geq 1 + \frac{4 t}{\pi ^2} \dv{|S(t)|^2}{t} - \frac{4 t^2}{\pi} \Delta E^2 \; ,
 \end{align}
 where the trigonometric inequality $\cos x \geq 1 - \left( 4 x \sin x - 2 x^2 \right) / \pi^2$ was used, and $\Delta E$ is the energy spread of the state.
-Since $|S(t)|^2 \geq 0$, then $\dv{|S(t)|^2}{t} = 0$ whenever $|S(t)| = 0$, which is the case at the orthogonalization time $t = \tau$. This leaves the inequality $0 \geq 1 - 4 \tau^2 \Delta E^2 / \pi^2$, which yields the Mandelstram Tamm bound when solved
+Since $|S(t)|^2 \geq 0$, then $\dv{|S(t)|^2}{t} = 0$ whenever $|S(t)| = 0$, which is the case at the orthogonalization time $t = \tau$. This leaves the inequality $0 \geq 1 - 4 \tau^2 \Delta E^2 / \pi^2$, which yields the Mandelstram Tamm bound when solved \cite{Mandelstam1991}
 \begin{equation}
 	\tau_{\mathrm{MT}} \geq \frac{\pi}{2 \Delta E} \; .
 \end{equation}
