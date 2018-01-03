@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{manybodyBloch}
+Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
+\newblock Many-body physics with ultracold gases.
+\newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
+
+\bibitem{Kuhner2000}
+Till~D. K\"uhner, Steven~R. White, and H.~Monien.
+\newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
+\newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
+
+\bibitem{FrankBloch}
+S~Van~Frank, M~Bonneau, J~Schmiedmayer, Sebastian Hild, Christian Gross, Marc
+  Cheneau, Immanuel Bloch, T~Pichler, A~Negretti, T~Calarco, et~al.
+\newblock Optimal control of complex atomic quantum systems.
+\newblock {\em Scientific reports}, 6, 2016.
+
+\end{thebibliography}

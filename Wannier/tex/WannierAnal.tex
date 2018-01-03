@@ -1,0 +1,72 @@
+\chapter{Exact Diagonalization in Momentum Space}
+
+\section{Calculating Bloch Functions}
+Consider a one-dimensional optical lattice described by the periodic potential
+\begin{equation}
+	V(x) = \frac{V_0}{2} \left( 1 - \cos (k_{\mathrm{lat}} x)  \right) \; , \label{eq:pot}
+\end{equation}
+where $V_0$ is the depth of the potential, and $k_{\mathrm{lat}}$ is the lattice-vector. \textit{Bloch's Theorem} states that energy eigenstates of such a periodic potential are Bloch waves of the form
+\begin{equation}
+	\phi_{k}^{(n)}(x) = e^{i k x} u_{k}^{(n)}(x) \; ,
+\end{equation}
+which is a plane wave with quasi-momentum $k$ modulated by a function, $u_{k}^{(n)}(x)$, with the same periodicity as the potential. The energy eigenspace of such a potential takes the form of bands, where $n$ denotes the band number.
+One can express $u_{k}^{(n)}(x)$ as a linear combination of plane waves with period of the reciprocal lattice
+\begin{equation}
+	u_{k}^{(n)}(x) = \sum_{l} c_{l,k}^{(n)} e^{i l k_{\mathrm{lat}} x} \; ,
+\end{equation}
+where $c_{l,k}^{(n)}$ are coefficients, $l$ is the site index ranging from $-L \leq l \leq L$, where $L$ is the number of sites. $l \cdot k_{\mathrm{lat}} = G_l$ constitutes the reciprocal lattice vector of site $l$. Thus, the Bloch functions can be written as
+\begin{equation}
+	\phi_{k}^{(n)}(x) = e^{i k x} \sum_{l} c_{l,k}^{(n)} e^{i l k_{\mathrm{lat}} x} \; ,
+\end{equation}
+where $k \in [-k_{\mathrm{lat}}/2 \; , \; k_{\mathrm{lat}}/2]$ due to the periodicity of $u_{k}^{(n)}(x)$.
+Likewise, one can express the potential as a linear combination of plane waves with period of the reciprocal lattice
+\begin{equation}
+	V(x) = \sum_{l} v_{l} e^{i l k_{\mathrm{lat}} x} \; . \label{eq:potfourier}
+\end{equation}
+Hence, the eigenvalue problem of the Bloch functions reads
+\begin{align}
+	\hat{H} \phi_{k}^{(n)}(x) &= E_{k}^{(n)} \phi_{k}^{(n)}(x) \nonumber \\
+	&= \sum_l c_{l,k}^{(n)} \frac{\hbar^2 \tilde{k}_{l,k}^2}{2 m} e^{i \tilde{k}_{l,k} x} + \sum_{l,l'} c_{l,k}^{(n)} v_{l'} e^{i \tilde{k}_{(l-l'),k} x} \; ,
+\end{align}
+where $\tilde{k}_{l,k} = l k_{\mathrm{lat}} + k$. From this it is clear that the problem has a plane wave solution, thus it can be reformulated using plane wave state $\ket{\tilde{k}_{l,k}}$, such that
+\begin{equation}
+	E_{k}^{(n)} \ket{\tilde{k}_{l,k}} = \sum_l c_{l,k}^{(n)} \frac{\hbar^2 \tilde{k}_{l,k}^2}{2 m} \ket{\tilde{k}_{l,k}} + \sum_{l,l'} c_{l,k}^{(n)} v_{l'} \ket{\tilde{k}_{(l-l'),k}} \; . \label{eq:eigmomentum}
+\end{equation}
+Since plane waves are orthonormal, $\braket{\tilde{k}_{l,k} | \tilde{k}_{l',k}} = \delta_{l,l'}$, multiplying $\bra{\tilde{k}_{l,k} }$ unto the left of equation \ref{eq:eigmomentum} leaves
+\begin{equation}
+	E_{k}^{(n)} c_{l,k}^{(n)} =  c_{l,k}^{(n)} \frac{\hbar^2 \tilde{k}_{l,k}^2}{2 m}  + \sum_{l'} c_{(l-l'),k}^{(n)} v_{l'} \; .
+\end{equation}
+Rewriting equation \ref{eq:pot} to the form of equation \ref{eq:potfourier} yields
+\begin{equation}
+	V(x) = \frac{V_0}{2} \left( 1 - \frac{1}{2} e^{-i k_{\mathrm{lat}} x} - \frac{1}{2} e^{i k_{\mathrm{lat}} x} \right) \; ,
+\end{equation}
+hence $v_0 = \frac{V_0}{2}$ and $v_{-1} = v_{1} = - \frac{V_0}{4}$, while the remaining coefficients are zero.
+Finally, when performing calculations regarding optical lattices one often works in units of recoil energy, $E_{\mathrm{rec}} = \frac{\hbar^2 k_{\mathrm{rec}}^2}{2 m}$, where $k_{\mathrm{rec}} = \frac{k_{\mathrm{lat}}}{2}$ is the wave vector of the light constituting the optical lattice. Introducing the unit-less, rescaled quasi-momentum $q = \frac{k}{k_{\mathrm{rec}}}$ allows expressing the Hamiltonian as
+\begin{equation*}
+\hat{H}_{l,l'} =
+    \begin{cases}
+     	 (q + 2 l)^2 + \frac{V_0}{2} , & l = l'  \\
+     	 - \frac{V_0}{4} , & | l - l'| = 1  \\
+     	 0 , & \text{otherwise} 
+    \end{cases}
+\end{equation*}
+This can be written in matrix form, which can be diagonalized in order to find the coefficients $c_{l,q}^{(n)}$.
+
+\section{Calculating Wannier Functions}
+Whereas Bloch functions are well localized in momentum space, the opposite is true for Wannier functions, which instead are well localized in real space. Hence, bases of Wannier functions are used to describe lattice systems within the tight binding limit \cite{manybodyBloch}. Wannier functions are given by
+\begin{equation}
+	w^{(n)}(x) = \frac{1}{\sqrt{L}} \sum_{k} e^{ -i k R } \phi_{k}^{(n)} (x) \; , \label{eq:wannier}
+\end{equation}
+where $R = \frac{2 \pi}{k_{\mathrm{lat}}}$ is a Bravais lattice vector. Explicitly writing equation \ref{eq:wannier} using the coefficients $c_{l,q}^{(n)}$ and the unit-less quasi-momentum yields
+\begin{equation}
+	w^{(n)}(x) = \frac{1}{\sqrt{L}} \sum_{q} \sum_{l} e^{ i 2 \pi \left( q + 2 l  \right) x} c_{l,q}^{(n)} \; . \label{eq:wannierrescaled}
+\end{equation}
+The Wannier functions are necessary for computing the parameters
+\begin{equation}
+	U = \frac{4 \pi \hbar^2 a}{m} \int \mathrm{d}x \ |w(x)|^4 \; ,
+\end{equation}
+and 
+\begin{equation}
+J = - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \; , \label{eq:J}
+\end{equation}
+from the Bose-Hubbard model. Here $a$ and $m$ is the scattering length and the mass of the atoms within the optical lattice, and $x_i$ is the center of the i'th cell of the lattice. 
