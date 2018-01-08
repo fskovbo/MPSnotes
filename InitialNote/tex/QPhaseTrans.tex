@@ -1,8 +1,47 @@
-\chapter{Quantum Phase Transitions}
+\chapter{Bose-Hubbard Model of Interacting Bosons in a Lattice}
+The Bose-Hubbard model describes weakly interacting bosons in a periodic lattice within the tight binding limit. The model is perfectly capable of predicting results with good accuracy, however, two conditions must hold in order for the it to be valid: (i) both the thermal energy and the mean interaction energy at a single site must be much smaller than the separation to first excited band, $\hbar \omega_0$; and (ii) the Wannier functions decay essentially within the length of the lattice constant \cite{manybodyBloch}.\\
+Under these conditions one is assured that only the lowest band is taken into account, and that only nearest-neighbour interactions take place.\\
+The Bose-Hubbard model is interesting, as it supports two distinct phases: the Superfluid phase and the Mott-Insulator phase. Both of these phases have application in various experiments CITE. Furthermore, the model contains effects such as a quantum phase transition between the two phases mentioned above. This transition is very important, as the system initially will be in the Superfluid phase when loading the atoms into the optical lattice, and only by increasing the lattice depth, can the Mott-Insulator be attained. 
+
+
+\section{The Bose-Hubbard Hamiltonian}
+Consider the Hamiltonian for bosonic particles in a trapping potential (described by equation \ref{hamilint}) in one dimension. For a periodic lattice potential in the tight binding limit it is favourable to work in a basis of localized Wannier functions. Expanding the field operators of the Hamiltonian in equation \ref{hamilint} in  the Wannier basis yields \cite{Jaksch}
+\begin{align}
+	\hat{H} &= \int \mathrm{d}x \sum_{i j} w^*(x-x_i) \hat{a}_{i}^{\dag} \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \hat{a}_j \nonumber \\
+	& \quad + g \int \mathrm{d}x \sum_{i j k l} w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) \hat{a}_{i}^{\dag} \hat{a}_{j}^{\dag} \hat{a}_{k} \hat{a}_{l} \\
+	&= - \sum_{i j } J_{i j} \hat{a}_{i}^{\dag} \hat{a}_{j} + \sum_{i j k l} U_{i j k l} \hat{a}_{i}^{\dag} \hat{a}_{j}^{\dag} \hat{a}_{k} \hat{a}_{l} \; ,
+\end{align}
+where
+\begin{align}
+	J_{i j} &= - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \\
+	U_{i j k l} &= g \int \mathrm{d}x \ w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) 
+\end{align}
+Since the system is periodic, one can consider a single site, $i = 0$, as representative for the entire lattice. In this way the different terms of the Hamiltonian can be interpreted as follows:
+\begin{align}
+	J_{0 0} &= \text{constant energy offset} \nonumber \\
+	J_{0 1} &= \text{"overlap matrix element" to neighbouring site} \nonumber \\
+	J_{0 2 - 0 \infty} &= \text{"overlap matrix element" to further sites} \nonumber \\
+	U_{0 0 0 0} &= \text{on-site interaction for two particles} \nonumber \\
+	U_{0 i i 0} &= \text{interaction off-site} \nonumber \\
+	U_{0 0 0 1} &= \text{interaction  + tunnelling , off-site} \nonumber 
+\end{align}
+Due to the rapid decay of the Wannier functions, the overlap of wavefunctions is limited to their nearest neighbour. Dropping all exponentially suppressed terms and constant offsets yields the Bose-Hubbard Hamiltonian
+\begin{equation}
+	\hat{H} = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} + \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) + \sum_{i} \varepsilon_i \hat{n}_i \; ,
+	\label{BHhamil}
+\end{equation}
+where $J = J_{0 1}$, $\langle i,j \rangle$ only counts neighbouring pairs, and
+\begin{equation}
+	U = U_{0 0 0 0} = g \int \mathrm{d}x \ |w(x)|^4 \; .
+\end{equation}
+The first term of the Bose-Hubbard Hamiltonian is the kinetic part, which describes hopping between neighbouring sites, which is achieved by annihilating a particle at site $j$, while creating a particle at site $i$. The second term is the interaction between particles within a single site, and the last term $\sum_{i} \varepsilon_i \hat{n}_i$ takes into account a possible potential offset at different sites.
+
+
+\section{Phases of the Bose-Hubbard Model}
+
 The Bose-Hubbard model supports two quantum phases: The \textit{Superfluid} phase and the \textit{Mott Insulator} phase. These phases depend on the ratio $J/U$, and can be described separately by examining the ground state of the Bose-Hubbard Hamiltonian in the two extreme limits of the ratio above.
 
-
-\section{Superfluid Phase}
+\subsection{Superfluid Phase}
 Consider the case of negligible interactions and a lattice of equal depth. The Hamiltonian of this system reads
 \begin{equation}
 	\hat{H} = \hat{H}_J = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} \; , 
@@ -49,7 +88,7 @@ These fluctuations are relatively large - especially in systems with low filling
 For large systems the dispersion relation of the superfluid state (equation \ref{SFenergy}) is continues. In other words, the spectrum is \textit{gapless}, since excitations with any energy are possible.
 
 
-\section{Mott-Insulator Phase}
+\subsection{Mott-Insulator Phase}
 In the case of very strong interactions the Hamiltonian reads
 \begin{equation}
 	\hat{H} = \hat{H}_U = \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) \; ,
@@ -87,8 +126,8 @@ Instead of considering the Hamiltonian as a whole, it can be considered as a sum
 For a homogeneous system $\hat{h}_i = \hat{h}_j \; \; \forall i,j$. One can write the kinetic part of the Hamiltonian locally if one assumes small fluctuations from the mean field
 \begin{align}
   \hat{a}_{i}^{\dag} \hat{a}_{j} &= \left( \psi^* + \delta \hat{a}_{i}^{\dag} \right) \left( \psi + \delta \hat{a}_{j} \right) \nonumber \\
-  &= \psi^* psi + \psi^* \delta \hat{a}_j + \psi \delta \hat{a}_{i}^{\dag} + \delta \hat{a}_{i}^{\dag} \delta \hat{a}_{j} \nonumber \\
-  & \approx \psi^* psi + \psi^* \left( \hat{a}_j - \psi \right) + \psi \left( \hat{a}_{i}^{\dag} - \psi^* \right) \nonumber \\
+  &= \psi^* \psi + \psi^* \delta \hat{a}_j + \psi \delta \hat{a}_{i}^{\dag} + \delta \hat{a}_{i}^{\dag} \delta \hat{a}_{j} \nonumber \\
+  & \approx \psi^* \psi + \psi^* \left( \hat{a}_j - \psi \right) + \psi \left( \hat{a}_{i}^{\dag} - \psi^* \right) \nonumber \\
 &= \psi^* \hat{a}_j + \psi \hat{a}_{i}^{\dag} - \psi^* \psi
 \end{align}
 Since every term only contains a single index, one can let $j \rightarrow i$ leaving a local description
@@ -97,7 +136,7 @@ Since every term only contains a single index, one can let $j \rightarrow i$ lea
 	\label{localhamil}
 \end{equation}
 where $z$ is the number of neighbours of site $i$ \cite{vanoosten}. The last term added is a chemical potential, which is needed due to the lack of a fixed particle number locally prompting the use of a Grand Canonical Ensemble description.\\
-Landau theory is a general theory regarding phase transitions, which states that in the vicinity of a critical point, one may expand the free energy in a power series of some order parameter $m$. Thus, in order to find $U_{crit}$ \ref{localhamil} must be minimized. In this case this order parameter is the mean field, hence
+Landau theory is a general theory regarding phase transitions, which states that in the vicinity of a critical point, one may expand the free energy in a power series of some order parameter $m$. Thus, in order to find $U_{crit}$, equation \ref{localhamil} must be minimized. In this case this order parameter is the mean field, hence
 \begin{equation}
 	E_{MF} = \text{const. } + a |\psi|^2 + b |\psi|^4 + \ldots \label{eq:landau}
 \end{equation} 

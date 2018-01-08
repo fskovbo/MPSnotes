@@ -1,51 +1,8 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: ../config/references.bib
 Warning--I didn't find a database entry for "cmplx_t"
 Warning--empty school in greiner
 Warning--empty booktitle in grimm
 Warning--can't use both volume and number fields in grimm
-You've used 20 entries,
-            2118 wiz_defined-function locations,
-            643 strings with 7035 characters,
-and the built_in function-call counts, 6661 in all, are:
-= -- 654
-> -- 303
-< -- 2
-+ -- 121
-- -- 100
-* -- 513
-:= -- 1136
-add.period$ -- 63
-call.type$ -- 20
-change.case$ -- 106
-chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 234
-empty$ -- 516
-format.name$ -- 100
-if$ -- 1357
-int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 22
-newline$ -- 104
-num.names$ -- 40
-pop$ -- 91
-preamble$ -- 1
-purify$ -- 90
-quote$ -- 0
-skip$ -- 149
-stack$ -- 0
-substring$ -- 478
-swap$ -- 31
-text.length$ -- 2
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 74
-warning$ -- 3
-while$ -- 64
-width$ -- 22
-write$ -- 222
 (There were 4 warnings)
