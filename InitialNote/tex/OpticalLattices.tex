@@ -48,9 +48,14 @@ The dipole potential in equation \ref{eq:dipolepot} scales with the intensity of
 	\label{eq:standwave}
 \end{equation}
  where $V_0 = | \frac{3 \pi c^2}{2 \omega_{0}^3} \frac{\Gamma}{\Delta} 4 I_0 |$. In practise, a one dimensional lattice like that of equation \ref{eq:standwave} is created by shining a single laser beam at a mirror, thus interfering with itself creating a standing wave.
-INSERT LATTICEFIGURE HERE. 
-Adding another laser beam in a different direction creates a periodic two dimensional potential. For orthogonal polarization of the two lasers, the resulting potential is purely the sum of the sinusoidal standing wave potential, as no interference term is present \cite{lewenstein}. Note, that the lattice is only well defined for distances much smaller than the waist of the laser beams, as the lattice is only present within the overlap of the two beams. Various shapes of the lattice can be achieved by adjusting the angle between the beams, however, the most common setup is using two orthogonal beam creating a square lattice of one dimensional tubes, as seen in figure REF.
-In order to create a three dimensional lattice as seen in figure REF, an additional third perpendicular laser beam is needed. In center of the trap, the lattice potential is then given by
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{Figures/OpticalLattice.pdf} 
+	\caption{\textit{\textbf{(a)} Two dimensional optical lattice formed by two mutually orthogonal laser beams. These tubes have a characteristic cigar shape, due to the Gaussian profile of the lasers. \textbf{(b)} Upon using three orthogonal laser beams, the result is a three dimensional lattice reminiscent of a cubic crystal. Figure is adopted from \cite{WideraThesis}.}}
+	\label{fig:OpticalLattice} 
+\end{figure}
+Adding another laser beam in a different direction creates a periodic two dimensional potential. For orthogonal polarization of the two lasers, the resulting potential is purely the sum of the sinusoidal standing wave potential, as no interference term is present \cite{lewenstein}. Note, that the lattice is only well defined for distances much smaller than the waist of the laser beams, as the lattice is only present within the overlap of the two beams. Various shapes of the lattice can be achieved by adjusting the angle between the beams, however, the most common setup is using two orthogonal beam creating a square lattice of one dimensional tubes, as seen in figure \ref{fig:OpticalLattice}.
+In order to create a three dimensional lattice as seen in figure \ref{fig:OpticalLattice}, an additional third perpendicular laser beam is needed. In center of the trap, the lattice potential is then given by
 \begin{equation}
 	V(x,y,z) = - V_0 \left( \cos^2{k x } + \cos^2{k y } + \cos^2{k z } \right) \; ,
 \end{equation}

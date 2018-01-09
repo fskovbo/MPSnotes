@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{Bloch2012}
+Immanuel Bloch, Jean Dalibard, and Sylvain Nascimbene.
+\newblock Quantum simulations with ultracold quantum gases.
+\newblock {\em Nature Physics}, 8(4):267--276, 2012.
+
 \bibitem{manybodyBloch}
 Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
 \newblock Many-body physics with ultracold gases.
@@ -10,6 +15,12 @@ H.~Bruus and K.~Flensberg.
 \newblock {\em Many-Body Quantum Theory in Condensed Matter Physics: An
   Introduction}.
 \newblock Oxford Graduate Texts. OUP Oxford, 2004.
+
+\bibitem{Dalibard2011}
+Jean Dalibard, Fabrice Gerbier, Gediminas Juzeli{\=u}nas, and Patrik
+  {\"O}hberg.
+\newblock Colloquium: Artificial gauge potentials for neutral atoms.
+\newblock {\em Reviews of Modern Physics}, 83(4):1523, 2011.
 
 \bibitem{Cramer}
 J.~Eisert, M.~Cramer, and M.~B. Plenio.
@@ -40,10 +51,21 @@ E.~P. Gross.
 \newblock Structure of a quantized vortex in boson systems.
 \newblock {\em Il Nuovo Cimento (1955-1965)}, 20(3):454--477, May 1961.
 
+\bibitem{Zoller1999}
+D.~Jaksch, H.-J. Briegel, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
+\newblock Entanglement of atoms via cold controlled collisions.
+\newblock {\em Phys. Rev. Lett.}, 82:1975--1978, Mar 1999.
+
 \bibitem{Jaksch}
 D.~Jaksch, C.~Bruder, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
 \newblock Cold bosonic atoms in optical lattices.
 \newblock {\em Phys. Rev. Lett.}, 81:3108--3111, Oct 1998.
+
+\bibitem{JakschZoller}
+D.~Jaksch and P.~Zoller.
+\newblock The cold atom hubbard toolbox.
+\newblock {\em Annals of Physics}, 315(1):52 -- 79, 2005.
+\newblock Special Issue.
 
 \bibitem{Kashurnikov2002}
 V.~A. Kashurnikov, N.~V. Prokof'ev, and B.~V. Svistunov.
@@ -85,6 +107,11 @@ Oliver Penrose and Lars Onsager.
 \newblock Bose-einstein condensation and liquid helium.
 \newblock {\em Phys. Rev.}, 104:576--584, Nov 1956.
 
+\bibitem{pethick2002bose}
+Christopher~J Pethick and Henrik Smith.
+\newblock {\em Bose-Einstein condensation in dilute gases}.
+\newblock Cambridge university press, 2002.
+
 \bibitem{Pitaevskii}
 L.P. Pitaevskii.
 \newblock Vortex lines in an imperfect bose gas.
@@ -95,6 +122,11 @@ M.~Plischke and B.~Bergersen.
 \newblock {\em Equilibrium Statistical Physics}.
 \newblock World Scientific, 2006.
 
+\bibitem{Molmer2010}
+M.~Saffman, T.~G. Walker, and K.~M\o{}lmer.
+\newblock Quantum information with rydberg atoms.
+\newblock {\em Rev. Mod. Phys.}, 82:2313--2363, Aug 2010.
+
 \bibitem{schollwock}
 Ulrich Schollwöck.
 \newblock The density-matrix renormalization group in the age of matrix product
@@ -102,11 +134,25 @@ Ulrich Schollwöck.
 \newblock {\em Annals of Physics}, 326(1):96 -- 192, 2011.
 \newblock January 2011 Special Issue.
 
+\bibitem{Simon2011}
+Jonathan Simon, Waseem~S Bakr, Ruichao Ma, M~Eric Tai, Philipp~M Preiss, and
+  Markus Greiner.
+\newblock Quantum simulation of antiferromagnetic spin chains in an optical
+  lattice.
+\newblock {\em Nature}, 472(7343):307--312, 2011.
+
 \bibitem{Spielman2008}
 I.~B. Spielman, W.~D. Phillips, and J.~V. Porto.
 \newblock Condensate fraction in a 2d bose gas measured across the
   mott-insulator transition.
 \newblock {\em Phys. Rev. Lett.}, 100:120402, Mar 2008.
+
+\bibitem{Tarruell2012}
+Leticia Tarruell, Daniel Greif, Thomas Uehlinger, Gregor Jotzu, and Tilman
+  Esslinger.
+\newblock Creating, moving and merging dirac points with a fermi gas in a
+  tunable honeycomb lattice.
+\newblock {\em Nature}, 483(7389):302--305, 2012.
 
 \bibitem{vanoosten}
 D.~van Oosten, P.~van~der Straten, and H.~T.~C. Stoof.
@@ -118,5 +164,12 @@ Guifr\'e Vidal.
 \newblock Efficient classical simulation of slightly entangled quantum
   computations.
 \newblock {\em Phys. Rev. Lett.}, 91:147902, Oct 2003.
+
+\bibitem{WideraThesis}
+Artur Widera.
+\newblock {\em Constructing correlated spin states with neutral atoms in
+  optical lattices}.
+\newblock PhD thesis, Ph. D. thesis, Johannes Gutenberg-Universit{\"a}t, Mainz,
+  2008.
 
 \end{thebibliography}
