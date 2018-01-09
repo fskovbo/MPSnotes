@@ -41,7 +41,7 @@ Rewriting equation \ref{eq:pot} to the form of equation \ref{eq:potfourier} yiel
 	V(x) = \frac{V_0}{2} \left( 1 - \frac{1}{2} e^{-i k_{\mathrm{lat}} x} - \frac{1}{2} e^{i k_{\mathrm{lat}} x} \right) \; ,
 \end{equation}
 hence $v_0 = \frac{V_0}{2}$ and $v_{-1} = v_{1} = - \frac{V_0}{4}$, while the remaining coefficients are zero.
-Finally, when performing calculations regarding optical lattices one often works in units of recoil energy, $E_{\mathrm{rec}} = \frac{\hbar^2 k_{\mathrm{rec}}^2}{2 m}$, where $k_{\mathrm{rec}} = \frac{k_{\mathrm{lat}}}{2}$ is the wave vector of the light constituting the optical lattice. Introducing the unit-less, rescaled quasi-momentum $q = \frac{k}{k_{\mathrm{rec}}}$ allows expressing the Hamiltonian as
+Finally, when performing calculations regarding optical lattices one often works in units of recoil energy, $E_{\mathrm{r}} = \frac{\hbar^2 k_{\mathrm{r}}^2}{2 m}$, where $k_{\mathrm{r}} = \frac{k_{\mathrm{lat}}}{2}$ is the wave vector of the light constituting the optical lattice. Introducing the unit-less, rescaled quasi-momentum $q = \frac{k}{k_{\mathrm{r}}}$ allows expressing the Hamiltonian as
 \begin{equation*}
 \hat{H}_{l,l'} =
     \begin{cases}
@@ -63,10 +63,10 @@ where $R = \frac{2 \pi}{k_{\mathrm{lat}}}$ is a Bravais lattice vector. Explicit
 \end{equation}
 The Wannier functions are necessary for computing the parameters
 \begin{equation}
-	U = \frac{4 \pi \hbar^2 a}{m} \int \mathrm{d}x \ |w(x)|^4 \; ,
+	U = \frac{4 \pi \hbar^2 a}{m} \int \mathrm{d}x \ |w(x)|^4 \; , \label{eq:BH_U}
 \end{equation}
 and 
 \begin{equation}
-J = - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \; , \label{eq:J}
+J = - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \; , \label{eq:BH_J}
 \end{equation}
 from the Bose-Hubbard model. Here $a$ and $m$ is the scattering length and the mass of the atoms within the optical lattice, and $x_i$ is the center of the i'th cell of the lattice. 
