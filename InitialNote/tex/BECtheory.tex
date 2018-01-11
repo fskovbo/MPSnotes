@@ -4,18 +4,18 @@ Bosons are particles of integer spin, whose statistics obey those of a Bose-Eins
 \begin{equation}
 	n_i = \frac{g_i}{\exp \left( \left( \varepsilon_i -\mu \right) / k_B T \right) - 1} \; , \label{eq:BHdistribution}
 \end{equation} 
-where $i$ denotes the state, $n_i$ is the population of the state, $g_i$ is its degeneracy, $\varepsilon_i$ is its energy, $\mu$ is the chemical potential, $k_B$ is the Boltzmann constant, and $T$ is the temperature. One important feature of bosons is that, unlike fermions, multiple particles can occupy the same quantum state. At higher temperatures the energy spectrum is practically continues, whereby this property has little effect, as two particles occupying the same single-particle state is highly unlikely. However, at low temperatures the energy spectrum of a system is often discrete, hence the statistics of the particles becomes very important. As evident from equation \ref{eq:BHdistribution}, the population of the ground state diverges as $T \to 0$. However, even below the finite temperature, $T_c$, one will observe a macroscopic population of the ground state. $T_c$ is called the critical temperature, and at this point multiple particles will start forming a Bose-Einstein Condensate (BEC). \cite{pethick2002bose}
+where $i$ denotes the state, $n_i$ is the population of the state, $g_i$ is its degeneracy, $\varepsilon_i$ is its energy, $\mu$ is the chemical potential, $k_B$ is the Boltzmann constant, and $T$ is the temperature. One important feature of bosons is that, unlike fermions, multiple particles can occupy the same quantum state. At higher temperatures the energy spectrum is practically continues, whereby this property has little effect, as two particles occupying the same single-particle state is highly unlikely. However, at low temperatures the energy spectrum systems often become increasingly discrete, hence the statistics of the particles becomes very important. As evident from equation \eqref{eq:BHdistribution}, the population of the ground state diverges as $T \to 0$. However, even below the finite temperature, $T_c$, one will observe a macroscopic population of the ground state. $T_c$ is called the critical temperature, and marks the point where multiple particles will start forming a Bose-Einstein Condensate (BEC). \cite{pethick2002bose}
 
 \section{Non-Interacting Particles}
-In the case of non-interacting particles and zero temperature, all particles of a Bose gas can be described by identical single-particles wavefunctions $\phi (\boldsymbol{r}_i)$. Hence, the many-body wavefunction is simply the product of the single-particle wavefunctions 
+In the case of non-interacting particles and zero temperature, all particles of a Bose gas can be described by identical single-particles wavefunctions $\phi (\boldsymbol{r}_i)$. Hence, the many-body wavefunction is simply given by the product 
 \begin{equation}
 	\Psi (\boldsymbol{r}_1 , \ldots , \boldsymbol{r}_N) = \prod_{i}^{N} \phi (\boldsymbol{r}_i) \; .
 \end{equation}
-Such a product state can be described by a single macroscopic wavefunction \cite{PenroseOnsager}
+Such a product state can be described by a single macroscopic wavefunction
 \begin{equation}
 	\psi (\boldsymbol{r}) = \sqrt{N} \varphi (\boldsymbol{r}) \; , \label{eq:psi_NIBEC}
 \end{equation}
-where $\phi (\boldsymbol{r})$ is the wave function of the single-particle state, in which the bosons condensate into.
+where $\phi (\boldsymbol{r})$ is the wave function of the single-particle state, in which the bosons condensate into \cite{PenroseOnsager}.
 
 \subsection{Second-Quantization}
 When describing Bose-Einstein condensates it is very convenient to work in second quantization, which describes the number of particle in each state rather than the state of each particle.\\
@@ -46,7 +46,7 @@ where $\hat{\psi}(\boldsymbol{r})$ will create a particle at location $\boldsymb
 	\left[ \hat{\psi}(\boldsymbol{r}) \; , \; \hat{\psi}^{\dag}(\boldsymbol{r'}) \right] = \; \delta(\boldsymbol{r} - \boldsymbol{r}') \quad , \quad
 	\left[ \hat{\psi}(\boldsymbol{r}) \; , \; \hat{\psi}(\boldsymbol{r'}) \right] = \; 0 \; .
 \end{equation}
-Now, consider a gas of non-interacting bosons described by equation \ref{eq:psi_NIBEC}, where $\epsilon_k$ is the energy of the $k$'th single-particle state. Due to the completeness of the basis of single-particle wavefunctions, $\{ \phi_k \}$, the creation operator can be expressed as
+Now, consider a gas of non-interacting bosons described by equation \eqref{eq:psi_NIBEC}, where $\epsilon_k$ is the energy of the $k$'th single-particle state. Due to the completeness of the basis of single-particle wavefunctions, $\{ \phi_k \}$, the creation operator can be expressed as
 \begin{equation}
 	\hat{a}_k = \int \mathrm{d^3} r \;  \phi_{k}^*(\boldsymbol{r}) \hat{\psi}(\boldsymbol{r}) \; .
 \end{equation}
@@ -63,27 +63,27 @@ A characteristic of a BEC is its low temperature and density. Thus, is it a vali
 \begin{equation}
 	\hat{H}^{(2)} = \frac{1}{2} \sum_{i \neq j} V(\boldsymbol{r_i} - \boldsymbol{r_j}) \; .
 \end{equation}
-At low energies all interactions can be considered of s-wave nature, thus prompting the use of a pseudo-potential
+At low energies all interactions can be considered of s-wave nature, because
+all waves of higher angular momentum are reflected by the centrifugal barrier. Furthermore, for cold gases the thermal de Broglie wavelength is much larger than the effective extension of the interaction potential. Therefore, the actual shape of the scattering potential is irrelevant, hence one can replace it with a pseudo-potential
 \begin{equation}
 	V(\boldsymbol{r} - \boldsymbol{r'}) = g \; \delta(\boldsymbol{r} - \boldsymbol{r'}) = \frac{4 \pi \hbar^2 a}{m} \delta(\boldsymbol{r} - \boldsymbol{r'}) \; ,
 \end{equation}
-which results in the same scattering phase as the real, way more complicated scattering potential.\\
+which results in the same scattering phase as the real, more complicated scattering potential. Thus, the interaction of cold atoms is fully determined by the scattering length, $a$ \cite{greiner}.\\
 Introducing the density operator
 \begin{equation}
 	\hat{\rho}(\boldsymbol{r}) = \hat{\psi}^{\dag}(\boldsymbol{r}) \hat{\psi}(\boldsymbol{r}) \; ,
 \end{equation}
-allows for writing $\hat{H}^{(2)}$ in second quantization
+allows writing $\hat{H}^{(2)}$ in second quantization
 \begin{align}
 	\hat{H}^{(2)} &= \frac{1}{2} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2 V(\boldsymbol{r_1} - \boldsymbol{r_2}) \hat{\psi}^{\dag}(\boldsymbol{r_1}) \hat{\psi}(\boldsymbol{r_1}) \left( \hat{\psi}^{\dag}(\boldsymbol{r_2}) \hat{\psi}(\boldsymbol{r_2}) - \delta(\boldsymbol{r_1} - \boldsymbol{r_2}) \right) \\
 	&= \frac{1}{2} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2  \hat{\psi}^{\dag}(\boldsymbol{r_1}) \hat{\psi}^{\dag}(\boldsymbol{r_2}) V(\boldsymbol{r_1} - \boldsymbol{r_2}) \hat{\psi}(\boldsymbol{r_1}) \hat{\psi}(\boldsymbol{r_2}) \; .
 \end{align}
-Combining this with the basic Hamiltonian of equation \ref{hamil2nd} gives the full Hamiltonian in second quantization
+Combining this with the basic Hamiltonian of equation \eqref{hamil2nd}, gives the full Hamiltonian in second quantization
 \begin{align}
 	\hat{H} &= \hat{H}^{(0)} + \hat{H}^{(2)} \\
 	& = \int \mathrm{d^3}r \ \hat{\psi}^{\dag}(\boldsymbol{r}) \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r})\right) \hat{\psi}(\boldsymbol{r}) + \frac{1}{2} \int \mathrm{d^3}r_1 \mathrm{d^3}r_2  \ \hat{\psi}^{\dag}(\boldsymbol{r_1}) \hat{\psi}^{\dag}(\boldsymbol{r_2}) V(\boldsymbol{r_1} - \boldsymbol{r_2}) \hat{\psi}(\boldsymbol{r_1}) \hat{\psi}(\boldsymbol{r_2})
 	\label{hamilint}
 \end{align}
-
 Using this Hamiltonian to try and solve the Heisenberg equations of motion for the field operators leads to
 \begin{equation}
 	i \hbar \frac{\partial }{\partial t} \hat{\psi}(\boldsymbol{r}) = \left[ \hat{\psi}(\boldsymbol{r}) \; , \; \hat{H}  \right] = \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r}) + g \hat{\psi}^{\dag}(\boldsymbol{r}) \hat{\psi}(\boldsymbol{r}) \right) \hat{\psi}(\boldsymbol{r}) \; ,
@@ -92,8 +92,8 @@ which is not solvable in general. However, in the scenario of a BEC the scatteri
 \begin{equation}
 	\hat{\psi}(\boldsymbol{r}) = \psi(\boldsymbol{r}) + \delta \hat{\psi}(\boldsymbol{r}) \; ,
 \end{equation}
-where $\psi(\boldsymbol{r})$ is the mean-field given by equation \ref{eq:psi_NIBEC}, and $\delta \hat{\psi}(\boldsymbol{r})$ is fluctuations from the mean. If $\braket{\delta \hat{\psi}(\boldsymbol{r})} = 0$, the fluctuations can be neglected, leading to the Gross-Pitaevskii equation \cite{Gross1961,Pitaevskii}
+where $\psi(\boldsymbol{r})$ is the mean-field given by equation \eqref{eq:psi_NIBEC}, and $\delta \hat{\psi}(\boldsymbol{r})$ is fluctuations from the mean. If $\braket{\delta \hat{\psi}(\boldsymbol{r})} = 0$, the fluctuations can be neglected, leading to the Gross-Pitaevskii equation \cite{Gross1961,Pitaevskii}
 \begin{equation}
 	i \hbar \frac{\partial }{\partial t} \hat{\psi}(\boldsymbol{r}) = \left( - \frac{\hbar^2}{2 m} \nabla^2 + U(\boldsymbol{r}) + g |\psi(\boldsymbol{r})|^2 \right) \psi(\boldsymbol{r}) \; .
 \end{equation}
-The Gross-Pitaevsky is very similar to the Schrödinger equation with exception of the non-linear term $g |\psi(\boldsymbol{r})|^2$, which can make the equation hard to solve in regions of low density.
+The Gross-Pitaevskii equation is very similar to the Schrödinger equation with exception of the non-linear term $g |\psi(\boldsymbol{r})|^2$, which can make the equation hard to solve in regions of low density.

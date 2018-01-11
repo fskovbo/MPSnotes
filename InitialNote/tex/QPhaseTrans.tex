@@ -1,11 +1,11 @@
 \chapter{Bose-Hubbard Model of Interacting Bosons in a Lattice}
 The Bose-Hubbard model describes weakly interacting bosons in a periodic lattice within the tight binding limit. The model is perfectly capable of predicting results with good accuracy, however, two conditions must hold in order for the it to be valid: (i) both the thermal energy and the mean interaction energy at a single site must be much smaller than the separation to first excited band, $\hbar \omega_0$, and (ii) the Wannier functions decay essentially within the length of the lattice constant \cite{manybodyBloch}.\\
 Under these conditions one is assured that only the lowest band is taken into account, and that only nearest-neighbour interactions take place.\\
-The Bose-Hubbard model is interesting, as it supports two distinct phases: the Superfluid phase and the Mott-Insulator phase. Both of these phases have application in various experiments CITE. Furthermore, the model contains effects such as a quantum phase transition between the two phases mentioned above. This transition is very important, as the system initially will be in the Superfluid phase when loading the atoms into the optical lattice, and only by increasing the lattice depth, can the Mott-Insulator be attained. 
+The Bose-Hubbard model is interesting, as it supports two distinct phases: the Superfluid phase and the Mott-Insulator phase. Furthermore, the model contains effects such as a quantum phase transition between the two phases mentioned above, which can be crossed without any change in external parameters. 
 
 
 \section{The Bose-Hubbard Hamiltonian}
-Consider the Hamiltonian for bosonic particles in a trapping potential (described by equation \ref{hamilint}) in one dimension. For a periodic lattice potential in the tight binding limit it is favourable to work in a basis of localized Wannier functions. Expanding the field operators of the Hamiltonian in equation \ref{hamilint} in  the Wannier basis yields \cite{Jaksch}
+Consider the Hamiltonian for bosonic particles in a trapping potential (described by equation \eqref{hamilint}) in one dimension. For a periodic lattice potential in the tight binding limit it is favourable to work in a basis of localized Wannier functions. Expanding the field operators of the Hamiltonian in equation \eqref{hamilint} in  the Wannier basis yields \cite{Jaksch}
 \begin{align}
 	\hat{H} &= \int \mathrm{d}x \sum_{i j} w^*(x-x_i) \hat{a}_{i}^{\dag} \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \hat{a}_j \nonumber \\
 	& \quad + g \int \mathrm{d}x \sum_{i j k l} w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) \hat{a}_{i}^{\dag} \hat{a}_{j}^{\dag} \hat{a}_{k} \hat{a}_{l} \\
@@ -16,7 +16,7 @@ where
 	J_{i j} &= - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \\
 	U_{i j k l} &= g \int \mathrm{d}x \ w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) 
 \end{align}
-Since the system is periodic, one can consider a single site, $i = 0$, as representative for the entire lattice. In this way the different terms of the Hamiltonian can be interpreted as follows:
+Since the system is periodic, one can consider a single site, $i = 0$, as representative for the entire lattice. In this way, the different terms of the Hamiltonian can be interpreted as follows:
 \begin{align}
 	J_{0 0} &= \text{constant energy offset} \nonumber \\
 	J_{0 1} &= \text{"overlap matrix element" to neighbouring site} \nonumber \\
@@ -52,7 +52,7 @@ which is completely periodic within the lattice due to the lack of site specific
 	\hat{a}_j &= \frac{1}{N_L} \sum_{q}  e^{i q x_j} \hat{a}_q \\
 	\hat{a}_{j}^{\dag} &= \frac{1}{N_L} \sum_{q}  e^{-i q x_j} \hat{a}_{q}^{\dag}
 \end{align}
-allows for writing the Hamiltonian \ref{hamilSF} in momentum space
+allows for writing the Hamiltonian \eqref{hamilSF} in momentum space
 \begin{equation}
 	\hat{H}_J = - J \sum_{q = - \infty}^{\infty} \left( e^{- i q d } + e^{i k d} \right) \hat{n}_q \; ,
 \end{equation}
@@ -70,7 +70,7 @@ where $N$ is the number of particles. With all particle condensed into the $q = 
 	\ket{\Psi_{SF}} \approx \prod_j \left( e^{\sqrt{N/N_L} \hat{a}_{j}^{\dag}} \right) \ket{0} = \ket{\alpha_1} \otimes \ket{\alpha_2} \otimes \ldots
 	\label{stateSF}
 \end{equation}
-Coherent states are eigenstates of the annihilation operator $\hat{a} \ket{\alpha} = \alpha \ket{\alpha}$, where $|\alpha |^2$ can be considered the particle density of the system, and $\alpha = |\alpha| e^{i \phi}$, with $\phi$ being a global phase. Thus, the superfluid state shows long range phase coherence and spontaneous symmetry breaking, which can also be seen in a BEC. From the state description of equation \ref{stateSF} the filling fraction $\bar{n}$ can be calculated
+Coherent states are eigenstates of the annihilation operator $\hat{a} \ket{\alpha} = \alpha \ket{\alpha}$, where $|\alpha |^2$ can be considered the particle density of the system, and $\alpha = |\alpha| e^{i \phi}$, with $\phi$ being a global phase. Thus, the superfluid state shows long range phase coherence and spontaneous symmetry breaking, which can also be seen in a BEC. From the state description of equation \eqref{stateSF} the filling fraction $\bar{n}$ can be calculated
 \begin{equation}
 	\bar{n} = \braket{\hat{n}_i} = \bra{\Psi_{SF}} \hat{a}_{j}^{\dag} \hat{a}_{j} \ket{\Psi_{SF}} = \frac{N}{N_L} \; ,
 \end{equation}
@@ -78,14 +78,14 @@ as well as the fluctuations of particle number per site
 \begin{equation}
 	\frac{\sqrt{\Delta \bar{n}^2}}{\bar{n}} \sim \frac{1}{\sqrt{\bar{n}}} \; .
 \end{equation}
-These fluctuations are relatively large - especially in systems with low filling fraction. Since the Hamiltonian \ref{hamilSF} only contains the site-hopping term, there in no penalty of having multiple particle on one site. This can also be understood by the complete de-localization of the wavefunction in real space. An illustration of this can be seen in figure \ref{fig:f(n)_SF}.\\
+These fluctuations are relatively large - especially in systems with low filling fraction. Since the Hamiltonian \eqref{hamilSF} only contains the site-hopping term, there in no penalty of having multiple particle on one site. This can also be understood by the complete de-localization of the wavefunction in real space. An illustration of this can be seen in figure \ref{fig:f(n)_SF}.\\
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\columnwidth]{Figures/f(n)_SF.JPG} 
 	\caption{(a)The statistics for the number of particles per lattice site $n$ for a filling fraction of $\bar{n}=1$ and $\bar{n}=2$ in the superfluid phase. (b) Illustration of the particles in the lattice. There will be large fluctuations of the number of particles found at each lattice site at a given time. \cite{greiner}}
 	\label{fig:f(n)_SF} 
 \end{figure}
-For large systems the dispersion relation of the superfluid state (equation \ref{SFenergy}) is continues. In other words, the spectrum is \textit{gapless}, since excitations with any energy are possible.
+For large systems the dispersion relation of the superfluid state (equation \eqref{SFenergy}) is continues. In other words, the spectrum is \textit{gapless}, since excitations with any energy are possible.
 
 
 \subsection{Mott-Insulator Phase}
@@ -106,11 +106,11 @@ Consider the case $\bar{n} = 1$, (average filling of one particle per site). Thi
 \begin{equation}
 	\ket{\Psi_{Mott}} = \prod_j \hat{a}_{j}^{\dag} \ket{0} \; .
 \end{equation}
-From the Hamiltonian \ref{hamilMott} the energy of the state is zero. Any fluctuation from this average will increase the energy by $U$, which in the limit $J/U \rightarrow 0$ can be quite substantial. Hence, the ground state is stable against non-zero kinetic energies, prompting the name \textit{Insulator}. This complete isolation of the different wells of the lattice means that any phase coherence is lost. Furthermore, as opposed to the superfluid the spectrum of the Mott insulator is gapped, meaning that there exist a lowest excitation energy - in this case $U$.
+From the Hamiltonian \eqref{hamilMott} the energy of the state is zero. Any fluctuation from this average will increase the energy by $U$, which in the limit $J/U \rightarrow 0$ can be quite substantial. Hence, the ground state is stable against non-zero kinetic energies, prompting the name \textit{Insulator}. This complete isolation of the different wells of the lattice means that any phase coherence is lost. Furthermore, as opposed to the superfluid the spectrum of the Mott insulator is gapped, meaning that there exist a lowest excitation energy - in this case $U$.
 
 
 \section{Phase Transition}
-Consider once again the full Bose-Hubbard Hamiltonian \ref{BHhamil}. The superfluid and the Mott-Insulator account for the two limits of the ratio $J/U$, however, it order to understand the full phase diagram of the Bose-Hubbard model one has to derive the $U_{crit}$ for which the phase transition occurs. There are several ways of doing this - one of them is looking at a mean-field solution of the Bose-Hubbard model. For simplicity the scenario $T=0$ is treated here. Even without a change of temperature the phase transition still happens, hence the label \textit{quantum phase transition} referring to the fact that the phase transition can happen without change of external parameters.\\
+Consider once again the full Bose-Hubbard Hamiltonian \eqref{BHhamil}. The superfluid and the Mott-Insulator account for the two limits of the ratio $J/U$, however, it order to understand the full phase diagram of the Bose-Hubbard model one has to derive the $U_{crit}$ for which the phase transition occurs. There are several ways of doing this - one of them is looking at a mean-field solution of the Bose-Hubbard model. For simplicity the scenario $T=0$ is treated here. Even without a change of temperature the phase transition still happens, hence the label \textit{quantum phase transition} referring to the fact that the phase transition can happen without change of external parameters.\\
 Applying the mean field approximation to the annihilation operator yields
 \begin{equation}
 	\hat{a}_j = \psi + \delta \hat{a}_j \; ,
@@ -136,7 +136,7 @@ Since every term only contains a single index, one can let $j \rightarrow i$ lea
 	\label{localhamil}
 \end{equation}
 where $z$ is the number of neighbours of site $i$ \cite{vanoosten}. The last term added is a chemical potential, which is needed due to the lack of a fixed particle number locally prompting the use of a Grand Canonical Ensemble description.\\
-Landau theory is a general theory regarding phase transitions, which states that in the vicinity of a critical point, one may expand the free energy in a power series of some order parameter $m$. Thus, in order to find $U_{crit}$, equation \ref{localhamil} must be minimized. In this case this order parameter is the mean field, hence
+Landau theory is a general theory regarding phase transitions, which states that in the vicinity of a critical point, one may expand the free energy in a power series of some order parameter $m$. Thus, in order to find $U_{crit}$, equation \eqref{localhamil} must be minimized. In this case this order parameter is the mean field, hence
 \begin{equation}
 	E_{MF} = \text{const. } + a |\psi|^2 + b |\psi|^4 + \ldots \label{eq:landau}
 \end{equation} 
@@ -148,7 +148,7 @@ Plotting this yields an effective potential, seen in figure \ref{fig:landau}, wh
 \label{fig:landau} 
 \end{figure} 
 
-The potential is symmetric in the complex plane allowing the system to have any phase. Furthermore, at some critical value of $a$, (here $a = 0$), the potential will shift from having a single central minimum to having minima at some $|\psi|$. This is a U(1) spontaneous symmetry breaking, which in Landau theory is associated with a phase transition \cite{plischke}. Thus, one need to compute the parameter $a$ of equation \ref{eq:landau}.\\
+The potential is symmetric in the complex plane allowing the system to have any phase. Furthermore, at some critical value of $a$, (here $a = 0$), the potential will shift from having a single central minimum to having minima at some $|\psi|$. This is a U(1) spontaneous symmetry breaking, which in Landau theory is associated with a phase transition \cite{plischke}. Thus, one need to compute the parameter $a$ of equation \eqref{eq:landau}.\\
 One method is using second order perturbation theory, where the $\hat{\psi} = 0$ case is solved exactly, followed by adding a small $\hat{\psi}$ as a perturbation
 \begin{equation}
 	\hat{h}_{i}^{(0)} = J z \left( \psi^* \psi \right) + \frac{U}{2} \hat{n}_i \left( \hat{n}_i -1 \right) - \mu \hat{n}_i \; .
