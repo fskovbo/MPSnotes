@@ -13,7 +13,7 @@ Here, L and R denote the left and right well respectively, $J$ is the tunnel mat
 \end{equation} 
 where $g = \frac{4 \pi \hbar^2 a}{m}$, and $a$ and $m$ are the scattering length and the mass of the atoms. Furthermore,
 \begin{equation}
-	J = J_{\uparrow\uparrow} = J_{\downarrow\downarrow} = - \int \mathrm{d}x \ w_{R}^*(x) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w_{L}(x) \; ,
+	J = J_{\uparrow} = J_{\downarrow} = - \int \mathrm{d}x \ w_{R}^*(x) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w_{L}(x) \; ,
 \end{equation}
 where $V(x)$ is the confining potential, and $w_{\mathrm{L},\mathrm{R}} (\boldsymbol{x})$ is a Wannier function localized at either the left or right well.\\
 Equation \eqref{eq:SpinHubbard} provides a general description of spinful bosons in a double well. However, in the limit of dominating interactions $U \gg J$, the probability of doubly occupation of a well is highly suppressed. Hence, upon starting in the subspace of singly occupied wells spanned by $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$, the states $\ket{\uparrow \downarrow, 0}$ and $\ket{0, \uparrow \downarrow}$ can only be reached as virtual intermediate states through second order tunneling processes.
@@ -23,21 +23,28 @@ Equation \eqref{eq:SpinHubbard} provides a general description of spinful bosons
 	\caption{\textit{\cite{Trotzky2008} }}
 	\label{fig:superexchange}
 \end{figure}
-This is an example of a superexchange interaction coupling the states $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$. This is visualised in figure \ref{fig:superexchange}, where the coupling of the two singly occupied states is achieved through the energetically higher-lying, doubly occupied states. Thus, the upper states are virtual, as they are merely an intermediate step in the coupling.
-Assuming zero potential bias ($\Delta = 0$), the effective coupling strength between $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$ is given by $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$, which can be derived through second order perturbation theory. 
-
-PERTUBATIONS
-
-Through this effective coupling, one can write an effective, bosonic Hamiltonian for the Hilbert space $\{ \ket{\uparrow \downarrow, 0} , \ket{0, \uparrow \downarrow} , \ket{\uparrow,\downarrow} , \ket{\downarrow,\uparrow} \}$ as
+This is an example of a superexchange interaction coupling the states $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$. This is visualised in figure \ref{fig:superexchange}.\textbf{A}, where the coupling of the two singly occupied states is achieved through the energetically higher-lying, doubly occupied states. Thus, the upper states are virtual, as they are merely an intermediate step in the coupling.
+Assuming zero potential bias ($\Delta = 0$), the effective coupling strength between $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$ is given by $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$, which can be derived through second order perturbation theory.
+Consider the case of $U \gg J$. Since the tunnelling matrix element is so small, the kinetic part of the Hamiltonian \eqref{eq:SpinHubbard} can be considered a perturbation. Due to the high value of $U$, employing a basis of single occupied states, $\rho = \{ \ket{\uparrow , \downarrow} , \ket{ \downarrow, \uparrow} , \ket{\uparrow,\uparrow} , \ket{\downarrow,\downarrow} \}$, is favourable. At first order, applying $\hat{H}_J$ to any member of $\rho$ will yield a state outside the basis. Thus, all first order contributions vanish. To second order, the perturbation is given by
 \begin{align}
-\hat{H}_{\mathrm{eff}} = J_{\mathrm{ex}} \begin{pmatrix}
+	H_{a,b}^{\mathrm{eff}} = \sum_{a \neq b} \frac{ |\bra{a} \hat{H}_{J}\ket{b}|^2}{\varepsilon_a - \varepsilon_b} \; , \label{eq:2ndorderpertubation}
+\end{align}
+where $\varepsilon$ denotes the energy of the respective state. For the same reasons as for the first order, no contributions come from $a,b \in \rho$. Therefore, one must consider all possible doubly occupied states. Thus, including the operator $\mathds{1} - \hat{P}_{\rho}$, which projects out of the subspace $\rho$, one can write equation \eqref{eq:2ndorderpertubation} as
+\begin{align}
+	H_{a,b}^{\mathrm{eff}} &=  - \braket{a|\hat{H}_J \frac{\mathds{1} - \hat{P}_{\rho}}{\hat{H}_U} \hat{H}_J|b} \nonumber \\
+	&= \sum_{n \notin \rho} \braket{a|\hat{H}_J|n} \left( \braket{n |\hat{H}_U | n} \right)^{-1} \braket{n|\hat{H}_J|b} \; .
+\end{align}
+For $J_{\sigma} = J $ and $U_{\uparrow\uparrow} = U_{\downarrow\downarrow} = \frac{U}{2}$, one can write the effective Hamiltonian in the basis $\rho$ as
+\begin{align}
+\hat{H}_{\mathrm{eff}} = -J_{\mathrm{ex}} \begin{pmatrix}
            1 & 1 & 0 & 0 \\
            1 & 1 & 0 & 0 \\
            0 & 0 & 1 & 0 \\
            0 & 0 & 0 & 1 
-         \end{pmatrix} \; .
+         \end{pmatrix} \; , \label{eq:BosonHamilEff}
 \end{align}
-This Hamiltonian can be mapped to that of an isotropic Heisenberg model, yielding
+where $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$. Diagonalizing this Hamiltonian yields eigenstates in the form of a spin triplet, $\ket{t}$ with energy $E_t = -2 J_{\mathrm{ex}}$, and a spin singlet, $\ket{s}$ with energy $E_s = 0$. This is illustrated in the bottom part of figure \ref{fig:superexchange}.\textbf{B}.
+Finally, the Hamiltonian \eqref{eq:BosonHamilEff} can be mapped to that of an isotropic Heisenberg model, yielding
 \begin{align}
 	\hat{H} &= -2 J_{\mathrm{ex}} \hat{\boldsymbol{S}}_{\mathrm{L}} \cdot \hat{\boldsymbol{S}}_{\mathrm{R}} \nonumber \\
 	&= - J_{\mathrm{ex}} \left( \hat{S}_{\mathrm{L}}^{+} \hat{S}_{\mathrm{R}}^{-} + \hat{S}_{\mathrm{L}}^{-} \hat{S}_{\mathrm{R}}^{+} \right) - 2 J_{\mathrm{ex}} \hat{S}_{\mathrm{L}}^{z} \hat{S}_{\mathrm{R}}^{z} \; , \label{eq:twositeFerro}
@@ -50,11 +57,7 @@ where
 \hat{S}_{\mathrm{L},\mathrm{R}}^{z} &= \left( \hat{n}_{\uparrow \; \mathrm{L},\mathrm{R}} - \hat{n}_{\downarrow \; \mathrm{L},\mathrm{R}} \right)/2 \\
 \hat{S}_{\mathrm{L},\mathrm{R}}^{\pm} &= \hat{S}_{\mathrm{L},\mathrm{R}}^{x} \pm i \hat{S}_{\mathrm{L},\mathrm{R}}^{y}
 \end{align*}
-Thus, the superexchange interaction of bosons is ferromagnetic.
-
-SKRIV OM EIGENSTATES FOR DOUBLE WELL????
-A convenient basis is given by the spin triplet/singlet states, $\ket{t/s} = \left( \ket{\uparrow,\downarrow} \pm \ket{\downarrow,\uparrow}  \right)/\sqrt{2}$, and the states $\ket{\pm} = \left( \ket{\uparrow \downarrow ,0} \pm \ket{0 , \downarrow \uparrow}  \right)/\sqrt{2}$. The states $\ket{s}$ and $\ket{-}$ are already eigenstates of \eqref{eq:twositeFerro} with energies $0$ and $U$ respectively.  
-
+Thus, the superexchange interaction of bosons is ferromagnetic, which accounts for the ground state being the spin triplet configuration.
 
 Applying a potential bias $\Delta > 0$ lifts the degeneracy of the two intermediate states, thus modifying the effective coupling. For $J,\Delta \ll U$ the coupling becomes
 \begin{equation}
