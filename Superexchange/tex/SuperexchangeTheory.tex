@@ -1,0 +1,69 @@
+\chapter{Superexchange Interaction}
+Ultracold atoms in optical lattices enables a wide variety of Hamiltonians to be mapped to the system. Thus, quantum simulations of various models can be conducted, as the interactions within the system can be tuned through manipulation of external fields. An example of this is the spin-spin interactions between particles described by the Ising and Heisenberg model. One such action is the spin-exchange interactions, which is an effective interaction that does not any direct coupling between spins. The spin-exchange interaction is observed for electrons as the interplay between the Coulomb force and exchange symmetries. This interaction is short ranged, as it is governed by the overlap of wavefunctions. However, at longer distances  the \textit{superexchange} interaction can be observed, where the interaction is mediated through higher-order exchanges.
+
+\section{Theoretical Model}
+The simplest setting for examining the superexchange interaction is a double well system occupied by a pair of bosons of different spin states, which are denoted by $\ket{\uparrow}$ and $\ket{\downarrow}$.\\
+As the system consists of bosons in a lattice, the Hamiltonian is simply a variant of the Bose-Hubbard Hamiltonian, which takes the different spins into account
+\begin{equation}
+	\hat{H} = \sum_{\sigma = \uparrow , \downarrow} \left[ -J \left( \hat{a}_{\sigma \mathrm{L}}^{\dag} \hat{a}_{\sigma \mathrm{R}} + \hat{a}_{\sigma \mathrm{R}}^{\dag} \hat{a}_{\sigma \mathrm{L}} \right) - \frac{\Delta}{2} \left( \hat{n}_{\sigma \mathrm{L}} - \hat{n}_{\sigma \mathrm{R}} \right)   \right] + U \left( \hat{n}_{\uparrow \mathrm{L}} \hat{n}_{\downarrow \mathrm{L}} + \hat{n}_{\uparrow \mathrm{R}} \hat{n}_{\downarrow \mathrm{R}} \right) \; . \label{eq:SpinHubbard}
+\end{equation}
+Here, L and R denote the left and right well respectively, $J$ is the tunnel matrix element, $U = U_{\uparrow \downarrow}$ is the on-site interaction between two atoms of opposite spin, and $\Delta$ is a potential bias. Like in the regular Bose-Hubbard model, the matrix elements can be calculated through the overlap of wavefunctions. Specifically in the case of well localized atoms is the use of a Wannier basis favourable, whereby the matrix elements are given by 
+\begin{equation}
+	U = U_{\uparrow \downarrow} = g \times \int \mathrm{d}^3 x \; |w_{\mathrm{L},\mathrm{R}} (\boldsymbol{x})|^4 \; ,
+\end{equation} 
+where $g = \frac{4 \pi \hbar^2 a}{m}$, and $a$ and $m$ are the scattering length and the mass of the atoms. Furthermore,
+\begin{equation}
+	J = J_{\uparrow\uparrow} = J_{\downarrow\downarrow} = - \int \mathrm{d}x \ w_{R}^*(x) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w_{L}(x) \; ,
+\end{equation}
+where $V(x)$ is the confining potential, and $w_{\mathrm{L},\mathrm{R}} (\boldsymbol{x})$ is a Wannier function localized at either the left or right well.\\
+Equation \eqref{eq:SpinHubbard} provides a general description of spinful bosons in a double well. However, in the limit of dominating interactions $U \gg J$, the probability of doubly occupation of a well is highly suppressed. Hence, upon starting in the subspace of singly occupied wells spanned by $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$, the states $\ket{\uparrow \downarrow, 0}$ and $\ket{0, \uparrow \downarrow}$ can only be reached as virtual intermediate states through second order tunneling processes.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/SXEschematic.pdf}
+	\caption{\textit{\cite{Trotzky2008} }}
+	\label{fig:superexchange}
+\end{figure}
+This is an example of a superexchange interaction coupling the states $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$. This is visualised in figure \ref{fig:superexchange}, where the coupling of the two singly occupied states is achieved through the energetically higher-lying, doubly occupied states. Thus, the upper states are virtual, as they are merely an intermediate step in the coupling.
+Assuming zero potential bias ($\Delta = 0$), the effective coupling strength between $\ket{\uparrow,\downarrow}$ and $\ket{\downarrow,\uparrow}$ is given by $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$, which can be derived through second order perturbation theory. 
+
+PERTUBATIONS
+
+Through this effective coupling, one can write an effective, bosonic Hamiltonian for the Hilbert space $\{ \ket{\uparrow \downarrow, 0} , \ket{0, \uparrow \downarrow} , \ket{\uparrow,\downarrow} , \ket{\downarrow,\uparrow} \}$ as
+\begin{align}
+\hat{H}_{\mathrm{eff}} = J_{\mathrm{ex}} \begin{pmatrix}
+           1 & 1 & 0 & 0 \\
+           1 & 1 & 0 & 0 \\
+           0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 1 
+         \end{pmatrix} \; .
+\end{align}
+This Hamiltonian can be mapped to that of an isotropic Heisenberg model, yielding
+\begin{align}
+	\hat{H} &= -2 J_{\mathrm{ex}} \hat{\boldsymbol{S}}_{\mathrm{L}} \cdot \hat{\boldsymbol{S}}_{\mathrm{R}} \nonumber \\
+	&= - J_{\mathrm{ex}} \left( \hat{S}_{\mathrm{L}}^{+} \hat{S}_{\mathrm{R}}^{-} + \hat{S}_{\mathrm{L}}^{-} \hat{S}_{\mathrm{R}}^{+} \right) - 2 J_{\mathrm{ex}} \hat{S}_{\mathrm{L}}^{z} \hat{S}_{\mathrm{R}}^{z} \; , \label{eq:twositeFerro}
+\end{align}
+where 
+\begin{align*}
+\hat{\boldsymbol{S}}_{\mathrm{L,R}} &= \left(  \hat{S}_{\mathrm{L,R}}^{x} , \hat{S}_{\mathrm{L,R}}^{y} , \hat{S}_{\mathrm{L,R}}^{z} \right)^{T} \\
+\hat{S}_{\mathrm{L},\mathrm{R}}^{+} &= \left( \ket{\uparrow}\bra{\downarrow} \right)_{\mathrm{L},\mathrm{R}} \\
+\hat{S}_{\mathrm{L},\mathrm{R}}^{-} &= \left( \ket{\downarrow}\bra{\uparrow} \right)_{\mathrm{L},\mathrm{R}} \\
+\hat{S}_{\mathrm{L},\mathrm{R}}^{z} &= \left( \hat{n}_{\uparrow \; \mathrm{L},\mathrm{R}} - \hat{n}_{\downarrow \; \mathrm{L},\mathrm{R}} \right)/2 \\
+\hat{S}_{\mathrm{L},\mathrm{R}}^{\pm} &= \hat{S}_{\mathrm{L},\mathrm{R}}^{x} \pm i \hat{S}_{\mathrm{L},\mathrm{R}}^{y}
+\end{align*}
+Thus, the superexchange interaction of bosons is ferromagnetic.
+
+SKRIV OM EIGENSTATES FOR DOUBLE WELL????
+A convenient basis is given by the spin triplet/singlet states, $\ket{t/s} = \left( \ket{\uparrow,\downarrow} \pm \ket{\downarrow,\uparrow}  \right)/\sqrt{2}$, and the states $\ket{\pm} = \left( \ket{\uparrow \downarrow ,0} \pm \ket{0 , \downarrow \uparrow}  \right)/\sqrt{2}$. The states $\ket{s}$ and $\ket{-}$ are already eigenstates of \eqref{eq:twositeFerro} with energies $0$ and $U$ respectively.  
+
+
+Applying a potential bias $\Delta > 0$ lifts the degeneracy of the two intermediate states, thus modifying the effective coupling. For $J,\Delta \ll U$ the coupling becomes
+\begin{equation}
+	J_{\mathrm{ex}} = \frac{J^2}{U + \Delta} + \frac{J^2}{U - \Delta} \; . \label{eq:Jex_delta}
+\end{equation}
+Hence, by tuning the bias to $\Delta > U$ one can change the sign of the coupling, thereby switching between ferromagnetic and antiferromagnetic superexchange interactions.\\
+If the vibrational level splitting in each potential well is much larger than all relevant energy scales, the two-site model can be extended to an entire one-dimensional lattice. Thus, within the Mott-Insulator regime ($U \gg J$) with unity filling, the full system can be treated as an isotropic Heisenberg spin chain
+\begin{equation}
+	\hat{H} = - J_{\mathrm{ex}} \sum_{\left\langle j, k \right\rangle} \left( \hat{S}_{j}^{+} \hat{S}_{k}^{-} + \hat{S}_{j}^{-} \hat{S}_{k}^{+} \right) - 2 J_{\mathrm{ex}} \sum_{\left\langle j, k \right\rangle} \hat{S}_{j}^{z} \hat{S}_{k}^{z} \; , \label{eq:HeisenbergChain}
+\end{equation}
+where $\left\langle j, k \right\rangle$ denotes summing over neighbouring sites.
+When describing information transfer through a spin chain, one is most often describing the propagation of a single spin impurity. In this case the first term in equation \ref{eq:HeisenbergChain}, which describes the longitudinal spin coupling, is merely an energy offset, which can be neglected. 
