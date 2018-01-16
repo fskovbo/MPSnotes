@@ -1,5 +1,34 @@
 \begin{thebibliography}{1}
 
+\bibitem{Anderson1959}
+P.~W. Anderson.
+\newblock New approach to the theory of superexchange interactions.
+\newblock {\em Phys. Rev.}, 115:2--13, Jul 1959.
+
+\bibitem{Bloch2012}
+Immanuel Bloch, Jean Dalibard, and Sylvain Nascimbene.
+\newblock Quantum simulations with ultracold quantum gases.
+\newblock {\em Nature Physics}, 8(4):267--276, 2012.
+
+\bibitem{Duan2003}
+L.-M. Duan, E.~Demler, and M.~D. Lukin.
+\newblock Controlling spin exchange interactions of ultracold atoms in optical
+  lattices.
+\newblock {\em Phys. Rev. Lett.}, 91:090402, Aug 2003.
+
+\bibitem{Fukuhara2013}
+Takeshi Fukuhara, Adrian Kantian, Manuel Endres, Marc Cheneau, Peter
+  Schau{\ss}, Sebastian Hild, David Bellem, Ulrich Schollw{\"o}ck, Thierry
+  Giamarchi, Christian Gross, et~al.
+\newblock Quantum dynamics of a mobile spin impurity.
+\newblock {\em Nature Physics}, 9(4):235--241, 2013.
+
+\bibitem{Kuklov2003}
+A.~B. Kuklov and B.~V. Svistunov.
+\newblock Counterflow superfluidity of two-species ultracold atoms in a
+  commensurate optical lattice.
+\newblock {\em Phys. Rev. Lett.}, 90:100401, Mar 2003.
+
 \bibitem{Trotzky2008}
 S.~Trotzky, P.~Cheinet, S.~F{\"o}lling, M.~Feld, U.~Schnorrberger, A.~M. Rey,
   A.~Polkovnikov, E.~A. Demler, M.~D. Lukin, and I.~Bloch.
