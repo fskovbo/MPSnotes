@@ -34,7 +34,7 @@ where $\varepsilon$ denotes the energy of the respective state. For the same rea
 	H_{a,b}^{\mathrm{eff}} &=  - \braket{a|\hat{H}_J \frac{\mathds{1} - \hat{P}_{\rho}}{\hat{H}_U} \hat{H}_J|b} \nonumber \\
 	&= \sum_{n \notin \rho} \braket{a|\hat{H}_J|n} \left( \braket{n |\hat{H}_U | n} \right)^{-1} \braket{n|\hat{H}_J|b} \; .
 \end{align}
-For $J_{\sigma} = J $ and $U_{\uparrow\uparrow} = U_{\downarrow\downarrow} = U_{\uparrow\downarrow}$, one can write the effective Hamiltonian in the basis $\rho$ as
+For $J_{\sigma} = J $ and $U_{\uparrow\uparrow} = U_{\downarrow\downarrow} = U_{\uparrow\downarrow}/2$, one can write the effective Hamiltonian in the basis $\rho$ as
 \begin{align}
 \hat{H}_{\mathrm{eff}} = -J_{\mathrm{ex}} \begin{pmatrix}
            1 & 1 & 0 & 0 \\
@@ -43,7 +43,7 @@ For $J_{\sigma} = J $ and $U_{\uparrow\uparrow} = U_{\downarrow\downarrow} = U_{
            0 & 0 & 0 & 1 
          \end{pmatrix} \; , \label{eq:BosonHamilEff}
 \end{align}
-where $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$ \cite{Duan2003}. Diagonalizing this Hamiltonian yields eigenstates in the form of a spin triplet, $\ket{t}$ with energy $E_t = -2 J_{\mathrm{ex}}$, and a spin singlet, $\ket{s}$ with energy $E_s = 0$. This is illustrated in the bottom part of figure \ref{fig:superexchange}.B.
+where $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$ \cite{Duan2003}. Diagonalizing this Hamiltonian yields eigenstates in the form of a spin triplet, $\ket{t}$ with energy $E_t = -2 J_{\mathrm{ex}}$, and a spin singlet, $\ket{s}$ with energy $E_s = 0$. This is illustrated in the bottom part of figure \ref{fig:superexchange}.B. The upper doublet displayed in figure \ref{fig:superexchange}.B contains further eigenstates of the Hamiltonian \eqref{eq:SpinHubbard} with doubly occupation. However, deep within the Mott regime ($U \gg J$) the doubly occupied states only exists as virtual states. Furthermore, the coupling between the two doublets is through a first order tunneling process, which is highly suppressed in the Mott regime. Thereby the coupling between the two doublets can be neglected, and one only has to consider the lower doublet, whose effective Hamiltonian is that of equation \eqref{eq:BosonHamilEff}, where the coupling is mediated through the superexchange interaction.\\
 Finally, the Hamiltonian \eqref{eq:BosonHamilEff} can be mapped to that of an isotropic Heisenberg model, yielding \cite{Trotzky2008}
 \begin{align}
 	\hat{H} &= -2 J_{\mathrm{ex}} \hat{\boldsymbol{S}}_{\mathrm{L}} \cdot \hat{\boldsymbol{S}}_{\mathrm{R}} \nonumber \\
