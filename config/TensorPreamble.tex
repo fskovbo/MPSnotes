@@ -2,7 +2,7 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.7}
 
-\usetikzlibrary{arrows,calc,shapes}
+\usetikzlibrary{arrows,calc,shapes,decorations.pathreplacing,calligraphy}
 \tikzset{>=latex}
 	
 
@@ -12,9 +12,16 @@
 
 \tikzstyle{matrix}=[diamond,draw=blue!50,fill=blue!20,thick,minimum height=0.5cm,minimum width=0.5cm]
 
-\tikzstyle{operator}=[circle,draw=blue!50,fill=blue!20,thick,minimum height=0.6cm]
+\tikzstyle{operator}=[circle,draw=gray!80,fill=gray!50,thick,minimum height=0.6cm]
 
-\tikzstyle{twositeop}=[draw=blue!50,fill=blue!20,thick,minimum height=0.6cm,rounded corners=0.3cm]
+\tikzstyle{twositeop}=[draw=gray!80,fill=gray!50,thick,minimum height=0.6cm,rounded corners=0.3cm]
+ 
+\tikzstyle{tensorl}=[rectangle,draw=orange!50,fill=orange!20,thick,minimum height=1cm,minimum width=0.6cm,rounded corners=0.1cm]
+
+\tikzstyle{tensorc}=[rectangle,draw=red!50,fill=red!20,thick,minimum height=1cm,minimum width=0.6cm,rounded corners=0.1cm]
+
+\tikzstyle{tensorr}=[rectangle,draw=purple!50,fill=purple!20,thick,minimum height=1cm,minimum width=0.6cm,rounded corners=0.1cm]
+
 
 
 	%% --------- Custom Shapes ---------%%

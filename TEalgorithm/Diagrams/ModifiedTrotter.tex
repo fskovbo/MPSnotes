@@ -1,0 +1,66 @@
+\begin{tikzpicture}[inner sep=1mm]
+\def \reldist {2};
+\def \numb {5};
+\def \wid {3.2};
+\def \size {1.0};
+\def \rad {0.5};
+
+	
+\foreach \i in  {1,...,\numb} {
+	\node[tensor,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A\i)
+	at (\i * \reldist, 0) {};
+	\draw[-] (A\i) -- (\i * \reldist , -8.5);	
+};
+
+\foreach \i in {1,...,4} {
+    \pgfmathtruncatemacro{\iplusone}{\i + 1};
+    \draw[-] (A\i) -- (A\iplusone);
+};
+
+\foreach \i in {1,3,5} {
+    \node[twositeop, minimum width= \wid cm,minimum height= \size cm,rounded corners = \rad cm] (fop\i)
+    at (\reldist*\i + \reldist/2,-1.5)
+    {\small $\hat{\mathcal{U}}_{J}^{even}(\delta t /2)$};
+};
+
+\foreach \i in {0,2,4} {
+    \node[twositeop, minimum width= \wid cm,minimum height= \size cm,rounded corners = \rad cm] (fop\i)
+    at (\reldist*\i + \reldist/2,-3)
+    {$\hat{\mathcal{U}}_{J}^{odd}(\delta t /2)$};
+};	
+	
+	
+\foreach \i in  {1,...,\numb} {
+	\node[operator,minimum width= \size cm,minimum height= \size cm] (op\i)
+	at (\i * \reldist, -4.5)
+	{\scriptsize $\hat{\mathcal{U}}_{U}(\delta t)$};	
+};
+
+\foreach \i in {1,3,5} {
+    \node[twositeop, minimum width= \wid cm,minimum height= \size cm,rounded corners = \rad cm] (sop\i)
+    at (\reldist*\i + \reldist/2,-6)
+    {\small $\hat{\mathcal{U}}_{J}^{even}(\delta t /2)$};
+};
+
+\foreach \i in {0,2,4} {
+    \node[twositeop, minimum width= \wid cm,minimum height= \size cm,rounded corners = \rad cm] (sop\i)
+    at (\reldist*\i + \reldist/2,-7.5)
+    {$\hat{\mathcal{U}}_{J}^{odd}(\delta t /2)$};
+};		
+	
+%\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt]
+%(-0.8,-8.2) -- (-0.8,-0.8) node [black,midway,xshift=-0.6cm] 
+%{$\delta t$};	
+%	
+
+\draw[decoration={calligraphic brace,amplitude=10pt}, decorate, line width=1.25pt, xshift=-4pt, yshift=0pt]
+(-0.8,-8.2) -- (-0.8,-0.8) node [black,midway,xshift=-0.6cm] 
+{\large $\delta t$};
+
+	\node (dot1) at (-0.5,0) {$\dots$};
+	\node (dot2) at (\numb * \reldist + 2.4,0) {$\dots$};
+	\draw[-] (A1) -- (dot1);
+	\draw[-] (A\numb) -- (dot2);
+	
+	
+\end{tikzpicture}
