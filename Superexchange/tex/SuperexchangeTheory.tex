@@ -44,9 +44,13 @@ For $J_{\sigma} = J $ and $U_{\uparrow\uparrow} = U_{\downarrow\downarrow} = U_{
          \end{pmatrix} \; , \label{eq:BosonHamilEff}
 \end{align}
 where $J_{\mathrm{ex}} = 2 \frac{J^2}{U}$ \cite{Duan2003}. Diagonalizing this Hamiltonian yields eigenstates in the form of a spin triplet, $\ket{t}$ with energy $E_t = -2 J_{\mathrm{ex}}$, and a spin singlet, $\ket{s}$ with energy $E_s = 0$. This is illustrated in the bottom part of figure \ref{fig:superexchange}.B. The upper doublet displayed in figure \ref{fig:superexchange}.B contains further eigenstates of the Hamiltonian \eqref{eq:SpinHubbard} with doubly occupation. However, deep within the Mott regime ($U \gg J$) the doubly occupied states only exists as virtual states. Furthermore, the coupling between the two doublets is through a first order tunneling process, which is highly suppressed in the Mott regime. Thereby the coupling between the two doublets can be neglected, and one only has to consider the lower doublet, whose effective Hamiltonian is that of equation \eqref{eq:BosonHamilEff}, where the coupling is mediated through the superexchange interaction.\\
-Finally, the Hamiltonian \eqref{eq:BosonHamilEff} can be mapped to that of an isotropic Heisenberg model, yielding \cite{Trotzky2008}
+Utilizing the eigenspectrum of the effective Hamiltonian (eq. \eqref{eq:BosonHamilEff}) one can express the Hamiltonian through the projection operator into the triplet subspace, $\hat{P}_t$, such that
+\begin{equation}
+	\hat{H}_{\mathrm{eff}} = -2 J_{\mathrm{ex}} \hat{P}_t \; . 
+\end{equation}  
+The triplet projection operator has the important property that it can be described by spin operators, $\hat{P}_t = \frac{3}{4} \hat{\boldsymbol{S}}_{\mathrm{L}} \cdot \hat{\boldsymbol{S}}_{\mathrm{R}}$, where $\hat{\boldsymbol{S}}_{\mathrm{L,R}}$ are the spin operators for the left and right site respectively. By discarding the constant term, the Hamiltonian \eqref{eq:BosonHamilEff} can be mapped to that of an isotropic Heisenberg model, yielding \cite{Trotzky2008}
 \begin{align}
-	\hat{H} &= -2 J_{\mathrm{ex}} \hat{\boldsymbol{S}}_{\mathrm{L}} \cdot \hat{\boldsymbol{S}}_{\mathrm{R}} \nonumber \\
+	\hat{H}_{\mathrm{eff}} &= -2 J_{\mathrm{ex}} \hat{\boldsymbol{S}}_{\mathrm{L}} \cdot \hat{\boldsymbol{S}}_{\mathrm{R}} \nonumber \\
 	&= - J_{\mathrm{ex}} \left( \hat{S}_{\mathrm{L}}^{+} \hat{S}_{\mathrm{R}}^{-} + \hat{S}_{\mathrm{L}}^{-} \hat{S}_{\mathrm{R}}^{+} \right) - 2 J_{\mathrm{ex}} \hat{S}_{\mathrm{L}}^{z} \hat{S}_{\mathrm{R}}^{z} \; , \label{eq:twositeFerro}
 \end{align}
 where 
@@ -68,5 +72,5 @@ If the vibrational level splitting in each potential well is much larger than al
 \begin{equation}
 	\hat{H} = - J_{\mathrm{ex}} \sum_{\left\langle j, k \right\rangle} \left( \hat{S}_{j}^{+} \hat{S}_{k}^{-} + \hat{S}_{j}^{-} \hat{S}_{k}^{+} \right) - 2 J_{\mathrm{ex}} \sum_{\left\langle j, k \right\rangle} \hat{S}_{j}^{z} \hat{S}_{k}^{z} \; , \label{eq:HeisenbergChain}
 \end{equation}
-where $\left\langle j, k \right\rangle$ denotes summing over neighbouring sites. In the process of deriving equation \eqref{eq:twositeFerro} and \eqref{eq:HeisenbergChain} some site specific energy shifts were left out, however, these can be compensated for by applying an external magnetic field.\\
+where $\left\langle j, k \right\rangle$ denotes summing over neighbouring sites. In the process of deriving equation \eqref{eq:twositeFerro} and \eqref{eq:HeisenbergChain} a constant energy shifts was left out, however, this can be compensated for by applying an external magnetic field.\\
 When describing information transfer through a spin chain, one is most often describing the propagation of a single spin impurity. In this case the first term in equation \ref{eq:HeisenbergChain}, which describes the longitudinal spin coupling, is merely an energy offset, which can be neglected \cite{Fukuhara2013}.  
