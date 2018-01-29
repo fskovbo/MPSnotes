@@ -46,6 +46,12 @@ Satoshi Ejima, Holger Fehske, Florian Gebhard, Kevin zu~M\"unster, Michael
   one-dimensional bose-hubbard model.
 \newblock {\em Phys. Rev. A}, 85:053644, May 2012.
 
+\bibitem{Gemelke2009}
+Nathan Gemelke, Xibo Zhang, Chen-Lung Hung, and Cheng Chin.
+\newblock In situ observation of incompressible mott-insulating domains in
+  ultracold atomic gases.
+\newblock {\em Nature}, 460(7258):995, 2009.
+
 \bibitem{greiner}
 Markus Greiner.
 \newblock {\em Ultracold quantum gases in three-dimensional optical lattice
@@ -143,6 +149,11 @@ L.P. Pitaevskii.
 M.~Plischke and B.~Bergersen.
 \newblock {\em Equilibrium Statistical Physics}.
 \newblock World Scientific, 2006.
+
+\bibitem{Sachdev2007QPT}
+Subir Sachdev.
+\newblock {\em Quantum phase transitions}.
+\newblock Wiley Online Library, 2007.
 
 \bibitem{Molmer2010}
 M.~Saffman, T.~G. Walker, and K.~M\o{}lmer.
