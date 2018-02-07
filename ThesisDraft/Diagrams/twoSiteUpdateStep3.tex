@@ -1,0 +1,49 @@
+\begin{tikzpicture}[inner sep=1mm]	
+	\def \center {2};
+	\def \width {2.5};
+	\def \offsetx {8};
+	\def \xspace {1};
+	\def \imgcenter {\offsetx -2.75};
+	\def \imgwidth {15};
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+	
+	
+	\node[tensor, minimum width=\width cm] (theta) at (\center, 0) {};
+	
+	\node (d1) at (\center - \width/2 + 0.35,-1) {};
+	\node (d2) at (\center + \width/2 - 0.35,-1) {};
+	\node (d3) at (\center - \width/2 - 0.8, 0) {};
+	\node (d4) at (\center + \width/2 + 0.8, 0) {};
+	
+	\draw[-] (d1) -- (d1 |-  theta.south);
+	\draw[-] (d2) -- (d2 |-  theta.south);
+	\draw[-] (d3) -- (theta);
+	\draw[-] (d4) -- (theta);	
+	
+	\node (thetalab) at (\center , 0 + 0.6) {$\tilde{\Theta}$};
+	
+	
+	\node[tensor] (U) at (\offsetx , 0) {};
+	\node[matrix] (S) at (\offsetx + \xspace, 0) {};
+    \node[tensor] (V) at (\offsetx + 2*\xspace , 0) {};
+	
+	
+	\node (j1) at (\offsetx ,-1) {$j_n$};
+	\node (j2) at (\offsetx + 2*\xspace ,-1) {$j_{n+1}$};
+	\node (a1) at (\offsetx -1.2 ,0) {$\alpha_{n-1}$};
+	\node (a2) at (\offsetx + 2*\xspace +1.2 ,0) {$\alpha_{n+1}$};    
+    
+	\node (Ulab) at (\offsetx , 0.6) {$U$};
+	\node (Slab) at (\offsetx + \xspace , 0.6) {$S$};
+	\node (Vlab) at (\offsetx + 2*\xspace , 0.6) {$V^{\dag}$};    
+    
+	\draw[-] (U) -- (j1);
+	\draw[-] (U) -- (a1);
+	\draw[-] (U) -- (S);
+	\draw[-] (V) -- (S);
+	\draw[-] (V) -- (j2);
+	\draw[-] (V) -- (a2);
+	
+	\draw[->, line width=1mm] (\offsetx-3.5 ,0) -- (\offsetx-2,0);
+	\node (SVD) at (\offsetx-2.9 ,0.4) {SVD};
+\end{tikzpicture}

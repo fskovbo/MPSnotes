@@ -1,0 +1,20 @@
+\begin{tikzpicture}[inner sep=1mm]
+    \foreach \i in {1,...,7} {
+        \node[operator] (\i) at (\i, 0) {};
+        \node (t\i) at (\i, 0.8) {};
+        \node (b\i) at (\i, -0.8) {};
+        
+        \draw[-] (\i) -- (t\i);
+        \draw[-] (\i) -- (b\i); 
+    };
+    
+    \foreach \i in {1,...,6} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (\i) -- (\iplusone);
+    };
+    
+    \node (t1) at (1, 1) {$j_1 '$};
+    \node (b1) at (1, -1) {$j_1$};
+    \node (t7) at (7, 1) {$j_N '$};
+    \node (b7) at (7, -1) {$j_N$};
+\end{tikzpicture}

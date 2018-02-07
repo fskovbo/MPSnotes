@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+Case mismatch error between cite keys Schollwock and schollwock
+---line 179 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 188 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 211 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 217 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 224 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 233 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 241 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 248 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Schollwock and schollwock
+---line 270 of file main.aux
+ : \citation{Schollwock
+ :                     }
+I'm skipping whatever remains of this command
+The style file: plain.bst
+Database file #1: ../config/references.bib
+Repeated entry---line 745 of file ../config/references.bib
+ : @article{Cramer
+ :                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 770 of file ../config/references.bib
+ : @article{Schollwock
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "cmplx_t"
+Warning--empty school in greiner
+Warning--empty booktitle in grimm
+Warning--can't use both volume and number fields in grimm
+(There were 11 error messages)

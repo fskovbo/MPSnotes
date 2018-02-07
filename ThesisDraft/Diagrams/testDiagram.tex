@@ -1,0 +1,15 @@
+\begin{tikzpicture}[inner sep=1mm]
+    \foreach \i in {1,...,5} {
+        \node[tensor, label={\small $\Gamma^{[\i]}$}] (\i tensor) at (2*\i -1, 0) {};
+        \node[matrix, label={\small $\Lambda^{[\i]}$}] (\i matrix) at (2*\i , 0) {};
+        \node (\i spin) at (2* \i -1, -0.7) {$s_\i$};
+        \draw[-] (\i tensor) -- (\i spin);
+        \draw[-] (\i tensor) -- (\i matrix);
+    };
+    
+    \foreach \i in {1,...,4} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (\i matrix) -- (\iplusone tensor);
+    };
+    %\draw[-] (1.west) .. controls +(-1.5, 1) and +(1.5, 1) .. (5.east);
+\end{tikzpicture}

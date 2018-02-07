@@ -1,0 +1,109 @@
+\chapter{Performing Time Evolution on an MPS}
+Several algorithms deals with time evolving MPS's, however, as many of them are very similar only a single one, tDMRG, will be treated here.\\
+Consider the time evolution of a quantum state
+\begin{equation}
+	\ket{\psi (t)} = \hat{U}(t) \ket{\psi (t)} \; ,
+\end{equation}
+where $\hat{U}(t) = \e^{ - \im \hat{H} t }$ is the time evolution operator. Simply writing this operator as an MPO and applying it is not straightforward, however, if the Hamiltonian contains only nearest-neighbour interactions this can be achieved.
+Assume the Hamiltonian is a sum of two-site operators of the form $\hat{H} = \sum_{n} \hat{h}^{[n , n+1]}$. One can decompose this into a sum over even and odd bonds
+\begin{equation}
+	\hat{H} = \hat{H}_{\mathrm{odd}} \; + \; \hat{H}_{\mathrm{even}} = \sum_{n \; \mathrm{odd}} \hat{h}^{[n , n+1]} \; + \; \sum_{n \; \mathrm{even}} \hat{h}^{[n , n+1]} \; .
+\end{equation}  
+From here one can discretize the time into small time slices $\delta t$ and perform a Trotter-Suzuki decomposition \cite{Suzuki}
+\begin{equation}
+	\e^{- \im \hat{H} \; \delta t} = \e^{- \im \hat{H}_{\mathrm{odd}} \; \delta t } \e^{- \im \hat{H}_{\mathrm{even}} \; \delta t} \; + \; \;  \mathrm{O}(\delta t^2) \; ,
+\end{equation}
+where the error is due to the noncommutativity of the bond Hamtiltonians $[ \hat{h}_{\mathrm{odd}}^{[n , n+1]} \; , \; \hat{h}_{\mathrm{even}}^{[n , n+1]} ] \neq 0$. Using this the time evolution operator can be written as the product
+\begin{equation}
+	\hat{U}(\delta t) \approx \left( \prod_{n \; \mathrm{odd}} \hat{U}^{[n,n+1]} (\delta t) \right) \left( \prod_{n \; \mathrm{even}} \hat{U}^{[n,n+1]} (\delta t) \right) \; ,
+\end{equation}
+where
+\begin{equation}
+	\hat{U}^{[n,n+1]} (\delta t) = \e^{- \im \hat{h}^{[n , n+1]} \; \delta t } \; .
+\end{equation}
+Each of these bond evolutions can be written in the form
+\begin{equation}
+	 U^{(j_n j_{n+1}), (j_n ' j_{n+1} ')} =  \bra{j_n j_{n+1}} \e^{- \im \hat{h}^{[n , n+1]} \; \delta t } \ket{j_n ' j_{n+1} '} \; ,
+\end{equation}
+whereby it can be represented as an MPO. Thus, one has one MPO performing an infinitesimal time step on the odd bonds and another MPO doing the same for even bonds, which can be seen in figure \ref{fig:oddevenops}.
+\begin{figure}[h!]
+	\centering
+	\input{Diagrams/TEBD.tex}
+	\caption{\textit{Approximation of each time step $\delta t$ using a Trotter-Suzuki decomposition, such that the time evolution operator is expressed as a product of unitary two-site operators.}}
+	\label{fig:oddevenops}
+\end{figure}
+
+Consider an MPS in the mixed-canonical form
+\begin{equation}
+	\ket{\psi} = \sum_{\boldsymbol{j}} A^{j_1} \ldots A^{j_{n-1}} \; M^{j_n} S M^{j_{n+1}} \; B^{j_{n+2}} \ldots B^{j_N} \ket{\boldsymbol{j}} \;
+\end{equation}
+where the matrices $M$ can have any form. Staring from this state the tDMGR update sequence looks as follows:
+
+\subsection{Infinitesimal time-step update for tDMRG}
+\begin{enumerate}
+\item
+\textbf{Merge:} Contract the two matrices $M^{[n]}$ and $M^{[n+1]}$ over the bond $\alpha_{n}$ creating a two-site tensor
+\begin{equation}
+	\Phi_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}} = \sum_{\alpha_n} M_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n } \; S_{\alpha_{n} , \alpha_{n}} \;  M_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } 
+\end{equation}
+
+
+\item
+\textbf{Apply unitary:} The two-site time evolution operator, $U^{j_n  j_{n+1} , j_n '  j_{n+1}'}$, can now easily be applied to the two-site tensor
+\begin{equation}
+	\tilde{\Phi}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1} } = \sum_{j_n ', j_{n+1}'} U^{j_n  j_{n+1} , j_n '  j_{n+1}'} \; \Phi_{\alpha_{n-1} , \alpha_{n+1}}^{j_n ', j_{n+1} ' } \; .
+\end{equation}
+
+
+\item
+\textbf{Unmerge:} Reshape the updated $\tilde{\Phi}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n ', j_{n+1} '}$ to a matrix and perform an SVD yielding
+\begin{equation}
+	\tilde{\Phi}_{(j_n  \alpha_{n-1} ) ,(j_{n+1}  \alpha_{n+1})} = \sum_{\alpha_n} U_{\alpha_{n-1} , \alpha_{n}}^{j_n } S_{\alpha_n , \alpha_n} (V^{\dag})_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1} } \; .
+\end{equation}
+This causes the bond dimension to increase $D \rightarrow d D$, which must be truncated by keeping only the $D$ largest singular values of $S$. 
+
+
+\item
+\textbf{Progress:}  Next, $\e^{- \im \hat{h}^{[n , n+1]} \; \delta t }$ must be applied to the next pair of sites, thus one has to shift by two sites to continue.\\
+First, keep $U_{\alpha_{n-1} , \alpha_{n}}^{j_n } = A_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n }$ and form the shifted $\Phi$ as
+\begin{equation}
+	\Phi_{\alpha_{n} , \alpha_{n+2}}^{j_{n+1} , j_{n+2}} = \sum_{\alpha_{n+1}}  S_{\alpha_n , \alpha_n} (V^{\dag})_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1} } B_{\alpha_{n+1} , \alpha_{n+1}}^{j_{n+2}} \; ,
+\end{equation}
+This is just a shift by one site, however, by reshaping and performing a second SVD one can form the $\Phi$ shifted by two sites
+\begin{equation}
+	\Phi_{\alpha_{n+1} , \alpha_{n+3}}^{j_{n+2} , j_{n+3}} = \sum_{\alpha_{n+2}}  S_{\alpha_{n+1} , \alpha_{n+1}} (V^{\dag})_{\alpha_{n+1} , \alpha_{n+2}}^{j_{n+2} } B_{\alpha_{n+2} , \alpha_{n+3}}^{j_{n+3}} \; ,
+\end{equation}
+where $U_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1} } = A_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} }$, thus retaining the canonical form.\\
+After each SVD the matrices are truncated down to dimension $D$, however, the second SVD causes no loss of information, as the Schmidt rank of $S$ will be at most $D$. 
+\end{enumerate}
+From here one can apply the unitary $U^{[n+2 , n+3]}$ to the new two-site tensor and proceed with the next infinitesimal time-evolution step all while remaining in the canonical form \cite{Schollwock}. This sequence is illustrated in figure \ref{fig:tDMRG}.
+
+\renewcommand{\thesubfigure}{\arabic{subfigure}}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Merge:}}
+		\input{Diagrams/tDMRG1.tex}
+	\end{subfigure}\\[.5cm]
+	
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Apply unitary:}}
+		\input{Diagrams/tDMRG2.tex}
+	\end{subfigure}\\[.5cm]
+	
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Unmerge:}}
+		\input{Diagrams/tDMRG3.tex}
+	\end{subfigure}\\[.5cm]
+
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Progress:}}
+		\input{Diagrams/tDMRG4.tex}
+	\end{subfigure}
+	\caption{\textit{A pictorial representation of the infinitesimal time-step update for tDMRG. After the sequence has been performed, the next unitary $U^{[n+2 , n+3]}$ can be applied to the new two-site tensor.}}
+	\label{fig:tDMRG}
+\end{figure}

@@ -1,0 +1,83 @@
+\begin{tikzpicture}[inner sep=1mm]
+    \foreach \i in {1,...,3} {
+        \node[tensor] (tt\i) at (\i, 0) {};
+        \node[operator] (o\i) at (\i, -1.5) {};
+        \node[tensor] (tb\i) at (\i, -3) {};  
+        
+        \draw[-] (tt\i) -- (o\i);
+        \draw[-] (o\i) -- (tb\i);
+    };
+    \foreach \i in {1,...,2} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+    \foreach \i in {9,...,12} {
+        \node[tensor] (tt\i) at (\i, 0) {};
+        \node[operator] (o\i) at (\i, -1.5) {};
+        \node[tensor] (tb\i) at (\i, -3) {};  
+        
+        \draw[-] (tt\i) -- (o\i);
+        \draw[-] (o\i) -- (tb\i);
+    };
+    \foreach \i in {9,...,11} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+    
+    \node[tensor] (tt4) at (5.4, 0) {};
+    \node[operator] (o4) at (5.4, -1.5) {};
+    \node[tensor] (tb4) at (5.4, -3) {};
+
+	\draw[-] (tt4) -- (o4);
+	\draw[-] (tb4) -- (o4);
+    
+    \node (at1) at (4.3, 0) {$\alpha_{i-1}$};
+    \node (at2) at (6.4, 0) {$\alpha_{i}$};
+    \node (ab1) at (4.3, -3) {$\alpha_{i-1} '$};
+    \node (ab2) at (6.4, -3) {$\alpha_{i} '$};
+    \node (b1) at (4.3, -1.5) {$\beta_{i-1}$};
+    \node (b2) at (6.4, -1.5) {$\beta_{i}$};
+    
+    \draw[-] (tt3) -- (at1);
+    \draw[-] (tb3) -- (ab1);
+    \draw[-] (o3) -- (b1);
+    \draw[-] (tt4) -- (at1);
+    \draw[-] (tb4) -- (ab1);
+    \draw[-] (o4) -- (b1);
+    \draw[-] (tt4) -- (at2);
+    \draw[-] (tb4) -- (ab2);
+    \draw[-] (o4) -- (b2);
+    
+    
+    \draw[->, line width=1mm] (6.9,-1.5) -- (8.4,-1.5);
+    
+    \node (at3) at (13, 0) {$\alpha_{i}$};
+    \node (ab3) at (13, -3) {$\alpha_{i} '$};
+    \node (b3) at (13, -1.5) {$\beta_{i}$};
+    \draw[-] (tt12) -- (at3);
+    \draw[-] (tb12) -- (ab3);
+    \draw[-] (o12) -- (b3);
+    
+    \node (L1) at (2,-4) {$L^{[i-1]}$};
+    \node (L2) at (10.5,-4) {$L^{[i]}$};
+
+    
+    \node (eq) at (14,-1.5) {$\equiv$};
+    
+
+    \node (dummy1) at (16,0) {$\alpha_{i}$};
+ 	\node (dummy2) at (16,-3) {$\alpha_{i} '$};
+ 	\node (dummy3) at (16,-1.5) {$\beta_{i}$};
+	\node[tensor] (mat) at (15 , -1.5) {};    
+    
+    \draw[-] (dummy1.west) .. controls (15, 0) .. (mat.north);
+    \draw[-] (dummy2.west) .. controls (15, -3) .. (mat.south);
+	\draw[-] (mat) -- (dummy3);   
+	
+	
+	\node (L3) at (15.5,-4) {$L^{[i]}$}; 
+\end{tikzpicture}

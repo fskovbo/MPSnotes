@@ -1,0 +1,68 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \offsetx {6};
+	\def \offsety {-5};
+	\def \imgcenter {\offsetx -2.25};
+	\def \imgwidth {15};
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+	
+
+	\Left{-0.5}{-1.5}{1.5};
+	\node[tensor] (U1) at (1,0) {};	
+	\node[tensor] (U2) at (1,-3) {};	
+	\node[operator] (W) at (1,-1.5) {};
+
+	\node (a1) at (2,0) {$\alpha_n$};
+	\node (a2) at (2,-3) {$\alpha_n '$};
+	\node (b) at (2,-1.5) {$\beta_n$};
+	
+	\draw[-] (U1) -- (W);
+	\draw[-] (U2) -- (W);
+	\draw[-] (U1) -- (a1);
+	\draw[-] (U2) -- (a2);
+	\draw[-] (W) -- (b);
+	
+	\node (L1) at (-1.4,-1.5) {$L^{[n-1]}$};
+	\node (U1lab) at (1,0.6) {$U$};
+	\node (U2lab) at (1,-3.6) {$U^{\dag}$};
+	
+	
+	\draw[->, line width=1mm] (\offsetx-3 ,-1.5) -- (\offsetx-1.5,-1.5);
+	
+	
+	\Left{\offsetx}{-1.5}{1.2};
+	\node (L2) at (\offsetx -0.8,-1.5) {$\tilde{L}^{[n]}$};
+	\node (a1) at (\offsetx+1.5,0) {$\alpha_n$};
+	\node (a2) at (\offsetx+1.5,-3) {$\alpha_n '$};
+	\node (b) at (\offsetx+1.5,-1.5) {$\beta_n$};
+	
+	%%----------------%%
+	
+	\Right{1}{-1.5 + \offsety}{1.5};
+	\node[tensor] (U1) at (-0.5,0 + \offsety) {};	
+	\node[tensor] (U2) at (-0.5,-3 + \offsety) {};	
+	\node[operator] (W) at (-0.5,-1.5 + \offsety) {};
+
+	\node (a1) at (-1.8,0 + \offsety) {$\alpha_{n}$};
+	\node (a2) at (-1.8,-3 + \offsety) {$\alpha_{n} '$};
+	\node (b) at (-1.8,-1.5 + \offsety) {$\beta_{n}$};
+	
+	\draw[-] (U1) -- (W);
+	\draw[-] (U2) -- (W);
+	\draw[-] (U1) -- (a1);
+	\draw[-] (U2) -- (a2);
+	\draw[-] (W) -- (b);
+	
+	\node (R1) at (2,-1.5 + \offsety) {$R^{[n+2]}$};
+	\node (V1lab) at (-0.5,0.6 + \offsety) {$V^{\dag}$};
+	\node (V2lab) at (-0.5,-3.6 + \offsety) {$V$};
+	
+	
+	\draw[->, line width=1mm] (\offsetx-3 ,-1.5 + \offsety) -- (\offsetx-1.5,-1.5 + \offsety);
+	
+	
+	\Right{\offsetx + 1.2}{-1.5 + \offsety}{1.2};
+	\node (R2) at (\offsetx +2.2,-1.5 + \offsety) {$\tilde{R}^{[n+1]}$};
+	\node (a1) at (\offsetx -0.5,0 + \offsety) {$\alpha_{n}$};
+	\node (a2) at (\offsetx -0.5,-3 + \offsety) {$\alpha_{n} '$};
+	\node (b) at (\offsetx -0.5,-1.5 + \offsety) {$\beta_{n}$};
+\end{tikzpicture}

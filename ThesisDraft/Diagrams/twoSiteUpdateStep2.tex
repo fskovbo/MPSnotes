@@ -1,0 +1,59 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \imgcenter {5.8};
+	\def \imgwidth {15};
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};	
+	
+	
+	\node[tensor, minimum width=2.5cm] (theta) at (2, 0) {};
+	\node[operator] (W1) at (1.1,-1.5) {};
+	\node[operator] (W2) at (2.9,-1.5) {};	
+	
+	\node (dummy1) at (0.3,-3) {};
+ 	\node (dummy2) at (3.6,-3) {};
+	\node[tensor] (L) at (-0.5 , -1.5) {};
+	\node[tensor] (R) at (4.5 , -1.5) {};    
+    
+    \draw[-] (dummy1.west) .. controls (-0.5, -3) .. (L.south);
+    \draw[-] (dummy2.east) .. controls (4.5, -3) .. (R.south);
+    \draw[-] (theta.west) .. controls (-0.5, 0) .. (L.north);
+    \draw[-] (theta.east) .. controls (4.5, 0) .. (R.north);
+	
+	\draw[-] (L) -- (W1);
+	\draw[-] (W1) -- (W2);
+	\draw[-] (W2) -- (R);
+	\draw[-] (W1) -- (W1 |-  theta.south);
+	\draw[-] (W2) -- (W2 |-  theta.south);
+	
+	\node (j1) at (1.1 , -2.5) {$j_{n}'$};
+	\node (j2) at (2.9 , -2.5) {$j_{n+1}'$};
+	\draw[-] (W1) -- (j1);
+	\draw[-] (W2) -- (j2);
+	
+	\node (a1) at (0.5 , -3.3) {$\alpha_{n-1}'$};
+	\node (a2) at (3.6 , -3.3) {$\alpha_{n+1}'$};
+	\node (Llab) at (-1.2 , -1.5) {$L$};
+	\node (Rlab) at (5 , -1.5) {$R$};	
+	\node (Thetalab) at (2 , 0.6) {$\tilde{\Theta}$};
+	\node (W1lab) at (0.6 , -0.9) {$W^{[n]}$};
+	\node (W2lab) at (3.6 , -0.9) {$W^{[n+1]}$};
+	
+	
+	\def \offsetx {7.5};
+	\def \offsety {-1};
+	\node[tensor, minimum width=2.5cm] (theta2) at (2+\offsetx, \offsety) {};
+	\node (d1) at (1.1 +\offsetx, -1+ \offsety) {};
+	\node (d2) at (2.9 +\offsetx, -1 + \offsety) {};
+	\node (d3) at (2+\offsetx - 1.25 - 0.8, 0+\offsety) {};
+	\node (d4) at (2+\offsetx + 1.25 + 0.8, 0+\offsety) {};
+	
+	\draw[-] (d1) -- (d1 |-  theta2.south);
+	\draw[-] (d2) -- (d2 |-  theta2.south);
+	\draw[-] (d3) -- (theta2);
+	\draw[-] (d4) -- (theta2);
+	
+	\node (Thetalab2) at (2 +\offsetx, 0.6 + \offsety) {$\tilde{\Theta}$};
+	
+	
+	\node (eq) at (5.8 , -1.5) {$=$};
+	\node (lambda) at (7 , -1.5) {$\lambda_0 \;  \times$};	
+\end{tikzpicture}

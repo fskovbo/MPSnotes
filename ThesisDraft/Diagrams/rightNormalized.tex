@@ -1,0 +1,21 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\node[tensor] (tens1) at (2.5,0) {};
+	\node[tensor] (tens2) at (2.5,-2) {}; 
+ 	
+	\node (index1) at (1,0) {$\alpha_n$};
+	\node (index2) at (1,-2) {$\alpha_n '$}; 	
+ 	
+ 	\draw[-] (tens1) -- (tens2);
+	\draw[-] (tens1) -- (index1);
+	\draw[-] (tens2) -- (index2); 	
+    \draw[-] (tens1.east) .. controls (3.5, 0) and (3.5, -2) .. (tens2.east);
+    
+    
+    \node (eq) at (4,-1) {$=$};
+    
+    
+ 	\node (dummy1) at (5,0) {};
+ 	\node (dummy2) at (5,-2) {};
+    
+    \draw[-] (dummy1.east) .. controls (6, 0) and (6, -2) .. (dummy2.east);
+\end{tikzpicture}

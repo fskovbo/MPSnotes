@@ -1,0 +1,44 @@
+\begin{tikzpicture}[inner sep=1mm]
+    \foreach \i in {1,...,7} {
+        \node[tensor] (t\i) at (\i, 0) {};
+        \node[operator] (o\i) at (\i, -1) {};
+        
+        \node (b\i) at (\i, -1.8) {};
+        
+        \draw[-] (t\i) -- (o\i);
+        \draw[-] (o\i) -- (b\i); 
+    };
+    
+    \foreach \i in {1,...,6} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (t\i) -- (t\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+    
+    \node (b1) at (1, -2) {$j_1$};
+    \node (b7) at (7, -2) {$j_N$};
+    
+    \node (psi) at (8.5, 0) {$\ket{\psi}$};
+    \node (O) at (8.5, -1) {$\hat{O}$};
+    
+    
+    \draw[->, line width=1mm] (4,-2) -- (4,-3);
+    
+    \foreach \i in {1,...,7} {
+        \node[tensor] (t\i) at (\i, -3.5) {};
+        
+        \node (b\i) at (\i, -4.3) {};
+        
+        \draw[-] (t\i) -- (b\i); 
+    };
+    
+    \foreach \i in {1,...,6} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (t\i) -- (t\iplusone);
+    };
+    
+    \node (b1) at (1, -4.5) {$j_1$};
+    \node (b7) at (7, -4.5) {$j_N$};
+    
+    \node (phi) at (8.5, -3.5) {$\ket{\phi}$};
+\end{tikzpicture}

@@ -1,0 +1,248 @@
+\begin{thebibliography}{10}
+
+\bibitem{WiemanCornell1995}
+Mike~H Anderson, Jason~R Ensher, Michael~R Matthews, Carl~E Wieman, Eric~A
+  Cornell, et~al.
+\newblock Observation of bose-einstein condensation in a dilute atomic vapor.
+\newblock {\em science}, 269(5221):198--201, 1995.
+
+\bibitem{Bloch2012}
+Immanuel Bloch, Jean Dalibard, and Sylvain Nascimbene.
+\newblock Quantum simulations with ultracold quantum gases.
+\newblock {\em Nature Physics}, 8(4):267--276, 2012.
+
+\bibitem{manybodyBloch}
+Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
+\newblock Many-body physics with ultracold gases.
+\newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
+
+\bibitem{bruus}
+H.~Bruus and K.~Flensberg.
+\newblock {\em Many-Body Quantum Theory in Condensed Matter Physics: An
+  Introduction}.
+\newblock Oxford Graduate Texts. OUP Oxford, 2004.
+
+\bibitem{cohen1992atom}
+Claude Cohen-Tannoudji, Jacques Dupont-Roc, Gilbert Grynberg, and Patricia
+  Thickstun.
+\newblock {\em Atom-photon interactions: basic processes and applications}.
+\newblock Wiley Online Library, 1992.
+
+\bibitem{Dalibard2011}
+Jean Dalibard, Fabrice Gerbier, Gediminas Juzeli{\=u}nas, and Patrik
+  {\"O}hberg.
+\newblock Colloquium: Artificial gauge potentials for neutral atoms.
+\newblock {\em Reviews of Modern Physics}, 83(4):1523, 2011.
+
+\bibitem{Cramer}
+J.~Eisert, M.~Cramer, and M.~B. Plenio.
+\newblock Colloquium: Area laws for the entanglement entropy.
+\newblock {\em Rev. Mod. Phys.}, 82:277--306, Feb 2010.
+
+\bibitem{characPhases}
+Satoshi Ejima, Holger Fehske, Florian Gebhard, Kevin zu~M\"unster, Michael
+  Knap, Enrico Arrigoni, and Wolfgang von~der Linden.
+\newblock Characterization of mott-insulating and superfluid phases in the
+  one-dimensional bose-hubbard model.
+\newblock {\em Phys. Rev. A}, 85:053644, May 2012.
+
+\bibitem{Gemelke2009}
+Nathan Gemelke, Xibo Zhang, Chen-Lung Hung, and Cheng Chin.
+\newblock In situ observation of incompressible mott-insulating domains in
+  ultracold atomic gases.
+\newblock {\em Nature}, 460(7258):995, 2009.
+
+\bibitem{greiner}
+Markus Greiner.
+\newblock {\em Ultracold quantum gases in three-dimensional optical lattice
+  potentials}.
+\newblock PhD thesis, April 2003.
+
+\bibitem{grimm}
+Rudolf Grimm, Matthias Weidemüller, and Yurii~B. Ovchinnikov.
+\newblock Optical dipole traps for neutral atoms.
+\newblock volume~42 of {\em Advances In Atomic, Molecular, and Optical
+  Physics}, pages 95 -- 170. Academic Press, 2000.
+
+\bibitem{Gross1961}
+E.~P. Gross.
+\newblock Structure of a quantized vortex in boson systems.
+\newblock {\em Il Nuovo Cimento (1955-1965)}, 20(3):454--477, May 1961.
+
+\bibitem{AreaLawHastings}
+M.~B. Hastings.
+\newblock An area law for one-dimensional quantum systems.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2007(08):P08024, 2007.
+
+\bibitem{Zoller1999}
+D.~Jaksch, H.-J. Briegel, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
+\newblock Entanglement of atoms via cold controlled collisions.
+\newblock {\em Phys. Rev. Lett.}, 82:1975--1978, Mar 1999.
+
+\bibitem{Jaksch}
+D.~Jaksch, C.~Bruder, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
+\newblock Cold bosonic atoms in optical lattices.
+\newblock {\em Phys. Rev. Lett.}, 81:3108--3111, Oct 1998.
+
+\bibitem{JakschZoller}
+D.~Jaksch and P.~Zoller.
+\newblock The cold atom hubbard toolbox.
+\newblock {\em Annals of Physics}, 315(1):52 -- 79, 2005.
+\newblock Special Issue.
+
+\bibitem{Kashurnikov2002}
+V.~A. Kashurnikov, N.~V. Prokof'ev, and B.~V. Svistunov.
+\newblock Revealing the superfluid\char21{}mott-insulator transition in an
+  optical lattice.
+\newblock {\em Phys. Rev. A}, 66:031601, Sep 2002.
+
+\bibitem{kittel}
+C.~Kittel.
+\newblock {\em Introduction to Solid State Physics}.
+\newblock Wiley, 2004.
+
+\bibitem{kittel1963}
+Charles Kittel and Ching-yao Fong.
+\newblock {\em Quantum theory of solids}, volume~3.
+\newblock Wiley New York, 1963.
+
+\bibitem{kohn1959analyticWannier}
+Walter Kohn.
+\newblock Analytic properties of bloch waves and wannier functions.
+\newblock {\em Physical Review}, 115(4):809, 1959.
+
+\bibitem{Kollath2004}
+C.~Kollath, U.~Schollw\"ock, J.~von Delft, and W.~Zwerger.
+\newblock Spatial correlations of trapped one-dimensional bosons in an optical
+  lattice.
+\newblock {\em Phys. Rev. A}, 69:031601, Mar 2004.
+
+\bibitem{Kuhner2000}
+Till~D. K\"uhner, Steven~R. White, and H.~Monien.
+\newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
+\newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
+
+\bibitem{Lanczos}
+Cornelius Lanczos.
+\newblock {An iteration method for the solution of the eigenvalue problem of
+  linear differential and integral operators}.
+\newblock {\em J. Res. Natl. Bur. Stand. B}, 45:255--282, 1950.
+
+\bibitem{lewenstein}
+Maciej Lewenstein, Anna Sanpera, Veronica Ahufinger, Bogdan Damski, Aditi
+  Sen(De), and Ujjwal Sen.
+\newblock Ultracold atomic gases in optical lattices: mimicking condensed
+  matter physics and beyond.
+\newblock {\em Advances in Physics}, 56(2):243--379, 2007.
+
+\bibitem{McCulloch}
+Ian~P McCulloch.
+\newblock From density-matrix renormalization group to matrix product states.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2007(10):P10014, 2007.
+
+\bibitem{PenroseOnsager}
+Oliver Penrose and Lars Onsager.
+\newblock Bose-einstein condensation and liquid helium.
+\newblock {\em Phys. Rev.}, 104:576--584, Nov 1956.
+
+\bibitem{pethick2002bose}
+Christopher~J Pethick and Henrik Smith.
+\newblock {\em Bose-Einstein condensation in dilute gases}.
+\newblock Cambridge university press, 2002.
+
+\bibitem{Pitaevskii}
+L.P. Pitaevskii.
+\newblock Vortex lines in an imperfect bose gas.
+\newblock {\em Soviet Physics JETP}, 13(2):451--454, August 1961.
+
+\bibitem{plischke}
+M.~Plischke and B.~Bergersen.
+\newblock {\em Equilibrium Statistical Physics}.
+\newblock World Scientific, 2006.
+
+\bibitem{Sachdev2007QPT}
+Subir Sachdev.
+\newblock {\em Quantum phase transitions}.
+\newblock Wiley Online Library, 2007.
+
+\bibitem{Molmer2010}
+M.~Saffman, T.~G. Walker, and K.~M\o{}lmer.
+\newblock Quantum information with rydberg atoms.
+\newblock {\em Rev. Mod. Phys.}, 82:2313--2363, Aug 2010.
+
+\bibitem{schollwock}
+Ulrich Schollwöck.
+\newblock The density-matrix renormalization group in the age of matrix product
+  states.
+\newblock {\em Annals of Physics}, 326(1):96 -- 192, 2011.
+\newblock January 2011 Special Issue.
+
+\bibitem{EntropyScaling}
+Norbert Schuch, Michael~M. Wolf, Frank Verstraete, and J.~Ignacio Cirac.
+\newblock Entropy scaling and simulability by matrix product states.
+\newblock {\em Phys. Rev. Lett.}, 100:030504, Jan 2008.
+
+\bibitem{Simon2011}
+Jonathan Simon, Waseem~S Bakr, Ruichao Ma, M~Eric Tai, Philipp~M Preiss, and
+  Markus Greiner.
+\newblock Quantum simulation of antiferromagnetic spin chains in an optical
+  lattice.
+\newblock {\em Nature}, 472(7343):307--312, 2011.
+
+\bibitem{Spielman2008}
+I.~B. Spielman, W.~D. Phillips, and J.~V. Porto.
+\newblock Condensate fraction in a 2d bose gas measured across the
+  mott-insulator transition.
+\newblock {\em Phys. Rev. Lett.}, 100:120402, Mar 2008.
+
+\bibitem{Suzuki}
+Masuo Suzuki.
+\newblock General theory of fractal path integrals with applications to
+  many-body theories and statistical physics.
+\newblock {\em Journal of Mathematical Physics}, 1991.
+
+\bibitem{Tarruell2012}
+Leticia Tarruell, Daniel Greif, Thomas Uehlinger, Gregor Jotzu, and Tilman
+  Esslinger.
+\newblock Creating, moving and merging dirac points with a fermi gas in a
+  tunable honeycomb lattice.
+\newblock {\em Nature}, 483(7389):302--305, 2012.
+
+\bibitem{vanoosten}
+D.~van Oosten, P.~van~der Straten, and H.~T.~C. Stoof.
+\newblock Quantum phases in an optical lattice.
+\newblock {\em Phys. Rev. A}, 63:053601, Apr 2001.
+
+\bibitem{Vidal}
+G.~Vidal.
+\newblock Classical simulation of infinite-size quantum lattice systems in one
+  spatial dimension.
+\newblock {\em Phys. Rev. Lett.}, 98:070201, Feb 2007.
+
+\bibitem{Vidal2003}
+Guifr\'e Vidal.
+\newblock Efficient classical simulation of slightly entangled quantum
+  computations.
+\newblock {\em Phys. Rev. Lett.}, 91:147902, Oct 2003.
+
+\bibitem{WhiteDMRG}
+Steven~R. White.
+\newblock Density matrix formulation for quantum renormalization groups.
+\newblock {\em Phys. Rev. Lett.}, 69:2863--2866, Nov 1992.
+
+\bibitem{WhiteSingleSite}
+Steven~R. White.
+\newblock Density matrix renormalization group algorithms with a single center
+  site.
+\newblock {\em Phys. Rev. B}, 72:180403, Nov 2005.
+
+\bibitem{WideraThesis}
+Artur Widera.
+\newblock {\em Constructing correlated spin states with neutral atoms in
+  optical lattices}.
+\newblock PhD thesis, Ph. D. thesis, Johannes Gutenberg-Universit{\"a}t, Mainz,
+  2008.
+
+\end{thebibliography}

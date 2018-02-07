@@ -1,0 +1,122 @@
+\begin{tikzpicture}[inner sep=1mm]
+    \foreach \i in {1,...,3} {
+        \node[tensor] (tt\i) at (\i , 0) {};
+        \node[operator] (o\i) at (\i , -1.5) {};
+        \node[tensor] (tb\i) at (\i , -3) {};
+        
+        
+        \draw[-] (tt\i) -- (o\i);
+        \draw[-] (o\i) -- (tb\i);
+    };
+
+    \foreach \i in {1,...,2} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+
+    \foreach \i in {7,...,9} {
+        \node[tensor] (tt\i) at (\i , 0) {};
+        \node[operator] (o\i) at (\i , -1.5) {};
+        \node[tensor] (tb\i) at (\i , -3) {};
+        
+        
+        \draw[-] (tt\i) -- (o\i);
+        \draw[-] (o\i) -- (tb\i);
+    };
+
+    \foreach \i in {7,...,8} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+    
+    \node[tensor] (tt5) at (5 , 0) {};
+    \node[operator] (o5) at (5 , -1.5) {};
+    \draw[-] (tt5) -- (o5);
+    
+    \node (a1) at (4 , 0) {$\alpha_{n-1}$};
+    \node (a2) at (4 , -3) {$\alpha_{n-1} '$};
+    \node (a3) at (6 , 0) {$\alpha_{n}$};
+    \node (a4) at (6 , -3) {$\alpha_{n} '$};
+    \node (b1) at (4 , -1.5) {$\beta_{n-1}$};
+    \node (b2) at (6 , -1.5) {$\beta_{n}$};
+    \node (j1) at (5 , -2.4) {$j_{n}$};
+    
+    
+    \draw[-] (tt3) -- (a1);
+    \draw[-] (tt5) -- (a1);
+    \draw[-] (tb3) -- (a2);
+    \draw[-] (tt7) -- (a3);
+    \draw[-] (tt5) -- (a3);
+    \draw[-] (tb7) -- (a4);
+    \draw[-] (o3) -- (b1);
+    \draw[-] (o5) -- (b1);
+    \draw[-] (o7) -- (b2);
+    \draw[-] (o5) -- (b2);
+    \draw[-] (o5) -- (j1);
+    
+    \node (L) at (2 , 1) {$L_{\alpha_{n-1} , \beta_{n-1} , \alpha_{n-1} '}^{[n-1]}$};
+    \node (R) at (8 , 1) {$R_{\alpha_{n} , \beta_{n} , \alpha_{n} '}^{[n+1]}$};
+    \node (M) at (5 , 1) {$M_{\alpha_{n-1} , \alpha_{n}}^{[n] \; j_n}$};
+    
+    
+    \node (eq1) at (9.8 , -0.75) {$=$};
+    
+    
+    \node (lambda) at (10.5 , -0.75) {$\lambda \times$};
+    
+    \foreach \i in {11,...,13} {
+        \node[tensor] (tt\i) at (\i , 0) {};
+        \node[tensor] (tb\i) at (\i , -1.5) {};
+        
+        \draw[-] (tt\i) -- (tb\i);
+    };
+
+    \foreach \i in {11,...,12} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+    };
+
+    \foreach \i in {15,...,17} {
+        \node[tensor] (tt\i) at (\i , 0) {};
+        \node[tensor] (tb\i) at (\i , -1.5) {};
+        
+        \draw[-] (tt\i) -- (tb\i);
+    };
+
+    \foreach \i in {15,...,16} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+    };
+    
+    \node[tensor] (tt14) at (14 , 0) {};
+    \draw[-] (tt13) -- (tt14);
+    \draw[-] (tt15) -- (tt14);
+    \draw[-] (tt14) -- (14, -0.75);
+    \draw[-] (tb13) -- (13.7, -1.5);
+    \draw[-] (tb15) -- (14.3, -1.5);
+    
+    \node (psiA) at (12 , 1) {$\Psi_{\alpha_{n-1} , \alpha_{n-1} '}^{A}$};
+    \node (psiB) at (16 , 1) {$\Psi_{\alpha_{n} ,  \alpha_{n} '}^{B}$};
+    \node (M) at (14 , 1) {$M_{\alpha_{n-1} , \alpha_{n}}^{[n] \; j_n}$};
+    
+    
+    \node (eq2) at (12 , -2.85) {$=$};
+    
+    
+    \node (lambda) at (12.5 , -2.85) {$\lambda \times$};
+    
+    
+    \node[tensor] (tM) at (13.5 , -2.6) {};
+    \draw[-] (tM) -- (13.5, -3.35);
+    \draw[-] (tM) -- (14.2, -2.6);
+    \draw[-] (tM) -- (12.8, -2.6);
+    
+    
+    \node (M) at (14.5 , -3.1) {$M_{\alpha_{n-1} , \alpha_{n}}^{[n] \; j_n}$};
+\end{tikzpicture}
