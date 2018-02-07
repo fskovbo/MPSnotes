@@ -1,0 +1,32 @@
+\begin{tikzpicture}[inner sep=1mm]
+\def \reldist {2};
+\def \numb {2};
+\def \wid {3.2};
+\def \size {1.0};
+\def \rad {0.5};
+
+
+
+\node[tensorc,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A1) at (1 * \reldist, 0) {$A^{[1]}$};
+
+\node[tensorr,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A2) at (2 * \reldist, 0) {$A^{[2]}$};
+
+
+\foreach \i in  {1,...,\numb} {
+	\draw[-] (A\i) -- (\i * \reldist , -2.5);	
+};
+
+\draw[-,line width=0.8mm] (A1) -- (A2);
+
+
+\node[twositeop, minimum width= \wid cm,minimum height= \size cm,rounded corners = \rad cm] (fop1)
+    at (\reldist*1 + \reldist/2, -1.5)
+    {\small $\hat{\mathcal{U}}_{J}^{[1,2]}(\delta t /2)$};
+    
+
+
+\node (dot2) at (\numb * \reldist + 1.4,0) {$\dots$};
+\draw[-] (A\numb) -- (dot2);
+	
+	
+\end{tikzpicture}

@@ -1,0 +1,85 @@
+\chapter{Time Evolution Algorithm}
+
+In order to efficiently perform the time evolution a slightly modified version of the TEBD algorithm was employed. Since the Hamiltonian is changing with every time step, one has to account for the time spent exponentiating the operators when considering the runtime of the algorithm. For a general operator $\hat{W}$ this can be achieved through the series expansion
+\begin{equation}
+	\exp \left( \hat{W} \right) = \sum_{k = 0}^{\infty} \frac{\hat{W}^k}{k!} = \hat{\mathds{1}} + \hat{W} \Bigl(  \hat{\mathds{1}} + \frac{\hat{W}}{2} \Bigl( \hat{\mathds{1}} + \frac{\hat{W}}{3} \Bigl( \ldots
+\end{equation}
+The number of terms needed in the expansion to accurately describe the exponentiation depends on the operator. As the cost of exponentiating the hopping terms of the Bose-Hubbard Hamiltonian was relatively high, it was concluded that keeping $J$ fixed and using $U$ as the control parameter was the better option. Hence, only the terms $\frac{U}{2} \hat{n}_i (\hat{n}_i -1)$ had to be exponentiated at every time step, which could be done fairly quickly due the diagonal form of the operator. However, in order to be able to consider the tunnelling and interaction contributions to the time evolution separately, one most expand the time evolution operator into its components. By employing the Suzuki-Trotter expansion the otherwise single tensor of the time evolution operator can be decomposed into separate tensors for each term of the Hamiltonian. To second order this expansion read
+\begin{equation}
+	\exp\left(  ( \hat{V} + \hat{W}  ) \delta \right) = \exp\left(  \hat{V} \delta /2  \right) \exp\left(  \hat{W} \delta   \right) \exp\left(  \hat{V} \delta /2  \right) + O(\delta^3) \; . \label{eq:SuzukiTrotter}
+\end{equation}
+Thus, one can divide the time evolution operator into a sequence of tensors, where
+\begin{align}
+	\hat{\mathcal{U}}_{J}^{[i,i+1]} (\delta t/2) &= \exp \left( -i J ( \hat{a}_{i}^{\dag} \hat{a}_{i+1} + \hat{a}_{i+1}^{\dag} \hat{a}_{i} ) \frac{\delta t}{2} / \hbar \right) \\
+	\hat{\mathcal{U}}_{U}^{[i]} (\delta t) &= \exp \left( -i \frac{U}{2} \hat{n}_i (\hat{n}_i -1) \delta t / \hbar \right) \; .
+\end{align}
+\begin{figure}[h!]
+	\centering
+	\input{Diagrams/ModifiedTEBD.tex}
+	\caption{\textit{Tensor diagram depicting a single time step of the modified TEBD algorithm. The time evolution operator has been subjected to a Suzuki-Trotter expansion as detailed in eq. \eqref{eq:SuzukiTrotter}. The tensors of the upper part of the network are contracted with the MPS while sweeping from left to right, whereas the lower part is applied with a right to left sweep.}}
+	\label{fig:ModifiedTEBD}
+\end{figure}
+A single time step, $\delta t$, using the expanded operator is represented diagrammatically in figure \ref{fig:ModifiedTEBD}. At first glance, the tensor network resulting from the Suzuki-Trotter expansion may seem too extensive, however, it can be contracted in a very efficient manner. The upper part of the network is contracted in a left to right sweeping manner, where one following each contraction pushes the position of the center cite, and thereby the normalisation, of the MPS to the right.
+\begin{figure}
+\centering % <-- add this
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}  
+  	\input{Diagrams/TrotterStep1.tex}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}    
+  	\input{Diagrams/TrotterStep2.tex}
+\end{subfigure}
+\\ % <-- add this
+\vspace{10mm}
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}    	
+  	\input{Diagrams/TrotterStep4.tex}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}  
+  	\input{Diagrams/TrotterStep6.tex}
+\end{subfigure}
+\caption{\textit{Sequence of contractions for modified TEBD algorithm during left to right sweep. Step \textbf{(i)}: MPS centred on site 1, tensors $A^{[1]}$ and $A^{[2]}$ are contracted. Step \textbf{(ii)}: Two-site tensor is contracted with two-site operator, followed by a splitting of the resulting tensor through an SVD in step \textbf{(iii)}. Lastly, in step \textbf{(iv)}, the center (and thereby the normalisation) is pushed to the next site leaving $A^{[1]}$ left-normalised.}}
+\label{fig:TEBDContraction}
+\end{figure}
+An example of this is shown in figure \ref{fig:TEBDContraction}. The MPS is initially centred on the first tensor, while its remaining tensors are all right-normalised. By following the depicted sequence of contractions marked with bold lines, the operators are efficiently applied to the MPS. In step (iii) the two-site tensor, $\Theta$, is split using an SVD, where the bond dimension of the tensors are truncated. This is crucial in order to maintain a reduced dimensionality, which would otherwise result in a significant increase in contraction time. In the last step the MPS is centred on the next site leaving the previous center left-normalised. Thereby the normalisation of the MPS is "pushed" to the right and contained in a single site, which makes it easy to deal with in the end of the time evolution step.
+As the centre reaches the end of the MPS, the direction of the sweep is reversed. The right to left sweep is slightly different, as there are no $\hat{\mathcal{U}}_{U}$-tensors that need to be contracted. The time evolution step is completed, as the first site is reached. 
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/TimeEvolve1.pdf}
+	\caption{\textit{}}
+	\label{fig:TimeEvolve1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/TimeEvolve2.pdf}
+	\caption{\textit{}}
+	\label{fig:TimeEvolve2}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/CompareCutoffs1.pdf}
+	\caption{\textit{}}
+	\label{fig:Cutoff1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/CompareCutoffs2.pdf}
+	\caption{\textit{}}
+	\label{fig:Cutoff2}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/CompareTimeStep.pdf}
+	\caption{\textit{}}
+	\label{fig:TimeStep}
+\end{figure}
+
+\end{document}
