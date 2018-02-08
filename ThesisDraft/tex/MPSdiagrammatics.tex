@@ -1,0 +1,20 @@
+\chapter{Diagrammatic Representation of Matrix Product States}
+
+An MPS and any operations on it can be descibed graphically using tensor networks, which allows for a visual overview of the mathematics taking place. For instance, one can represent a single tensor in the MPS as seen in figure \ref{fig:singleTensor}, where horizontal legs are called \textit{bond dimensons} and represent the indiced of the local matrix. The vertical legs correspond to the physical index of the site. These tensors can be contracted by connecting the legs of tensors as seen in figure \ref{fig:simpleConnected}. Connected lines are summed over just like matrix multiplication. 
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{\linewidth}
+		\centering
+		\input{Diagrams/singleTensor.tex}
+		\caption{\textit{Single tensor of an MPS. The horizontal legs are the indices of the local matrix, while the vertical leg is physical index of the site.}}
+		\label{fig:singleTensor}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\input{Diagrams/simpleConnected.tex}
+		\caption{\textit{Simple connected network of tensors. Connected lines are summed over.}}
+		\label{fig:simpleConnected}
+	\end{subfigure}
+	
+\end{figure}

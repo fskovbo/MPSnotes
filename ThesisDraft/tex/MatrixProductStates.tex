@@ -11,7 +11,6 @@ SKRIV INTRO OM MPS MED REFERENCER TIL LITTERATUR
 
 
 \section{Entanglement in Quantum Systems and Area Laws}
-
 Entanglement is a fundamental property of quantum mechanics responsible for correlating different degrees of freedom within a quantum system. Thus, the individual parts of a quantum system can not be described alone, as entanglement with the remainder of the system has to be taken into consideration. This drastically complicates any description of the system, which is why exact descriptions of many-body systems are almost impossible. CITE \\
 The measure of entanglement within a quantum many-body system is the entanglement entropy, although it is often more instructive to look at the bipartite entanglement entropy, which measures the entanglement between two partitions of the system.
 Consider a bipartition of the Hilbert space $\mathcal{H} = \mathcal{H}_A \otimes \mathcal{H}_B$. A state $\ket{\psi} \in \mathcal{H}$ can be decomposed using the \textit{Schmidt decomposition} as
@@ -26,34 +25,16 @@ From this one can determine the entanglement entropy of the chosen bipartition, 
 \begin{equation}
 	S = - \sum_{\alpha} \Lambda_{\alpha}^2 \log \Lambda_{\alpha}^2 \; .
 \end{equation}
-Quite often, one is not conserned with the actual entanglement entropy of the system, but rather how it scales when the region in question grows in size. It is natural to assume that the entanglement entropy scales with the systems size, the \textit{volume} of the system, since this is the case for thermal systems. However, ground states of quantum many-body systems often follow an \textit{area law}, meaning that the scaling of the entropy is linear in the boundary area of the region. This is especially the case for systems with a gapped and local Hamiltonian \cite{Cramer}. This observation is the key to the success of numerical computations for one-dimensional systems, since the ground state can be described with relatively few parameters. Thus, one only has to consider a small region of the Hilbert space when performing a variational search for the ground state.\\
-For one dimensional systems the boundry of a bipartition consists of only one site. Hence, following an area law means that the entropy will be bounded by a constant, which is independent of the size of both the system and the subsystem. This can be understood intuitively as only degrees of freedom within the correlation length, $\xi$, of the boundary will be entangled, no matter where in the system the boundary is present \cite{Hastings2007}.\\
+Quite often, one is not conserned with the actual entanglement entropy of the system, but rather how it scales when the region in question grows in size. It is natural to assume that the entanglement entropy scales with the systems size, the \textit{volume} of the system, since this is the case for thermal systems. However, ground states of quantum many-body systems often follow an \textit{area law}, meaning that the scaling of the entropy is linear in the boundary area of the region. This is especially the case for systems with a gapped and local Hamiltonian \cite{Cramer}.\\
+In a one dimensional lattice the boundary of a bipartition consists of only one site. Hence, the entropy will be bounded by a constant independent of the size of both the system and the subsystem, if the system follows an area law. This can be understood intuitively, as only degrees of freedom within the correlation length, $\xi$, of the boundary will be entangled, no matter where in the system the boundary is present \cite{Hastings2007}.\\
+This observation is the key to the success of numerical computations for one-dimensional systems, as one only has to consider a small region of the Hilbert space when performing a variational search for the ground state. In fact, 
 
 
-\section{Diagrammatic Representation of Matrix Product States}
-%% Perhaps move to appendix
+
 A powerful method for describing one dimensional systems is through \textit{Matrix Prodduct States}, which in principle are a representation of the system generated through a series of Schmidt decompositions. Thus, it immediately follows that MPS's satisfy an area law, making them excellent at describing ground states.\\ 
 
 
 Matrix product states is a parametrization of one dimensional states, which only considers the relevant part of the full Hilbert space, thus greatly simplifying numerical computations within the system. The main idea is to parametrize the coefficients of a general linear combination of states as a product of matrices, with a single matrix for each physical site.\\
-An MPS and any operations on it can be descibed graphically using tensor networks, which allows for a visual overview of the mathematics taking place. For instance, one can represent a single tensor in the MPS as seen in figure \ref{fig:singleTensor}, where horizontal legs are called \textit{bond dimensons} and represent the indiced of the local matrix. The vertical legs correspond to the physical index of the site. These tensors can be contracted by connecting the legs of tensors as seen in figure \ref{fig:simpleConnected}. Connected lines are summed over just like matrix multiplication. 
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{\linewidth}
-		\centering
-		\input{Diagrams/singleTensor.tex}
-		\caption{\textit{Single tensor of an MPS. The horizontal legs are the indices of the local matrix, while the vertical leg is physical index of the site.}}
-		\label{fig:singleTensor}
-	\end{subfigure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\input{Diagrams/simpleConnected.tex}
-		\caption{\textit{Simple connected network of tensors. Connected lines are summed over.}}
-		\label{fig:simpleConnected}
-	\end{subfigure}
-	
-\end{figure}
 
 
 \subsection{Singular Value Decomposition (SVD)}
