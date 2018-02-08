@@ -27,14 +27,7 @@ From this one can determine the entanglement entropy of the chosen bipartition, 
 \end{equation}
 Quite often, one is not conserned with the actual entanglement entropy of the system, but rather how it scales when the region in question grows in size. It is natural to assume that the entanglement entropy scales with the systems size, the \textit{volume} of the system, since this is the case for thermal systems. However, ground states of quantum many-body systems often follow an \textit{area law}, meaning that the scaling of the entropy is linear in the boundary area of the region. This is especially the case for systems with a gapped and local Hamiltonian \cite{Cramer}.\\
 In a one dimensional lattice the boundary of a bipartition consists of only one site. Hence, the entropy will be bounded by a constant independent of the size of both the system and the subsystem, if the system follows an area law. This can be understood intuitively, as only degrees of freedom within the correlation length, $\xi$, of the boundary will be entangled, no matter where in the system the boundary is present \cite{Hastings2007}.\\
-This observation is the key to the success of numerical computations for one-dimensional systems, as one only has to consider a small region of the Hilbert space when performing a variational search for the ground state. In fact, 
-
-
-
-A powerful method for describing one dimensional systems is through \textit{Matrix Prodduct States}, which in principle are a representation of the system generated through a series of Schmidt decompositions. Thus, it immediately follows that MPS's satisfy an area law, making them excellent at describing ground states.\\ 
-
-
-Matrix product states is a parametrization of one dimensional states, which only considers the relevant part of the full Hilbert space, thus greatly simplifying numerical computations within the system. The main idea is to parametrize the coefficients of a general linear combination of states as a product of matrices, with a single matrix for each physical site.\\
+This observation is the key to the success of numerical computations for one-dimensional systems, as one only has to consider a small region of the Hilbert space when performing a variational search for the ground state. A highly efficient way of describing one dimensional systems is through Matrix Product States (MPS), which follow an area law by default, as they are constructed through a series of Schmidt decompositions.
 
 
 \subsection{Singular Value Decomposition (SVD)}
@@ -62,56 +55,66 @@ These properties are very important when building the MPS. Figure \ref{fig:SVD} 
 
 
 \section{Construction of an MPS} \label{sec:construct_MPS}
-%Perhaps move SVD description here so it can be linked directly with truncation etc ... relate SVD to Schmidt decompostion - Wiki has proof
+Matrix products states are parametrisations of one dimensional quantum states through a product of tensors. This parametrisation is especially intuitive for lattice systems, as each lattice site can be represented by a single tensor. These tensors have two different kinds of indices; \textit{physical indices}, $j$, which corresponds to the physical states at a given site, and \textit{bond indices}, which serves to connect neighbouring sites. Tensors can be merged by contracting the bond connecting them, which is achieved by summing over their common index. Hence, equations involving matrix product states tend to grow quite long, whereby they often are described through diagrams. In the diagrammatic representation the physical indices are marked by vertical legs, while bond indices are marked by horisontal legs. When two tensors are connected by a leg, it means that the corresponding bond is contracted. Further details and examples regarding tensor diagrams can be found in \ref{chap:diagrams}.\\
 
-Consider a chain of $N$ sites with each site having a $d$-dimensional local Hilbert space $\{ \ket{j_n} \}$, where $n = 1, \ldots, N$. There are several ways of constructing an MPS from an arbitrary quantum state of this chain
+Consider a chain of $N$ sites with each site having a $d$-dimensional local Hilbert space $\{ \ket{j_n} \}$, where $n = 1, \ldots, N$. Thus, an arbitrary quantum state of this system reads
 \begin{equation}
 	\ket{\psi} = \sum_{j_1, \ldots, j_N} c_{j_1 \ldots j_N} \ket{j_1, \ldots, j_N} \; .
 	\label{eq:arbstate}
 \end{equation}
-One method is to apply successive SVD's, where the ordering of these operations determines the canonical form of the SVD. The construction of an MPS requires a series of steps:
+This description of a general state can be parametrised to the MPS form by applying successive Schmidt decomposition. However, in practice this is done through Singular Value Decompositions (SVD), as these are faster to perform numerically. The two approaches are equivalent, as the singular value decomposition is essentially a restatement of the Schmidt decomposition CITE.
+Through an SVD, an arbitrary matrix, $A$, of dimensions $(M \times N)$ can be decomposed into three matrices
+\begin{equation}
+	A = U S V^{\dag} \; .
+\end{equation}
+These matrices have the following properties \cite{Schollwock}:
+\begin{itemize}
+\item
+$U$ is of dimension $(M \times \min(M,N))$ and has orthonormal columns, meaning $U^{\dag}U = I$. If $M \leq N$, then it is also unitary $U U^{\dag} = I$.
+
+\item
+$S$ is a positive, diagonal $(\min(M,N) \times \min(M,N))$ matrix. The diagonal elements are singular values, and the number of non-zero entries is the Schmidt rank of $A$.
+
+\item
+$V^{\dag}$ is of dimension $(\min(M,N) \times N)$ and has orthonormal rows, meaning $V^{\dag}V = I$. If $M \geq N$, then it is also unitary $V V^{\dag} = I$.
+\end{itemize} 
+
+From the general state of eq. \eqref{eq:arbstate} an MPS can be constructed through the following steps:
 \begin{enumerate}
 \item
-The $d^N$-dimensional vector $c_{j_1 \ldots j_N}$ is reshaped into a $(d \times d^{N-1})$ matrix $\Psi$, where
-\begin{equation}
-	\Psi_{j_1 , (j_2 \ldots j_n)} = c_{j_1 \ldots j_N} \; .
-\end{equation}
-Performing an SVD on said matrix yields
+The $d^N$-dimensional vector $c_{j_1 \ldots j_N}$ is reshaped into a $(d \times d^{N-1})$ matrix $\Psi_{j_1 , (j_2 \ldots j_n)}$. Performing an SVD on $\Psi$ yields
 \begin{equation}
 	c_{j_1 \ldots j_N} = \Psi_{j_1 , (j_2 \ldots j_n)} = \sum_{\alpha_1}^{d} U_{j_1 , \alpha_1} S_{\alpha_1 , \alpha_1} (V^{\dag})_{\alpha_1 , (j_2 \ldots j_N)} = \sum_{\alpha_1}^{d} A_{\alpha_1}^{j_1} \Psi_{(\alpha_1 j_2),(j_3 \ldots j_N)} \; ,
 \end{equation}
-where $U$ has been decomposed into $d$ row vectors $A^{j_1}$ with entries $A_{\alpha_1}^{j_1} = U_{j_1 , \alpha_1}$. Furthermore, $S$ and $V^{\dag}$ has been multiplied and reshaped into a $(d^2 \times d^{N-2})$ matrix.
+where $U$ has been decomposed into $d$ row vectors $A^{j_1}$ with entries $A_{\alpha_1}^{j_1} = U_{j_1 , \alpha_1}$. In this notation $A_{\alpha_1}^{j_1}$ is a tensor with physical indices $j_1$ and bond indices $\alpha_1$. Furthermore, $S$ and $V^{\dag}$ has been multiplied and reshaped into a $(d^2 \times d^{N-2})$ matrix, $\Psi_{(\alpha_1 j_2),(j_3 \ldots j_N)}$.
 
 \item
 The new matrix $\Psi_{(\alpha_1 j_2),(j_3 \ldots j_N)}$ is subjected to an SVD decomposition
 \begin{equation}
 	c_{j_1 \ldots j_N} = \sum_{\alpha_1}^{d} \sum_{\alpha_2}^{d^2} A_{\alpha_1}^{j_1} U_{(\alpha_1 j_2) , \alpha_2} S_{\alpha_2 , \alpha_2} (V^{\dag})_{\alpha_2 , (j_3 \ldots j_N)} = \sum_{\alpha_1}^{d} \sum_{\alpha_2}^{d^2} A_{\alpha_1}^{j_1} A_{\alpha_1 , \alpha_2}^{j_2} \Psi_{(\alpha_2 j_3),(j_4 \ldots j_N)} \; ,
 \end{equation}
-where $U$ has been decomposed into $d$ matrices $A^{j_2}$ with entries $A_{\alpha_1 , \alpha_2}^{j_2} = U_{(\alpha_1 j_2) , \alpha_2}$. The matrix $\Psi_{(\alpha_2 j_3),(j_4 \ldots j_N)}$ has dimensions $(d^3 \times d^{N-3})$.
+where $U$ has been decomposed into $d$ matrices $A^{j_2}$ with entries $A_{\alpha_1 , \alpha_2}^{j_2} = U_{(\alpha_1 j_2) , \alpha_2}$. The matrix $\Psi_{(\alpha_2 j_3),(j_4 \ldots j_N)}$ has dimensions $(d^3 \times d^{N-3})$ and is yet again a product of the matrices $S$ and $V^{\dag}$ from the SVD.
 
 \item
-This pattern of applying and SVD to the matrix, replacing $U$ and reshaping into a new matrix is continued throughout the chain leaving 
+This pattern of applying and SVD to the matrix, replacing $U$, and reshaping into a new matrix is continued throughout the chain leaving 
 \begin{equation}
 	c_{j_1 \ldots j_N} = \sum_{\alpha_1 , \ldots , \alpha_{N-1}} A_{\alpha_1}^{j_1} A_{\alpha_1 , \alpha_2}^{j_2} \ldots A_{\alpha_{N-2} ,\alpha_{N-1}}^{j_{N-1}} A_{\alpha_{N-1} ,\alpha_{N}}^{j_{N}} = A^{j_1} A^{j_2} \ldots A^{j_{N-1}} A^{j_{N}} \; ,
 \end{equation}
-where the sum can be recognized as a matrix multiplication allowing a neater notation. The whole process is illustrated in figure \ref{fig:MPSbuild}.
-
+where the sum can be recognized as a matrix multiplication allowing a neater notation.
 \end{enumerate}
-
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/MPSbuild.tex}
 	\caption{\textit{Diagrammatic representation of the construction of a left-canonical MPS from an arbitrary quantum state through successive SVD's.}}
 	\label{fig:MPSbuild}
 \end{figure}
-Thus, one can rewrite the original state (equation \ref{eq:arbstate}) as a matrix product state \cite{Schollwock}
+The construction of an MPS is illustrated in figure \ref{fig:MPSbuild}. Thereby, the original state (equation \ref{eq:arbstate}) can be written as a matrix product state in the form \cite{Schollwock}
 \begin{equation}
 	\ket{\psi} = \sum_{j_1, \ldots, j_N} A^{j_1} A^{j_2} \ldots A^{j_{N-1}} A^{j_{N}} \ket{j_1, \ldots, j_N} \; .
 	\label{eq:MPS_LC} 
 \end{equation}
 \\
-It is worth examining the properties of this representation. Looking at the dimensions of the components of an SVD one can see that the dimensions of the matrices $A^{j_n}$ follow a stair-like structure $(1 \times d ),(d \times d^2) , \ldots , (d^{N/2 -1} \times d^{N/2}) , (d^{N/2} \times d^{N/2 -1 }), \ldots , (d \times 1)$, where N is taken as even for simplicity. Hence, the matrix dimensions increase exponentially making exact computations practically impossible. However, certain simplifications can be made, greatly increasing computational speed without sacrificing much precision at all. First, one only needs to keep the non-zero singular values of the matrices $S$, thus reducing the dimensional factor from $d$ to $r_n$, where $r_n \leq d$ is the Schmidt rank of the n'th decomposition. Secondly, as discussed earlier, only a few terms is needed to accurately describe entanglement across bonds, thus allowing truncation of the $S$ matrix (and likewise reduction of $U$ and $V$) down to a chosen size $D$. Only the $D$ largest singular values are kept, as these contribute the most to the state. Thus, the dimension of the matrices will cap at $D$: $(1 \times d ),(d \times d^2) , \ldots , (d^{n} \times D) , (D \times D), \ldots , ( D \times d^{n}) \ldots  (d \times 1)$, avoiding the otherwise exponential dimensional growth. \cite{EntropyScaling}
-
+It is worth examining the properties of this representation. From the dimensions of the components of an SVD, one will notice the dimensions of the matrices $A^{j_n}$ follow a pyramid-like structure $(1 \times d ),(d \times d^2) , \ldots , (d^{N/2 -1} \times d^{N/2}) , (d^{N/2} \times d^{N/2 -1 }), \ldots , (d \times 1)$, where N is taken as even for simplicity. Hence, the matrix dimensions increase exponentially making exact computations practically impossible. However, certain simplifications can be made, which greatly reduces computational time without sacrificing much precision. First, one only needs to keep the non-zero, singular values of the matrices $S$, thus reducing the dimensional factor from $d$ to $r_n$, where $r_n \leq d$ is the Schmidt rank of the n'th decomposition. Secondly, as discussed earlier, only a few terms is needed to accurately describe entanglement across bonds. Therefore, the matrices $S$, $U$ and $V$ can be truncated, by keeping only the $D$ largest singular values, as these contribute the most to the state. Thus, the dimension of the matrices will cap at $D$: $(1 \times d ),(d \times d^2) , \ldots , (d^{n} \times D) , (D \times D), \ldots , ( D \times d^{n}) \ldots  (d \times 1)$, avoiding the otherwise exponential dimensional growth \cite{EntropyScaling}. The amount of singular values needed to be kept in order to produce an accurate approximation of the state is highly dependent of the system. Thus, one often need to perform the same calculation for various values of $D$, in order to gauge how much the matrices can be truncated.
 
 
 \section{Canonical Form}
@@ -119,7 +122,7 @@ The MPS described in equation \ref{eq:MPS_LC} is not unique, as writing
 \begin{equation}
 	\tilde{A}^{j_n} = X_{n-1} A^{j_n} X_{n}^{-1}
 \end{equation}
-describes the same state using different matrices. This gauge freedom allows for expressing the MPS in whichever way is most convenient often resulting in a much lower numerical cost of operations. By choosing a gauge the MPS is brought into a \textit{canonical form}. \cite{Vidal}
+describes the same state using different matrices. This gauge freedom allows expressing the MPS in whichever way is most convenient, often resulting in a much lower numerical cost of operations. By choosing a gauge, the MPS is brought into a \textit{canonical form} \cite{Vidal}.
 
 \subsection{Left-canonical matrix product state}
 The process above describing building the MPS from an arbitrary state produces an MPS in a \textit{left-canonical} form. This means that all the the matrices are left-normalized, such that
