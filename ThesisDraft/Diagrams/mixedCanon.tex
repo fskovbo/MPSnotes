@@ -1,26 +1,28 @@
 \begin{tikzpicture}[inner sep=1mm]
+	\def \hdist {1.5};
+	\def \numb {5};
+	\def \vleg {1};
+	\def \NL {3};
+
+	\foreach \i in  {1,...,\numb} {
+		\node[tensor] (\i) at (\i*\hdist, 0) {};
+		\node (index\i) at (\i*\hdist, -\vleg) {};
+		\draw[-] (\i) -- (index\i);	
+	};
+	
 	\foreach \i in  {1,...,4} {
-		\node[tensor] (\i) at (\i, 0) {};
-		\node (index\i) at (\i, -0.8) {};
-		\draw[-] (\i) -- (index\i);	
-	};
-	\foreach \i in  {1,...,3} {
-		\pgfmathtruncatemacro{\iplusone}{\i + 1};
-		\draw[-] (\i) -- (\iplusone);
-	};
-		\foreach \i in  {6,...,8} {
-		\node[tensor] (\i) at (\i, 0) {};
-		\node (index\i) at (\i, -0.8) {};
-		\draw[-] (\i) -- (index\i);	
-	};
-	\foreach \i in  {6,...,7} {
 		\pgfmathtruncatemacro{\iplusone}{\i + 1};
 		\draw[-] (\i) -- (\iplusone);
 	};
 	
-	\node[matrix, label={\small $S$}] (S) at (5,0) {};
-	\draw[-] (4) -- (S);
-	\draw[-] (S) -- (6);
-	\node (index1) at (1, -1) {$j_1$};
-	\node (index8) at (8, -1) {$j_N$};		
+	\foreach \i in  {1,...,\NL} {
+		\node[tensorl] (\i) at (\i*\hdist, 0) {};
+	};
+	
+	\node[tensorc] (C) at (\numb*\hdist-\hdist, 0) {};
+	\node[tensorr] (R) at (\numb*\hdist, 0) {};
+
+
+	\node (indexL) at (1*\hdist, -\vleg -0.2) {$j_1$};
+	\node (indexR) at (\numb*\hdist, -\vleg -0.2) {$j_N$};		
 \end{tikzpicture}

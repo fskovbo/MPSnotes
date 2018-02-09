@@ -1,0 +1,14 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \vdist {2.5}
+
+	\node[tensorc] (tens1) at (1,0) {};
+	\node[tensorc] (tens2) at (1,-\vdist) {}; 
+	
+	\draw[-] (tens1) -- (tens2);	
+	
+ 	\node[operator] (op) at (1,-\vdist/2) {\small $\hat{O}^{[n]}$};
+ 	
+ 
+    \draw[-] (tens1.west) .. controls (0, 0) and (0, -\vdist) .. (tens2.west);
+    \draw[-] (tens1.east) .. controls (2, 0) and (2, -\vdist) .. (tens2.east);
+\end{tikzpicture}

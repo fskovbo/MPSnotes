@@ -1,71 +1,67 @@
 \chapter{Calculating Ground States with MPS}
-For large systems exact diagonalization of the Hamiltonian is impossible, whereby one must resort to variational methods in order to find ground states. This involves finding the MPS $\ket{\psi}$, which minimizes
+For large systems exact diagonalization of the Hamiltonian is impossible, whereby one must resort to variational methods in order to find ground states. This involves finding the MPS, $\ket{\psi}$, which minimizes
 \begin{equation}
 	E = \frac{\bra{\psi} \hat{H} \ket{\psi}}{\braket{\psi | \psi}} \; .
 \end{equation}
-The most efficient way to do this, is to express the Hamiltonian as an MPO as described in equation \ref{eq:MPOrep}, which makes it easy to aplly to an MPS. While this may seem difficult at first, it can actually be done rather easily without any lengthy calculations. To see this consider the following example:
+The most efficient way to do this, is to express the Hamiltonian as an MPO as described in eq. \eqref{eq:MPOrep}, whereby it easily can be applied to an MPS. While this may seem difficult at first, it can actually be done without any lengthy calculations. Consider the following example:
 
 \subsection{Example: Building an MPO from a Hamiltonian}
-Consider a Hamiltonian consisting of next-neighbour interaction terms and a field term
+Consider the Bose-Hubbard Hamiltonian , which consists of both nearest-neighbour tunneling terms and on-site interactions terms
 \begin{equation}
-	\hat{H} = \sum_i \frac{J}{2} \hat{S}_{i}^{+} \hat{S}_{i+1}^{-} + \frac{J}{2} \hat{S}_{i}^{-} \hat{S}_{i+1}^{+} + J^z \hat{S}_{i}^{z} \hat{S}_{i+1}^{z} - h \hat{S}_{i}^{z} \; ,
-	\label{eq:exHamiltonian}
+	\hat{H} = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} + \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) \; .
+	\label{eq:BHhamil}
 \end{equation}
-which can be expressed as a sum of strings of operators - most of these being identities just like in equation \ref{eq:localOperator}. Moving through such a string from the right one will at some point encounter one of 4 non-trivial operators. This can be summarized as 5 different possible states of the string of operators on a given bond:
+The Hamiltonian can be expressed as a sum of strings of operators - most of these being identities just like in equation \ref{eq:localOperator}. Moving through such a string from the right, one will at some point encounter one of 3 non-trivial operators. This can be summarized as 4 different possible states of the string of operators on a given bond:
 \begin{enumerate}
 	\item
 	Only identities to the right of the bond.
 	\item
-	An $\hat{S}^{+}$ operator just to the right of the bond.
+	An $\hat{a}^{\dag}$ operator just to the right of the bond.
 	\item
-	An $\hat{S}^{-}$ operator just to the right of the bond.
+	An $\hat{a}$ operator just to the right of the bond.
 	\item
-	An $\hat{S}^{z}$ operator just to the right of the bond.
-	\item
-	A completed interaction \textit{or} the field term, $h \hat{S}^{z}$, somewhere to the right.
+	A completed tunneling \textit{or} the interaction term, $\frac{U}{2} \hat{n} \left( \hat{n} -1 \right)$, somewhere to the right.
 \end{enumerate}
-When moving through the string of operators from the right, only certain transitions between these state are possible. For instance $\boldsymbol{1 \rightarrow 1}$, where one starts in state 1, and the next operator is an identity. Likewise, $\boldsymbol{1 \rightarrow 2,3,4,5}$ are all possible, since these transitions represent the next operator being one of the interactions or the field. Next, $\boldsymbol{2 \rightarrow 5}$ completes the interaction $\frac{J}{2} \hat{S}^{+} \hat{S}^{-}$ - similar transitions exists for all the possible interactions $\boldsymbol{3,4 \rightarrow 5}$. Finally, the transition $\boldsymbol{5 \rightarrow 5}$ is needed to continue iterating through the operator chain after having passed the interactions. This can be encoded in the operator-valued matrix
+When moving through the string of operators from the right, only certain transitions between these state are possible. For instance $\boldsymbol{1 \rightarrow 1}$, where one starts in state 1, and the next operator is an identity. Likewise, $\boldsymbol{1 \rightarrow 2,3,4}$ are all possible, since these transitions represent the next operator being non-trivial. Next, $\boldsymbol{2 \rightarrow 4}$ completes the hopping $-J \hat{a}^{\dag} \hat{a}$ - a similar transition exists for the other hopping term $\boldsymbol{3 \rightarrow 4}$. Finally, the transition $\boldsymbol{4 \rightarrow 4}$ is needed to continue iterating through the operator chain after having passed the non-trivial operators. This can be encoded in the operator-valued matrix
 \begin{equation}
  W^{[i]} \: = \: \begin{pmatrix}
-\hat{I} & 0 & 0 & 0 & 0 \\
-\hat{S}^+ & 0 & 0 & 0 & 0 \\
-\hat{S}^- & 0 & 0 & 0 & 0 \\
-\hat{S}^z & 0 & 0 & 0 & 0 \\
--h \hat{S}^z & (J/2) \hat{S}^- & (J/2) \hat{S}^+ & J^z \hat{S}^z & \hat{I}
-
+\hat{I} & 0 & 0 & 0  \\
+\hat{a}^{\dag} & 0 & 0 & 0  \\
+\hat{a} & 0 & 0 & 0 \\
+\frac{U}{2} \hat{n} \left( \hat{n} -1 \right) & -J \hat{a} & -J \hat{a}^{\dag} &  \hat{I}
 \end{pmatrix} \; ,
 \label{eq:MPOmatrix}
 \end{equation}
-which contains all the allowed transitions between the five state \cite{Schollwock}. When one starts moving through the operator chain from the right side, one obviously begins in state 1 and ends in state 5. This can be encoded in the two vectors
+which contains all the allowed transitions between the five state \cite{Schollwock}. When one starts moving through the operator chain from the right side, one obviously begins in state 1 and ends in state 4. This can be encoded in the two vectors
 \begin{equation*}
- \vec{v}_{left} = (0 , 0 , 0 ,0 , 1) \quad , \quad \vec{v}_{right} = (1 , 0 , 0 ,0 , 0)^T \; .
+ \vec{v}_{left} = (0 , 0 , 0  , 1) \quad , \quad \vec{v}_{right} = (1  , 0 ,0 , 0)^T \; .
 \end{equation*}
-Thus, the Hamiltonian described in equation \ref{eq:exHamiltonian} can be written as an MPO 
+Thus, the Bose-Hubbard Hamiltonian can be written as an MPO 
 \begin{equation}
-	\hat{H} = \sum_{\substack{j_1 , \ldots , j_N  \\ j_1 ' , \ldots , j_N '}} \vec{v}_{left} \; W^{[1] j_1 , j_1 '} W^{[2] j_2 , j_2 '} \ldots W^{[N] j_N , j_N '} \; \vec{v}_{right} \; \ket{j_1 , \ldots , j_N} \bra{j_1 ' , \ldots , j_N '} \; .
+	\hat{H} = \sum_{\boldsymbol{j}, \boldsymbol{j'}} \vec{v}_{left} \; W^{[1] j_1 , j_1 '} W^{[2] j_2 , j_2 '} \ldots W^{[N] j_N , j_N '} \; \vec{v}_{right} \; \ket{\boldsymbol{j}} \bra{\boldsymbol{j'}} \; .
 	\label{eq:MPOhamiltonian}
 \end{equation}
-Observe how all of this was done without having to do a single numerical computation. The resulting MPO can now readily be applied to an MPS.\\
+Often, the two closing vectors are implicitly multiplied unto the outer matrices for a cleaner notation. Observe how all of this was done without having to do a single numerical computation. The resulting MPO can now readily be applied to an MPS.\\
 
 This is just an example for a simple Hamiltonian with only next-neighbour interactions. Interactions of longer range require intermediate states consisting of identities in order to connect the interacting operators. However, doing this is fairly simple and will often result in MPO's of a similar low dimension as the one shown in the example.
 
 
 \section{Efficient Application of a Hamiltonian to an MPS}
-In section \ref{sec:MPO} it was explained how to apply an MPO to an MPS, and it was shown how to efficiently evaluate local operators. While Hamiltonians may contains local terms, they are rarely completely local, and since $\hat{H} \ket{\psi}$ must be evaluated many times during variational methods, the naive approach of section \ref{sec:MPO} simply doesn't cut it.\\
+In section \ref{sec:MPO} it was explained how to apply an MPO to an MPS, and it was shown how to efficiently evaluate local operators. However, since $\hat{H} \ket{\psi}$ must be evaluated many times during variational methods, one must find even more efficient way of applying the operator.\\
 Consider an MPS in a mixed-canonical form
 \begin{align}
-	\ket{\psi} &= \sum_{\boldsymbol{j}} A^{j_1} \ldots A^{j_{n-1}} \Psi^{j_n} B^{j_{n+1}} \ldots B^{j_{N}} \nonumber \\
+	\ket{\psi} &= \sum_{\boldsymbol{j}} A^{j_1} \ldots A^{j_{n-1}} \Psi^{j_n} B^{j_{n+1}} \ldots B^{j_{N}} \ket{\boldsymbol{j}} \nonumber \\
 	&= \sum_{\alpha_{n-1} , \alpha_{n}} \ket{\alpha_{n-1}}_A \Psi_{\alpha_{n-1} , \alpha_{n}}^{j_n}  \ket{\alpha_{n}}_B \; ,
 	\label{eq:MPSmixedsingle}
 \end{align}
-where the set of matrices at the n'th site has not been brought into either canonical form, and a Hamiltonian in the same form as described in equation \ref{eq:MPOhamiltonian}. For notations sake the opening and closing vectors have been combined with the outer matrices of the MPO.
-For the variational search of the ground state huge reductions in computational cost can be found by re-using as many calculations as possible. Consider in the basis $\{ \ket{\alpha_{n-1} } \; , \; \ket{ j_n } \; , \; \ket{\alpha_{n} } \}$ the individual matrix elements of the Hamiltonian
+where $\Psi^{j_n}$ is the central site, and $\ket{\alpha_{n-1}}_A$ and $\ket{\alpha_{n}}_B$ are block states introduced in eq. \eqref{eq:mixedA} and \eqref{eq:mixedB} respectively.
+Huge reductions in computational cost of the variational search can be found by re-using as many calculations as possible. In the basis $\{ \ket{\alpha_{n-1} } \; , \; \ket{ j_n } \; , \; \ket{\alpha_{n} } \}$ the individual matrix elements of the Hamiltonian can be expressed as
 \begin{equation*}
-	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \sum_{\boldsymbol{j} , \boldsymbol{j'}}  W^{j_1 , j_1 '} \ldots W^{j_N , j_N '}  \braket{\alpha_{n-1} j_n \alpha_{n} | \boldsymbol{j}} \braket{\boldsymbol{j'} | \alpha_{n-1} ' j_n ' \alpha_{n} '} 
+	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \sum_{\boldsymbol{j} , \boldsymbol{j'}}  W^{j_1 , j_1 '} \ldots W^{j_N , j_N '}  \braket{\alpha_{n-1} j_n \alpha_{n} | \boldsymbol{j}} \braket{\boldsymbol{j'} | \alpha_{n-1} ' j_n ' \alpha_{n} '} \; . 
 \end{equation*}
 Since the basis of local states $\{ \ket{\boldsymbol{j}} \}$ shares a state with the basis $\{ \ket{\alpha_{n-1} } \; , \; \ket{ j_n } \; , \; \ket{\alpha_{n} } \}$, the above expression can be re-written using $\sum_{\boldsymbol{j}} \braket{j_n | \boldsymbol{j}} = \sum_{\boldsymbol{j *}} \ket{ \boldsymbol{j *}}$, where "$\boldsymbol{*}$" means "excluding $j_n$". Thus,
 \begin{align}
-&	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} \nonumber \\
+&	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \nonumber \\
  &= \sum_{\boldsymbol{j *} , \boldsymbol{j' * }}  W^{j_1 , j_1 '} \ldots W^{j_n , j_n '} \ldots W^{j_N , j_N '} \nonumber \\
 	& \qquad \times \braket{\alpha_{n-1} | j_1 \ldots j_{n-1}} \braket{\alpha_{n} | j_{n+1} \ldots j_{N}} \braket{j_1 ' \ldots j_{n-1} ' | \alpha_{n-1} '} \braket{j_{n+1} ' \ldots j_{N} ' | \alpha_{n} '} \nonumber \\
 	&= \sum_{\boldsymbol{j *} , \boldsymbol{j' * }}  W^{j_1 , j_1 '} \ldots W^{j_n , j_n '} \ldots W^{j_N , j_N '} \nonumber \\
@@ -75,13 +71,13 @@ Since the basis of local states $\{ \ket{\boldsymbol{j}} \}$ shares a state with
 	\left( \sum_{j_2 , j_2 '} A_{\alpha_1 , \alpha_2}^{j_2 *} W_{\beta_1, \beta_2}^{j_2 , j_2 '} A_{\alpha_1 ' , \alpha_2 '}^{j_2 '} \right)
 	\ldots W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \nonumber \\
 	& \qquad \times \left( \sum_{j_{n+1} , j_{n+1} '} B_{\alpha_n , \alpha_{n+1}}^{j_{n+1} *} W_{\beta_n, \beta_{n+1}}^{j_{n+1} , j_{n+1} '} B_{\alpha_n ', \alpha_{n+1} '}^{j_{n+1} '} \right)
-	\left( \sum_{j_{N} , j_{N} '} B_{\alpha_{N-1} , 1}^{j_{N} *} W_{\beta_{N-1}, 1}^{j_{N} , j_{N} '} B_{\alpha_{N-1}' , 1 }^{j_{N} '} \right) \nonumber \; .
+	\left( \sum_{j_{N} , j_{N} '} B_{\alpha_{N-1} , 1}^{j_{N} *} W_{\beta_{N-1}, 1}^{j_{N} , j_{N} '} B_{\alpha_{N-1}' , 1 }^{j_{N} '} \right)  \; .
 \end{align}  
-While this expression may seem terrible complicated due to all the indices, it is actually rather easy to understand. First, the matrix element is written excluding the local basis state $\ket{j_n}$. Next, the Hamilton MPO is projected into the block states of A and B, $\ket{\alpha_{n-1}}_A$ and $\ket{\alpha_{n}}_B$, which can easily be seen when considering equations \ref{eq:mixedA} and \ref{eq:mixedB}. Finally, the matrices are grouped according to their expansion in the local basis. Working with the above expression appears cumbersome, but as can be seen in figure \ref{fig:singleElemHamil}, what has been done is simply a decoupling of the system into three distinct parts.
+While this expression may seem terrible complicated due to all the indices, it is actually rather easy to understand. First, the matrix element is written excluding the local basis state $\ket{j_n}$. Next, the Hamilton MPO is projected into the block states of A, $\ket{\alpha_{n-1}}_A$, and B, $\ket{\alpha_{n}}_B$. Finally, the matrices are grouped according to their expansion in the local basis. Working with the above expression appears cumbersome, but it is merely a decoupling of the system into three distinct parts, which can be seen in figure \ref{fig:singleElemHamil}.
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/singleElementHamiltonian.tex}
-	\caption{\textit{Representation of the matrix element $\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '}$ as an MPS/MPO network. Expressing the matrix element in this form decouples the network in three parts: The matrices of the MPO, $W^{[n]}$, connecting the physical sites of the matrix element, and contracted parts L and R consisting of the rest of the MPO and thepart of the MPS in left- and right-canonical form respectively.}}
+	\caption{\textit{Representation of the matrix element $\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '}$ as an tensor network. Expressing the matrix element in this form decouples the network in three parts: The matrices of the MPO, $W^{[n]}$, connecting the physical sites of the matrix element, and contracted parts L and R consisting of the rest of the MPO and the left- and right-normalised part of the MPS respectively.}}
 	\label{fig:singleElemHamil}
 \end{figure}
 Since both the left and right side of the network is connected, one can contract these parts into two separate tensors $L$ and $R$ called "environments":
@@ -89,42 +85,32 @@ Since both the left and right side of the network is connected, one can contract
 	L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} &= \sum_{ \substack{ \{ \alpha_i \beta_i \alpha_i ' \} \\ i < n-1}} \left( \sum_{j_1 , j_1 '} A_{1 , \alpha_1}^{j_1 *} W_{1, \beta_1}^{j_1 , j_1 '} A_{1 , \alpha_1 '}^{j_1 '} \right) \ldots \left( \sum_{j_{n-1} , j_{n-1} '} A_{\alpha_{n-2} , \alpha_{n-1}}^{j_{n-1} *} W_{\beta_{n-2}, \beta_{n-1}}^{j_{n-1} , j_{n-1} '} A_{\alpha_{n-2} ' , \alpha_{n-1} '}^{j_{n-1} '} \right) \label{eq:Ltensor} \\
 	R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} &= \sum_{ \substack{ \{ \alpha_i \beta_i \alpha_i ' \} \\ i > n}} \left( \sum_{j_{n+1} , j_{n+1} '} B_{\alpha_n , \alpha_{n+1}}^{j_{n+1} *} W_{\beta_n, \beta_{n+1}}^{j_{n+1} , j_{n+1} '} B_{\alpha_n ', \alpha_{n+1} '}^{j_{n+1} '} \right) \left( \sum_{j_{N} , j_{N} '} B_{\alpha_{N-1} , 1}^{j_{N} *} W_{\beta_{N-1}, 1}^{j_{N} , j_{N} '} B_{\alpha_{N-1}' , 1 }^{j_{N} '} \right) \label{eq:Rtensor}
 \end{align}
-From these contractions the obvious tripartite structure of the Hamiltonian matrix element, which could be seen in figure \ref{fig:singleElemHamil}, can be written in a compact way
+From these contractions, the obvious tripartite structure of the Hamiltonian matrix element, as seen in figure \ref{fig:singleElemHamil}, can be written in a compact way
 \begin{equation}
 	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \sum_{\beta_{n-1} , \beta_{n}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} \; W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \; R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} \; .
 \end{equation}
-Finally, applying this parametrization of the Hamiltonian to the MPS described in equation \ref{eq:MPSmixedsingle} yields \cite{Schollwock}
+Finally, applying this parametrization of the Hamiltonian to the MPS of eq. \eqref{eq:MPSmixedsingle} yields \cite{schollwock}
 \begin{equation}
 	\hat{H} \ket{\psi} = \sum_{\beta_{n-1} , \beta_{n}} \sum_{\alpha_{n-1}' , j_n ', \alpha_{n}'} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} \; W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \; R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} \; \Psi_{\alpha_{n-1} ' , \alpha_{n} '}^{j_n '} \ket{\alpha_{n-1}}_A \ket{j_n} \ket{\alpha_{n}}_B \; .
 	\label{eq:HPsi}
 \end{equation}
-
-As mentioned earlier, evaluating $\hat{H} \ket{\psi}$ must be done many times during a variational search of the ground state, hence this operation must be executed as fast as possible. Examining equation \ref{eq:HPsi} one will notice, that while the boundaries of $L$ and $R$ will change depending on which site is being optimized, the bulk of the two tensors remain constant through a lot of the calculations. Instead of calculating $L$ and $R$ from equations \ref{eq:Ltensor} and \ref{eq:Rtensor} explicitly every time equation \ref{eq:HPsi} has to be evaluated, one can iteratively build them, since they only change by one column of the network at a time. This allows reuse of a lot of information resulting in much lower computational cost.\\
+As mentioned earlier, evaluating $\hat{H} \ket{\psi}$ must be done many times during a variational search of the ground state, hence this operation must be executed as fast as possible. Examining eq. \eqref{eq:HPsi} one will notice, that while the boundaries of $L$ and $R$ will change depending on which site is being optimized, the bulk of the two tensors remain constant through a lot of the calculations. Instead of calculating $L$ and $R$ from eq. \eqref{eq:Ltensor} and \eqref{eq:Rtensor} for every evaluation of eq. \eqref{eq:HPsi}, one can iteratively build them, since they only change by one column of the network at a time. Thus, a large number of computations can be reused.\\
 Consider the construction of the tensor $L^{[i]}$. This can be built iteratively from the left by contracting the previous left-tensor $L^{[i-1]}$ with the i'th column of the network consisting of $A^{[i]}$, $W^{[i]}$ and $A^{[i] \dag}$
 \begin{equation}
 	L_{\alpha_i , \beta_i , \alpha_i '}^{[i]} = \sum_{\substack{ j_i , j_i ' \\ \alpha_{i-1} , \beta_{i-1} , \alpha_{i-1} '}} W_{\beta_{i-1} , \beta_i}^{[i] j_i , j_i '} \left( A^{[i] j_i \dag} \right)_{\alpha_i , \alpha_{i-1}} L_{\alpha_{i-1} , \beta_{i-1} , \alpha_{i-1} '}^{[i-1]} A_{\alpha_{i-1} ' , \alpha_i '}^{[i] j_i '} \; .
 \end{equation}
-This iterative update of $L^{[i]}$ can be seen illustrated in figure \ref{fig:buildLTensor}. The square-bracket notation has been re-introduced to keep track of the tensors relation to the physical sites. In order to remain consistent with notation, the dummy scalars $L_{\alpha_0 , \beta_0 , \alpha_0 '}^{[0]}  = 1  = \alpha_0 , \beta_0 , \alpha_0 '$ has been introduced. 
+This iterative update of $L^{[i]}$ can be seen illustrated in figure \ref{fig:buildLTensor}. The square-bracket notation has been re-introduced to keep track of the tensors relation to the physical sites. In order to remain consistent with notation, the dummy scalars $L_{\alpha_0 , \beta_0 , \alpha_0 '}^{[0]}  = 1  = \alpha_0 , \beta_0 , \alpha_0 '$ has been introduced.\\
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/buildLTensor.tex}
 	\caption{\textit{Iterative update from $L^{[i-1]}$ to $L^{[i]}$. This is done through a contraction of $L^{[i-1]}$ with $A^{[i]}$, $W^{[i]}$ and $A^{[i] \dag}$. The result is a tensor with three horizontal legs.}}
 	\label{fig:buildLTensor}
 \end{figure}
-Performing this update can be sped up when considering the properties of the Hamiltonian and the canonical form. Looking at matrix representation, $W^{[i]}$, of the example Hamiltonian in equation \ref{eq:MPOmatrix} one will notice that most entries are zeroes. While this may not be the case for every Hamiltonian, knowing the structure of the corresponding MPO allows one to simplify multiplications. Furthermore, for the last index in the $W^{[i]}$ matrix, $\beta_i = D_W$, only identities will operate towards the left, if the MPO is constructed according to the rules outlined earlier. Since the matrices $A^{[i]}$ are left normalized, this implies that $L_{\alpha_i , D_W, \alpha_i '}^{[i]} = \delta_{\alpha_i , \alpha_i '}$, greatly simplifying calculations.\\
-It is important to store every iteration of $L^{[i]}$, since $L$ will grow and shrink constantly throughout the variational search of the ground state, whereby every iteration of $L^{[i]}$ will be used multiple times. By keeping track of every iteration, an update of the MPS at the $j$'th site will only affect $L^{[i]}$ for $i \geq j$ - and this update can be done swiftly using the previously stored iterations.\\
-
-Naturally all of this applies when building the right tensor $R$. Here one starts from the right and moves left when iteratively contracting the tensor. Likewise, right-normalization simplify the contractions when $b_i = 1$, implying only identities to the left in the chain of operators.\\
-
-Finally, a re-bracketing for optimal matrix multiplication allows for an even lower operational cost
-\begin{align*}
-	L_{\alpha_i , \beta_i , \alpha_i '}^{[i]} &= \sum_{j_i , \alpha_{i-1}} \left( A^{[i] j_i \dag} \right)_{\alpha_i , \alpha_{i-1}} \left( \sum_{j_i ' , \beta_{i-1}} W_{\beta_{i-1} , \beta_i}^{[i] j_i , j_i '} \left( \sum_{\alpha_{i-1} '}  L_{\alpha_{i-1} , \beta_{i-1} , \alpha_{i-1} '}^{[i-1]} A_{\alpha_{i-1} ' , \alpha_i '}^{[i] j_i '} \right) \right) \\
-	 \hat{H} \ket{\psi} &= \sum_{\beta_{n-1} , \alpha_{n-1} '}  L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} \left( \sum_{\beta_n , j_n '} W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \left( \sum_{\alpha_n '} R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} \; \Psi_{\alpha_{n-1} ' , \alpha_{n} '}^{j_n '} \right) \right) \ket{\alpha_{n-1}}_A \ket{j_n} \ket{\alpha_{n}}_B \; ,
-\end{align*}
-where they both scale as $\mathrm{O}(d D^3 D_W)$.\\
+It is important to store every iteration of $L^{[i]}$, since $L$ will grow and shrink constantly throughout the variational search of the ground state, whereby every iteration of $L^{[i]}$ will be used multiple times.
+The same applies when building the right environment, $R$. Here one starts from the right and moves left when iteratively contracting the tensor. By applying optimal bracketing, the computational cost of updating the environments scales as $\mathrm{O}(d D^3 D_W)$.
   
 
-\section{Iterative Ground State Search}
+\section{Iterative Ground State Search and the DMRG Algorithm}
 In order to find the ground state of the system on can introduce a Lagrangian multiplier and extremize
 \begin{equation}
 	\bra{\psi} \hat{H} \ket{\psi} - \lambda \braket{\psi | \psi} \; ,

@@ -125,7 +125,7 @@ The MPS described in equation \ref{eq:MPS_LC} is not unique, as writing
 describes the same state using different matrices. This gauge freedom allows expressing the MPS in whichever way is most convenient, often resulting in a much lower numerical cost of operations. By choosing a gauge, the MPS is brought into a \textit{canonical form} \cite{Vidal}.
 
 \subsection{Left-canonical matrix product state}
-The process above describing building the MPS from an arbitrary state produces an MPS in a \textit{left-canonical} form. This means that all the the matrices are left-normalized, such that
+The process of constructing an matrix product state detailed in Section \ref{sec:construct_MPS} brings the MPS in a \textit{left-canonical} form. This implies that all the matrices are left-normalized, such that
 \begin{equation}
 	\sum_{j_n} A^{j_n \dag} A^{j_n} = I \; .
 	\label{eq:LC_ident}
@@ -134,109 +134,122 @@ This is a consequence of the matrix $U$ (from the SVD) fulfilling $U^{\dag}U = I
 \begin{align*}
 	\delta_{\alpha_n , \alpha_n'} &= \sum_{\alpha_{n-1} j_n} (U^{\dag})_{\alpha_n , (\alpha_{n-1} j_n)} U_{(\alpha_{n-1} j_n), \alpha_n'} \\
 	 &= \sum_{\alpha_{n-1} j_n} (A^{j_n \dag})_{\alpha_n , \alpha_{n-1}} A_{\alpha_{n-1}, \alpha_n'}^{j_n} \\
-	 &= \sum_{j_n} \left( A^{j_n \dag} A^{j_n} \right)_{\alpha_{n}, \alpha_n'}
+	 &= \sum_{j_n} \left( A^{j_n \dag} A^{j_n} \right)_{\alpha_{n} . \alpha_n'}
 \end{align*} 
-hence following the condition of equation \ref{eq:LC_ident}. Figure \ref{fig:leftNorm} illustrates this, where two left-normalized matrices are contracted.
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/leftNormalized.tex}
-	\caption{\textit{Contraction of two left-normalized A-matrices over their left index (shown as the arc) and their physical index (the connecting vertical line). The result is $\delta_{\alpha_n , \alpha_n'}$, adding the n'th site to the contraction of all previous sites to the left.}}
+	\caption{\textit{Contraction over the left index (shown as the arc) and the physical index of two left-normalised matrices. The result is $\delta_{\alpha_n , \alpha_n'}$, adding the n'th site to the contraction of all previous sites to the left.}}
 	\label{fig:leftNorm}
 \end{figure}
-This allows for contractions from the left without explicit calculation, which is necessary when considering systems in the thermodynamic limit. In general $\sum_{j_n} A^{j_n} A^{j_n \dag}  \neq I$.
+Figure \ref{fig:leftNorm} illustrates a contraction of the bonds connecting two left-normalised matrices. As this contraction results in the identity per definition, one can contract left-normalised matrices without any explicit calculation. This is displayed diagrammatically through an arc, which is equivalent to an identity-tensor with two bond indices. 
+
 
 \subsection{Right-canonical matrix product state}
-A right-canonical MPS can be built from \ref{eq:arbstate} by starting from the other side of the chain. This implies multiplying $U$ and $S$ into the new $\Psi$-matrix, and reshaping $(V^{\dag})_{(\alpha_{n-1} j_n), \alpha_n}$ into matrices $B_{\alpha_{n-1} , \alpha_n}^{j_n}$. Hence, the right-canonical form of the MPS reads
+One could also have built a a right-canonical MPS from eq. \eqref{eq:arbstate}, had one started from other side of the chain. This implies multiplying $U$ and $S$ into the new $\Psi$-matrix, and reshaping $(V^{\dag})_{(\alpha_{n-1} j_n), \alpha_n}$ into matrices $B_{\alpha_{n-1} , \alpha_n}^{j_n}$. Hence, the right-canonical form of the MPS of eq. \eqref{eq:MPS_LC} reads
 \begin{equation}
 	\ket{\psi} = \sum_{j_1, \ldots, j_N} B^{j_1} B^{j_2} \ldots B^{j_{N-1}} B^{j_{N}} \ket{j_1, \ldots, j_N} \; .
 \label{eq:MPS_RC}	 
 \end{equation}
-In this form all the matrices are right-normalized meaning 
+In this form all the matrices are right-normalized, whereby 
 \begin{equation}
-	\sum_{j_n} B^{j_n} B^{j_n \dag} = I \; ,
+	\sum_{j_n} B^{j_n} B^{j_n \dag} = I \; .
 	\label{eq:RC_ident}
 \end{equation}
-which is illustrated in figure \ref{fig:rightNorm}, which depict a contraction of right-normalized matrices at site $n$. 
+Note how right-normalised matrices are denoted by $B^{j_n}$ opposed to left-normalised matrices, $A^{j_n}$.
+Figure \ref{fig:rightNorm} illustrates two right-normalised matrices contracted over their physical index.
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/rightNormalized.tex}
-	\caption{\textit{Contraction of two right-normalized B-matrices over their right index (shown as the arc) and their physical index (the connecting vertical line). The result is $\delta_{\alpha_n , \alpha_n'}$, adding the n'th site to the contraction of all previous sites to the right.}}
+	\caption{\textit{Contraction over the right index (shown as the arc) and the physical index of two right-normalised matrices.}}
 	\label{fig:rightNorm}
 \end{figure}
-Generally $\sum_{j_n} B^{j_n \dag} B^{j_n} \neq I$.
+
 
 \subsection{Mixed-canonical matrix product state}
-The two above forms can also be mixed, which allows for easy bi-partitioning of the system into a Schmidt decomposition, which is useful for easy computations of reduced density matrices.\\
-Consider the procedure of building an MPS in the left-canonical form as described in section \ref{sec:construct_MPS}, where the coefficients have been decomposed from the left up until site $n$
+In practice one rarely finds use for a purely left- or right-canonical MPS. However, combining the two canonical forms listed above yields the mixed-canonical form. This form results in a natural bi-partitioning of the system into a Schmidt decomposition, and it is especially useful for measuring local properties of the state. CITE\\
+Consider the procedure of building an MPS in the left-canonical form, where $c_{j_1 \ldots j_N}$ has been decomposed from the left up until site $n$
 \begin{equation}
 	c_{j_1 \ldots j_N} = \sum_{\alpha_n} \left( A^{j_1} \ldots  A^{j_n} \right) _{\alpha_n} S_{\alpha_n , \alpha_n} (V^{\dag})_{\alpha_n , (j_{n+1} \ldots j_N)} \; .
 \end{equation}
-From here the $V^{\dag}$ can be reshaped into the matrix $\Psi_{(\alpha_n j_{n+1} \ldots j_{N-1}),j_N}$, which can then be successively decomposed from the right, resulting in a set of right-normalized matrices. The final result reads
+By reshaping $V^{\dag}$  into the matrix $\Psi_{(\alpha_n j_{n+1} \ldots j_{N-1}),j_N}$, one can initiate a successive decomposition from the right, resulting in a set of right-normalized matrices. The final result reads
 \begin{equation}
-	c_{j_1 \ldots j_N} = A^{j_1} \ldots A^{j_n} S B^{j_{n+1}} B^{j_N} \; ,
+	c_{j_1 \ldots j_N} = A^{j_1} \ldots A^{j_n} S B^{j_{n+1}} \ldots B^{j_N} \; ,
 	\label{eq:mixedCanon}
 \end{equation}
-which is illustrated in figure \ref{fig:mixedCanon}.
+which is illustrated in figure \ref{fig:mixedCanonical1}.
 \begin{figure}[h!]
-	\centering
-	\input{Diagrams/mixedCanon.tex}
-	\caption{\textit{Diagrammatic representation of an MPS in mixed-canonical form, where the tensors on the left are left-normalized, while the tensors on the right are right-normalised. The matrix S is a diagonal, singular valued matrix.}}
-	\label{fig:mixedCanon}
+\centering % <-- add this
+\begin{subfigure}[b]{0.45\textwidth}
+  	\input{Diagrams/mixedCanonS.tex}
+	\caption{}
+	\label{fig:MixedCanonical1}
+\end{subfigure}
+\hspace{5mm}
+\begin{subfigure}[b]{0.45\textwidth}    
+  	\input{Diagrams/mixedCanon.tex}
+	\caption{}
+	\label{fig:MixedCanonical2}
+\end{subfigure}
+\caption{\textit{Mixed-canonical form of an MPS. The form \textbf{(i)} directly brings the MPS into the form of a Schmidt decomposition, while the form \textbf{(ii)} is well suited for measuring local properties of the state.}}
 \end{figure}
-In this form the Schmidt decomposition can be read directly of the MPS by introducing the vectors
+In this form the Schmidt decomposition can be read directly from the form of the MPS by introducing the vectors
 \begin{align}
  	\ket{\alpha_n}_A \; &= \; \sum_{j_1 , \ldots , j_n} \left( A^{j_1} \ldots A^{j_n} \right)_{1,\alpha_n} \ket{j_1 , \ldots , j_n}  \label{eq:mixedA} \\
- 	\ket{\alpha_n}_B \; &= \; \sum_{j_{n+1} , \ldots , j_N} \left( B^{j_{n+1}} \ldots B^{j_N} \right)_{\alpha_n , 1} \ket{j_{n+1} , \ldots , j_N} \label{eq:mixedB}
+ 	\ket{\alpha_n}_B \; &= \; \sum_{j_{n+1} , \ldots , j_N} \left( B^{j_{n+1}} \ldots B^{j_N} \right)_{\alpha_n , 1} \ket{j_{n+1} , \ldots , j_N} \; , \label{eq:mixedB}
 \end{align}
 whereby the state can be written in the form
 \begin{equation}
 	\ket{\psi} = \sum_{\alpha_n} S_{\alpha_n , \alpha_n} \ket{\alpha_n}_A \ket{\alpha_n}_B \; .
 \end{equation}
-In order for this to be a Schmidt decomposition $\sum_{\alpha_n} (S_{\alpha_n , \alpha_n})^2 = 1$, which is fulfilled from the properties of the SVD, and the states on A and B have to be orthonormal respectively, which they are by construction.
+In order for this to be a Schmidt decomposition $\sum_{\alpha_n} (S_{\alpha_n , \alpha_n})^2 = 1$, however this condition is fulfilled by default by the SVD. Furthermore, the states $\ket{\alpha_n}_A$ and $\ket{\alpha_n}_B$ have to be orthonormal respectively, which they are by construction.\\
+Another useful version of the mixed-canonical form is depicted in figure \ref{fig:MixedCanonical2}, where the matrix $S$ of eq. \eqref{eq:mixedCanon} has been multiplied unto the matrix either to the left or right of it. The result is a central cite, which does not follow any normalisation. This form is advantageous when measuring local properties of a state, as the overlap with itself simplifies to the multiplication of the matrices at the central cite.
+ 
 
 \subsection{Bringing a matrix product state into canonical form}
-So far it has only been presented how to bring an MPS into a canonical form when building it. However, an arbitrary, pre-built MPS can be be brought into a canonical form through a series of SVD's, again exploiting the unitarity or left-/right-normalization of the resulting matrices.\\
+Up until now all canonical forms were realised during the construction of the matrix product states. However, any arbitrary MPS can be be brought into a canonical form through a series of SVD's, again exploiting the unitarity or left-/right-normalization of the resulting matrices.\\
 Consider a general MPS
 \begin{equation}
 	\ket{\psi} = \sum_{j_1 , \ldots , j_N} \sum_{\alpha_1 , \ldots } M_{1 , \alpha_1}^{j_1} M_{\alpha_1 , \alpha_2}^{j_2} M_{\alpha_2 , \alpha_3}^{j_3} \ldots \ket{j_1 , \ldots , j_N} \; , 
+	\label{eq:generalMPS}
 \end{equation}
-which has to be brought into a left-canonical form. By grouping the physical and left (row) index of $M_{1 , \alpha_1}^{j_1}$, one can bring this set of matrices into the form of a single matrix, where an SVD can be applied to it. This yields $M = A S V^{\dag}$, where $A^{\dag} A = I$, such that $A$ is left-normalized as desired.
+which has to be brought into a left-canonical form. By grouping the physical and left (row) index of $M_{1 , \alpha_1}^{j_1}$, one can reshape the tensor into a single matrix, $M_{(j_1 , 1) , \alpha_1}$. Applying an SVD yields $M = A S V^{\dag}$, where $A^{\dag} A = I$, such that $A$ is left-normalized as desired. Thus, the left-normalisation of the first tensor of the MPS reads
 \begin{align}
-& \; \sum_{j_1 , \ldots , j_N} \sum_{\alpha_1 , \ldots } M_{(j_1 , 1) , \alpha_1} M_{\alpha_1 , \alpha_2}^{j_2} M_{\alpha_2 , \alpha_3}^{j_3} \ldots \ket{j_1 , \ldots , j_N} \nonumber \\
+\ket{\psi} = & \; \sum_{j_1 , \ldots , j_N} \sum_{\alpha_1 , \ldots } M_{(j_1 , 1) , \alpha_1} M_{\alpha_1 , \alpha_2}^{j_2} M_{\alpha_2 , \alpha_3}^{j_3} \ldots \ket{j_1 , \ldots , j_N} \nonumber \\
 = & \; \sum_{j_1 , \ldots , j_N} \sum_{\alpha_1 , \ldots } \sum_{s_1} A_{(j_1 , 1) , s_1} S_{s_1 , s_1} V_{s_1 , \alpha_1}^{\dag} M_{\alpha_1 , \alpha_2}^{j_2} M_{\alpha_2 , \alpha_3}^{j_3} \ldots \ket{j_1 , \ldots , j_N} \nonumber \\
 = & \; \sum_{j_1 , \ldots , j_N} \sum_{\alpha_1 , \ldots } \sum_{s_1} A_{1 , s_1}^{j_1} \left( S_{s_1 , s_1} V_{s_1 , \alpha_1}^{\dag} M_{\alpha_1 , \alpha_2}^{j_2} \right) M_{\alpha_2 , \alpha_3}^{j_3} \ldots \ket{j_1 , \ldots , j_N} \nonumber \\
 = & \; \sum_{j_1 , \ldots , j_N} \sum_{\alpha_2 , \ldots } \sum_{s_1} A_{1 , s_1}^{j_1} \tilde{M}_{s_1 , \alpha_2}^{j_2} M_{\alpha_2 , \alpha_3}^{j_3} \ldots \ket{j_1 , \ldots , j_N} \; ,
 \end{align}
-where $\tilde{M}_{s_1 , \alpha_2}^{j_2} = \sum_{\alpha_1} S_{s_1 , s_1} V_{s_1 , \alpha_1}^{\dag} M_{\alpha_1 , \alpha_2}^{j_2}$. This procedure can be iterated through the entire chain leaving an MPS in the left-canonical form.\\
-Likewise, an MPS can also be brought into a right-canonical form by grouping the physical index with the right (column) index of $M$ yielding the SVD $M = U S B$, where $B B^{\dag} = I$. Iterating through the chain from the right will thus make the MPS right-canonical. \cite{Schollwock}
+where $\tilde{M}_{s_1 , \alpha_2}^{j_2} = \sum_{\alpha_1} S_{s_1 , s_1} V_{s_1 , \alpha_1}^{\dag} M_{\alpha_1 , \alpha_2}^{j_2}$. This procedure can be iterated through the entire chain, leaving the MPS in the left-canonical form \cite{Schollwock}.\\
+Likewise, an MPS can be brought into a right-canonical form by grouping the physical index with the right (column) index of $M$ yielding the SVD $M = U S B$, where $B B^{\dag} = I$. Thus, iterating through the chain from the right will produce a right-canonical MPS.
 
 \section{Overlaps and Efficient Contractions}
-Once the MPS is built it is important to understand how to use it for efficient calculations of overlaps and expectation values. For this, consider the geneal case of two states $\ket{\psi}$ and $\ket{\phi}$ described by the matrices $M$ and $\tilde{M}$. The overlap between these states reads
+Great reductions in computational cost can be achieved by contracting the tensor networks in the correct order. Consider the general case of two states $\ket{\psi}$ and $\ket{\phi}$ described by the matrices $M$ and $\tilde{M}$. The overlap between these states reads
 \begin{equation}
-	\braket{\phi | \psi} = \sum_{j_1 , \ldots , j_N} \tilde{M}^{j_1 *} \ldots \tilde{M}^{j_N *} M^{j_1} \ldots M^{j_N} = \sum_{j_1 , \ldots , j_N} \tilde{M}^{j_N \dag} \ldots \tilde{M}^{j_1 \dag} M^{j_1} \ldots M^{j_N} \; , 
+	\braket{\phi | \psi} = \sum_{j_1 , \ldots , j_N} \tilde{M}^{j_N \dag} \ldots \tilde{M}^{j_1 \dag} M^{j_1} \ldots M^{j_N} \; , 
 	\label{eq:overlap}
 \end{equation}
-which is represented grafically in figure \ref{fig:effCont}.
+which is represented diagrammatically in figure \ref{fig:effCont}.
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/effectiveContraction.tex}
 	\caption{\textit{Efficient contraction of the overlap between two general states $\ket{\psi}$ and $\ket{\phi}$. By contracting the bonds in the specified order the computational cost is greatly reduced.}}
 	\label{fig:effCont}
 \end{figure}
-The evaluation of the overlap can be drastically sped up by considering the optimal order of contractions, which corresponds to an optimal bracketing of equation \ref{eq:overlap}:
+The evaluation of the overlap can be drastically sped up by considering the optimal order of contractions, which corresponds to an optimal bracketing of eq. \eqref{eq:overlap}:
 \begin{equation}
 	\braket{\phi | \psi} = \sum_{j_N} \tilde{M}^{j_N \dag} \left( \ldots \left( \sum_{j_2} \tilde{M}^{j_2 \dag} \left( \sum_{j_1} \tilde{M}^{j_1 \dag} M^{j_1} \right) M^{j_2} \right) \ldots \right) M^{j_N} \; .
 	\label{eq:optBrackets}
 \end{equation}  
-The innermost bracket a matrix is formed from the multiplication of a column and a row vector and the first physical index, $j_1$, is summed over. In the second set of brackets three matrices are multiplied and the second physical index is summed over. This procedure continues, however, after the first contraction the complexity of the operation does not increase. This is in contrast to the scenario, where an arbitrary bond was contracted over at first. If $d$ is the dimension of the Hilbert spaces at the physical sites, and all the matrices are of dimension $(D \times D)$, then the total operational cost of the optimal contraction is $\mathrm{O}(N D^3 d)$ \cite{Schollwock}. The order of contractions is illustrated in figure \ref{eq:overlap}.\\
-In the special case of calculating a norm, $\braket{\psi | \psi}$ having brought the MPS to a canonical form greatly simplifies the calculation, as having an either left- or right-canonical MPS implies a norm of 1. This can easily be seen for left-canonical form when considering equation \ref{eq:LC_ident} and \ref{eq:optBrackets}. Due to the left-orthogonality every matrix product is $I$, causing it to drop out. Finally, summing over the final index yields 1.
+Within the innermost bracket a matrix is formed by multiplying a column and a row vector followed by the summation over the first physical index, $j_1$. In the remaining set of brackets three matrices are multiplied and the corresponding physical index is summed over. However, after the first contraction the complexity of the operation does not increase. Consider the worst case scenario of all the matrices being of dimension $(D \times D)$ with a local Hilbert space of dimension $d$. The total operational cost of the optimal contraction is $\mathrm{O}(N D^3 d)$ compared to otherwise exponential complexity of a random order of contractions \cite{Schollwock}. The order of contractions described in eq. \eqref{eq:optBrackets} is illustrated in figure \ref{eq:overlap}.\\
+When calculating a norm, $\braket{\psi | \psi}$, the canonical form of the MPS greatly reduces to computational time, as having an either left- or right-canonical MPS implies a norm of 1 without any contractions needed. In the case of a left-canonical for, every matrix product of eq. \eqref{eq:optBrackets} is $I$ due to left-orthogonality. Finally, summing over the final index simply yields 1.
 
 
-\section{Matrix Product Operators (MPO)} \label{sec:MPO}
-An MPO is an operator expressed in the formalism of an MPS. Thus, operators can easily be incorporated as part of the tensor networks, where they are evaluated by contraction over their bonds.\\
-Consider a single coefficient of an MPS
+\section{Matrix Product Operators} \label{sec:MPO}
+A Matrix Product Operator (MPO) is an operator expressed in the formalism of an MPS. Thus, operators can easily be incorporated as part of the tensor networks, where they are evaluated by contraction over their bonds.\\
+Consider a single coefficient of an MPS of the state $\psi$
 \begin{equation}
-	\braket{\boldsymbol{j} | \psi} = M^{j_1} M^{j_2} \ldots M^{j_N} \; . 
+	\braket{j_1 , \ldots , j_N | \psi} = \braket{\boldsymbol{j} | \psi} = M^{j_1} M^{j_2} \ldots M^{j_N} \; . 
 \end{equation}
 Expressing an operator $\hat{O}$ in the basis of the local states, one can write it in a similar manner
 \begin{equation}
@@ -258,9 +271,10 @@ Applying a matrix product operator to a matrix product state is simply a matrix 
 	&= \sum_{\boldsymbol{j},\boldsymbol{j'}} \sum_{\boldsymbol{\alpha},\boldsymbol{\beta}} \left( M_{1, \alpha_1}^{ j_1 '} M_{\alpha_1, \alpha_2}^{j_2 '} \ldots \right) \left( W_{1, \beta_1}^{j_1 ' , j_1 } W_{\beta_1, \beta_2}^{j_2 ', j_2 } \ldots \right) \ket{\boldsymbol{j}} \nonumber \\
 &= \sum_{\boldsymbol{j},\boldsymbol{j'}} \sum_{\boldsymbol{\alpha},\boldsymbol{\beta}} \left( M_{1, \alpha_1}^{ j_1 '} W_{1, \beta_1}^{j_1 ' , j_1} \right) \left( M_{\alpha_1, \alpha_2}^{j_2 '}  W_{\beta_1, \beta_2}^{j_2 ' , j_2} \right) \ldots \ket{\boldsymbol{j}} \nonumber \\
 &= \sum_{\boldsymbol{j}} \sum_{\boldsymbol{\alpha},\boldsymbol{\beta}} N_{(1,1),(\alpha_1 , \beta_1)}^{j_1} N_{(\alpha_1 , \beta_1),(\alpha_2 , \beta_2)}^{j_2} \ldots \ket{\boldsymbol{j}} \nonumber \\
-&= \sum_{\boldsymbol{j}} N^{j_1} N^{j_2} \ldots \ket{\boldsymbol{j}} \; = \; \ket{\phi} 
+&= \sum_{\boldsymbol{j}} N^{j_1} N^{j_2} \ldots \ket{\boldsymbol{j}} \; = \; \ket{\phi}
+\label{eq:optBracketsMPO}
 \end{align} 
-The result is a new MPS, $\ket{\phi}$, which is described by the matrices $N^{j_n}$. These matrices have the dimensions of the product of the dimensions of the original MPS and MPO. Thus, applying an operator leaves the form of the MPS invariant at a cost of increased matrix dimensions, which it illustrated in figure \ref{fig:MPOcont}.
+The result is a new MPS, $\ket{\phi}$, which is described by the matrices $N^{j_n}$ and is illustrated in figure \ref{fig:MPOcont}. These matrices have the dimensions of the product of the dimensions of the original MPS and MPO. Thus, applying an operator leaves the form of the MPS invariant at a cost of increased matrix dimensions.
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/MPOcontract.tex}
@@ -269,45 +283,110 @@ The result is a new MPS, $\ket{\phi}$, which is described by the matrices $N^{j_
 \end{figure}
 If the dimension of the MPS is $D$, while the dimension of the MPO is $D_W$, the total computational cost of the operation is $\mathrm{O}(N d^2 D_W ^2 D^2)$.\cite{Schollwock, McCulloch}
 
-
-
-\subsection{Efficient evaluation of local operators}
-%% write less about this 
-Often one only needs to apply an operator to a single site. Consider the local operator $\hat{O}^{[n]}$, where the square brackets denote the origin of the operator. As $\hat{O}^{[n]}$ is local it only acts on site $n$ and can be expressed in the basis of said site
+\section{Correlation Functions and Measurement of Local Properties}
+Measuring local properties of a state is achieved by calculating the expectation value of local operators. Consider the local operator $\hat{O}^{[n]}$, where the square brackets denote the site, on which the $\hat{O}$ operates. As $\hat{O}^{[n]}$ is only acts on site $n$, it can be expressed in the basis of said site
 \begin{equation}
 	\hat{O}^{[n]} = \sum_{j_n , j_n '} O^{j_n , j_n '} \ket{j_n} \bra{j_n '} \; .
 	\label{eq:localOperator}
 \end{equation}
-Applying this operator to a state describing the entire system implies applying the identity operator on all other sites such that
-\begin{equation}
-	\hat{O} = I^{[1]} \otimes I^{[2]} \otimes \ldots \otimes O^{[n]} \otimes \ldots \otimes I^{[N]} \; .
-	\label{eq:localOps}
-\end{equation}
-In order to evaluate the expectation value of an operator using an MPS the operator is expressed as a product of matrices $O^{j_1 , j_1 '} \ldots O^{j_N , j_N '}$. In the case of a single local operator most of these matrices will be identities. This matrix product can then be multiplied with the matrices of the MPS. Again applying optimal bracketing simplifies the computation: 
-\begin{align}
-	\bra{\psi} \hat{O} \ket{\psi} & = \sum_{j_1 , \ldots , j_N} \sum_{j_1 ' , \ldots , j_N '} \tilde{M}^{j_1 *} \ldots \tilde{M}^{j_N *} O^{j_1 , j_1 '} \ldots O^{j_N , j_N '} M^{j_1 '} \ldots M^{j_N '} \\
-	& = \sum_{j_N , j_N '} O^{j_N , j_N '}  \tilde{M}^{j_N \dag} \left( \ldots \left( \sum_{j_2 , j_2 '} O^{j_2 , j_2 '} \tilde{M}^{j_2 \dag} \left( \sum_{j_1 , j_1 '} O^{j_1 , j_1 '} \tilde{M}^{j_1 \dag} M^{j_1 '} \right) M^{j_2 '} \right) \ldots \right) M^{j_N '} \; .
-	\label{eq:optBracketsOPS}
-\end{align} 
-Although this operation sums over two indices in every brackets most of the matrices $O^{j_n , j_n '}$ are identities causing them to drop out, thus reducing the sum to a single index for most sites. Hence the operational cost is essentially still $\mathrm{O}(N D^3 d)$.\cite{Schollwock} \\
-However, the above calculation can be simplified even further when considering canonical forms. Consider an MPS in the mixed-canonical form, where all matrices left of site $n$ are left-normalized, while all matrices to the right are right-normalized. In this case the two sides can be contract without any calculation, resulting in the network shown in figure \ref{fig:contExpVal}, which reduces the calculation to simply
+Applying a local operator to a state implies applying the identity operator on all other sites. The resulting operator, $\hat{O} = \hat{I}^{[1]} \otimes \hat{I}^{[2]} \otimes \ldots \otimes \hat{O}^{[n]} \otimes \ldots \otimes \hat{I}^{[N]}$, can then be expressed as an MPO and readily be applied to a matrix product state. However, the calculation is greatly simplified when considering an MPS in a mixed-canonical form, where all matrices left of site $n$ are left-normalized, while all matrices to the right are right-normalized. In this case, the entire tensor network on either side of site $n$ can be contracted without any calculation. The remaining network needed to be contracted is shown in figure \ref{fig:SingleSiteOperator}, which is simply the sum
 \begin{equation}
 	\bra{\psi} \hat{O}^{[n]} \ket{\psi} = \sum_{j_n , j_n '} O^{j_n , j_n '} \Tr \left( M^{j_n \dag} M^{j_n '} \right) 
 \end{equation}
-with the computational cost $\mathrm{O}(D^2 d^2)$.
+with the computational cost $\mathrm{O}(D^2 d^2)$ \cite{Schollwock}.
+\begin{figure}[h!]
+\centering % <-- add this
+\begin{subfigure}[b]{0.35\textwidth}
+  	\input{Diagrams/SingleSiteOperator.tex}
+	\caption{}
+	\label{fig:SingleSiteOperator}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\textwidth}    
+  	\input{Diagrams/DoubleSiteOperator.tex}
+	\caption{}
+	\label{fig:DoubleSiteOperator}
+\end{subfigure}
+\caption{\textit{Measurement of local properties of a matrix product state in the mixed-canonical form.}}
+\end{figure}
+Very similar is the case of multiple-site local operator. However, sites on which the operator act can not be contracted explicitly. Thus, the resulting tensor network will look like the example shown in figure \ref{fig:DoubleSiteOperator}, where a two-site operator is measured.\\
 
+Also correlation functions are calculated efficiently using matrix product states in the mixed-canonical form. Consider the correlation $\bra{\psi} \hat{O}^{[n]} \hat{Q}^{[n+k]} \ket{\psi}$, whose corresponding tensor network is shown in figure \ref{fig:CorrelationFunction}.
 \begin{figure}[h!]
 	\centering
-	\input{Diagrams/contractedExpectationValue.tex}
-	\caption{\textit{Contracted network for evaluating $\bra{\psi} \hat{O}^{[n]} \ket{\psi}$, where matrices are left- and right-normalized to the left and right of site n.}}
-	\label{fig:contExpVal}
+	\input{Diagrams/CorrelationFunctionNetwork.tex}
+	\caption{\textit{Tensor network for the correlation function $\bra{\psi} \hat{O}^{[n]} \hat{Q}^{[n+4]} \ket{\psi}$. The outer parts of the network are implicitly contracted to identities following the mixed-canonical form of the MPS.}}
+	\label{fig:CorrelationFunction}
 \end{figure}
-
-\section{Correlation Functions}
-%%write about how to evaluate two-site correlations
+Again, having brought the MPS unto a mixed-canonical form results in the outer parts of the network being explicitly contracted as identities. However, the otherwise right-normalised tensors between the two operators can not be contracted as identities, as the right-most operator breaks the canonical form. Thus, one has to contract a network of length $k+1$, which is done most efficiently following the optimal bracketing described in eq. \eqref{eq:optBracketsMPO}. The complexity of the entire contraction is of order $O(k D^3 d)$.
 
 \subsection{Correlation length}
-%% copy section from numerics chapter
+Although the MPS formalism excels at describing one dimensional systems, it struggles with describing long ranged correlations, due to how it is constructed.
+Consider a general MPS in no particular canonical form, as described in eq. \eqref{eq:generalMPS}. The \textit{transfer operator} is defined as
+\begin{equation}
+	\hat{E}^{[n]} = \sum_{\alpha_{n-1}, \alpha_{n-1}'} \sum_{\alpha_{n}, \alpha_{n}'} \left( \sum_{j_n} M^{[n] j_n *} \otimes  M^{[n] j_n} \right)_{(\alpha_{n-1} \alpha_{n-1}'),(\alpha_{n}  \alpha_{n}')} \left( \ket{\alpha_{n-1}}\bra{\alpha_{n-1}'} \right) \left( \ket{\alpha_{n}}\bra{\alpha_{n}'} \right) \; ,
+\end{equation}   
+where the expression in the brackets is the matrix elements of the operator, and $\alpha_n$ are the physical indices of the matrices. The transfer operator is essentially a complete, positive map from operators defined on a block of the lattice of length $n-1$ to a block of length $n$, such that
+\begin{equation}
+	\{ \ket{\alpha_{n-1}}\bra{\alpha_{n-1}'} \} \to \{ \ket{\alpha_{n}}\bra{\alpha_{n}'} \} \; .
+\end{equation}
+One important property of the transfer operator, or transfer matrix, is that all eigenvalues $|\lambda_k| \leq 1 $ \cite{schollwock}. \\
+Generalizing the transfer operator to contraction with an operator $\hat{O}$ gives
+\begin{equation}
+	E_{O}^{[n]} = \sum_{j_n , j_n '} O^{j_n , j_n '} M^{[n] j_n *} \otimes  M^{[n] j_n '} \; .
+\end{equation}
+Using this one can write the correlation function of two general operators on sites $i$ and $j$ as
+\begin{align}
+	\bra{\psi} \hat{O}^{[i]} \hat{O}^{[j]} \ket{\psi} &= \Tr E^{[1]} \ldots E^{[i-1]} E_{O}^{[i]} E^{[i+1]} \ldots E^{[j-1]} E_{O}^{[j]} E^{[j+1]} \ldots E^{[N]} \nonumber \\
+	&= \Tr E_{O}^{[i]} E^{[j-i-1]} E_{O}^{[j]} E^{[L-j+i-1]} \nonumber \\ 
+	&= \sum_{l , k} \bra{l} E_{O}^{[i]} \ket{k} \lambda_{k}^{j-i-1} \bra{k} E_{O}^{[j]} \ket{l} \lambda_{l}^{N-j+i-1} \nonumber \\ 
+	&= \sum_{k} \bra{1} E_{O}^{[i]} \ket{k} \lambda_{k}^{j-i-1} \bra{k} E_{O}^{[j]} \ket{1} \qquad (\mathrm{for } N \to \infty)
+\end{align}
+where $\lambda$ is the eigenvalues of the transfer matrix. Since $|\lambda_k| \leq 1 $, only the leading eigenvalue $\lambda_1 = 1$ remains as $N \to \infty$. Defining the distance between two sites as $r = |j - i -1|$ and the correlation decay, or correlation length, as $\xi_k = -1/\ln \lambda_k$, the correlation function can be written as
+\begin{equation}
+	\frac{\bra{\psi} \hat{O}^{[i]} \hat{O}^{[j]} \ket{\psi}}{\braket{\psi | \psi}} = c_1 + \sum_{k = 2} c_k e^{-r/ \xi_k} \; , \label{eq:corrfunction}
+\end{equation}
+where $c_k = \bra{1} E_{O}^{[i]} \ket{k} \bra{k} E_{O}^{[j]} \ket{1}$. \cite{schollwock} \\
+Equation \eqref{eq:corrfunction} shows that the correlation function is a linear combination of exponential functions. Since this was derived without any assumptions regarding neither the MPS nor the operators, this results can be considered general. Thus, any finite-dimensional MPS will only be able to approximate the true correlation of a system.\\
+This is the cause of the difficulty of describing the long range correlations, such as the Superfluid single-particle correlations. While single-particle correlations decay exponentially for the Mott-Insulator, it decays following a power-law for Superfluids
+\begin{equation}
+	\braket{\hat{a}_{i}^{\dag} \hat{a}_{j}} \sim |i - j|^{-K_b /2} \; ,
+\end{equation}
+where $K_b$ is the Tomonaga-Luttinger parameter \cite{characPhases}. For short distances equation \eqref{eq:corrfunction} is able to accurately approximate a power-law, however, as distances grow larger, only the slowest exponential decay will survive. Hence, the correlation turns into a pure exponential decay with $\xi = -1/ \ln \lambda$, where $\lambda$ is the largest eigenvalue of $\hat{E}$ contributing to the correlation.
+
+\subsection{Visualization of density matrices}
+One way of displaying the correlations of the system is to plot its density matrix, whose entries are given by
+\begin{equation}
+	\rho_{i,j} = \bra{\psi} \hat{a}_{i}^{\dag} \hat{a}_j \ket{\psi} \; .
+\end{equation}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{Figures/DensityMatSF30sweeps.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 0$.}}
+        \label{fig:DensityMatSF}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{Figures/DensityMatMI.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 12$.}}
+        \label{fig:DensityMatMI}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{Figures/U050.pdf}
+        \caption{\textit{Norm value of density matrix entries for $U/J = 0.5$.}}
+        \label{fig:DensityMat05}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \includegraphics[width=0.9\textwidth]{Figures/correlationlength.pdf}
+	\caption{\textit{Correlation function plotted as a function of distance from the diagonal element of the correlation matrix.}}
+	\label{fig:expDecayCorrFunc}
+    \end{subfigure}    
+\end{figure}
+Figures \ref{fig:DensityMatSF} and \ref{fig:DensityMatMI} show the density matrix of the 50 particle system plotted for the Superfluid and the Mott-Insulator limit respectively. In the SF limit long-range correlations are present, which is seen by large off-diagonal elements. However, as discussed previously, in the MPS approximation all correlations decay exponentially, which causes issues when trying to approximate the very long range correlations of the system. This is visualized in figure \ref{fig:expDecayCorrFunc} where the correlation function is plotted against distance from the diagonal. The Superfluid graph has a hump on it, which is an artefact of the DMRG algorithm. Due to the very long correlation length the graph should be almost flat except for the rapid drop in the end, which is due to the open boundary conditions. The graph in figure \ref{fig:expDecayCorrFunc} is the result of the DMRG algorithm attempting to express this long range correlation as a series of exponentials.\\
+In the MI limit no interaction takes place between sites and the correlation length is zero,  leading to a correlation matrix consisting only of diagonal elements of equal magnitude. Figure \eqref{eq:MI_lim} shows some off-diagonal elements of non-zero magnitude, however, this system is not a pure Mott-Insulator, as $U/J = 12$. Nevertheless, the correlations are well described by only a single exponential function, as shown in figure \ref{fig:expDecayCorrFunc}.\\
+Finally, figure \ref{fig:DensityMat05} illustrates the density matrix for a system with $U/J = 0.5$, which is primarily as Superfluid, although, as seen in the figure, has a well defined diagonal. Inspecting its correlation function reveals that the best approximation is by a power-law, thus confirming that the system is indeed a Superfluid. 
 
 
 

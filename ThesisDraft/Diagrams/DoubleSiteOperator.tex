@@ -1,0 +1,21 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \vdist {2.5}
+	\def \hdist {1.5}
+	\def \wid {2}
+
+	\node[tensorc] (tens1) at (1,0) {};
+	\node[tensorc] (tens2) at (1,-\vdist) {};
+	\node[tensorr] (tens3) at (1 + \hdist,0) {};
+	\node[tensorr] (tens4) at (1 + \hdist,-\vdist) {};
+
+	\draw[-] (tens1) -- (tens2);
+ 	\draw[-] (tens3) -- (tens4);
+ 	\draw[-] (tens1) -- (tens3);
+ 	\draw[-] (tens2) -- (tens4);
+	 
+ 	\node[twositeop, minimum width= \wid cm] (op) at (1 + \hdist/2 ,-\vdist/2) { $\hat{O}^{[n, n+1]}$};
+ 	
+ 
+    \draw[-] (tens1.west) .. controls (0, 0) and (0, -\vdist) .. (tens2.west);
+    \draw[-] (tens3.east) .. controls (2+\hdist, 0) and (2+\hdist, -\vdist) .. (tens4.east);
+\end{tikzpicture}

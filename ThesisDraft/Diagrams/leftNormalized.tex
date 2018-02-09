@@ -1,21 +1,23 @@
 \begin{tikzpicture}[inner sep=1mm]
-	\node[tensor] (tens1) at (1,0) {};
-	\node[tensor] (tens2) at (1,-2) {}; 
+	\def \vdist {1.5};
+
+	\node[tensorl] (tens1) at (1,0) {};
+	\node[tensorl] (tens2) at (1,-\vdist) {}; 
  	
 	\node (index1) at (2.5,0) {$\alpha_n$};
-	\node (index2) at (2.5,-2) {$\alpha_n '$}; 	
+	\node (index2) at (2.5,-\vdist) {$\alpha_n '$}; 	
  	
  	\draw[-] (tens1) -- (tens2);
 	\draw[-] (tens1) -- (index1);
 	\draw[-] (tens2) -- (index2); 	
-    \draw[-] (tens1.west) .. controls (0, 0) and (0, -2) .. (tens2.west);
+    \draw[-] (tens1.west) .. controls (0, 0) and (0, -\vdist) .. (tens2.west);
     
     
-    \node (eq) at (3.5,-1) {$=$};
+    \node (eq) at (3.5,-\vdist/2) {$=$};
     
     
- 	\node (dummy1) at (5,0) {};
- 	\node (dummy2) at (5,-2) {};
+ 	\node (dummy1) at (5,0) {$\alpha_n$};
+ 	\node (dummy2) at (5,-\vdist) {$\alpha_n '$};
     
-    \draw[-] (dummy1.west) .. controls (4, 0) and (4, -2) .. (dummy2.west);
+    \draw[-] (dummy1.west) .. controls (4, 0) and (4, -\vdist) .. (dummy2.west);
 \end{tikzpicture}
