@@ -3,48 +3,7 @@ For large systems exact diagonalization of the Hamiltonian is impossible, whereb
 \begin{equation}
 	E = \frac{\bra{\psi} \hat{H} \ket{\psi}}{\braket{\psi | \psi}} \; .
 \end{equation}
-The most efficient way to do this, is to express the Hamiltonian as an MPO as described in eq. \eqref{eq:MPOrep}, whereby it easily can be applied to an MPS. While this may seem difficult at first, it can actually be done without any lengthy calculations. Consider the following example:
-
-\subsection{Example: Building an MPO from a Hamiltonian}
-Consider the Bose-Hubbard Hamiltonian , which consists of both nearest-neighbour tunneling terms and on-site interactions terms
-\begin{equation}
-	\hat{H} = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} + \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) \; .
-	\label{eq:BHhamil}
-\end{equation}
-The Hamiltonian can be expressed as a sum of strings of operators - most of these being identities just like in equation \ref{eq:localOperator}. Moving through such a string from the right, one will at some point encounter one of 3 non-trivial operators. This can be summarized as 4 different possible states of the string of operators on a given bond:
-\begin{enumerate}
-	\item
-	Only identities to the right of the bond.
-	\item
-	An $\hat{a}^{\dag}$ operator just to the right of the bond.
-	\item
-	An $\hat{a}$ operator just to the right of the bond.
-	\item
-	A completed tunneling \textit{or} the interaction term, $\frac{U}{2} \hat{n} \left( \hat{n} -1 \right)$, somewhere to the right.
-\end{enumerate}
-When moving through the string of operators from the right, only certain transitions between these state are possible. For instance $\boldsymbol{1 \rightarrow 1}$, where one starts in state 1, and the next operator is an identity. Likewise, $\boldsymbol{1 \rightarrow 2,3,4}$ are all possible, since these transitions represent the next operator being non-trivial. Next, $\boldsymbol{2 \rightarrow 4}$ completes the hopping $-J \hat{a}^{\dag} \hat{a}$ - a similar transition exists for the other hopping term $\boldsymbol{3 \rightarrow 4}$. Finally, the transition $\boldsymbol{4 \rightarrow 4}$ is needed to continue iterating through the operator chain after having passed the non-trivial operators. This can be encoded in the operator-valued matrix
-\begin{equation}
- W^{[i]} \: = \: \begin{pmatrix}
-\hat{I} & 0 & 0 & 0  \\
-\hat{a}^{\dag} & 0 & 0 & 0  \\
-\hat{a} & 0 & 0 & 0 \\
-\frac{U}{2} \hat{n} \left( \hat{n} -1 \right) & -J \hat{a} & -J \hat{a}^{\dag} &  \hat{I}
-\end{pmatrix} \; ,
-\label{eq:MPOmatrix}
-\end{equation}
-which contains all the allowed transitions between the five state \cite{Schollwock}. When one starts moving through the operator chain from the right side, one obviously begins in state 1 and ends in state 4. This can be encoded in the two vectors
-\begin{equation*}
- \vec{v}_{left} = (0 , 0 , 0  , 1) \quad , \quad \vec{v}_{right} = (1  , 0 ,0 , 0)^T \; .
-\end{equation*}
-Thus, the Bose-Hubbard Hamiltonian can be written as an MPO 
-\begin{equation}
-	\hat{H} = \sum_{\boldsymbol{j}, \boldsymbol{j'}} \vec{v}_{left} \; W^{[1] j_1 , j_1 '} W^{[2] j_2 , j_2 '} \ldots W^{[N] j_N , j_N '} \; \vec{v}_{right} \; \ket{\boldsymbol{j}} \bra{\boldsymbol{j'}} \; .
-	\label{eq:MPOhamiltonian}
-\end{equation}
-Often, the two closing vectors are implicitly multiplied unto the outer matrices for a cleaner notation. Observe how all of this was done without having to do a single numerical computation. The resulting MPO can now readily be applied to an MPS.\\
-
-This is just an example for a simple Hamiltonian with only next-neighbour interactions. Interactions of longer range require intermediate states consisting of identities in order to connect the interacting operators. However, doing this is fairly simple and will often result in MPO's of a similar low dimension as the one shown in the example.
-
+The most efficient way to do this, is to express the Hamiltonian as an MPO as described in eq. \eqref{eq:MPOrep}, whereby it easily can be applied to an MPS. While this may seem difficult at first, it can actually be done without any lengthy calculations. An example is given in Appendix \ref{chap:buildMPO}, where the Bose-Hubbard Hamiltonian is formulated as tensors.
 
 \section{Efficient Application of a Hamiltonian to an MPS}
 In section \ref{sec:MPO} it was explained how to apply an MPO to an MPS, and it was shown how to efficiently evaluate local operators. However, since $\hat{H} \ket{\psi}$ must be evaluated many times during variational methods, one must find even more efficient way of applying the operator.\\
@@ -110,7 +69,7 @@ It is important to store every iteration of $L^{[i]}$, since $L$ will grow and s
 The same applies when building the right environment, $R$. Here one starts from the right and moves left when iteratively contracting the tensor. By applying optimal bracketing, the computational cost of updating the environments scales as $\mathrm{O}(d D^3 D_W)$.
   
 
-\section{Iterative Ground State Search and the DMRG Algorithm}
+\section{Iterative Ground State Search and the DMRG Algorithm} \label{sec:DMRG}
 In order to find the ground state of the system on can introduce a Lagrangian multiplier, $\lambda$, and extremize
 \begin{equation}
 	\bra{\psi} \hat{H} \ket{\psi} - \lambda \braket{\psi | \psi} \; ,
@@ -216,13 +175,13 @@ This concludes the two-site update sequence, which is illustrated in figure \ref
 	\end{subfigure}
 	
 	
-	\caption{\textit{A pictorial representation of the two-site update sequence for iterative ground state search. In step (4) the direction one is iterating determines whether to update the left or right environment.}}
+	\caption{\textit{A diagrammatic representation of the two-site update sequence for iterative ground state search. In step \textbf{(4)}, which environment is updated is determined by the direction of iteration.}}
 	\label{fig:twoSiteUpdate}
 \end{figure}
 
 Some comments regarding this sequence are in order: The matrices of the eigenvalue problem have dimensions $( d^2 D^2 \times d^2 D^2)$, which is generally too much for exact diagonalization, however, since only the lowest eigenvalue is of interest, one can use an iterative eigensolver. CITE Furthermore, if the MPS is not in the proper mixed-canonical form, the eigenvalue problem turns into a generalized eigenvalue problem, which can be numerically quite demanding. Thus, updating the left and right environments in step (4) is necessary, since it leads to great simplifications in step (2). Lastly, one could also consider just a single site when updating, however, this method is very prone to getting stuck \cite{WhiteSingleSite}. By updating two sites at once, one actually optimizes the bond between them. Hence, after updating the two sites, one must only iterate a single site. Optimization is done with regards to the current configuration, whereby it depends on previous updates. To compensate for this, one must sweep through the entire system multiple times, which leads to the following algorithm for iterative ground state search, which follows the structure of the DMRG algorithm:
 
-\subsection{Iterative grounds state search algorithm}
+\subsection{Iterative ground state search algorithm}
 \begin{itemize}
 \item[]
 \textbf{Initialize:} Start from some right-normalized initial guess for $\ket{\psi}$. From this, calculate the tensor $R^{[i]}$ iteratively for all sites, starting at the right.

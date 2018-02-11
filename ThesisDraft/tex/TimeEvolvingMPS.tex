@@ -1,5 +1,18 @@
-\chapter{Performing Time Evolution on an MPS}
-Several algorithms deals with time evolving MPS's, however, as many of them are very similar only a single one, tDMRG, will be treated here.\\
+\chapter{Performing Time Evolution of Matrix Product States}
+A central component of Optimal Control is time evolution. In order to compute any optimal control sequence, it is crucial to have a fast and accurate time evolution algorithm. However, also the construction of the time evolution operator must be taken into account, as exponentiating a tensor spanning the entire system, such as most Hamiltonians, is no easy task. In fact, since the time evolution operator is constantly altered when optimizing control parameters, the time spent exponentiating the Hamiltonian must be taken into account of the total runtime. Thus, both an efficient time evolution algorithm and an efficient operator exponentiation is needed when performing optimal control.
+
+\section{The tDMRG Algorithm}
+% Describe Trotter decomposition 
+% Time evolve bonds rather than tensors - similar to DMRG
+% Briefly describe tDMRG sequence using the already described DMRG algorithm
+% Motivate modified algorithm: -exponentiation time -system specific
+%   (can get better results building the algorithm around the system/
+%    /optimication problem, rather than using a generic algorithm)
+ 
+Several algorithms for time evolving matrix product states exist, however, they all origin from the same ideas proposed in \cite{Vidal2003,Vidal2004}. The most widely used of these algorithms is the tDMRG algorithm, which gets its name from its similarity with the ground state search algorithm described in Section \ref{sec:DMRG}. In fact, one only 
+
+
+
 Consider the time evolution of a quantum state
 \begin{equation}
 	\ket{\psi (t)} = \hat{U}(t) \ket{\psi (t)} \; ,
@@ -78,32 +91,39 @@ After each SVD the matrices are truncated down to dimension $D$, however, the se
 \end{enumerate}
 From here one can apply the unitary $U^{[n+2 , n+3]}$ to the new two-site tensor and proceed with the next infinitesimal time-evolution step all while remaining in the canonical form \cite{Schollwock}. This sequence is illustrated in figure \ref{fig:tDMRG}.
 
-\renewcommand{\thesubfigure}{\arabic{subfigure}}
+\section{Modified Time Evolution Algorithm for Optimal Control}
+% Split of H into H_J and H_U and why (direct contruction of exp(H_U) )
+% Sequence/algortihm
+% graphs from testing
+
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{\textwidth}
-		\centering
-		\caption{\textbf{Merge:}}
-		\input{Diagrams/tDMRG1.tex}
-	\end{subfigure}\\[.5cm]
-	
-	\begin{subfigure}{\textwidth}
-		\centering
-		\caption{\textbf{Apply unitary:}}
-		\input{Diagrams/tDMRG2.tex}
-	\end{subfigure}\\[.5cm]
-	
-	\begin{subfigure}{\textwidth}
-		\centering
-		\caption{\textbf{Unmerge:}}
-		\input{Diagrams/tDMRG3.tex}
-	\end{subfigure}\\[.5cm]
+	\input{Diagrams/ModifiedTEBD.tex}
+	\caption{\textit{Tensor diagram depicting a single time step of the modified TEBD algorithm. The time evolution operator has been subjected to a Suzuki-Trotter expansion as detailed in eq. \eqref{eq:SuzukiTrotter}. The tensors of the upper part of the network are contracted with the MPS while sweeping from left to right, whereas the lower part is applied with a right to left sweep.}}
+	\label{fig:ModifiedTEBD}
+\end{figure}
 
-	\begin{subfigure}{\textwidth}
-		\centering
-		\caption{\textbf{Progress:}}
-		\input{Diagrams/tDMRG4.tex}
-	\end{subfigure}
-	\caption{\textit{A pictorial representation of the infinitesimal time-step update for tDMRG. After the sequence has been performed, the next unitary $U^{[n+2 , n+3]}$ can be applied to the new two-site tensor.}}
-	\label{fig:tDMRG}
+
+\begin{figure}
+\centering % <-- add this
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}  
+  	\input{Diagrams/TrotterStep1.tex}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}    
+  	\input{Diagrams/TrotterStep2.tex}
+\end{subfigure}
+\\ % <-- add this
+\vspace{10mm}
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}    	
+  	\input{Diagrams/TrotterStep4.tex}
+\end{subfigure}
+\begin{subfigure}[b]{0.35\textwidth}
+	\caption{}  
+  	\input{Diagrams/TrotterStep6.tex}
+\end{subfigure}
+\caption{\textit{Sequence of contractions for modified TEBD algorithm during left to right sweep. Step \textbf{(i)}: MPS centred on site 1, tensors $A^{[1]}$ and $A^{[2]}$ are contracted. Step \textbf{(ii)}: Two-site tensor is contracted with two-site operator, followed by a splitting of the resulting tensor through an SVD in step \textbf{(iii)}. Lastly, in step \textbf{(iv)}, the center (and thereby the normalisation) is pushed to the next site leaving $A^{[1]}$ left-normalised.}}
+\label{fig:TEBDContraction}
 \end{figure}
