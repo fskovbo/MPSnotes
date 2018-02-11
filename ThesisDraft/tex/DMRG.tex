@@ -111,29 +111,29 @@ The same applies when building the right environment, $R$. Here one starts from 
   
 
 \section{Iterative Ground State Search and the DMRG Algorithm}
-In order to find the ground state of the system on can introduce a Lagrangian multiplier and extremize
+In order to find the ground state of the system on can introduce a Lagrangian multiplier, $\lambda$, and extremize
 \begin{equation}
 	\bra{\psi} \hat{H} \ket{\psi} - \lambda \braket{\psi | \psi} \; ,
 	\label{eq:lagrange}
 \end{equation}
 whereby the desired ground state, $\ket{\psi}$, and ground state energy, $\lambda^0$, will be reached.\\
-Consider an MPS of the form $M^{[1]} \ldots M^{[N]}$. Trying to optimize the entire MPS at the same time is a highly non-linear problem involving an extremely large number of variables. However, the problem can be linearised by only considering the matrix entries $M_{\alpha_{n-1}, \alpha_n}^{j_n}$ at site $n$ as variables, while keeping the rest of the MPS constant. By varying the matrix elements one site at a time, one will continuously find states lower in energy until convergence is reached. However, this procedure is very prone to getting stuck in a local extrema. To circumvent this one can consider two sites at a time and optimize with regards to a tensor, created by momentarily merging the two sites.\cite{WhiteDMRG} \\
-Considering equation \ref{eq:lagrange} one has to calculate
+Trying to optimize an entire MPS at once is a highly non-linear problem involving an extremely large number of variables. However, the problem can be linearised by only considering the variables of a single tensor (site) at a time, while keeping the rest of the MPS constant. By varying just a single tensor at a time, one will continuously find states lower in energy, until convergence is reached. However, this procedure is very prone to getting stuck in a local extrema. To circumvent this, one can consider two sites at a time and optimize with regards to a two-site tensor, created by momentarily merging the two sites \cite{WhiteDMRG}.\\
+Consider the variation of the tensors $M^{[n]}$ and $M^{[n+1]}$. Expressing the minimization problem of eq. \eqref{eq:lagrange} in terms of the left and right environments (as done in eq. \eqref{eq:HPsi}) yields
 \begin{align}
 	\bra{\psi} \hat{H} \ket{\psi} &= \sum_{\substack{j_n , j_n ' \\ j_{n+1} , j_{n+1} '}} \sum_{\alpha_{n-1} ' , \alpha_n ', \alpha_{n+1} '} \sum_{\alpha_{n-1} , \alpha_n , \alpha_{n+1}} \sum_{\beta_{n-1} , \beta_n , \beta_{n+1}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} \; W_{\beta_{n_1}, \beta_n}^{[n] j_n , j_n '} \; W_{\beta_{n}, \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '} \nonumber \\
 	& \qquad \times R_{\alpha_{n+1} ,\beta_{n+1} , \alpha_{n+1} '}^{[n+2]} \; M_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n } \; M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *}  \label{eq:twositeHamil}\\
 	\braket{\psi | \psi} &= \sum_{j_n , j_{n+1} } \sum_{\substack{\alpha_{n-1} ' \\ \alpha_n ', \alpha_{n+1} '}} \sum_{\substack{\alpha_{n-1} , \alpha_n \\ \alpha_{n+1}}} \Psi_{\alpha_{n-1},\alpha_{n-1}'}^{A} \; M_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n } \; M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *} \; \Psi_{\alpha_{n+1},\alpha_{n+1}'}^{B} \; , \label{eq:twositeOverlap}
 \end{align}
-where the Hamiltonian from equation \ref{eq:HPsi} has been re-ordered to accommodate for examining two sites, $n$ and $n+1$, at a time, and 
+where the Hamiltonian from eq. \eqref{eq:HPsi} has been re-ordered to accommodate examining two sites, $n$ and $n+1$, at a time, and 
 \begin{align}
 \Psi_{\alpha_{n-1},\alpha_{n-1}'}^{A} &= \sum_{j_1 , \ldots , j_{n-1}} \left( M^{j_{n-1} \dag} \ldots M^{j_{1} \dag} M^{j_1} \ldots M^{j_{n-1}} \right) _{\alpha_{n-1} , \alpha_{n-1} '} \label{eq:psiA} \\
 \Psi_{\alpha_{n+1},\alpha_{n+1}'}^{B} &= \sum_{j_{n+2} , \ldots , j_{N}} \left( M^{j_{n+2} } \ldots M^{j_{N} } M^{j_N \dag} \ldots M^{j_{n+2} \dag} \right) _{\alpha_{n+1} ', \alpha_{n+1} } \; .
 \end{align}
-Further simplifications can be made for mixed-canonical forms, if sites $1$ through $n-1$ are left-normalized, and sites $n+2$ through $N$ are right-normalized
+Further simplifications can be made for mixed-canonical forms, if sites $1$ through $n-1$ are left-normalized, and sites $n+2$ through $N$ are right-normalized, whereby
 \begin{equation}
 	\Psi_{\alpha_{n-1},\alpha_{n-1}'}^{A} = \delta_{\alpha_{n-1},\alpha_{n-1}'} \qquad , \qquad \Psi_{\alpha_{n+1},\alpha_{n+1}'}^{B} = \delta_{\alpha_{n+1},\alpha_{n+1}'} \; .
 \end{equation}
-From here one has to find the extremum of equation \ref{eq:lagrange} with respect to $M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *}$. Looking at equation \ref{eq:twositeHamil} and \ref{eq:twositeOverlap} this may seem like a daunting task, however, it can actually be done fairly easily through the following sequence:
+Finding the extremum of eq. \eqref{eq:lagrange} with respect to $M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *}$ is done through the following sequence:
 
 \subsection{Two-site update for iterative ground state search}
 \begin{enumerate}
@@ -144,7 +144,7 @@ From here one has to find the extremum of equation \ref{eq:lagrange} with respec
 \end{equation}
 
 \item
-\textbf{Solve eigenproblem:} The problem is simply an eigenvalue problem, which can be seen by reshaping
+\textbf{Solve eigenproblem:} This yields an eigenvalue problem, which can be seen by reshaping
 \begin{align}
 	H_{( \alpha_{n-1}  j_n  j_{n+1}, \alpha_{n+1}),(\alpha_{n-1}'  j_n '  j_{n+1}', \alpha_{n+1}')} &= \nonumber \\
 	= \; \sum_{\substack{\beta_{n-1} , \beta_n \\ \beta_{n+1}}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} & \; W_{\beta_{n_1}, \beta_n}^{[n] j_n , j_n '} \; W_{\beta_{n}, \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '}\;  R_{\alpha_{n+1} ,\beta_{n+1} , \alpha_{n+1} '}^{[n+2]} \\
@@ -155,7 +155,7 @@ such that
 	H v - \lambda v = 0 \; .
 	\label{eq:eigprob}
 \end{equation}
-Solving this for the lowest eigenvalue $\lambda_0$ yields $v_{ \alpha_{n-1} j_n j_{n+1} \alpha_{n+1}}^0$, which can be reshaped back to the now optimized $\tilde{\Theta}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}}$.
+Solving this for the lowest eigenvalue $\lambda_0$ yields $v_{ \alpha_{n-1} j_n j_{n+1} \alpha_{n+1}}^0$, which can be reshaped back to the now optimized two-site tensor, $\tilde{\Theta}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}}$.
 
 \item
 \textbf{Unmerge:} Reshape the updated $\tilde{\Theta}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}}$ to a matrix and perform an SVD yielding
@@ -165,10 +165,11 @@ Solving this for the lowest eigenvalue $\lambda_0$ yields $v_{ \alpha_{n-1} j_n 
 This causes the bond dimension to increase $D \rightarrow d D$, which must be truncated by keeping only the $D$ largest singular values of $S$. 
 
 \item
-\textbf{Update environments:} The last step depends on which direction one is iterating trough the chain. Here the left- and right-normalization of $U$ and $V^{\dag}$ is used to update the environments.\\
+\textbf{Update environments:} The last step depends on which direction, one is iterating trough the chain. Here, the left- and right-normalization of $U$ and $V^{\dag}$ is used to update the environments.\\
 \textit{Going right}: Update the left environment
 \begin{equation}
 	\tilde{L}_{\alpha_{n}, \beta_{n} , \alpha_{n} '}^{[n]} = \sum_{\substack{ j_{n} , j_{n} ' \\ \alpha_{n-1} , \beta_{n-1} , \alpha_{n-1} '}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} \; U_{\alpha_{n-1} , \alpha_{n}}^{j_n} \; W_{\beta_{n-1} , \beta_{n}}^{[n] j_n , j_n '} \; U_{\alpha_{n-1} ', \alpha_{n}'}^{j_n ' *} \; ,
+\label{eq:updateLeft}
 \end{equation}
 and build the matrix of the right site
 \begin{equation}
@@ -177,6 +178,7 @@ and build the matrix of the right site
 \textit{Going left}: Update the right environment
 \begin{equation}
 	\tilde{R}_{\alpha_{n}, \beta_{n} , \alpha_{n} '}^{[n+1]} = \sum_{\substack{ j_{n+1} , j_{n+1} ' \\ \alpha_{n+1} , \beta_{n+1} , \alpha_{n+1} '}} R_{\alpha_{n+1}, \beta_{n+1} , \alpha_{n+1} '}^{[n+2]} \; \left( V^{\dag} \right)_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1}} \; W_{\beta_{n} , \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '} \; \left( V^{\dag} \right)_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1} *} \; ,
+	\label{eq:updateRight}
 \end{equation}
 and build the matrix of the left site
 \begin{equation}
@@ -184,7 +186,7 @@ and build the matrix of the left site
 \end{equation} 
  
 \end{enumerate}
-This concludes the two-site update sequence, which can be seen illustrated in figure \ref{fig:twoSiteUpdate}. After performing the sequence, one can move \textit{one site} to either left or right, depending on which direction one is iterating.
+This concludes the two-site update sequence, which is illustrated in figure \ref{fig:twoSiteUpdate}. After performing the sequence, one can move \textit{one site} to either left or right, depending on which direction, one is iterating.
 
 \renewcommand{\thesubfigure}{\arabic{subfigure}}
 \begin{figure}[h!]
@@ -218,18 +220,18 @@ This concludes the two-site update sequence, which can be seen illustrated in fi
 	\label{fig:twoSiteUpdate}
 \end{figure}
 
-Some comments regarding this sequence are in order: The matrices of the eigenvalue problem has dimensions $( d^2 D^2 \times d^2 D^2)$, which is generally too much for exact diagonalization, however, since only the lowest eigenvalue is of interest, one can use an iterative eigensolver. Furthermore, if the MPS is not in the proper mixed-canonical form, the eigenvalue problem turns into a generalized eigenvalue problem, which can be numerically quite demanding. Thus, updating the left and right environments in step (4) is necessary, since it leads to great simplifications in step (2). Lastly, one could also consider just a single site when updating, however, this method is very prone to getting stuck \cite{WhiteSingleSite}. By updating two sites at once, one actually optimized the bond between them. Hence, after updating the two sites \textit{one must only iterate a single site} in order to optimize the next bond. Optimization is done with regards to the current configuration, whereby it depends on previous updates. To compensate for this one must sweep through the entire system multiple times, which leads to the following algorithm for iterative ground state search:
+Some comments regarding this sequence are in order: The matrices of the eigenvalue problem have dimensions $( d^2 D^2 \times d^2 D^2)$, which is generally too much for exact diagonalization, however, since only the lowest eigenvalue is of interest, one can use an iterative eigensolver. CITE Furthermore, if the MPS is not in the proper mixed-canonical form, the eigenvalue problem turns into a generalized eigenvalue problem, which can be numerically quite demanding. Thus, updating the left and right environments in step (4) is necessary, since it leads to great simplifications in step (2). Lastly, one could also consider just a single site when updating, however, this method is very prone to getting stuck \cite{WhiteSingleSite}. By updating two sites at once, one actually optimizes the bond between them. Hence, after updating the two sites, one must only iterate a single site. Optimization is done with regards to the current configuration, whereby it depends on previous updates. To compensate for this, one must sweep through the entire system multiple times, which leads to the following algorithm for iterative ground state search, which follows the structure of the DMRG algorithm:
 
 \subsection{Iterative grounds state search algorithm}
 \begin{itemize}
 \item[]
-\textbf{Initialize:} Start from some right-normalized initial guess for $\ket{\psi}$. Using this calculate the tensor $R^{[i]}$ iteratively for all sites starting at the right.
+\textbf{Initialize:} Start from some right-normalized initial guess for $\ket{\psi}$. From this, calculate the tensor $R^{[i]}$ iteratively for all sites, starting at the right.
 
 \item[]
-\textbf{Right sweep:} Starting from site $n = 1$ perform a \textit{two-site update}, where one updates the \textit{left environment} as described in the sequence. Afterwards $n$ is iterated by 1, $n \rightarrow n + 1$, and the process is repeated until $n = N-1$ is reached.
+\textbf{Right sweep:} Starting from site $n = 1$, perform a \textit{two-site update}, where one updates the \textit{left environment} as described in eq. \eqref{eq:updateLeft}. Afterwards, $n$ is iterated by 1, $n \rightarrow n + 1$, and the process is repeated until $n = N-1$ is reached.
 
 \item[]
-\textbf{Left sweep:} Starting from site $n = N-1$ perform a \textit{two-site update}, where one updates the \textit{right environment} as described in the sequence. Afterwards $n$ is iterated by 1, $n \rightarrow n - 1$, and the process is repeated until $n = 1$ is reached.
+\textbf{Left sweep:} Starting from site $n = N-1$, perform a \textit{two-site update}, where one updates the \textit{right environment} as described in eq. \eqref{eq:updateLeft}. Afterwards, $n$ is iterated by 1, $n \rightarrow n - 1$, and the process is repeated until $n = 1$ is reached.
 
 \item[]
 \textbf{Repeat sweeps:} Continue by alternating between left and right sweeps through the system until convergence is achieved.  
