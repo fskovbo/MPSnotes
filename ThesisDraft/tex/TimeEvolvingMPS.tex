@@ -5,14 +5,6 @@ Although the standard algorithms for time evolution are quite efficient, further
 
 
 \section{The tDMRG Algorithm}
-% Describe Trotter decomposition 
-% Time evolve bonds rather than tensors - similar to DMRG
-% Briefly describe tDMRG sequence using the already described DMRG algorithm
-% Motivate modified algorithm: -exponentiation time -system specific
-%   (can get better results building the algorithm around the system/
-%    /optimication problem, rather than using a generic algorithm)
- 
-
 Consider the time evolution of a quantum state
 \begin{equation}
 	\ket{\psi (t)} = \hat{\mathcal{U}}(t) \ket{\psi (0)} \; ,
@@ -42,7 +34,7 @@ The result is an MPO performing an infinitesimal time step on the odd bonds, and
 	\caption{\textit{Approximation of each time step $\delta t$ using a Trotter-Suzuki decomposition, such that the time evolution operator is expressed as a product of unitary two-site operators.}}
 	\label{fig:oddevenops}
 \end{figure}
-The tDMRG algorithm describes the most efficient and accurate way of contracting the tensor network detailed in Figure \ref{fig:oddevenops}. The algorithm gets its name from its similarity with the DMRG algorithm detailed in Section \ref{sec:DMRG}. In fact, the merge and unmerge procedure of the two algorithms is completely identical, whereby they only differ in the steps of applying the operator and proceeding to the next site. The following procedure details a time evolution step of the $n$'th bond \cite{Schollwock}.
+The tDMRG algorithm describes the most efficient and accurate way of contracting the tensor network detailed in Figure \ref{fig:oddevenops}. The algorithm gets its name from its similarity with the DMRG algorithm detailed in Section \ref{sec:DMRG}. In fact, the merge and unmerge procedure of the two algorithms is completely identical, whereby they only differ in the steps of applying the operator and proceeding to the next site. The following procedure details a time evolution step of the $n$'th bond \cite{schollwock}.
 
 \subsection{Infinitesimal time-step update for tDMRG}
 \begin{enumerate}

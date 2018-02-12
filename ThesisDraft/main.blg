@@ -1,61 +1,62 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
 Case mismatch error between cite keys Schollwock and schollwock
----line 179 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 188 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 211 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 217 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 224 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 233 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 241 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 248 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys Schollwock and schollwock
----line 270 of file main.aux
+---line 272 of file main.aux
  : \citation{Schollwock
  :                     }
 I'm skipping whatever remains of this command
 The style file: plain.bst
 Database file #1: ../config/references.bib
-Repeated entry---line 745 of file ../config/references.bib
- : @article{Cramer
- :                ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 770 of file ../config/references.bib
- : @article{Schollwock
- :                    ,
-I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "cmplx_t"
+Warning--entry type for "ITensor" isn't style-file defined
+--line 854 of file ../config/references.bib
+Warning--I didn't find a database entry for "Vidal"
+Warning--I didn't find a database entry for "McCulloch"
+Warning--I didn't find a database entry for "WhiteDMRG"
+Warning--I didn't find a database entry for "WhiteSingleSite"
+Warning--I didn't find a database entry for "Suzuki"
 Warning--empty school in greiner
 Warning--empty booktitle in grimm
 Warning--can't use both volume and number fields in grimm
-(There were 11 error messages)
+You've used 37 entries,
+            2118 wiz_defined-function locations,
+            765 strings with 9768 characters,
+and the built_in function-call counts, 12281 in all, are:
+= -- 1182
+> -- 619
+< -- 3
++ -- 248
+- -- 208
+* -- 951
+:= -- 2111
+add.period$ -- 114
+call.type$ -- 37
+change.case$ -- 205
+chr.to.int$ -- 0
+cite$ -- 40
+duplicate$ -- 419
+empty$ -- 930
+format.name$ -- 208
+if$ -- 2483
+int.to.chr$ -- 0
+int.to.str$ -- 37
+missing$ -- 41
+newline$ -- 189
+num.names$ -- 74
+pop$ -- 191
+preamble$ -- 1
+purify$ -- 177
+quote$ -- 0
+skip$ -- 269
+stack$ -- 0
+substring$ -- 796
+swap$ -- 49
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 134
+warning$ -- 3
+while$ -- 115
+width$ -- 39
+write$ -- 405
+(There was 1 error message)
