@@ -1,7 +1,7 @@
 \begin{tikzpicture}[inner sep=1mm]
 \def \reldist {2};
 \def \numb {4};
-\def \wid {3.2};
+\def \wid {2.8};
 \def \size {1.0};
 \def \hi {0.8};
 \def \vert {1.0};
@@ -10,7 +10,7 @@
 	
 \foreach \i in  {1,...,\numb} {
 	\node[tensor,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A\i)
-	at (\i * \reldist, 0) {$A^{[ \i ]}$};
+	at (\i * \reldist, 0) {$M^{[ \i ]}$};
 	\draw[-] (A\i) -- (\i * \reldist , -\numb*\vert -1.8);	
 };
 

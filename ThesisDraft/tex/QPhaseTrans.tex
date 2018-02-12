@@ -15,6 +15,7 @@ where
 \begin{align}
 	J_{i j} &= - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \\
 	U_{i j k l} &= g \int \mathrm{d}x \ w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) 
+	\label{eq:BHparamJ}
 \end{align}
 Since the system is periodic, one can consider a single site, $i = 0$, as representative for the entire lattice. In this way, the different terms of the Hamiltonian can be interpreted as follows:
 \begin{align}
@@ -33,6 +34,7 @@ Due to the rapid decay of the Wannier functions, the overlap of wavefunctions is
 where $J = J_{0 1}$, $\langle i,j \rangle$ only counts neighbouring pairs, and
 \begin{equation}
 	U = U_{0 0 0 0} = g \int \mathrm{d}x \ |w(x)|^4 \; .
+	\label{eq:BHparamU}
 \end{equation}
 The first term of the Bose-Hubbard Hamiltonian describes the kinematics within the model, which takes the form of tunneling between neighbouring sites. This is interpreted by annihilating a particle at site $j$ while creating a particle at site $i$. The second term describes the interaction between particles within a single site, and the last term $\sum_{i} \varepsilon_i \hat{n}_i$ takes into account a possible potential offset at different sites.
 
