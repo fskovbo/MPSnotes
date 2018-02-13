@@ -1,4 +1,7 @@
 \chapter{Quantum Optimal Control Theory}
+%% Mention controlability
+
+
 The fundamental problem of Quantum Optimal Control Theory is to transfer the population from an initial state $\ket{\psi_0}$ to $\ket{\psi_{\mathrm{target}}}$ by adjusting a set of control parameters within the Hamiltonian used to evolve the system. Consider the Hamiltonian
 \begin{equation}
 	\hat{H}(\boldsymbol{u}(t)) = \hat{H}_0 + \sum_{i = 1}^{m} f_i(u_i(t)) \hat{H} \; ,
@@ -35,7 +38,7 @@ This sets a lower bound of the orthogonalization time, however, the bound was de
 From this expression it is clear, that fast solutions require a large value of $\Delta E$, as described earlier. Since \ref{eq:MTlimit} is dependent on the control $\boldsymbol{u}(t)$, one would have to take an infimum over all controls connecting the initial and target state in order to evaluate the lowest value of the bound. This in itself is a task just as difficult as solving the control problem.
 
 
-\section{GRAPE}
+\section{GRAPE}  %% need better name
 A central part of optimal control is actually finding the solution to the control problem. One way of achieving this is through the method known as GRAPE, where the control in each iteration of the optimization process is updated using the gradient of a cost functional $\hat{J}$ \cite{QOCT}. This cost functional is given by
 \begin{equation}
 	J = \frac{1}{2} \left( 1-|\braket{\psi_{\mathrm{target}} | \psi (T)}|^2 \right) + \frac{\gamma}{2} \sum_{n=1}^{m} \int_{0}^{T} \left( \pdv{u_n}{t} \right)^2 \mathrm{d}t \; ,
@@ -96,3 +99,10 @@ will satisfy equation \ref{eq:statpoint}, but only for a stationary point of $J$
 	\nabla \hat{J}_n = - \gamma \ddot{u}_n - \Re \bra{\chi} \pdv{\hat{H}}{u_n} \ket{\psi} \; ,
 \end{equation}
 which is method known as GRAPE. 
+
+\section{Case Study of Frank article ??}
+%% discuss figure of merit 
+%% from Maja & Julie: infidelity much stronger figure of merit
+
+\section{Interior Point Method}
+

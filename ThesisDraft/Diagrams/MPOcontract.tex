@@ -1,44 +1,48 @@
 \begin{tikzpicture}[inner sep=1mm]
-    \foreach \i in {1,...,7} {
-        \node[tensor] (t\i) at (\i, 0) {};
-        \node[operator] (o\i) at (\i, -1) {};
+	\def \numb {6};
+	\def \hdist {1.5};
+	\def \vdist {1.25};
+
+    \foreach \i in {1,...,\numb} {
+        \node[tensor] (t\i) at (\i*\hdist, 0) {};
+        \node[operator] (o\i) at (\i*\hdist, -\vdist) {};
         
-        \node (b\i) at (\i, -1.8) {};
+        \node (b\i) at (\i*\hdist, -\vdist-0.8) {};
         
         \draw[-] (t\i) -- (o\i);
         \draw[-] (o\i) -- (b\i); 
     };
     
-    \foreach \i in {1,...,6} {
+    \foreach \i in {1,...,5} {
         \pgfmathtruncatemacro{\iplusone}{\i + 1};
         \draw[-] (t\i) -- (t\iplusone);
         \draw[-] (o\i) -- (o\iplusone);
     };
     
-    \node (b1) at (1, -2) {$j_1$};
-    \node (b7) at (7, -2) {$j_N$};
+    \node (b1) at (1, -2*\vdist) {$j_1$};
+    \node (b\numb) at (\numb*\hdist, -2*\vdist) {$j_N$};
     
-    \node (psi) at (8.5, 0) {$\ket{\psi}$};
-    \node (O) at (8.5, -1) {$\hat{O}$};
+    \node (psi) at (\numb*\hdist+\hdist, 0) {$\ket{\psi}$};
+    \node (O) at (\numb*\hdist+\hdist, -\vdist) {$\hat{O}$};
     
     
-    \draw[->, line width=1mm] (4,-2) -- (4,-3);
+    \draw[->, line width=1mm] (\numb*\hdist/2 +\hdist/2 ,-2*\vdist + 0.4) -- (\numb*\hdist/2 +\hdist/2,-3*\vdist + 0.4);
     
-    \foreach \i in {1,...,7} {
-        \node[tensor] (t\i) at (\i, -3.5) {};
+    \foreach \i in {1,...,\numb} {
+        \node[tensor] (t\i) at (\i*\hdist, -3*\vdist) {};
         
-        \node (b\i) at (\i, -4.3) {};
+        \node (b\i) at (\i*\hdist, -3*\vdist-0.8) {};
         
         \draw[-] (t\i) -- (b\i); 
     };
     
-    \foreach \i in {1,...,6} {
+    \foreach \i in {1,...,5} {
         \pgfmathtruncatemacro{\iplusone}{\i + 1};
         \draw[-] (t\i) -- (t\iplusone);
     };
     
-    \node (b1) at (1, -4.5) {$j_1$};
-    \node (b7) at (7, -4.5) {$j_N$};
+    \node (b1) at (1, -4*\vdist) {$j_1$};
+    \node (b\numb) at (\numb*\hdist, -4*\vdist) {$j_N$};
     
-    \node (phi) at (8.5, -3.5) {$\ket{\phi}$};
+    \node (phi) at (\numb*\hdist+\hdist, -3*\vdist) {$\ket{\phi}$};
 \end{tikzpicture}
