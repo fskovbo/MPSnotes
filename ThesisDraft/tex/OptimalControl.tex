@@ -1,0 +1,98 @@
+\chapter{Quantum Optimal Control Theory}
+The fundamental problem of Quantum Optimal Control Theory is to transfer the population from an initial state $\ket{\psi_0}$ to $\ket{\psi_{\mathrm{target}}}$ by adjusting a set of control parameters within the Hamiltonian used to evolve the system. Consider the Hamiltonian
+\begin{equation}
+	\hat{H}(\boldsymbol{u}(t)) = \hat{H}_0 + \sum_{i = 1}^{m} f_i(u_i(t)) \hat{H} \; ,
+\end{equation} 
+where $\hat{H}_0$ is an uncontrollable drift of the Hamiltonian, $\boldsymbol{u}(t)$ is the control, and $f(\boldsymbol{u}(t))$ is some function. Thus, a control must be found such that 
+\begin{equation}
+	F = |\braket{\psi_{\mathrm{target}} | \psi (T)}|^2 = 1 \; ,
+\end{equation}
+where $F$ is the fidelity, and $\psi (T)$ is the solution at $t = T$ to the Schrödinger equation 
+\begin{equation}
+	i \frac{\partial \psi}{\partial t} = \hat{H} \left( \boldsymbol{u}(t),\psi (t) \right) \psi (t) \; .
+\end{equation}
+Solutions to this problem are called optimal controls.[JJ del A]
+
+
+\section{Quantum Speed Limit}
+A subtlety of the above problem is that one is only searching for the control, $\boldsymbol{u}(t)$, which steers the initial state into the target-state at time $t = T$. It is often desirable to obtain the desired state in the shortest timespan possible, however, if a solution exists at $t= T_1 > T_2$, it might not exist at $t = T_2$. The shortest duration for which a solution can be found is called the \textit{quantum speed limit} (QSL). This is due to the fact that quantum mechanics dictates that there is a limit of how many orthogonal states a system can pass through per unit time. A large energy difference to orthogonal states allows for fast oscillations within the system, however, as these differences cannot be arbitrarily large, a lower bound of how fast a system can evolve exists, which in turn leads to the QSL \cite{Caneva2009}.\\
+There are several ways of approximating the quantum speed limit, however, there is no known way to reliably estimate the QSL for a general state. Thus, the best option is often to just solve the problem at increasingly shorter durations until a solution no longer can be found [JJ]. 
+If the initial state,$\ket{\psi_0}$, and the target-state, $\ket{\psi_{\mathrm{target}}}$, are orthogonal, one can estimate the QSL from the orthogonalization time, which is how long it takes for a state to become orthogonal to itself.
+Consider $\ket{\psi (0)} = \sum_{n}^{\infty} c_n \ket{\phi _n}$, where $\hat{H} \ket{\phi _n} = E_n \ket{\phi _n}$. Following \cite{QSLtoffoli} the norm squared of the survival probability is given as
+\begin{align}
+	|S(t)|^2 = |\braket{\psi (0) | \psi (t)}|^2 &= \sum_{n , m = 0}^{\infty} |c_n|^2 |c_m|^2 \cos \left( (E_n - E_m) t \right) \nonumber \\
+	&\geq 1 + \frac{4 t}{\pi ^2} \dv{|S(t)|^2}{t} - \frac{4 t^2}{\pi} \Delta E^2 \; ,
+\end{align}
+where the trigonometric inequality $\cos x \geq 1 - \left( 4 x \sin x - 2 x^2 \right) / \pi^2$ was used, and $\Delta E$ is the energy spread of the state.
+Since $|S(t)|^2 \geq 0$, then $\dv{|S(t)|^2}{t} = 0$ whenever $|S(t)| = 0$, which is the case at the orthogonalization time $t = \tau$. This leaves the inequality $0 \geq 1 - 4 \tau^2 \Delta E^2 / \pi^2$, which yields the Mandelstram Tamm bound when solved \cite{Mandelstam1991}
+\begin{equation}
+	\tau_{\mathrm{MT}} \geq \frac{\pi}{2 \Delta E} \; .
+\end{equation}
+This sets a lower bound of the orthogonalization time, however, the bound was derived using a constant Hamiltonian. In the case of optimal control the Hamiltonian is time dependent, which can be taken into account by using arguments from differential geometry \cite{Aharonov,beyondQSL}
+\begin{equation}
+	\tau_{\mathrm{MT}} \geq \frac{\pi}{2} \left( \int_{0}^{T} \Delta E \; \mathrm{d}t \right) ^{-1} \; , \label{eq:MTlimit}
+\end{equation}
+From this expression it is clear, that fast solutions require a large value of $\Delta E$, as described earlier. Since \ref{eq:MTlimit} is dependent on the control $\boldsymbol{u}(t)$, one would have to take an infimum over all controls connecting the initial and target state in order to evaluate the lowest value of the bound. This in itself is a task just as difficult as solving the control problem.
+
+
+\section{GRAPE}
+A central part of optimal control is actually finding the solution to the control problem. One way of achieving this is through the method known as GRAPE, where the control in each iteration of the optimization process is updated using the gradient of a cost functional $\hat{J}$ \cite{QOCT}. This cost functional is given by
+\begin{equation}
+	J = \frac{1}{2} \left( 1-|\braket{\psi_{\mathrm{target}} | \psi (T)}|^2 \right) + \frac{\gamma}{2} \sum_{n=1}^{m} \int_{0}^{T} \left( \pdv{u_n}{t} \right)^2 \mathrm{d}t \; ,
+\end{equation}
+where $m$ is the number of control parameters at each instance of time, and $u_n$ is the n'th entry in $\boldsymbol{u}(t)$. The first term of the cost functional is half the fidelity, while the second term is a regularization, which penalizes large variations in the control. Thus, increasing $\gamma$ will favor a very smooth control, while keeping it low allows the control to vary greatly.\\
+In order to force the time evolution to satisfy the Schrödinger equation, one can introduce a Lagrange multiplier, $\ket{\chi}$, which yields the optimization Lagrangian
+\begin{equation}
+	L = J + \Re \left[ \int_{0}^{T} \bra{\chi} \left( i \ket{\dot{\psi}} - \hat{H} \ket{\psi} \right) \mathrm{d}t \right] \; ,
+\end{equation} 
+where $\ket{\dot{\psi}}$ is the time-derivative of the state $\ket{\psi}$. The optimal solutions are the stationary points of $L$, where
+\begin{equation}
+	\frac{\delta L}{\delta \chi ^* (t')} = \frac{\delta L}{\delta \psi ^* (t')} = \frac{\delta L}{\delta u_n (t')} = 0 \quad \mathrm{for} \quad  n = 1, \ldots , m \; , \label{eq:statpoint}
+\end{equation}
+and $0 \leq t' \leq T$.
+Calculating the derivative with respect to the Lagrange multiplier, $\bra{\chi (t')}$, yields
+\begin{equation}
+	\frac{\delta L}{\delta \chi ^* (t')} = \frac{1}{2} \left( i \ket{\dot{\psi}} -  \hat{H} \ket{\psi} \right) \; ,
+\end{equation}
+or when rewritten
+\begin{equation}
+	 i \ket{\dot{\psi}} =  \hat{H} \ket{\psi} \; ,
+\end{equation}
+which, as expected, is just the Schrödinger equation.
+Taking the derivative with respect to $\bra{\psi (t')}$ yields
+\begin{align}
+	\frac{\delta L}{\delta \psi ^* (t')} &= \frac{\delta }{\delta \psi ^* (t')} \left[ \frac{1}{2} \int_{0}^{T} \left( i \braket{\dot{\psi} | \chi} -  \bra{\psi} \hat{H} \ket{\psi} \right) \mathrm{d}t \right] \nonumber \\ 
+	&= - \frac{1}{2} H \ket{\chi} + \frac{\delta }{\delta \psi ^* (t')} \left[ \frac{i}{2} \left( \braket{\psi | \chi} \Big|_0^T - \int_0^T \braket{\psi | \dot{\chi}} \right) \right] \nonumber \\
+	&= - \frac{1}{2} \left( H \ket{\chi} -i \ket{\dot{\chi}}  \right) \; . \label{eq:deriv_psit}
+\end{align}
+Furthermore, one also has to consider the derivative with respect to $\bra{\psi (T)}$ due to explicit dependence in the fidelity. This yields
+\begin{equation}
+	\frac{\delta L}{\delta \psi ^* (T)} = - \frac{1}{2} \left( \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} - i \ket{\chi (T)} \right) \; . \label{eq:deriv_psiT}
+\end{equation}
+Equation \ref{eq:deriv_psit} takes the form of the Schrödinger equation for $\ket{\chi (t')}$,
+\begin{equation}
+	 i \ket{\dot{\chi}} =  - \hat{H} \ket{\chi} \; ,
+\end{equation}
+however, the sign is flipped implying a backwards propagation in time. This is further enforced by equation \ref{eq:deriv_psiT}, which states
+\begin{equation}
+	 \ket{\chi (T)} = -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; .
+\end{equation}
+Thus, at $t = T$, $\ket{\chi}$ is given as the projection of the final state unto the target-state, which in case of a correct solution is simply the target-state. Hence, equations \ref{eq:deriv_psit} and \ref{eq:deriv_psiT} can be interpreted as $\ket{\chi}$ being the target-state evolved backwards in time.
+Finally, the derivative with respect to the control parameters is 
+\begin{align}
+	\frac{\delta L}{\delta u_n (t')} &= - \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} + \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ u_n \dot{u}_n \Big|_0^T - \int_0^T u_n \ddot{u}_n \mathrm{d}t \right] \nonumber \\
+	&=  \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} - \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ \int_0^T u_n \ddot{u}_n \mathrm{d}t \right] \nonumber \\
+	&=  \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} - \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ \int_0^T \left( \pdv{u_n}{u_n (t')} \ddot{u}_n + u_n \pdv{\ddot{u}_n}{u_n (t')} \right) \mathrm{d}t \right] \nonumber \\
+	&= \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} - \gamma \ddot{u}_n \; . \label{eq:deriv_u} 
+\end{align} 
+A solution to the equations \ref{eq:deriv_psit}, \ref{eq:deriv_psiT} and \ref{eq:deriv_u} with the initial conditions
+\begin{align}
+	\ket{\chi (T)} &= -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; , \\
+	\ket{\psi (0)} &= \ket{\psi _0} \; , \\
+	\boldsymbol{u}(0) = \boldsymbol{u}_1 \; &, \quad \boldsymbol{u}(T) = \boldsymbol{u}_2 \; ,
+\end{align}
+will satisfy equation \ref{eq:statpoint}, but only for a stationary point of $J$, which is not necessarily the minimum. For small values of $J$ however, it has been shown that the solution will be a minimum \cite{BECcontrol}. This is very difficult though, due to the complexity of the equations. An alternative is to find the minimum of the reduced cost functional $\hat{J}\left( \boldsymbol{u}(t) \right) =  J\left(\psi(\boldsymbol{u}(t)) \; , \; \boldsymbol{u}(t) \right)$, where $\psi(\boldsymbol{u}(t))$ is a unique solution of the Schrödinger equation. This can be done by iteratively updating the control using the gradient of the reduced cost functional
+\begin{equation}
+	\nabla \hat{J}_n = - \gamma \ddot{u}_n - \Re \bra{\chi} \pdv{\hat{H}}{u_n} \ket{\psi} \; ,
+\end{equation}
+which is method known as GRAPE. 

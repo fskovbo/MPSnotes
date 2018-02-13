@@ -1,13 +1,13 @@
 \chapter{Matrix Product States}
-Matrix product states is a parametrization of one dimensional states, which only considers the relevant part of the full Hilbert space, thus greatly simplifying numerical computations within the system. The main idea is to parametrize the coefficients of a general linear combination of states as a product of matrices, with a single matrix for each physical site.\\
-SKRIV INTRO OM MPS MED REFERENCER TIL LITTERATUR 
-- quick "history"
-   * known for a long time
-   * algorithms standardised by White
-- why do we need MPS description? (copy from numerics chapter)
-   * Do quick analysis of size of Hilbert space
-   * mention efficient application of operators
-- usage of MPS (mention DMRG and tDMRG here)
+Attempts to perform numerical analysis of quantum many-body systems using exact diagonalisation are highly limited by system sizes. Due to the large number of possible configurations in a many-body scenario and entanglement coupling various degrees of freedom of the system, the Hilbert space grows too large for exact methods to search.
+Consider the Bose-Hubbard model described in eq. \eqref{BHhamil}. The dimension of the corresponding Hilbert space is
+\begin{equation}
+	D_{\mathcal{H}} = \frac{(N+N_p -1)!}{N_p ! (N-1)!} \; ,
+\end{equation}
+where $N$ is the number of sites, and $N_p$ is the number of particles. For unit occupancy, $N_p / N = 1$, the Hilbert space grows exponentially with the system size \cite{Dong}. Therefore, descriptions using exact diagonalisation are only possible for small systems.
+The invention of the density-matrix renormalization group
+(DMRG) marked a turning point for numerical descriptions of quantum many-body systems, as it remains the most powerful method to study one-dimensional lattices \cite{White1992,White1993}. One of the defining differences between the DMRG method and exact diagonalisation is scaling of entanglement in the quantum states. In the DMRG description, systems automatically follow an area law, whereby only a tiny corner of the Hilbert space has to be considered when searching for ground states \cite{Cramer}.\\
+Matrix Product States (MPS) are parametrizations of (typically) one dimensional states, where the states and operators are decomposed into networks of tensors. In this description of quantum states it is very easy to measure local properties of quantum many-body systems, and correlations can be computed very efficiently. The matrix product state description has surfaces several times under different names, most notable in \cite{Baxter1968}. However, the connection between the DMRG method and the MPS description made in \cite{Ostlund1995, Dukelsky1998} opened up the possibilities for performing time evolution, finite temperature analysis, and much more \cite{schollwock}.
 
 
 \section{Entanglement in Quantum Systems and Area Laws}
@@ -93,6 +93,7 @@ It is worth examining the properties of this representation. From the dimensions
 
 
 \section{Canonical Forms}
+\label{sec:canonical}
 The MPS described in equation \ref{eq:MPS_LC} is not unique, as writing 
 \begin{equation}
 	\tilde{A}^{j_n} = X_{n-1} A^{j_n} X_{n}^{-1}
@@ -156,14 +157,14 @@ which is illustrated in figure \ref{fig:mixedCanonical1}.
 \begin{figure}[h!]
 \centering % <-- add this
 \begin{subfigure}[b]{0.45\textwidth}
+	\caption{}  	
   	\input{Diagrams/mixedCanonS.tex}
-	\caption{}
 	\label{fig:MixedCanonical1}
 \end{subfigure}
 \hspace{5mm}
 \begin{subfigure}[b]{0.45\textwidth}    
+	\caption{}  	
   	\input{Diagrams/mixedCanon.tex}
-	\caption{}
 	\label{fig:MixedCanonical2}
 \end{subfigure}
 \caption{\textit{Mixed-canonical form of an MPS. The form \textbf{(i)} directly brings the MPS into the form of a Schmidt decomposition, while the form \textbf{(ii)} is well suited for measuring local properties of the state.}}
