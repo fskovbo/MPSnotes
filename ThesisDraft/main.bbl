@@ -1,10 +1,20 @@
 \begin{thebibliography}{10}
 
+\bibitem{Aharonov}
+J.~Anandan and Y.~Aharonov.
+\newblock Geometry of quantum evolution.
+\newblock {\em Phys. Rev. Lett.}, 65:1697--1700, Oct 1990.
+
 \bibitem{WiemanCornell1995}
 Mike~H Anderson, Jason~R Ensher, Michael~R Matthews, Carl~E Wieman, Eric~A
   Cornell, et~al.
 \newblock Observation of bose-einstein condensation in a dilute atomic vapor.
 \newblock {\em science}, 269(5221):198--201, 1995.
+
+\bibitem{Baxter1968}
+RJ~Baxter.
+\newblock Dimers on a rectangular lattice.
+\newblock {\em Journal of Mathematical Physics}, 9(4):650--654, 1968.
 
 \bibitem{Bloch2012}
 Immanuel Bloch, Jean Dalibard, and Sylvain Nascimbene.
@@ -16,11 +26,23 @@ Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
 \newblock Many-body physics with ultracold gases.
 \newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
 
+\bibitem{BECcontrol}
+A.~Borzì and U.~Hohenester.
+\newblock Multigrid optimization schemes for solving bose–einstein condensate
+  control problems.
+\newblock {\em SIAM Journal on Scientific Computing}, 30(1):441--462, 2008.
+
 \bibitem{bruus}
 H.~Bruus and K.~Flensberg.
 \newblock {\em Many-Body Quantum Theory in Condensed Matter Physics: An
   Introduction}.
 \newblock Oxford Graduate Texts. OUP Oxford, 2004.
+
+\bibitem{Caneva2009}
+T.~Caneva, M.~Murphy, T.~Calarco, R.~Fazio, S.~Montangero, V.~Giovannetti, and
+  G.~E. Santoro.
+\newblock Optimal control at the quantum speed limit.
+\newblock {\em Phys. Rev. Lett.}, 103:240501, Dec 2009.
 
 \bibitem{cohen1992atom}
 Claude Cohen-Tannoudji, Jacques Dupont-Roc, Gilbert Grynberg, and Patricia
@@ -34,9 +56,11 @@ Jean Dalibard, Fabrice Gerbier, Gediminas Juzeli{\=u}nas, and Patrik
 \newblock Colloquium: Artificial gauge potentials for neutral atoms.
 \newblock {\em Reviews of Modern Physics}, 83(4):1523, 2011.
 
-\bibitem{ITensor}
-Steven R.~White E.~Miles~Stoudenmire.
-\newblock Itensor, 2013-present.
+\bibitem{Dukelsky1998}
+J~Dukelsky.
+\newblock J. dukelsky, ma mart{\'\i}n-delgado, t. nishino, and g. sierra,
+  europhys. lett. 43, 457 (1998).
+\newblock {\em Europhys. Lett.}, 43:457, 1998.
 
 \bibitem{Cramer}
 J.~Eisert, M.~Cramer, and M.~B. Plenio.
@@ -49,6 +73,12 @@ Satoshi Ejima, Holger Fehske, Florian Gebhard, Kevin zu~M\"unster, Michael
 \newblock Characterization of mott-insulating and superfluid phases in the
   one-dimensional bose-hubbard model.
 \newblock {\em Phys. Rev. A}, 85:053644, May 2012.
+
+\bibitem{beyondQSL}
+Miroslav Gajdacz, Kunal~K. Das, Jan Arlt, Jacob~F. Sherson, and Tom\'a\ifmmode
+  \check{s}\else~\v{s}\fi{} Opatrn\'y.
+\newblock Time-limited optimal dynamics beyond the quantum speed limit.
+\newblock {\em Phys. Rev. A}, 92:062106, Dec 2015.
 
 \bibitem{Gemelke2009}
 Nathan Gemelke, Xibo Zhang, Chen-Lung Hung, and Cheng Chin.
@@ -78,6 +108,14 @@ M.~B. Hastings.
 \newblock An area law for one-dimensional quantum systems.
 \newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
   2007(08):P08024, 2007.
+
+\bibitem{QOCT}
+Georg J\"ager, Daniel~M. Reich, Michael~H. Goerz, Christiane~P. Koch, and
+  Ulrich Hohenester.
+\newblock Optimal quantum control of bose-einstein condensates in magnetic
+  microtraps: Comparison of gradient-ascent-pulse-engineering and krotov
+  optimization schemes.
+\newblock {\em Phys. Rev. A}, 90:033628, Sep 2014.
 
 \bibitem{Zoller1999}
 D.~Jaksch, H.-J. Briegel, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
@@ -115,12 +153,29 @@ Till~D. K\"uhner, Steven~R. White, and H.~Monien.
 \newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
 \newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
 
+\bibitem{QSLtoffoli}
+Lev~B. Levitin and Tommaso Toffoli.
+\newblock Fundamental limit on the rate of quantum dynamics: The unified bound
+  is tight.
+\newblock {\em Phys. Rev. Lett.}, 103:160502, Oct 2009.
+
 \bibitem{lewenstein}
 Maciej Lewenstein, Anna Sanpera, Veronica Ahufinger, Bogdan Damski, Aditi
   Sen(De), and Ujjwal Sen.
 \newblock Ultracold atomic gases in optical lattices: mimicking condensed
   matter physics and beyond.
 \newblock {\em Advances in Physics}, 56(2):243--379, 2007.
+
+\bibitem{Mandelstam1991}
+L.~Mandelstam and Ig. Tamm.
+\newblock {\em The Uncertainty Relation Between Energy and Time in
+  Non-relativistic Quantum Mechanics}, pages 115--123.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1991.
+
+\bibitem{Ostlund1995}
+Stellan {\"O}stlund and Stefan Rommer.
+\newblock Thermodynamic limit of density matrix renormalization.
+\newblock {\em Physical review letters}, 75(19):3537, 1995.
 
 \bibitem{PenroseOnsager}
 Oliver Penrose and Lars Onsager.
@@ -177,6 +232,10 @@ I.~B. Spielman, W.~D. Phillips, and J.~V. Porto.
   mott-insulator transition.
 \newblock {\em Phys. Rev. Lett.}, 100:120402, Mar 2008.
 
+\bibitem{ITensor}
+E.~Miles Stoudenmire and Steven~R. White.
+\newblock Itensor library.
+
 \bibitem{Tarruell2012}
 Leticia Tarruell, Daniel Greif, Thomas Uehlinger, Gregor Jotzu, and Tilman
   Esslinger.
@@ -200,11 +259,26 @@ Guifr{\'e} Vidal.
 \newblock Efficient simulation of one-dimensional quantum many-body systems.
 \newblock {\em Physical review letters}, 93(4):040502, 2004.
 
+\bibitem{White1992}
+Steven~R. White.
+\newblock Density matrix formulation for quantum renormalization groups.
+\newblock {\em Phys. Rev. Lett.}, 69:2863--2866, Nov 1992.
+
+\bibitem{White1993}
+Steven~R White.
+\newblock Density-matrix algorithms for quantum renormalization groups.
+\newblock {\em Physical Review B}, 48(14):10345, 1993.
+
 \bibitem{WideraThesis}
 Artur Widera.
 \newblock {\em Constructing correlated spin states with neutral atoms in
   optical lattices}.
 \newblock PhD thesis, Ph. D. thesis, Johannes Gutenberg-Universit{\"a}t, Mainz,
   2008.
+
+\bibitem{Dong}
+J.~M. {Zhang} and R.~X. {Dong}.
+\newblock {Exact diagonalization: the Bose-Hubbard model as an example}.
+\newblock {\em European Journal of Physics}, 31:591--602, May 2010.
 
 \end{thebibliography}
