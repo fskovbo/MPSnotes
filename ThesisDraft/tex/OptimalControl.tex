@@ -2,7 +2,7 @@
 The fundamental problem of Quantum Optimal Control Theory is to steer the dynamics of a quantum system in a desired way through external fields \cite{Rice2000,Shapiro2003}. Often, the goal is the transfer from an initial state, $\ket{\psi_0}$, to the desired target-state, $\ket{\psi_{\mathrm{target}}}$. The fields responsible for controlling the dynamics of the system are parametrised by a set of control parameters or functions. Optimal control theory determines the parameters, which leads to the desired dynamics of the system \cite{Werschnik2007}.\\ 
 In control problems, the Hamiltonian of the system is given as
 \begin{equation}
-	\hat{H} = \hat{H}_0 + \hat{H}_I = \hat{H}_0 + \sum_{n = 1}^{m} u_n(t) \hat{H}_i \; ,
+	\hat{H} = \hat{H}_0 + \hat{H}_I = \hat{H}_0 + \sum_{n = 1}^{m} \hat{V}_i (u_n(t)) \; ,
 	\label{eq:ControlHamiltonians}
 \end{equation} 
 where $\hat{H}_0$ is an uncontrollable drift of the Hamiltonian, $\hat{H}_i$ are the controllable fields, and $u_n(t)$ are the control functions or parameters. A quantum system like this is completely controllable if every unitary operator $\hat{U}$ is accessible from the identity operator $\hat{I}$ via a path $\gamma (t) = \hat{U}(t, t_0)$ satisfying \cite{Schirmer2001}
@@ -19,7 +19,7 @@ Extending these conditions to infinite-dimensional Hilbert spaces and constraine
 
 \section{The Gradient-Ascent Pulse Engineering Method}
 In this instance, the control problem is steering an initial state to a target-state. More specifically, the transfer of a Superfluid to a Mott-Insulator, which is controlled by varying the lattice depth. Therefore, the optimal control problem can be stated as follows: 
-Suppose the system is initially described by the state $\ket{\psi_0}$, and the potential is varied in the time interval $[ 0 , T]$. The goal is finding the set of control parameters, $\boldsymbol{u}(t)$, which brings the initial state as close as possible to the target state, $\ket{\psi_{\mathrm{target}}}$. This is formulated in terms of a cost function
+Suppose the system is initially described by the state $\ket{\psi_0} = \ket{\psi (0)}$, and the potential is varied in the time interval $[ 0 , T]$. The goal is finding the set of control parameters, $\boldsymbol{u}(t)$, which brings the initial state as close as possible to the target state, $\ket{\psi_{\mathrm{target}}}$. This is formulated in terms of a cost function
 \begin{equation}
 	J_T = \frac{1}{2} \left( 1-|\braket{\psi_{\mathrm{target}} | \psi (T)}|^2 \right) \; ,
 	\label{eq:infidelityCost}
@@ -33,71 +33,34 @@ Experimentally, large variations in the control parameter is often hard to achie
 where $\gamma$ weighs the relative importance between matching states and smoothness of the control \cite{Jager2014}. As the state transfer is considered the highest priority, $\gamma$ is set as $\gamma \ll 1$, such that $J_T$ dominates the cost function of eq. \eqref{eq:grapeCost}.\\
 
 A powerful way of performing optimal control is through the Gradient-Ascent Pulse Engineering (GRAPE) method. Through GRAPE, the gradient of the cost function \eqref{eq:grapeCost} can be evaluated and used to update the existing set of controls \cite{Khaneja2005}. Thereby, one achieves an optimization of the cost function.\\
-During the transfer from the initial to the target state, the system must fulfill the Schrödinger equation. This is a constraint of the optimization problem, which is managed by the introduction of a Lagrange multiplier, $\ket{\chi}$. The optimization Lagrangian reads
+The gradient of the cost function can be derived in multiple ways. A common method \cite{Hohenester2007, Winckel2008, BECcontrol} is introducing a Lagrange multiplier, which forces the dynamics to obey the Schrödinger equations. The derivation utilizes functional derivatives, as time, $\ket{\psi (t)}$, and the Lagrange multiplier are considered continuous functions. Later, the functions are discretized to perform numerical computations. Although this procedure is fairly easy, higher order correction terms of the gradient are absent due to the continuity of the functions.\\
+Here, an alternative derivation following \cite{Khaneja2005, deFouquieres2011} is presented.
+
+Assume the transfer time, $T$, is discretized in $M$ equal steps, $\Delta t = T/M$. Therefore, the control become similarly discretized as
+\begin{align}
+	u_n = \left( u_n (t_1) , \ldots , u_n (t_M)  \right) \equiv \left( u_1 , \ldots , u_M  \right) \; ,
+\end{align}
+where $m = 1$ has been assumed in the last statement for cleaner notation. Thus, the system is controlled by only a single parameter. Extending this formalism to $m$ controls is trivial.
+Likewise, the time-evolution of the system during the time step $j$ is given by the propagator
 \begin{equation}
-	L = J + \Re \left[ \int_{0}^{T} \bra{\chi} \left( i \ket{\dot{\psi}} - \hat{H} \ket{\psi} \right) \mathrm{d}t \right] \; ,
-	\label{eq:optLagrange}
+	\hat{\mathcal{U}}_j \equiv \hat{\mathcal{U}} (u(t_j)) = \exp \lbrace -i \left(  \hat{H}_0 + \hat{V} (u(t_j))  \right) \Delta t \rbrace \; . 
 \end{equation} 
-where $\ket{\dot{\psi}}$ is the time-derivative of the state $\ket{\psi (t)}$. Note, the explicit time dependence is omitted in favour of cleaner notation. The optimal solutions are the stationary points of $L$ \cite{Hohenester2007}, where
+Thereby, the cost function \eqref{eq:grapeCost} becomes
 \begin{equation}
-	\frac{\delta L}{\delta \chi ^* (t')} = \frac{\delta L}{\delta \psi ^* (t')} = \frac{\delta L}{\delta u_n (t')} = 0 \quad \mathrm{for} \quad  n = 1, \ldots , m \; , \label{eq:statpoint}
+	J = \frac{1}{2} \left( 1 - |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2 \right) + \frac{\gamma}{2} \sum_{j}^{M-1} \left( \frac{\Delta u_j}{\Delta t} \right)^2 \Delta t \; ,
+	\label{eq:discreteCost}
 \end{equation}
-and $0 \leq t' \leq T$. As $\ket{\chi}$, $\ket{\psi}$ and $u_n$ are all considered functions, one must employ the functional derivative.
-Calculating the derivative of eq. \eqref{eq:optLagrange} with respect to the Lagrange multiplier, $\bra{\chi (t')}$, yields
+where $\Delta u_j =  u_{j+1} - u_j$.\\
+By defining $c \equiv \braket{\psi_{\mathrm{target}} | \psi (T)}$, the derivative with respect to the control of the first term of the discretized cost \eqref{eq:discreteCost} can be written as 
 \begin{equation}
-	\frac{\delta L}{\delta \chi ^* (t')} = \frac{1}{2} \left( i \ket{\dot{\psi}} -  \hat{H} \ket{\psi} \right) \; ,
+	\frac{\partial}{\partial u_j} J_T = \frac{\partial}{\partial u_j} \frac{1}{2} |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2  = \Re \left( c^* \frac{\partial c}{\partial u_j} \right) \; .
 \end{equation}
-or when rewritten
-\begin{equation}
-	 i \ket{\dot{\psi}} =  \hat{H} \ket{\psi} \; ,
-\end{equation}
-which is the Schrödinger equation for the state $\ket{\psi (t)}$.
-Taking the derivative of eq. \eqref{eq:optLagrange} with respect to $\bra{\psi (t')}$ yields
+Focusing on $\frac{\partial c}{\partial u_j}$ reveals
 \begin{align}
-	\frac{\delta L}{\delta \psi ^* (t')} &= \frac{\delta }{\delta \psi ^* (t')} \left[ \frac{1}{2} \int_{0}^{T} \left( i \braket{\dot{\psi} | \chi} -  \bra{\psi} \hat{H} \ket{\psi} \right) \mathrm{d}t \right] \nonumber \\ 
-	&= - \frac{1}{2} H \ket{\chi} + \frac{\delta }{\delta \psi ^* (t')} \left[ \frac{i}{2} \left( \braket{\psi | \chi} \Big|_0^T - \int_0^T \braket{\psi | \dot{\chi}} \right) \right] \nonumber \\
-	&= - \frac{1}{2} \left( H \ket{\chi} -i \ket{\dot{\chi}}  \right) \; . \label{eq:deriv_psit}
+	\frac{\partial c}{\partial u_j} &= \frac{\partial }{\partial u_j} braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)} \nonumber \\
+	&= \bra{\psi_{\mathrm{target}}} \hat{\mathcal{U}}_M \ldots \hat{\mathcal{U}}_{j+1} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_j} \hat{\mathcal{U}}_{j-1} \ldots \hat{\mathcal{U}}_{1} 
 \end{align}
-Furthermore, one must consider the derivative with respect to $\bra{\psi (T)}$ due to explicit dependence in the fidelity, whereby
-\begin{equation}
-	\frac{\delta L}{\delta \psi ^* (T)} = - \frac{1}{2} \left( \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} - i \ket{\chi (T)} \right) \; . \label{eq:deriv_psiT}
-\end{equation}
-From the requirements of the derivatives of eq. \eqref{eq:statpoint}, equation \eqref{eq:deriv_psit} can be reshaped to Schrödinger equation for $\ket{\chi (t')}$,
-\begin{equation}
-	 i \ket{\dot{\chi}} =  - \hat{H} \ket{\chi} \; .
-	 \label{eq:LagrangeSchroedinger}
-\end{equation}
-However, the sign of the Hamiltonian is flipped implying a backwards propagation in time. Further explanation is found when examining eq. \eqref{eq:LagrangeSchroedinger}, which states
-\begin{equation}
-	 \ket{\chi (T)} = -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; .
-\end{equation}
-Thus, at $t = T$, $\ket{\chi}$ is given as the projection of the final state unto the target-state. Therefore, the Lagrange multiplier, $\ket{\chi}$, can be interpreted as the backwards time-evolved target state \cite{BECcontrol}.\\
 
-
-%% --------------- corrected until here -------------
-%% derive derivative with respect to u_n and include commutator corrections 
-%% add algorithmic description as in GRAPE paper
-%% mention discretization of time
-%% add schematic of control amplitude and its optimization (perhaps from Jesper note)
-
-Finally, the derivative of the optimization Lagrangian with respect to the control parameters is 
-\begin{align}
-	\frac{\delta L}{\delta u_n (t')} &= - \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} + \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ u_n \dot{u}_n \Big|_0^T - \int_0^T u_n \ddot{u}_n \mathrm{d}t \right] \nonumber \\
-	&=  \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} - \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ \int_0^T u_n \ddot{u}_n \mathrm{d}t \right] \nonumber \\
-	&=  \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} - \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ \int_0^T \left( \pdv{u_n}{u_n (t')} \ddot{u}_n + u_n \pdv{\ddot{u}_n}{u_n (t')} \right) \mathrm{d}t \right] \nonumber \\
-	&= \Re \bra{\chi} \pdv{\hat{H}}{u_n (t')} \ket{\psi} - \gamma \ddot{u}_n \; . \label{eq:deriv_u} 
-\end{align} 
-A solution to the equations \ref{eq:deriv_psit}, \ref{eq:deriv_psiT} and \ref{eq:deriv_u} with the initial conditions
-\begin{align}
-	\ket{\chi (T)} &= -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; , \\
-	\ket{\psi (0)} &= \ket{\psi _0} \; , \\
-	\boldsymbol{u}(0) = \boldsymbol{u}_1 \; &, \quad \boldsymbol{u}(T) = \boldsymbol{u}_2 \; ,
-\end{align}
-will satisfy equation \ref{eq:statpoint}, but only for a stationary point of $J$, which is not necessarily the minimum. For small values of $J$ however, it has been shown that the solution will be a minimum \cite{BECcontrol}. This is very difficult though, due to the complexity of the equations. An alternative is to find the minimum of the reduced cost functional $\hat{J}\left( \boldsymbol{u}(t) \right) =  J\left(\psi(\boldsymbol{u}(t)) \; , \; \boldsymbol{u}(t) \right)$, where $\psi(\boldsymbol{u}(t))$ is a unique solution of the Schrödinger equation. This can be done by iteratively updating the control using the gradient of the reduced cost functional
-\begin{equation}
-	\nabla \hat{J}_n = - \gamma \ddot{u}_n - \Re \bra{\chi} \pdv{\hat{H}}{u_n} \ket{\psi} \; ,
-\end{equation}
-which is method known as GRAPE. 
 
 \section{Interior Point Method}
 Through the GRAPE algorithm, the gradient of the cost is calculated. Thus, gradient-based optimization algorithm can be employed in the search for the control, which minimizes the cost functional. 
