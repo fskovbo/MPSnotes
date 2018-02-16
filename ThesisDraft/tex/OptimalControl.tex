@@ -2,7 +2,7 @@
 The fundamental problem of Quantum Optimal Control Theory is to steer the dynamics of a quantum system in a desired way through external fields \cite{Rice2000,Shapiro2003}. Often, the goal is the transfer from an initial state, $\ket{\psi_0}$, to the desired target-state, $\ket{\psi_{\mathrm{target}}}$. The fields responsible for controlling the dynamics of the system are parametrised by a set of control parameters or functions. Optimal control theory determines the parameters, which leads to the desired dynamics of the system \cite{Werschnik2007}.\\ 
 In control problems, the Hamiltonian of the system is given as
 \begin{equation}
-	\hat{H} = \hat{H}_0 + \hat{H}_I = \hat{H}_0 + \sum_{n = 1}^{m} \hat{V}_i (u_n(t)) \; ,
+	\hat{H} = \hat{H}_0 + \hat{H}_I = \hat{H}_0 + \sum_{n = 1}^{m} u_n(t) \hat{H}_n \; ,
 	\label{eq:ControlHamiltonians}
 \end{equation} 
 where $\hat{H}_0$ is an uncontrollable drift of the Hamiltonian, $\hat{H}_i$ are the controllable fields, and $u_n(t)$ are the control functions or parameters. A quantum system like this is completely controllable if every unitary operator $\hat{U}$ is accessible from the identity operator $\hat{I}$ via a path $\gamma (t) = \hat{U}(t, t_0)$ satisfying \cite{Schirmer2001}
@@ -37,33 +37,294 @@ The gradient of the cost function can be derived in multiple ways. A common meth
 Here, an alternative derivation following \cite{Khaneja2005, deFouquieres2011} is presented.
 
 Assume the transfer time, $T$, is discretized in $M$ equal steps, $\Delta t = T/M$. Therefore, the control become similarly discretized as
-\begin{align}
-	u_n = \left( u_n (t_1) , \ldots , u_n (t_M)  \right) \equiv \left( u_1 , \ldots , u_M  \right) \; ,
-\end{align}
-where $m = 1$ has been assumed in the last statement for cleaner notation. Thus, the system is controlled by only a single parameter. Extending this formalism to $m$ controls is trivial.
+\begin{equation}
+	u_n = \left( u_n (t_1) , \ldots , u_n (t_M)  \right) \equiv \left( u_n (1) , \ldots , u_n (M)  \right) \; .
+\end{equation}
 Likewise, the time-evolution of the system during the time step $j$ is given by the propagator
 \begin{equation}
-	\hat{\mathcal{U}}_j \equiv \hat{\mathcal{U}} (u(t_j)) = \exp \lbrace -i \left(  \hat{H}_0 + \hat{V} (u(t_j))  \right) \Delta t \rbrace \; . 
+	\hat{\mathcal{U}}_j \equiv \hat{\mathcal{U}} (u(t_j)) = \exp \lbrace -i \left(  \sum_{n = 1}^{m} u_n(j) \hat{H}_n  \right) \Delta t \rbrace \; . 
 \end{equation} 
 Thereby, the cost function \eqref{eq:grapeCost} becomes
 \begin{equation}
-	J = \frac{1}{2} \left( 1 - |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2 \right) + \frac{\gamma}{2} \sum_{j}^{M-1} \left( \frac{\Delta u_j}{\Delta t} \right)^2 \Delta t \; ,
+	J = \frac{1}{2} \left( 1 - |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2 \right) + \frac{\gamma}{2} \sum_{n}^{m} \sum_{j}^{M-1} \left( \frac{\Delta u_n (j)}{\Delta t} \right)^2 \Delta t \; ,
 	\label{eq:discreteCost}
 \end{equation}
-where $\Delta u_j =  u_{j+1} - u_j$.\\
+where $\Delta u_n (j) =  u_n (j+1) - u_n (j)$.\\
 By defining $c \equiv \braket{\psi_{\mathrm{target}} | \psi (T)}$, the derivative with respect to the control of the first term of the discretized cost \eqref{eq:discreteCost} can be written as 
 \begin{equation}
-	\frac{\partial}{\partial u_j} J_T = \frac{\partial}{\partial u_j} \frac{1}{2} |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2  = \Re \left( c^* \frac{\partial c}{\partial u_j} \right) \; .
+	\frac{\partial J_T}{\partial u_n (j)} = \frac{\partial}{\partial u_n (j)} \left( \frac{1}{2} |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2  \right) = \Re \left( c^* \frac{\partial c}{\partial u_n (j)} \right) \; .
+	\label{eq:dJTdu}
 \end{equation}
-Focusing on $\frac{\partial c}{\partial u_j}$ reveals
+Focusing on $\frac{\partial c}{\partial u_n (j)}$ reveals
 \begin{align}
-	\frac{\partial c}{\partial u_j} &= \frac{\partial }{\partial u_j} braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)} \nonumber \\
-	&= \bra{\psi_{\mathrm{target}}} \hat{\mathcal{U}}_M \ldots \hat{\mathcal{U}}_{j+1} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_j} \hat{\mathcal{U}}_{j-1} \ldots \hat{\mathcal{U}}_{1} 
+	\frac{\partial c}{\partial u_n (j)} &= \frac{\partial }{\partial u_n (j)} \braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)} \nonumber \\
+	&= \bra{\psi_{\mathrm{target}}} \hat{\mathcal{U}}_M \ldots \hat{\mathcal{U}}_{j+1} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \hat{\mathcal{U}}_{j-1} \ldots \hat{\mathcal{U}}_{1} \ket{\psi (0)}
+	\label{eq:dcdu}
 \end{align}
+Multiplying eq. \eqref{eq:dcdu} with $c^*$ to recreate the result of eq. \eqref{eq:dJTdu} yields
+\begin{align}
+	c^* \frac{\partial c}{\partial u_n (j)} &= \left( \braket{\psi(T) | \psi_{\mathrm{target}}} \bra{\psi_{\mathrm{target}}} \right) \prod_{j' = j +1}^{M} \hat{\mathcal{U}}_{j '} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \prod_{j' = 1}^{ j-1} \hat{\mathcal{U}}_{j '} \ket{\psi (0)} \\
+	&= -i \bra{\chi (T)} \prod_{j' = j +1}^{M} \hat{\mathcal{U}}_{j '} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \prod_{j' = 1}^{ j-1} \hat{\mathcal{U}}_{j '} \ket{\psi (0)} \\
+	&= -i \bra{\chi (t_j)}  \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \ket{\psi (t_{j-1})} \; ,
+	\label{eq:gradientForBack}
+\end{align}
+where $\ket{\chi (T)} \equiv -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)}$ is the projection of the final state unto the target state. Notice how in eq. \eqref{eq:gradientForBack} the state $\ket{\chi (T)}$ has been propagated backwards in time.\\ 
+The derivative of the propagator, $\hat{\mathcal{U}}_{j}$, is non-trivial, due to the non-commutativity of the operators, $[ \hat{H}_0 \; , \; \hat{H}_n ]$. This results in a series of higher order corrections to the derivative.
+Expressing the derivative as a Taylor series yields
+\begin{align}
+	\frac{\partial}{\partial u_n (j)} \left[ -i \hat{H} \Delta t \right] &= \sum_{p=1}^{\infty} \frac{ \left( -i \Delta t \right) ^p }{p!} \sum_{q=0}^{p-1} \hat{H}^k \hat{H}_n \hat{H}^{p-q-1} \nonumber \\
+	&= \sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{A^p B A^q}{(p+q+1)!} \; ,
+	\label{eq:derivTaylorExp}
+\end{align}  
+where $A = -i \hat{H} \Delta t$ and $B = -i \hat{H}_n \Delta t$. The factorial in the denominator can be split using
+\begin{equation}
+	\frac{1}{(p+q+1)!} = \frac{1}{p q !} \int_{0}^{1} (1-\alpha)^p \alpha^q \mathrm{d}\alpha \; ,
+\end{equation}
+whereby eq. \eqref{eq:derivTaylorExp} can be expressed as
+\begin{equation}
+	\sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{A^p B A^q}{(p+q+1)!} =  e^{A} \int_{0}^{1} e^{- \alpha A} B e^{ \alpha A} \mathrm{d}\alpha \; .
+	\label{eq:doublesumToInt}
+\end{equation}
+Evaluating the resulting integral yields an iterative series of commutators
+\begin{equation}
+	\int_{0}^{1} e^{- \alpha A} B e^{ \alpha A} \mathrm{d}\alpha = \sum_{k=0}^{\infty} \frac{ (-1)^k}{(k+1)!} \left[ A \; , \; B \right]_k \; , 
+	\label{eq:integralToComm}
+\end{equation}
+where $\left[ A \; , \; B \right]_k = \left[ A \; , \; \left[ A \; , \; B \right]_{k-1} \right]$ and $\left[ A \; , \; B \right]_0 = B$.
+Combining equations \eqref{eq:derivTaylorExp}, \eqref{eq:doublesumToInt}, and \eqref{eq:integralToComm}, the derivative of the propagator can be written as the commutator series 
+\begin{equation}
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} = \exp \{ -i \hat{H} \Delta t \} \left( -i \hat{H}_n \Delta t + \frac{(\Delta t)^2}{2} \left[ \hat{H} , \hat{H}_n  \right] + \frac{i (\Delta t)^3}{6} \left[ \hat{H} , \left[ \hat{H} , \hat{H}_n  \right]  \right] - \ldots \right) \; .
+	\label{eq:higherOrderGradient}
+\end{equation}
+For small time-steps the higher order corrections can be neglected, however, choosing a larger time-step reduces the run-time of the time-evolution, which is critical when describing many-body systems. Therefore, including higher order contributions increases the accuracy, whereby larger time-steps can be employed. Computing the higher order corrections can be done efficiently by analytically deriving the commutators beforehand. The increase in accuracy achieved depends on the system, as it is determined by the commutator $\left[ \hat{H} , \hat{H}_n  \right]$.\\
+Lastly, combining equations \eqref{eq:dJTdu}, \eqref{eq:gradientForBack}, and \eqref{eq:higherOrderGradient} produces the final expression for the gradient of $J_T$ for the control at time $t_j$ 
+\begin{equation}
+		\frac{\partial J_T}{\partial u_n (j)}  = - \Re \left( \bra{\chi (t_j)} \hat{H}_n + \mathrm{h.o.}  \ket{\psi (t_{j})} \right)  \Delta t \; ,
+\end{equation}
+where $\mathrm{h.o.}$ denotes higher order terms described in eq. \eqref{eq:higherOrderGradient}.\\
+
+The gradient of the cost function requires the computation of the regularisation term as well. The simplest approach is deriving the gradient from the continuous expression \eqref{eq:grapeCost} by taking the functional derivative
+\begin{align}
+	\frac{\delta }{\delta u_n (t')} \left[ \frac{\gamma}{2} \sum_{n=1}^{m} \int_{0}^{T} \left( \pdv{u_n}{t} \right)^2 \mathrm{d}t \right]
+	&= \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ u_n \dot{u}_n \Big|_0^T - \int_0^T u_n \ddot{u}_n \mathrm{d}t \right] \nonumber \\
+	&=  - \frac{\gamma}{2} \int_0^T \left( \pdv{u_n}{u_n (t')} \ddot{u}_n + u_n \pdv{\ddot{u}_n}{u_n (t')} \right) \mathrm{d}t  \nonumber \\
+	&=  - \gamma \ddot{u}_n \; . \label{eq:regularisationGradient} 
+\end{align} 
+The continuous second derivative $\ddot{u}_n$ can easily be discretized for numerical calculations. Hence, the final expression for the cost gradient elements are given by
+\begin{equation}
+	\frac{\partial J}{\partial u_n (j)}  = - \Re \left( \bra{\chi (t_j)} \hat{H}_n + \mathrm{h.o.}  \ket{\psi (t_{j})} \right)  \Delta t - \gamma \ddot{u}_n \; .
+	\label{eq:costGradient}
+\end{equation}\\
+
+Through the analytically derived gradient, the cost can be iteratively updated using gradient-based optimization methods until a desired threshold is reached. This forms the framework of the Gradient-Ascent Pulse Engineering (GRAPE) algorithm \cite{Khaneja2005}, which is summarised below:
+
+\begin{algorithm}
+\begin{algorithmic}
+\caption{GRAPE Algorithm}
+\State Choose initial control $\boldsymbol{u}^{(1)}$.
+\While{$ J > J_{\mathrm{threshold}}$}
+	\State Calculate $\ket{\psi (t_k)} = \prod_{j=1}^{k} \hat{\mathcal{U}}_j \ket{\psi (0)}$ for $k = 1 \ldots M$.
+	\State Calculate $\ket{\chi (t_k)} = \prod_{j=M}^{k} \hat{\mathcal{U}}_{j}^{\dag} \ket{\chi (T)}$ for $k = M \ldots 1$. 
+	\State Evaluate $\frac{\partial J}{\partial u_n (k)}$ for $k = 1 \ldots M$ and $n = 1 \ldots m$ according to eq. \eqref{eq:costGradient}.
+	\State Update controls using gradient such that $J^{(i + 1)} < J^{(i)}$. 
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+The computations are performed under the boundary conditions
+\begin{align}
+	\boldsymbol{u}(0) &= \text{fixed value} \\
+	\boldsymbol{u}(T) &= \text{fixed value} \\
+	\ket{\psi (0)} &= \ket{\psi_0} \\
+	\ket{\chi (T)} &= -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; .
+\end{align}
+Figure \ref{fig:ControlUpdate} illustrates an update step of the controls such that the cost function is reduced.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{Figures/ControlUpdate.pdf} 
+	\caption{ \textit{Visualisation of update step $i \to i+1$ the control $\boldsymbol{u}^{(i)}$ resulting in a decreased cost function.}}
+	\label{fig:ControlUpdate} 
+\end{figure} 
+Although the starting guess of the control, $\boldsymbol{u}^{(1)}$, can be completely random, both faster convergence and lower convergence value is achieved by choosing a good starting seed. Clearly, there is no guarantee that the algorithm will converge to the global optimum, as it is based on a gradient ascent procedure \cite{Khaneja2005}. Nevertheless, the algorithm can be made to search a large portion of the parameter space by executing it multiple time for various seeds.  
+
+\subsection{ $L^2$- vs. $H^1$-norm }
 
 
 \section{Interior Point Method}
 Through the GRAPE algorithm, the gradient of the cost is calculated. Thus, gradient-based optimization algorithm can be employed in the search for the control, which minimizes the cost functional. 
+
+
+Interior point methods are modified versions of Newtons method for bound, constrained problems, where the algorithm at each iteration satisfies the constraints strictly. Thus, the methods approach the solution from within the feasible region, thus giving rise to their name. The interior point methods provide efficient performance while having better theoretical properties than the standard simplex method.\\
+
+A general bound, constrained minimization problem can be stated as
+\begin{align*}
+	\min_{x \in \mathbb{R}^n} \;  & \; f(x) \\
+	\text{subject to} \;  & \; c_i(x) = 0 \; , \qquad i \in \mathcal{E} \\
+							& \; c_i(x) \geq 0  \; , \qquad  i \in \mathcal{I} \\
+							& \; x \geq 0
+\end{align*}
+where $E$ and $I$ is the set of equalities and inequalities respectively, and $f \; . \; \mathbb{R}^n \to \mathbb{R}$.
+In practice working with equality constraints is often easier. Hence, the inequality constraint are often turned into equality constraints through the use of \textit{slack variables}, which make up the difference between the left and right side \cite{ipopt}. Thus, transforming the inequality $A x \leq b$ into
+\begin{align*}
+	A x + u &= b \\
+	u & \geq 0 \; .
+\end{align*}
+Although this does introduce the additional variable $u$, having only equality conditions for boundaries is generally easier to work with.
+
+\subsection{Karush–Kuhn–Tucker Conditions}
+A central theorem in mathematical optimization are the Karush–Kuhn–Tucker conditions, or KKT conditions, which are first-order conditions for for a solution of a nonlinear problem to be an optimum. The KKT conditions allow inequality constraints, thus being more general than Lagrange multipliers, which only allow equalities. The KKT conditions can be stated as follows \cite{wright}
+\begin{theorem}
+	Suppose that $x^*$ is a local solution of the objective function $f \; . \; \mathbb{R}^n \to \mathbb{R}$ with respect to a collection of constraints $\{ c_i(x) \in \mathcal{E} \vee c_i(x) \in \mathcal{I} \}_{i=1}^{m}$, where $c_i \; . \; \mathbb{R}^n \to \mathbb{R}$. Let $\mathcal{L}$ be the Lagrangian of the problem. If the subset of the constraints $\{ c_i(x) \in \mathcal{E}\}$ has the property that $\{ \nabla c_i(x^*)\}$ is linear independent, then there is a vector of Lagrange multipliers, $\lambda^*$, for which the following holds:
+	\begin{subequations}	
+	\begin{align}
+		\nabla_x \mathcal{L}(x^*,\lambda^*) &= 0 \; ,  \\
+		c_i(x^*) &= 0 \; , \qquad \forall i \in \mathcal{E} \\
+		c_i(x^*) &= 0 \; , \qquad \forall i \in \mathcal{I} \\
+		\lambda_{i}^* &\geq 0 \; , \qquad \forall i \in \mathcal{I} \\
+		\lambda_{i}^* c_i(x^*) &= 0 \; , \qquad \forall i \in \mathcal{E} \cup \mathcal{I}
+	\end{align}
+	\end{subequations}	  
+\end{theorem}
+The KKT conditions is a way of determining whether a point is an optimum, since if $x^*$ satisfies the conditions, then its objective value must be lower than the objective point of any other point.
+Note, that for $m = 0$ the set $\mathcal{I}$ is empty, thus only equality conditions are present, and $\lambda$ becomes regular Lagrange multipliers. 
+
+\subsection{Duality Theory}
+Consider a minimization problem such as the linear problem
+\begin{align*}
+	\min_{x \in \mathbb{R}^n} \;  & \; c^T x \\
+	\text{subject to} \;  & \; A x = b  \\
+							& \; x \geq 0 \; ,
+\end{align*}
+which will be denoted as the \textit{primal} problem. The \textit{dual} to this problem is defined as 
+\begin{align*}
+	\max_{\lambda \in \mathbb{R}^n} \;  & \; b^T \lambda \\
+	\text{subject to} \;  & \; A^T \lambda + s = c  \\
+							& \; s \geq 0 \; .
+\end{align*}
+This is another linear optimum problem with the unique property, that the Lagrange multipliers of the primal problem are the optimal variables of the dual problem and vice versa. Thus, the dual problem allows a lot of information to be obtained about the primal problem. Note, that the dual problem of the dual is nothing but the initial primal problem.
+An important property of the dual problem is, that it has the exact same KKT conditions as the primal, thus prompting the following theorem \cite{wright}:
+\begin{theorem}
+If either the primal or the dual problem has a solution, then so does the other, and the objective values are equal. If either problem is unbounded, then the other problem is infeasible. If a solution exists, then the optimal solution to the dual problem are the Lagrange multipliers to the primal problem and vice versa.
+\end{theorem}
+
+Therefore, for primal-dual algorithms one utilizes a triplet of variables $(x , \lambda , s)$ when computing the optimum of a function.
+
+\subsection{Barrier Problems}
+In interior point methods the boundaries of the variables are enforced through a barrier function, which keeps the objective function continuously differentiable.
+Consider the same standard linear optimization problem as earlier. To this problem one can associate a \textit{barrier function}, $B(x , \mu)$, defined as
+\begin{equation}
+	B(x , \mu) = c^T x - \mu \sum_{i=1}^{n} \ln x_i \; ,
+\end{equation} 
+where the barrier parameter $\mu > 0$ determines how "sharp" the boundary of the parameter is, as seen in figure \ref{fig:barrier}. Note, how for $\mu \to 0$ one recovers the original problem.
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=0.6\textwidth]{Figures/barrier.png}
+%	\caption{\textit{Barrier term for various $\mu$ (here $u$). At $\mu \to 0$ the barrier turns into the strict inequality constraint of the original problem.}}
+%	\label{fig:barrier}
+%\end{figure}
+Instead of minimizing the old problem, it is now of interest of solving the barrier problem 
+\begin{align*}
+	\min_{x \in \mathbb{R}^n} \;  & \; B(x , \mu) \\
+	\text{subject to} \;  & \; A x = b   \; ,
+\end{align*}
+where the constraint on $x$ no longer is needed due to the barrier. Associated to the new barrier problem is the Lagrangian
+\begin{equation}
+	\mathcal{L}(x, \lambda, s) = c^T x - \mu \sum_{i=1}^{n} \ln x_i - \lambda^T (A x -b) \; ,
+\end{equation}
+where $\lambda \in \mathbb{R}^m$ is the Lagrange multiplier for the $A x = b$ constraint. Now let $X = \mathrm{Diag}(x_1 , \ldots , x_n)$, $e = (1,1, \ldots , 1)^T$, $s = \mu X^{-1} e$, and $S = \mathrm{Diag}(s_1 , \ldots , s_n)$. Using these one can state the KKT conditions of the barrier problem as 
+\begin{subequations}
+\begin{align}
+	A^T \lambda + s &= c \\
+	A x &= b \\
+	X S e &= \mu e \; .
+\end{align}
+\end{subequations}
+Comparing these to the KKT conditions of the original problem
+\begin{subequations}
+\begin{align}
+	A^T \lambda + s &= c \\
+	A x &= b \\
+	x_i s_i &= 0 \; \text{for } i = 1, \ldots , n  \; ,
+\end{align}
+\end{subequations}
+one can easily see that the $\mu$ of the barrier function has "relaxed" the KKT complementary condition \cite{ipnote}. Again, for $\mu \to 0$ one returns to the original problem. 
+
+
+\subsection{Primal-Dual Interior Point Method}
+By considering the previously explained concepts, one can alter the classical Newton's method to take into account the constraints of the problem, such that one can compute a constrained Newton step, which allows iteration of the parameters towards the optimum.
+By solving the \textit{barrier subproblem} for a given $\mu$, one will find the optimum solution of said subproblem. Thus, solving these subproblems iteratively for ever decreasing $\mu$ using the previous solution as starting point, one will approach the optimal solution of the original problem $x^*$ as $\mu \to 0$ \cite{ipopt}.\\
+In the linear case the Primal-Dual Interior Point Method solves two problems  simultaneously:\\
+\textbf{Primal:}
+ \begin{align*}
+	\min_{x \in \mathbb{R}^n} \;  & \; c^T x \\
+	\text{subject to} \;  & \; A x = b  \\
+							& \; x \geq 0 \; ,
+\end{align*}
+\textbf{Dual:} 
+\begin{align*}
+	\max_{\lambda \in \mathbb{R}^n} \;  & \; b^T \lambda \\
+	\text{subject to} \;  & \; A^T \lambda + s = c  \\
+							& \; s \geq 0 \; .
+\end{align*}
+The solutions for these problems are characterized by the same KKT conditions, which were listed earlier. These conditions can be written into a single mapping
+ \begin{align}
+    F(x , \lambda, s) &= \begin{pmatrix}
+           A^T \lambda + s - c \\
+           A x - b \\
+           X S e
+         \end{pmatrix} = 0
+  \end{align}
+  which has the Jacobian
+ \begin{align}
+    J(x , \lambda, s) = \begin{pmatrix}
+           0 & A^T & I	\\
+           A & 0 & 0 	\\
+           S & 0 & X
+         \end{pmatrix}
+  \end{align}
+Thus, one can write the Newton direction $(x_B , \lambda_B , s_B)$ as the solution to the system of equations
+\begin{align}
+J \begin{pmatrix}
+           x_B \\
+           \lambda_B \\
+           s_B
+         \end{pmatrix} = -F
+\end{align}
+This equation does not take into account the barrier function, however, as stated earlier, the effect of the barrier term is to relax the the KKT complementary condition. Thus, by setting $X S e = \mu e$ one obtains
+\begin{align}
+	\begin{pmatrix}
+    	 0 & A^T & I    \\
+         A & 0 & 0 		\\
+         S & 0 & X
+    \end{pmatrix} 
+    \begin{pmatrix}
+    	x_b 		    \\
+        \lambda_B		\\
+        s_B
+    \end{pmatrix} =
+    - \begin{pmatrix}
+    	  A^T \lambda + s - c 	\\
+          A x - b 				\\
+          X S e - \mu e
+    \end{pmatrix} \; . \label{eq:newtondirection}
+\end{align}
+Thus, one can iteratively update the parameters in the algorithm using the Newton calculated Newton direction
+\begin{equation}
+	(x_{k+1} , \lambda_{k+1} , s _{k+1}) = (x_{k} , \lambda_{k} , s _{k}) + \alpha  (x_B , \lambda_B , s_B) \; , \label{eq:newtonstep}
+\end{equation}
+where $alpha$ can be found using a line-search or other more sophisticated methods.
+The procedure above can be summarized in the following algorithm \cite{ipnote}:\\
+\begin{algorithmic}
+\State Choose $\sigma \in (0,1)$ and $\mu_0 > 0$.
+\State Choose point $(x_0 , \lambda_0 , s_0)$ within feasible region.
+\For{$k = 1 , \ldots$}
+	\State $\mu_k \gets \sigma \mu_{k-1}$
+	\State Calculate the Newton direction using equation \ref{eq:newtondirection}.
+	\State Find $\alpha$.
+	\State $x_{k+1} \gets \alpha p_b$
+\EndFor
+\end{algorithmic}
+The name of the method should now be easily understood, as the methods starts in the interior of the feasible region and works it way towards the boundary. The path that the algorithm traces out through the feasible region is called the \textit{central path} and can be used for proving the convergence of the algorithm \cite{wright}.
+
 
 
 \section{Quantum Speed Limit}
@@ -85,10 +346,5 @@ This sets a lower bound of the orthogonalization time, however, the bound was de
 	\tau_{\mathrm{MT}} \geq \frac{\pi}{2} \left( \int_{0}^{T} \Delta E \; \mathrm{d}t \right) ^{-1} \; , \label{eq:MTlimit}
 \end{equation}
 From this expression it is clear, that fast solutions require a large value of $\Delta E$, as described earlier. Since \ref{eq:MTlimit} is dependent on the control $\boldsymbol{u}(t)$, one would have to take an infimum over all controls connecting the initial and target state in order to evaluate the lowest value of the bound. This in itself is a task just as difficult as solving the control problem.
-
-
-\section{Case Study of Frank article ??}
-%% discuss figure of merit 
-%% from Maja & Julie: infidelity much stronger figure of merit
 
 
