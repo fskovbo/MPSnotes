@@ -74,12 +74,12 @@ However, simply exponentiating the different terms of the Bose-Hubbard Hamiltoni
 \end{equation}
 Once again, the error is due to the non-commutativity of operators. Thus, the time evolution operator can be divided into a sequence of tensors, where
 \begin{align}
-	\hat{\mathcal{U}}_{J}^{[i,i+1]} (\delta t/2) &= \exp \left( -i J ( \hat{a}_{i}^{\dag} \hat{a}_{i+1} + \hat{a}_{i+1}^{\dag} \hat{a}_{i} ) \frac{\delta t}{2} / \hbar \right) \\
-	\hat{\mathcal{U}}_{U}^{[i]} (\delta t) &= \exp \left( -i \frac{U}{2} \hat{n}_i (\hat{n}_i -1) \delta t / \hbar \right) \; .
+	\hat{\mathcal{U}}_{J}^{[i,i+1]} (\Delta t) &= \exp \left( -i J ( \hat{a}_{i}^{\dag} \hat{a}_{i+1} + \hat{a}_{i+1}^{\dag} \hat{a}_{i} ) \Delta t \right) \\
+	\hat{\mathcal{U}}_{U}^{[i]} (\Delta t /2) &= \exp \left( -i \frac{U}{2} \hat{n}_i (\hat{n}_i -1) \Delta t /2 \right) \; .
 \end{align}
 \begin{figure}[h!]
 	\centering
-	\input{Diagrams/ModifiedTEBD.tex}
+	\input{Diagrams/ModifiedTDMRG.tex}
 	\caption{\textit{Tensor diagram depicting a single time step of the modified rDMRG algorithm. The time evolution operator has been subjected to a Suzuki-Trotter expansion as detailed in eq. \eqref{eq:SuzukiTrotter}. The tensors of the upper part of the network are contracted with the MPS while sweeping from left to right, whereas the lower part is applied with a right to left sweep.}}
 	\label{fig:ModifiedTEBD}
 \end{figure}
