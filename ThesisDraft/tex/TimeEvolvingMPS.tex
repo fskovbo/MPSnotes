@@ -17,15 +17,15 @@ Assume the Hamiltonian is a sum of two-site operators of the form $\hat{H} = \su
 \end{equation}  
 Exponentiating the Hamiltonian is non-trivial due to the non-commutativity of the operators, $[ \hat{h}_{\mathrm{odd}}^{[n , n+1]} \; , \; \hat{h}_{\mathrm{even}}^{[n , n+1]} ] \neq 0$. Considering a small time slice, $\delta t$, the exponentiation can be achieved through the Trotter-Suzuki expansion \cite{Suzuki}. To first order this reads
 \begin{equation}
-	\e^{- \im \hat{H} \; \delta t} = \e^{- \im \hat{H}_{\mathrm{odd}} \; \delta t } \e^{- \im \hat{H}_{\mathrm{even}} \; \delta t} \; + \; \;  \mathrm{O}(\delta t^2) \; ,
+	\e^{- \im \hat{H} \; \Delta t} = \e^{- \im \hat{H}_{\mathrm{odd}} \; \Delta t } \e^{- \im \hat{H}_{\mathrm{even}} \; \Delta t} \; + \; \;  \mathrm{O}(\Delta t^2) \; ,
 \end{equation}
 where the error is due to the non-commutativity of the bond Hamiltonians. Thus, the time evolution operator can be expressed as the product
 \begin{equation}
-	\hat{\mathcal{U}}(\delta t) \approx \left( \prod_{n \; \mathrm{odd}} \hat{\mathcal{U}}^{[n,n+1]} (\delta t) \right) \left( \prod_{n \; \mathrm{even}} \hat{\mathcal{U}}^{[n,n+1]} (\delta t) \right) \; ,
+	\hat{\mathcal{U}}(\Delta t) \approx \left( \prod_{n \; \mathrm{odd}} \hat{\mathcal{U}}^{[n,n+1]} (\Delta t) \right) \left( \prod_{n \; \mathrm{even}} \hat{\mathcal{U}}^{[n,n+1]} (\Delta t) \right) \; ,
 \end{equation}
 where
 \begin{equation}
-	\hat{\mathcal{U}}^{[n,n+1]} (\delta t) = \e^{- \im \hat{h}^{[n , n+1]} \; \delta t } \; .
+	\hat{\mathcal{U}}^{[n,n+1]} (\Delta t) = \e^{- \im \hat{h}^{[n , n+1]} \; \Delta t } \; .
 \end{equation}
 The result is an MPO performing an infinitesimal time step on the odd bonds, and another MPO evolving the even bonds. An illustration of this is shown in Figure \ref{fig:oddevenops}.
 \begin{figure}[h!]
@@ -80,37 +80,45 @@ Once again, the error is due to the non-commutativity of operators. Thus, the ti
 \begin{figure}[h!]
 	\centering
 	\input{Diagrams/ModifiedTDMRG.tex}
-	\caption{\textit{Tensor diagram depicting a single time step of the modified rDMRG algorithm. The time evolution operator has been subjected to a Suzuki-Trotter expansion as detailed in eq. \eqref{eq:SuzukiTrotter}. The tensors of the upper part of the network are contracted with the MPS while sweeping from left to right, whereas the lower part is applied with a right to left sweep.}}
+	\caption{\textit{Tensor diagram depicting a single time step of the modified rDMRG algorithm. The time evolution operator has been subjected to a Suzuki-Trotter expansion as detailed in eq. \eqref{eq:SuzukiTrotter}. The tensors of the upper part of the network are contracted with the MPS while sweeping from left to right, whereas the lower part is applied with a right-to-left sweep.}}
 	\label{fig:ModifiedTEBD}
 \end{figure}
-A single time step, $\delta t$, using the expanded operator is represented diagrammatically in figure \ref{fig:ModifiedTEBD}. At first glance, the tensor network resulting from the Suzuki-Trotter expansion may seem rather extensive, however, it can be contracted in a very efficient manner. The upper part of the network is contracted in a left to right sweeping manner, where the position of the center cite, and thereby the normalisation of the MPS, is pushed to the right following each step.
+A single time step, $\Delta t$, using the expanded operator is represented diagrammatically in figure \ref{fig:ModifiedTEBD}. At first glance, the tensor network resulting from the Suzuki-Trotter expansion may seem rather extensive, however, it can be contracted in a very efficient manner. The upper part of the network is contracted in a left-to-right sweeping manner, where the position of the center cite, and thereby the normalisation of the MPS, is pushed to the right following each step. Likewise, the lower part of the network is contracted though a right-to-left sweep such that the MPS returns to its original form centered on the first site after applying the final operator. Thereby, the MPS is immediately ready for the subsequent time-propagation.\\
 \begin{figure}[h!]
 \centering % <-- add this
-\begin{subfigure}[b]{0.35\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 	\caption{}  
   	\input{Diagrams/TrotterStep1.tex}
 \end{subfigure}
-\begin{subfigure}[b]{0.35\textwidth}
+\hspace{10mm}
+\begin{subfigure}[b]{0.4\textwidth}
 	\caption{}    
   	\input{Diagrams/TrotterStep2.tex}
 \end{subfigure}
 \\ % <-- add this
-\vspace{10mm}
-\begin{subfigure}[b]{0.35\textwidth}
+\vspace{5mm}
+\begin{subfigure}[b]{0.4\textwidth}
 	\caption{}    	
   	\input{Diagrams/TrotterStep4.tex}
 \end{subfigure}
-\begin{subfigure}[b]{0.35\textwidth}
+\hspace{10mm}
+\begin{subfigure}[b]{0.4\textwidth}
 	\caption{}  
   	\input{Diagrams/TrotterStep6.tex}
 \end{subfigure}
-\caption{\textit{Sequence of contractions for modified tDMRG algorithm during left to right sweep. Step \textbf{(i)}: MPS centred on site 1, tensors $A^{[1]}$ and $A^{[2]}$ are contracted. Step \textbf{(ii)}: Two-site tensor is contracted with two-site operator, followed by a splitting of the resulting tensor through an SVD in step \textbf{(iii)}. Lastly, in step \textbf{(iv)}, the center (and thereby the normalisation) is pushed to the next site leaving $A^{[1]}$ left-normalised.}}
+\caption{\textit{Sequence of contractions for modified tDMRG algorithm during left to right sweep. Step \textbf{(i)}: MPS is centered on site 1. Tensors $M^{[1]}$ and $M^{[2]}$ are contracted. Step \textbf{(ii)}: Two-site tensor, $\Theta$, is contracted with operators in numbered sequence. The propagated two-site tensor is split using an SVD in step \textbf{(iii)}, followed by a contraction to the right. Lastly, in step \textbf{(iv)}, the two-site tensor of $M^{[2]}$ and $M^{[3]}$ is split using another SVD, whereby the center (and thereby the normalisation) is pushed to site 3.}}
 \label{fig:TEBDContraction}
 \end{figure}
-The sequence of contractions is shown in figure \ref{fig:TEBDContraction}. The MPS is initially centered on the first tensor, while its remaining tensors are all right-normalised. By contracting the bonds marked with a bold line, the operators are efficiently applied to the MPS. In step (iii) the two-site tensor, $\Theta$, is split using an SVD, where the bond dimension of the tensors is truncated. This is crucial in order to maintain a reduced dimensionality, which would otherwise result in a significant increase in contraction time. In the last step the MPS is centered on the next site, leaving the previous center left-normalised. Thereby the normalisation of the MPS is "pushed" to the right and contained in a single site, which makes it easy to deal with in the end of the time evolution step.
-As the center reaches the end of the MPS, the direction of the sweep is reversed. The right to left sweep is slightly different, as there are no $\hat{\mathcal{U}}_{U}$-tensors that need to be contracted. The time evolution step is completed, as the first site is reached.\\
+The sequence of contractions of the left-to-right sweep is shown in figure \ref{fig:TEBDContraction}. The MPS is initially centered on the first tensor, while its remaining tensors are all right-normalised. By contracting the bonds marked with a bold line, the operators are efficiently applied to the MPS. In step (iii) the two-site tensor, $\Theta$, is split using an SVD, where the bond dimension of the tensors is truncated. This is crucial in order to maintain a reduced dimensionality, which would otherwise result in a significant increase in contraction time. In the final step (iv), the central cite of the MPS is moved to the start of the next two-site operator through another site merge and subsequent SVD. This step is exactly as in the original tDMRG algorithm. Thereby the normalisation of the MPS is "pushed" to the right and contained in a single site, which makes it easy to deal with in the end of the time evolution step.\\
+As the center reaches the end of the MPS, the direction of the sweep is reversed. The right-to-left sweep is very similar to the sequence described above. The main difference is in the order of contractions, as the $\hat{\mathcal{U}}_{J}^{[i,i+1]} (\Delta t)$-operator is applied before the $\hat{\mathcal{U}}_{U}^{[i]} (\Delta t /2)$-operator. As the sweep, and thereby the central cite, reaches the first site of the MPS, the central site is divided by its norm. Thereby the MPS is normalised and in the same configuration as before the time step. Thus, further propagations can be performed readily.\\ 
+Additional precision is achieved when evaluating the potential at the beginning and end points of the time interval CITE DANIEL STECK. Thus, the left-to-right sweep applies the operator $\hat{\mathcal{U}}_{U(t)}^{[i]} (\Delta t /2)$, while the right-to-left sweep applies $\hat{\mathcal{U}}_{U(t + \Delta t)}^{[i]} (\Delta t /2)$.\\
 
-Comparing the original tDMRG with the modified version reveals a difference in the ordering of the two-site operators. The tDMRG algorithm evolves all even bonds first followed by an evolution of the odd bonds. Meanwhile, the modified algorithm applies the two-site operators in a sweeping manner, as the central site of the MPS is moved. The most accurate approach is the original tDMRG algorithm. However, following the structure of the modified algorithm, evolving even and odd bonds separately would require multiple sweeps back and forth, due to the second order of the Suzuki-Trotter decomposition. The result is a large increase in the number of SVD's needed, which is a fairly expensive operation to perform. Therefore, the modified algorithm employs the less accurate order of operations. Since the Suzuki-Trotter expansion is of second order, compared to the first order used in the regular tDMRG algorithm, the error may be compensated. To properly gauge the accuracy of this time evolution operator, it must be compared to the more reliable approach of direct diagonalisation.
+The Suzuki-Trotter expansion \eqref{eq:SuzukiTrotter} does not determine the ordering of the operators. Thus, an alternative algorithm exists, where the half-step is taken through the $\hat{\mathcal{U}}_{J}^{[i,i+1]}$ operator. However, applying the two-site operators are in general more time consuming than applying two single-site operator.
+A comparison between the run-times of various time-evolution algorithms in shown in FIGURE. The MPO-based algorithm builds the propagator using the ITensor library methods following \cite{Pollmann2015}, whereby the resulting MPO is applied to the MPS according to eq. \eqref{eq:optBracketsMPO}. This method has an error of order $O(\Delta t ^2)$, which is less accurate than the second-order Trotter expansion.
+The fast version of the U-split algorithm employs a density-matrix decomposition to split the two-site tensors, which is slightly faster than the conventional SVD \cite{schollwock}. 
+
+ 
+ To properly gauge the accuracy of this time evolution operator, it must be compared to the more reliable approach of direct diagonalisation.
 
 
 \section{Numerical Comparison of Time Evolution Algorithms}

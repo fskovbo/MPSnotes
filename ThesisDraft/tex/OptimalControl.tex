@@ -90,7 +90,7 @@ Evaluating the resulting integral yields an iterative series of commutators
 	\int_{0}^{1} e^{- \alpha A} B e^{ \alpha A} \mathrm{d}\alpha = \sum_{k=0}^{\infty} \frac{ (-1)^k}{(k+1)!} \left[ A \; , \; B \right]_k \; , 
 	\label{eq:integralToComm}
 \end{equation}
-where $\left[ A \; , \; B \right]_k = \left[ A \; , \; \left[ A \; , \; B \right]_{k-1} \right]$ and $\left[ A \; , \; B \right]_0 = B$.
+where $\left[ A \; , \; B \right]_k = \left[ A \; , \; \left[ A \; , \; B \right]_{k-1} \right]$ and $\left[ A \; , \; B \right]_0 = B$. This is otherwise known as the Baker–Campbell–Hausdorff expansion \cite{Wilcox1967}.\\
 Combining equations \eqref{eq:derivTaylorExp}, \eqref{eq:doublesumToInt}, and \eqref{eq:integralToComm}, the derivative of the propagator can be written as the commutator series 
 \begin{equation}
 	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} = \exp \{ -i \hat{H} \Delta t \} \left( -i \hat{H}_n \Delta t + \frac{(\Delta t)^2}{2} \left[ \hat{H} , \hat{H}_n  \right] + \frac{i (\Delta t)^3}{6} \left[ \hat{H} , \left[ \hat{H} , \hat{H}_n  \right]  \right] - \ldots \right) \; .

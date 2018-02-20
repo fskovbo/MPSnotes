@@ -43,13 +43,28 @@
 
 
 \draw[decoration={calligraphic brace,amplitude=10pt}, decorate, line width=1.25pt, xshift=-4pt, yshift=0pt]
-(0, -4*\vert -0.4) -- (0,-0.8) node [black,midway,xshift=-0.6cm] 
-{\large $\Delta t$};
+(0.5, -4*\vert -0.4) -- (0.5,-0.8) node [black,midway,xshift=-1.0cm] 
+{\large $\hat{\mathcal{U}} ( \Delta t)$};
 
 
-	\node (dot2) at (\numb * \reldist + 2,0) {$\dots$};
+\draw[decoration={calligraphic brace,amplitude=10pt,mirror}, decorate, line width=1.25pt, xshift=-4pt, yshift=0pt]
+(\numb * \reldist + 3, -2*\vert -0.5) -- (\numb * \reldist + 3,-0.8) node [black,midway,xshift=1.2cm] 
+{\normalsize \begin{tabular}{c}
+				$\rightarrow$ \\
+				Sweep \\
+			  \end{tabular} };
 
-	\draw[-] (A\numb) -- (dot2);
+
+\draw[decoration={calligraphic brace,amplitude=10pt,mirror}, decorate, line width=1.25pt, xshift=-4pt, yshift=0pt]
+(\numb * \reldist + 3, -4*\vert -0.4) -- (\numb * \reldist + 3,-2*\vert -0.6) node [black,midway,xshift=1.2cm] 
+{\normalsize \begin{tabular}{c}
+				$\leftarrow$ \\
+				Sweep \\
+			  \end{tabular} };
+
+
+\node (dot2) at (\numb * \reldist + 2,0) {$\dots$};
+\draw[-] (A\numb) -- (dot2);
 	
 	
 \end{tikzpicture}

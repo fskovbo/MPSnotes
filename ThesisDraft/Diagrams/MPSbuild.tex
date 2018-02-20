@@ -13,7 +13,7 @@
 	
 	\draw[->, line width=1.25mm] (\wid/2 +1,-1) -- (\wid/2 +1,-2.3);
 	
-	\node[tensor] (blok1) at (1*\hdist, -3) {$A^{j_1}$};
+	\node[tensorl] (blok1) at (1*\hdist, -3) {$A^{j_1}$};
 	\node[tensor, minimum width=\wids cm] (tens2) at (\wids/2 +2.5, -3) {$c^{j_2 \ldots j_N}$};
 	
 	\foreach \i in  {2,...,\numb} {
@@ -27,7 +27,7 @@
 	\node (dots) at (\wid/2 +1, -4.6) {\vdots};
 	
 	\foreach \i in  {1,...,\numb} {
-		\node[tensor] (t\i) at (\i*\hdist, -6) {};
+		\node[tensorl] (t\i) at (\i*\hdist, -6) {};
 		\node (\i) at (\i*\hdist, -6.8) {};
 		\draw[-] (t\i) -- (\i);	
 	};
@@ -36,8 +36,8 @@
 		\draw[-] (t\i) -- (t\iplusone);	
 	};
 	
-	\node[tensor] (lab1) at (1*\hdist, -6) {$A^{j_1}$};
-	\node[tensor] (lab2) at (2*\hdist, -6) {$A^{j_2}$};
-	\node[tensor] (labN) at (\numb*\hdist, -6) {$A^{j_N}$};
+	\node[tensorl] (lab1) at (1*\hdist, -6) {$A^{j_1}$};
+	\node[tensorl] (lab2) at (2*\hdist, -6) {$A^{j_2}$};
+	\node[tensorl] (labN) at (\numb*\hdist, -6) {$A^{j_N}$};
 	
 \end{tikzpicture}

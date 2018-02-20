@@ -1,32 +1,48 @@
 \begin{tikzpicture}[inner sep=1mm]
-\def \reldist {2};
-\def \numb {2};
-\def \wid {2.8};
+\def \reldist {1.5};
+\def \numb {4};
+\def \wid {2.3};
 \def \size {1.0};
-\def \rad {0.5};
-
-
-
-\node[tensor,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A1) at (1 * \reldist, 0) {$M^{[1]}$};
-
-\node[tensor,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A2) at (2 * \reldist, 0) {$M^{[2]}$};
+\def \hi {0.8};
+\def \rad {0.4};
+\def \vert {1.35};
 
 
 \foreach \i in  {1,...,\numb} {
-	\draw[-] (A\i) -- (\i * \reldist ,-2.5);	
+	\node[tensorr,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (A\i)
+	at (\i * \reldist, 0) {$M^{[ \i ]}$};
+	\draw[-] (A\i) -- (\i * \reldist , -2.5*\vert);	
 };
-   
-\draw[-] (A1) -- (A2);    
 
-\node[twositeop, minimum width= \wid cm,minimum height= \size cm,rounded corners = \rad cm] (fop2)
-    at (\reldist*2 + \reldist/2, -1.5 )
-    {$\hat{\mathcal{U}}_{J}^{[2,3]}(\delta t /2)$};
-	
-\node[operator,minimum width= \size cm,minimum height= \size cm] (op1)
-	at ( \reldist, -1.5)
-	{\small $\hat{\mathcal{U}}_{U}$};	
+\foreach \i in {1,...,3} {
+    \pgfmathtruncatemacro{\iplusone}{\i + 1};
+    \draw[-] (A\i) -- (A\iplusone);
+};
 
-\draw[-,line width=0.8mm] (A1) -- (op1);
+\node[tensorl,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (L) at (1 * \reldist, 0) {$M^{[1]}$};
+
+\node[tensorc,minimum width= \size cm,minimum height= \size cm, rounded corners = 0.2cm] (C) at (2 * \reldist, 0) {$M^{[2]}$};
+
+
+\foreach \i in  {1,...,\numb} {
+	\draw[-] (A\i) -- (\i * \reldist , -2.6 *\vert);	
+};
+
+\draw[-,line width=0.8mm] (A2) -- (A3);
+
+\foreach \i in  {3,...,\numb} {
+	\node[operator,minimum width= \hi cm,minimum height= \hi cm] (op\i)
+	at (\i * \reldist, -\vert)
+	{\scriptsize $\hat{\mathcal{U}}_{U}^{[ \i ]}$};	
+};
+
+\foreach \i in {3} {
+	\pgfmathtruncatemacro{\j}{\i + 1};
+    \node[twositeop, minimum width= \wid cm,minimum height= \hi cm,rounded corners = \rad cm] (top\i)
+    at (\reldist*\i + \reldist/2, -2*\vert)
+    {\small $\hat{\mathcal{U}}_{J}^{[ \i , \j ]} $};
+};
+
 
 \node (dot2) at (\numb * \reldist + 1.4,0) {$\dots$};
 \draw[-] (A\numb) -- (dot2);
