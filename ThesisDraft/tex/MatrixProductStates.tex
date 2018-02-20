@@ -98,7 +98,7 @@ The MPS described in equation \ref{eq:MPS_LC} is not unique, as writing
 \begin{equation}
 	\tilde{A}^{j_n} = X_{n-1} A^{j_n} X_{n}^{-1}
 \end{equation}
-describes the same state using different matrices. This gauge freedom allows expressing the MPS in whichever way is most convenient, often resulting in a much lower numerical cost of operations. By choosing a gauge, the MPS is brought into a \textit{canonical form} \cite{Vidal}.
+describes the same state using different matrices. This gauge freedom allows expressing the MPS in whichever way is most convenient, often resulting in a much lower numerical cost of operations. By choosing a gauge, the MPS is brought into a \textit{canonical form} \cite{Vidal2007}.
 
 \subsection{Left-canonical matrix product state}
 The process of constructing an matrix product state detailed in Section \ref{sec:construct_MPS} brings the MPS in a \textit{left-canonical} form. This implies that all the matrices are left-normalized, such that
@@ -143,7 +143,7 @@ Figure \ref{fig:rightNorm} illustrates two right-normalised matrices contracted 
 
 
 \subsection{Mixed-canonical matrix product state}
-In practice one rarely finds use for a purely left- or right-canonical MPS. However, combining the two canonical forms listed above yields the mixed-canonical form. This form results in a natural bi-partitioning of the system into a Schmidt decomposition, and it is especially useful for measuring local properties of the state. CITE\\
+In practice one rarely finds use for a purely left- or right-canonical MPS. However, combining the two canonical forms listed above yields the mixed-canonical form. This form results in a natural bi-partitioning of the system into a Schmidt decomposition, and it is especially useful for measuring local properties of the state \cite{schollwock}.\\
 Consider the procedure of building an MPS in the left-canonical form, where $c_{j_1 \ldots j_N}$ has been decomposed from the left up until site $n$
 \begin{equation}
 	c_{j_1 \ldots j_N} = \sum_{\alpha_n} \left( A^{j_1} \ldots  A^{j_n} \right) _{\alpha_n} S_{\alpha_n , \alpha_n} (V^{\dag})_{\alpha_n , (j_{n+1} \ldots j_N)} \; .
@@ -153,7 +153,7 @@ By reshaping $V^{\dag}$  into the matrix $\Psi_{(\alpha_n j_{n+1} \ldots j_{N-1}
 	c_{j_1 \ldots j_N} = A^{j_1} \ldots A^{j_n} S B^{j_{n+1}} \ldots B^{j_N} \; ,
 	\label{eq:mixedCanon}
 \end{equation}
-which is illustrated in figure \ref{fig:mixedCanonical1}.
+which is illustrated in figure \ref{fig:MixedCanonical1}.
 \begin{figure}[h!]
 \centering % <-- add this
 \begin{subfigure}[b]{0.47\textwidth}
@@ -257,7 +257,7 @@ The result is a new MPS, $\ket{\phi}$, which is described by the matrices $N^{j_
 	\caption{\textit{Application of an MPO, $\hat{O}$, on an MPS, $\ket{\psi}$. Matching physical indices are contracted resulting in a new MPS, $\ket{\phi}$, with increased matrix dimensions.}}
 	\label{fig:MPOcont}
 \end{figure}
-If the dimension of the MPS is $D$, while the dimension of the MPO is $D_W$, the total computational cost of the operation is $\mathrm{O}(N d^2 D_W ^2 D^2)$.\cite{schollwock, McCulloch}
+If the dimension of the MPS is $D$, while the dimension of the MPO is $D_W$, the total computational cost of the operation is $\mathrm{O}(N d^2 D_W ^2 D^2)$.\cite{schollwock, McCulloch2007}
 
 \section{Correlation Functions and Measurement of Local Properties}
 \label{sec:correlationFunctions}

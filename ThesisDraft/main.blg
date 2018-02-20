@@ -1,15 +1,8 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-Case mismatch error between cite keys Schollwock and schollwock
----line 287 of file main.aux
- : \citation{Schollwock
- :                     }
-I'm skipping whatever remains of this command
 The style file: plain.bst
 Database file #1: ../config/references.bib
-Warning--I didn't find a database entry for "Vidal"
-Warning--I didn't find a database entry for "McCulloch"
 Warning--I didn't find a database entry for "WhiteDMRG"
 Warning--I didn't find a database entry for "WhiteSingleSite"
 Warning--I didn't find a database entry for "Suzuki"
@@ -17,45 +10,45 @@ Warning--empty school in greiner
 Warning--empty booktitle in grimm
 Warning--can't use both volume and number fields in grimm
 Warning--can't use both author and editor fields in Mandelstam1991
-You've used 50 entries,
+You've used 70 entries,
             2118 wiz_defined-function locations,
-            860 strings with 11890 characters,
-and the built_in function-call counts, 16738 in all, are:
-= -- 1618
-> -- 825
-< -- 4
-+ -- 330
-- -- 276
-* -- 1296
-:= -- 2862
-add.period$ -- 153
-call.type$ -- 50
-change.case$ -- 277
+            984 strings with 15260 characters,
+and the built_in function-call counts, 23410 in all, are:
+= -- 2244
+> -- 1193
+< -- 6
++ -- 474
+- -- 400
+* -- 1815
+:= -- 4020
+add.period$ -- 213
+call.type$ -- 70
+change.case$ -- 394
 chr.to.int$ -- 0
-cite$ -- 54
-duplicate$ -- 573
-empty$ -- 1275
-format.name$ -- 276
-if$ -- 3396
+cite$ -- 74
+duplicate$ -- 800
+empty$ -- 1771
+format.name$ -- 400
+if$ -- 4750
 int.to.chr$ -- 0
-int.to.str$ -- 50
-missing$ -- 55
-newline$ -- 254
-num.names$ -- 100
-pop$ -- 242
+int.to.str$ -- 70
+missing$ -- 76
+newline$ -- 353
+num.names$ -- 142
+pop$ -- 343
 preamble$ -- 1
-purify$ -- 237
+purify$ -- 335
 quote$ -- 0
-skip$ -- 380
+skip$ -- 532
 stack$ -- 0
-substring$ -- 1131
-swap$ -- 72
-text.length$ -- 4
+substring$ -- 1507
+swap$ -- 100
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 184
+type$ -- 260
 warning$ -- 4
-while$ -- 159
-width$ -- 52
-write$ -- 548
-(There was 1 error message)
+while$ -- 218
+width$ -- 72
+write$ -- 767
+(There were 7 warnings)

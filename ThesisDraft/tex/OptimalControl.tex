@@ -112,7 +112,7 @@ The gradient of the cost function requires the computation of the regularisation
 \end{align} 
 The continuous second derivative $\ddot{u}_n$ can easily be discretized for numerical calculations. Hence, the final expression for the cost gradient elements are given by
 \begin{equation}
-	\frac{\partial J}{\partial u_n (j)}  = - \Re \left( \bra{\chi (t_j)} \hat{H}_n + \mathrm{h.o.}  \ket{\psi (t_{j})} \right)  \Delta t - \gamma \ddot{u}_n \; .
+	\frac{\partial J}{\partial u_n (j)}  = - \Re \left( \bra{\chi (t_j)} ( \hat{H}_n + \mathrm{h.o.} )  \ket{\psi (t_{j})} \right)  \Delta t - \gamma \ddot{u}_n \; .
 	\label{eq:costGradient}
 \end{equation}\\
 
