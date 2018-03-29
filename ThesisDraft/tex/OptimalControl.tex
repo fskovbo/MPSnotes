@@ -17,8 +17,8 @@ is of dimension $N^2$ \cite{Ramakrishna1995}.\\
 Extending these conditions to infinite-dimensional Hilbert spaces and constrained controls is non-trivial \cite{Huang1983}. Therefore, no calculations of the Lie dimensions will be performed for the control problems presented in this thesis.
 
 
-\section{The Gradient-Ascent Pulse Engineering Method}
-In this instance, the control problem is steering an initial state to a target-state. More specifically, the transfer of a Superfluid to a Mott-Insulator, which is controlled by varying the lattice depth. Therefore, the optimal control problem can be stated as follows: 
+\section{The Gradient-Ascent Pulse Engineering Method - GRAPE}
+The control problem presented in this thesis is steering the system from an initial state in the Superfluid phase to a target-state in the Mott-Insulator phase. This is achieved by varying the lattice depth, which therefore can be considered the control parameter. Hence, the optimal control problem can be stated as follows: 
 Suppose the system is initially described by the state $\ket{\psi_0} = \ket{\psi (0)}$, and the potential is varied in the time interval $[ 0 , T]$. The goal is finding the set of control parameters, $\boldsymbol{u}(t)$, which brings the initial state as close as possible to the target state, $\ket{\psi_{\mathrm{target}}}$. This is formulated in terms of a cost function
 \begin{equation}
 	J_T = \frac{1}{2} \left( 1-|\braket{\psi_{\mathrm{target}} | \psi (T)}|^2 \right) \; ,
@@ -146,11 +146,30 @@ Figure \ref{fig:ControlUpdate} illustrates an update step of the controls such t
 \end{figure} 
 Although the starting guess of the control, $\boldsymbol{u}^{(1)}$, can be completely random, both faster convergence and lower convergence value is achieved by choosing a good starting seed. Clearly, there is no guarantee that the algorithm will converge to the global optimum, as it is based on a gradient ascent procedure \cite{Khaneja2005}. Nevertheless, the algorithm can be made to search a large portion of the parameter space by executing it multiple time for various seeds.  
 
-\subsection{ $L^2$- vs. $H^1$-norm }
+
+\section{Gradient-Optimization Using Parametrization - GROUP}
+The convergence rate of optimal control sequences has been shown to be greatly improved by employing gradient-based methods, such as GRAPE, for updating the control \cite{Jager2014}.
+One of the disadvantages of GRAPE is the dimension for the optimization. As the duration of the control pulse is discretised into $M$ time-steps, the control at each of these steps must be optimized. For long durations or small time-steps the resulting dimension of the optimization ($M$) will be very large. One can consider this type of control parametrisation having too many degrees of freedom for the optimization. 
+However, by employing a proper parametrisation of the control, the optimization dimension can be drastically reduced \cite{Winckel2008}.\\
+The typical choice is employing a chopped basis, which parametrises the control as
+\begin{equation}
+	u(t) = u_0 (t) + S(t) \sum_{n=1}^{N} c_n f_n (t) ; ,
+\end{equation}   
+where $f_n$ are the basis functions. In addition, $u_0 (t)$ is the initial control function, and $S (t)$ is a shape function enforcing the boundary conditions of the control, whereby $S(0) = S(T) = 0$ CITE JJ ARTIKEL. In the chopped basis the coefficients $c_n$ are optimized rather than the full control, $u(t)$. The basis functions, $f_n$, must be chosen based on physical insight of the system. For the control problem discussed in this thesis, employing a basis of sine functions has proven itself useful, as the sine functions are excellent at describing the smoothly varying control pulses desired CITE JJ. Thus, the basis functions read $f_n = \sin \left( \frac{\omega_n t}{T} \right)$, where $\omega_n = n \pi$.
+An extension of this type of chopped basis was done in \cite{Doria2011,Caneva2011}, introducing random shifts to the frequencies resulting in the Chopped RAndom Basis or \textsc{CRAB}. In recent years the \textsc{CRAB} parametrisation has been used together with the Nelder-Mead hill climbing algorithm to solve various control problems \cite{Doria2011,Caneva2011,FrankBloch,Lloyd2014}.\\
+The great advantage of employing a reduced basis representation is the drastic reduction in the optimization space, whereby the optimal control can be found much more efficiently. However, artificial minima can be introduced, if the chosen basis is incapable of spanning the part of the optimization space containing the optimal solutions \cite{Rach2015}. Hence, the chopped basis dimension, $N$, must be chosen not too small.\\
+
+The Gradient-Optimization Using Parametrization or \textsc{GROUP} algorithm introduced in JJ CITE combined the chopped basis representation with the gradient based \textsc{GRAPE} algorithm. This of course alters the gradient of the cost functional described in eq. \eqref{eq:costGradient}. The new gradient can be derived using the chain rule
+\begin{align}
+	\frac{\partial J (\boldsymbol{c})}{\partial c_n} &= \sum_{m = 1}^{M} \frac{\partial J }{\partial u(t_m)} \frac{\partial u(t_m)}{\partial c_n} \nonumber \\
+	&= \sum_{m = 1}^{M} \frac{\partial J }{\partial u(t_m)} S(t_m) f_n(t_m) \; , \label{eq:GROUPgradient} 
+\end{align}
+where only a single control, $u$, has been chosen for cleaner notation. The gradient in \textsc{GROUP} is more complicated than in \textsc{GRAPE} ($\frac{\partial J }{\partial u(t_m)}$, see eq. \eqref{eq:costGradient}). However, the cost of computing the gradient is still dominated by the evaluation of $\frac{\partial J }{\partial u(t_m)}$, as this requires two time-evolutions for the full duration, $T$. Therefore, the chopped basis representation reduces the dimension of the optimization space, thereby reducing the number of elements in the cost gradient, while causing a negligible increase in the computational difficulty of computing the gradient.
+In JJREF a comparison between different optimization algorithms for optimal control showed that \textsc{GROUP} outperformed both \textsc{GRAPE} and Nelder-Mead with \textsc{CRAB} in term of fidelity reached and number of function evaluations required.
 
 
 \section{Interior Point Method}
-The convergence rate of the GRAPE algorithm has been shown to be greatly improved by employing gradient-based optimization methods for updating the control \cite{Jager2014}.
+Through the gradient of the cost functional, the control functions can be iteratively updated yielding an improved cost. The update of the control functions can be done using various hill-climbing methods.
 Interior point methods are modified versions of Newtons method for bound, constrained problems. The methods approach the solution from within the feasible region and provides efficient performance while having better theoretical properties than the standard simplex method \cite{wright}.\\
 
 Here, a linear version of the method will be derived, however, the formalism can easily be extended to non-linear problems \cite{wright}.
