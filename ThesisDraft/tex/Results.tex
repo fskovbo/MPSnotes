@@ -1,0 +1,14 @@
+\chapter{Results}
+
+
+summarize the methods used \\
+explain how chapter is ordered/which things are examined
+
+
+
+\section{Characterization of Methods on Small System}
+
+\subsection{Seed selection}
+The success of an optimization process is often dependent on the quality of the initial starting point or seed. Poor seeding strategies can lead to failure in finding optimal solutions when conducting local searches in complex optimization landscapes \cite{Sorensen2016}. This has been demonstrated to occur in constrained quantum control problems \cite{Zhdanov2015}, which is exactly the type of problem examined in this thesis. Hence, the type of seed used for the optimization must be chosen carefully.\\ 
+In CITEZAC different adiabatic lattice ramps from the superfluid to Mott-insulator phase were examined. The study concluded that ramping the lattice slowly around the point of the phase transition results in an improved final fidelity. This is very similar to an avoided crossing in a two-level system, $\{ \ket{1} , \ket{2} \}$, due to an external perturbation. In this scenario $\ket{1}$ is the ground state in one asymptotic limit of the external parameter, while $\ket{2}$ is the ground state in the other limit. A transfer $\ket{1} \to \ket{2}$ while remaining in the ground state can be achieved by adiabatically sweeping over the external parameter, whereas a rapid change in this external parameter will result in the final state being excited.\\
+Thus, a ramp sequence was proposed in CITEZAC, which has an initial sigmoid shape followed by a slow increase in the lattice depth around the phase transition point. Following this, the lattice follows an exponential ramp to its final depth. Examining other attempts of optimizing the ramp sequence of the Bose-Hubbard model \cite{Doria2011,FrankBloch} shows similar traits in their results. Thus, choosing seeds with a slow ramp across the point of the phase transition followed by a rapid increase in lattice depth should yield good optimization results.
