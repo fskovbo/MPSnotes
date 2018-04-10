@@ -114,11 +114,13 @@ As the center reaches the end of the MPS, the direction of the sweep is reversed
 Additional precision is achieved when evaluating the potential at the beginning and end points of the time interval CITE DANIEL STECK. Thus, the left-to-right sweep applies the operator $\hat{\mathcal{U}}_{U(t)}^{[i]} (\Delta t /2)$, while the right-to-left sweep applies $\hat{\mathcal{U}}_{U(t + \Delta t)}^{[i]} (\Delta t /2)$.\\
 
 The Suzuki-Trotter expansion \eqref{eq:SuzukiTrotter} does not determine the ordering of the operators. Thus, an alternative algorithm exists, where the half-step is taken through the $\hat{\mathcal{U}}_{J}^{[i,i+1]}$ operator. However, applying the two-site operators are in general more time consuming than applying two single-site operator.
-A comparison between the run-times of various time-evolution algorithms in shown in FIGURE. The MPO-based algorithm builds the propagator using the ITensor library methods following \cite{Pollmann2015}, whereby the resulting MPO is applied to the MPS according to eq. \eqref{eq:optBracketsMPO}. This method has an error of order $O(\Delta t ^2)$, which is less accurate than the second-order Trotter expansion.
-The fast version of the U-split algorithm employs a density-matrix decomposition to split the two-site tensors, which is slightly faster than the conventional SVD \cite{schollwock}. 
-
- 
- To properly gauge the accuracy of this time evolution operator, it must be compared to the more reliable approach of direct diagonalisation.
-
-
-\section{Numerical Comparison of Time Evolution Algorithms}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Figures/CompareRuntime.pdf}
+    \caption{\textit{Runtime of performing 100 time steps with various algorithms in Bose Hubbard system with unit occupancy. Solid lines are systems with a local Fock space of dimension $N$, while dashed lines are systems with a constant Fock space dimension of 5.}}
+    \label{fig:CompareRuntime}
+\end{figure}
+A comparison between the run-times of various time-evolution algorithms in shown in Figure \ref{fig:CompareRuntime}. The two tDMRG algorithms are the one described above using a half-step of $\hat{\mathcal{U}}_{J}$ and $\hat{\mathcal{U}}_{U}$ respectively. The MPO-based algorithm builds the propagator using ITensor library methods following \cite{Pollmann2015}, and the resulting MPO is applied to the MPS according to eq. \eqref{eq:optBracketsMPO}. This method has an error of order $O(\Delta t ^2)$, which is less accurate than the second-order Trotter expansion.
+In Section \ref{sec:MPO} the cost of applying an MPO to an MPS was given by $\mathrm{O}(N d^2 D_W ^2 D^2)$. Considering the single-site tensors of the tDMRG algorithms, $D_W$ is zero. Since $d = N$ for the solid lines in Figure \ref{fig:CompareRuntime}, the runtime of the algorithm will have a cubic scaling with the system size. However, a much better scaling can be achieved by truncating the local Hilbert space, such that $d$ is kept constant resulting in a runtime scaling linearly with the system size.
+Consider the case of the Bose Hubbard model, eq. \eqref{BHhamil}. The interaction term scales quadratically with the number of particles at a given site, which causes a huge energy penalty even in low end of the tight binding limit. Thus, for large systems with unit occupation, neglecting contributions from states with a majority of the particles at a single site is a reasonable approximation.
+Therefore, the modified tDMRG algorithm can be applied to very large systems at a low cost, if the dimension of the physical index of the MPS is restricted to a reasonable fraction of the number of particles.   

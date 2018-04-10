@@ -132,10 +132,10 @@ Through the analytically derived gradient, the cost can be iteratively updated u
 \end{algorithm}
 The computations are performed under the boundary conditions
 \begin{align}
-	\boldsymbol{u}(0) &= \text{fixed value} \\
+	\boldsymbol{u}(0) &= \text{fixed value} \label{eq:firstBound} \\
 	\boldsymbol{u}(T) &= \text{fixed value} \\
 	\ket{\psi (0)} &= \ket{\psi_0} \\
-	\ket{\chi (T)} &= -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; .
+	\ket{\chi (T)} &= -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)} \; .  \label{eq:lastBound}
 \end{align}
 Figure \ref{fig:ControlUpdate} illustrates an update step of the controls such that the cost function is reduced.
 \begin{figure}[!h]
@@ -153,9 +153,9 @@ One of the disadvantages of GRAPE is the dimension for the optimization. As the 
 However, by employing a proper parametrisation of the control, the optimization dimension can be drastically reduced \cite{Winckel2008}.\\
 The typical choice is employing a chopped basis, which parametrises the control as
 \begin{equation}
-	u(t) = u_0 (t) + S(t) \sum_{n=1}^{N} c_n f_n (t) ; ,
+	u(t) = u_0 (t) + S(t) \sum_{n=1}^{N} c_n f_n (t) \; , \label{eq:controlParametrization}
 \end{equation}   
-where $f_n$ are the basis functions. In addition, $u_0 (t)$ is the initial control function, and $S (t)$ is a shape function enforcing the boundary conditions of the control, whereby $S(0) = S(T) = 0$ CITE JJ ARTIKEL. In the chopped basis the coefficients $c_n$ are optimized rather than the full control, $u(t)$. The basis functions, $f_n$, must be chosen based on physical insight of the system. For the control problem discussed in this thesis, employing a basis of sine functions has proven itself useful, as the sine functions are excellent at describing the smoothly varying control pulses desired CITE JJ. Thus, the basis functions read $f_n = \sin \left( \frac{\omega_n t}{T} \right)$, where $\omega_n = n \pi$.
+where $f_n$ are the basis functions. In addition, $u_0 (t)$ is the initial control function, and $S (t)$ is a shape function enforcing the boundary conditions of the control, whereby $S(0) = S(T) = 0$ CITE JJ ARTIKEL. The shape function used throughout this thesis consists of two steep sigmoids oriented such that $S$ is unit for most time steps. In the chopped basis the coefficients $c_n$ are optimized rather than the full control, $u(t)$. The basis functions, $f_n$, must be chosen based on physical insight of the system. For the control problem discussed in this thesis, employing a basis of sine functions has proven itself useful, as the sine functions are excellent at describing the smoothly varying control pulses desired CITE JJ. Thus, the basis functions read $f_n = \sin \left( \frac{\omega_n t}{T} \right)$, where $\omega_n = n \pi$.
 An extension of this type of chopped basis was done in \cite{Doria2011,Caneva2011}, introducing random shifts to the frequencies resulting in the Chopped RAndom Basis or \textsc{CRAB}. In recent years the \textsc{CRAB} parametrisation has been used together with the Nelder-Mead hill climbing algorithm to solve various control problems \cite{Doria2011,Caneva2011,FrankBloch,Lloyd2014}.\\
 The great advantage of employing a reduced basis representation is the drastic reduction in the optimization space, whereby the optimal control can be found much more efficiently. However, artificial minima can be introduced, if the chosen basis is incapable of spanning the part of the optimization space containing the optimal solutions \cite{Rach2015}. Hence, the chopped basis dimension, $N$, must be chosen not too small.\\
 
@@ -166,6 +166,20 @@ The Gradient-Optimization Using Parametrization or \textsc{GROUP} algorithm intr
 \end{align}
 where only a single control, $u$, has been chosen for cleaner notation. The gradient in \textsc{GROUP} is more complicated than in \textsc{GRAPE} ($\frac{\partial J }{\partial u(t_m)}$, see eq. \eqref{eq:costGradient}). However, the cost of computing the gradient is still dominated by the evaluation of $\frac{\partial J }{\partial u(t_m)}$, as this requires two time-evolutions for the full duration, $T$. Therefore, the chopped basis representation reduces the dimension of the optimization space, thereby reducing the number of elements in the cost gradient, while causing a negligible increase in the computational difficulty of computing the gradient.
 In JJREF a comparison between different optimization algorithms for optimal control showed that \textsc{GROUP} outperformed both \textsc{GRAPE} and Nelder-Mead with \textsc{CRAB} in term of fidelity reached and number of function evaluations required.
+
+\subsection{Alteration of constraints through GROUP}
+Although GROUP drastically reduces the number of optimization parameters, it comes with the cost of a large increase in constraints.\\
+Consider the non-parametrized optimization problem discretized in time. In this case the problem is subjected to the boundaries of eq. \eqref{eq:firstBound}-\eqref{eq:lastBound}. Furthermore, a set of constraints of the control is often needed. Consider the specific case of the control system being a lattice system described by the Bose-Hubbard model and the control being the lattice depth. A minimum value of the control is required, as the lattice depth must be near the tight-binding limit for the model to remain a good description of the system. This constraint must be enforced at all times. In addition to this, an upper limit of the control may be desired to restrict the interval in which the solution is searched for. Thus, the constraints of the optimization problem reads 
+\begin{equation}
+	 u_{min} \geq u(i) \geq u_{max} \quad \forall i \; .
+\end{equation}
+
+Employing the GROUP algorithm causes a parametrization of the control, eq. \eqref{eq:controlParametrization}, which in turn alters the constraints. Most gradient-based optimization algorithms require the Jacobian of the constraints in addition to the gradient of the objective function. Interior point methods, which is the algorithm of choice for solving the control problems described in this thesis, are without exception. Thus, one must also consider the alteration of the Jacobian, which has elements of the general form $\boldsymbol{J}_{ij} = \frac{\partial f_i}{\partial x_j}$.
+Since the constraint function is simply the time discretized control itself, the Jacobian is given by
+\begin{equation}
+	\boldsymbol{J}_{ij} = \frac{\partial u(i)}{\partial c_j} = S(i) f_j (i) \; .
+\end{equation}
+Thus, the Jacobian of the constraints has $M * N$ entries, where $M$ is the number of time steps, and $N$ is the dimension of the optimization space. However, these elements are fast to retrieve, as they remain constant throughout the optimization. 
 
 
 \section{Interior Point Method}
@@ -293,6 +307,8 @@ The procedure above can be summarized in the following algorithm \cite{ipnote}:\
 \EndFor
 \end{algorithmic}
 \end{algorithm}
+
+The implementation of the interior point algorithm used in this thesis is from the IPOPT library \cite{Wachter2006}, which also approximates the Hessian of the optimization Lagrangian through previous derivatives using the L-BFGS algorithm \cite{Liu1989}. By including information about the second derivative, the algorithm is able to converge in much fewer iterations. 
 
 
 \section{Quantum Speed Limit}
