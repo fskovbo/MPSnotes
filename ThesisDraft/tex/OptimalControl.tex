@@ -147,7 +147,7 @@ Figure \ref{fig:ControlUpdate} illustrates an update step of the controls such t
 Although the starting guess of the control, $\boldsymbol{u}^{(1)}$, can be completely random, both faster convergence and lower convergence value is achieved by choosing a good starting seed. Clearly, there is no guarantee that the algorithm will converge to the global optimum, as it is based on a gradient ascent procedure \cite{Khaneja2005}. Nevertheless, the algorithm can be made to search a large portion of the parameter space by executing it multiple time for various seeds.  
 
 
-\section{Gradient-Optimization Using Parametrization - GROUP}
+\section{Gradient-Optimization Using Parametrization - GROUP} \label{sec:GROUP}
 The convergence rate of optimal control sequences has been shown to be greatly improved by employing gradient-based methods, such as GRAPE, for updating the control \cite{Jager2014}.
 One of the disadvantages of GRAPE is the dimension for the optimization. As the duration of the control pulse is discretised into $M$ time-steps, the control at each of these steps must be optimized. For long durations or small time-steps the resulting dimension of the optimization ($M$) will be very large. One can consider this type of control parametrisation having too many degrees of freedom for the optimization. 
 However, by employing a proper parametrisation of the control, the optimization dimension can be drastically reduced \cite{Winckel2008}.\\
@@ -182,7 +182,7 @@ Since the constraint function is simply the time discretized control itself, the
 Thus, the Jacobian of the constraints has $M * N$ entries, where $M$ is the number of time steps, and $N$ is the dimension of the optimization space. However, these elements are fast to retrieve, as they remain constant throughout the optimization. 
 
 
-\section{Interior Point Method}
+\section{Interior Point Method} \label{sec:IntPoint}
 Through the gradient of the cost functional, the control functions can be iteratively updated yielding an improved cost. The update of the control functions can be done using various hill-climbing methods.
 Interior point methods are modified versions of Newtons method for bound, constrained problems. The methods approach the solution from within the feasible region and provides efficient performance while having better theoretical properties than the standard simplex method \cite{wright}.\\
 
