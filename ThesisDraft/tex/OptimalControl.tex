@@ -2,10 +2,10 @@
 The fundamental problem of Quantum Optimal Control Theory is to steer the dynamics of a quantum system in a desired way through external fields \cite{Rice2000,Shapiro2003}. Often, the goal is the transfer from an initial state, $\ket{\psi_0}$, to the desired target-state, $\ket{\psi_{\mathrm{target}}}$. The fields responsible for controlling the dynamics of the system are parametrised by a set of control parameters or functions. Optimal control theory determines the parameters, which leads to the desired dynamics of the system \cite{Werschnik2007}.\\ 
 In control problems, the Hamiltonian of the system is given as
 \begin{equation}
-	\hat{H} = \hat{H}_0 + \hat{H}_I = \hat{H}_0 + \sum_{n = 1}^{m} u_n(t) \hat{H}_n \; ,
+	\hat{H} = \hat{H}_0 + \hat{H}_I = \hat{H}_0 + \sum_{n = 1}^{m}  \hat{H}_n (u_n(t)) \; ,
 	\label{eq:ControlHamiltonians}
 \end{equation} 
-where $\hat{H}_0$ is an uncontrollable drift of the Hamiltonian, $\hat{H}_i$ are the controllable fields, and $u_n(t)$ are the control functions or parameters. A quantum system like this is completely controllable if every unitary operator $\hat{U}$ is accessible from the identity operator $\hat{I}$ via a path $\gamma (t) = \hat{U}(t, t_0)$ satisfying \cite{Schirmer2001}
+where $\hat{H}_0$ is an uncontrollable drift of the Hamiltonian, $\hat{H}_n$ are the controllable fields, and $u_n(t)$ are the control functions or parameters. A quantum system like this is completely controllable if every unitary operator $\hat{U}$ is accessible from the identity operator $\hat{I}$ via a path $\gamma (t) = \hat{U}(t, t_0)$ satisfying \cite{Schirmer2001}
 \begin{equation}
 	i \partial_t \hat{U}(t, t_0) = \left( \hat{H}_0 + \hat{H}_I \right) \hat{U}(t, t_0) \; .
 \end{equation} 
@@ -27,94 +27,96 @@ Suppose the system is initially described by the state $\ket{\psi_0} = \ket{\psi
 which is given as half the infidelity between the target and the state at $t=T$. The cost function becomes zero, when the terminal state matches the target state up to an arbitrary phase. Hence, the optimal control problem can be formulated as a minimization problem of eq. \eqref{eq:infidelityCost} \cite{Jager2014}.\\
 Experimentally, large variations in the control parameter is often hard to achieve. Therefore, an extra term is often added to the cost function, which penalizes strong variations in the control. The new cost function reads
 \begin{equation}
-	J = J_T + \frac{\gamma}{2} \sum_{n=1}^{m} \int_{0}^{T} \left( \pdv{u_n}{t} \right)^2 \mathrm{d}t \; ,
+	J = J_T + J_R = J_T + \frac{\gamma}{2} \sum_{n=1}^{m} \int_{0}^{T} \left( \pdv{u_n}{t} \right)^2 \mathrm{d}t \; ,
 	\label{eq:grapeCost}
 \end{equation}
 where $\gamma$ weighs the relative importance between matching states and smoothness of the control \cite{Jager2014}. As the state transfer is considered the highest priority, $\gamma$ is set as $\gamma \ll 1$, such that $J_T$ dominates the cost function of eq. \eqref{eq:grapeCost}.\\
 
 A powerful way of performing optimal control is through the Gradient-Ascent Pulse Engineering (GRAPE) method. Through GRAPE, the gradient of the cost function \eqref{eq:grapeCost} can be evaluated and used to update the existing set of controls \cite{Khaneja2005}. Thereby, one achieves an optimization of the cost function.\\
-The gradient of the cost function can be derived in multiple ways. A common method \cite{Hohenester2007, Winckel2008, BECcontrol} is introducing a Lagrange multiplier, which forces the dynamics to obey the Schrödinger equations. The derivation utilizes functional derivatives, as time, $\ket{\psi (t)}$, and the Lagrange multiplier are considered continuous functions. Later, the functions are discretized to perform numerical computations. Although this procedure is fairly easy, higher order correction terms of the gradient are absent due to the continuity of the functions.\\
-Here, an alternative derivation following \cite{Khaneja2005, deFouquieres2011} is presented.
-
+The gradient of the cost function can be derived in multiple ways. A common method \cite{Hohenester2007, Winckel2008, BECcontrol} is introducing a Lagrange multiplier, which forces the dynamics to obey the Schrödinger equations. The derivation utilizes functional derivatives, as time, $\ket{\psi (t)}$, and the Lagrange multiplier are considered continuous functions. Later, the functions are discretized to perform numerical computations. Although this procedure is fairly easy, higher order correction terms of the gradient are absent due to the continuity of the functions. Here, an alternative derivation following \cite{Khaneja2005, deFouquieres2011} is presented in which the discretization is introduced immediately. \\
 Assume the transfer time, $T$, is discretized in $M$ equal steps, $\Delta t = T/M$. Therefore, the control become similarly discretized as
 \begin{equation}
 	u_n = \left( u_n (t_1) , \ldots , u_n (t_M)  \right) \equiv \left( u_n (1) , \ldots , u_n (M)  \right) \; .
 \end{equation}
 Likewise, the time-evolution of the system during the time step $j$ is given by the propagator
 \begin{equation}
-	\hat{\mathcal{U}}_j \equiv \hat{\mathcal{U}} (u(t_j)) = \exp \lbrace -i \left(  \sum_{n = 1}^{m} u_n(j) \hat{H}_n  \right) \Delta t \rbrace \; . 
+	\hat{\mathcal{U}}_j \equiv \hat{\mathcal{U}} (u(t_j)) = \exp \bigg\{ -i \left(  \sum_{n = 1}^{m}  \hat{H}_n (u_n(j))  \right) \Delta t \bigg\} \; . 
 \end{equation} 
 Thereby, the cost function \eqref{eq:grapeCost} becomes
 \begin{equation}
-	J = \frac{1}{2} \left( 1 - |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2 \right) + \frac{\gamma}{2} \sum_{n}^{m} \sum_{j}^{M-1} \left( \frac{\Delta u_n (j)}{\Delta t} \right)^2 \Delta t \; ,
+	J = \frac{1}{2} \left( 1 - |\braket{\psi_{\mathrm{target}} | \prod_{j = 1}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2 \right) + \frac{\gamma}{2} \sum_{n = 1}^{m} \sum_{j = 1}^{M-1} \left( \frac{\Delta u_n (j)}{\Delta t} \right)^2 \Delta t \; ,
 	\label{eq:discreteCost}
 \end{equation}
-where $\Delta u_n (j) =  u_n (j+1) - u_n (j)$.\\
-By defining $c \equiv \braket{\psi_{\mathrm{target}} | \psi (T)}$, the derivative with respect to the control of the first term of the discretized cost \eqref{eq:discreteCost} can be written as 
+where $\Delta u_n (j) =  u_n (j+1) - u_n (j)$. The full gradient of the cost, $\nabla J(\boldsymbol{u})$, is a vector of partial derivatives $\frac{\partial J(\boldsymbol{u})}{\partial u_n (j)}$.\\
+First, consider the derivative of the regularization
+\begin{align}
+	\frac{\partial J_R}{\partial u_n (j)} &= \frac{\gamma}{2} \left( 2 \frac{u_n (j) - u_n (j-1)}{\Delta t^2} - 2 \frac{u_n (j+1) - u_n (j)}{\Delta t^2} \right) \Delta t \nonumber \\
+	&= \frac{\gamma}{\Delta t} \left( 2 u_n (j) - u_n (j+1) - u_n (j-1) \right) \; . \label{eq:regularizationGrad}
+\end{align}
+The part of the gradient related to the regularization depends only on the control, whereby it can be calculated without considering the state of the system.\\ 
+Next, consider the derivative of $J_T$. Defining the transfer probability amplitude $\tau \equiv \braket{\psi_{\mathrm{target}} | \psi (T)}$, the derivative of the final infidelity with respect to the control can be written as 
 \begin{equation}
-	\frac{\partial J_T}{\partial u_n (j)} = \frac{\partial}{\partial u_n (j)} \left( \frac{1}{2} |\braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)}|^2  \right) = \Re \left( c^* \frac{\partial c}{\partial u_n (j)} \right) \; .
+	\frac{\partial J_T}{\partial u_n (j)} = - \frac{1}{2} \frac{\partial}{\partial u_n (j)}  \tau^* \tau   = - \Re \left( \tau^* \frac{\partial \tau}{\partial u_n (j)} \right) \; .
 	\label{eq:dJTdu}
 \end{equation}
-Focusing on $\frac{\partial c}{\partial u_n (j)}$ reveals
+From eq. \eqref{eq:dJTdu} it is evident that the derivative of the infidelity only depends on the derivative of the transfer probability amplitude, $\frac{\partial \tau}{\partial u_n (j)}$. This derivative can be rewritten as
 \begin{align}
-	\frac{\partial c}{\partial u_n (j)} &= \frac{\partial }{\partial u_n (j)} \braket{\psi_{\mathrm{target}} | \prod_{j}^{M} \hat{\mathcal{U}}_j | \psi (0)} \nonumber \\
+	\frac{\partial \tau}{\partial u_n (j)} &= \frac{\partial }{\partial u_n (j)} \braket{\psi_{\mathrm{target}} | \prod_{j = 1}^{M} \hat{\mathcal{U}}_j | \psi (0)} \nonumber \\
 	&= \bra{\psi_{\mathrm{target}}} \hat{\mathcal{U}}_M \ldots \hat{\mathcal{U}}_{j+1} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \hat{\mathcal{U}}_{j-1} \ldots \hat{\mathcal{U}}_{1} \ket{\psi (0)}
 	\label{eq:dcdu}
 \end{align}
-Multiplying eq. \eqref{eq:dcdu} with $c^*$ to recreate the result of eq. \eqref{eq:dJTdu} yields
+Multiplying eq. \eqref{eq:dcdu} with $\tau^*$ to recreate the result of eq. \eqref{eq:dJTdu} yields
 \begin{align}
-	c^* \frac{\partial c}{\partial u_n (j)} &= \left( \braket{\psi(T) | \psi_{\mathrm{target}}} \bra{\psi_{\mathrm{target}}} \right) \prod_{j' = j +1}^{M} \hat{\mathcal{U}}_{j '} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \prod_{j' = 1}^{ j-1} \hat{\mathcal{U}}_{j '} \ket{\psi (0)} \\
-	&= -i \bra{\chi (T)} \prod_{j' = j +1}^{M} \hat{\mathcal{U}}_{j '} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \prod_{j' = 1}^{ j-1} \hat{\mathcal{U}}_{j '} \ket{\psi (0)} \\
-	&= -i \bra{\chi (t_j)}  \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \ket{\psi (t_{j-1})} \; ,
+	\tau^* \frac{\partial \tau}{\partial u_n (j)} &=  \braket{\psi(T) | \psi_{\mathrm{target}}} \Braket{\psi_{\mathrm{target}} | \prod_{j' = j +1}^{M} \hat{\mathcal{U}}_{j '} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \prod_{j' = 1}^{ j-1} \hat{\mathcal{U}}_{j '} | \psi (0)} \\
+	&= i \Braket{\chi (T) | \prod_{j' = j +1}^{M} \hat{\mathcal{U}}_{j '} \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} \prod_{j' = 1}^{ j-1} \hat{\mathcal{U}}_{j '} | \psi (0)} \\
+	&= i \Braket{\chi (t_j) |  \frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} | \psi (t_{j-1})} \; ,
 	\label{eq:gradientForBack}
 \end{align}
-where $\ket{\chi (T)} \equiv -i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)}$ is the projection of the final state unto the target state. Notice how in eq. \eqref{eq:gradientForBack} the state $\ket{\chi (T)}$ has been propagated backwards in time.\\ 
-The derivative of the propagator, $\hat{\mathcal{U}}_{j}$, is non-trivial, due to the non-commutativity of the operators, $[ \hat{H}_0 \; , \; \hat{H}_n ]$. This results in a series of higher order corrections to the derivative.
-Expressing the derivative as a Taylor series yields
+where $\ket{\chi (T)} \equiv i \ket{\psi_{\mathrm{target}}} \braket{\psi_{\mathrm{target}} | \psi (T)}$ is the projection of the final state unto the target state. Notice how in eq. \eqref{eq:gradientForBack} the state $\ket{\chi (T)}$ has been propagated backwards in time.\\ 
+The derivative of the propagator, $\hat{\mathcal{U}}_{j}$, is non-trivial, due to possible non-commutativity between the Hamiltonian and its derivative. This results in a series of higher order corrections to the derivative of propagator.
+Expanding the propagator as a Taylor series before taking the derivative gives
 \begin{align}
-	\frac{\partial}{\partial u_n (j)} \left[ -i \hat{H} \Delta t \right] &= \sum_{p=1}^{\infty} \frac{ \left( -i \Delta t \right) ^p }{p!} \sum_{q=0}^{p-1} \hat{H}^k \hat{H}_n \hat{H}^{p-q-1} \nonumber \\
-	&= \sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{A^p B A^q}{(p+q+1)!} \; ,
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} &= \frac{\partial}{\partial u_n (j)}  \exp \left( -i \hat{H} \Delta t \right) \nonumber \\
+	&= \sum_{p = 0}^{\infty} \frac{( -i \Delta t  )^p}{p!} \frac{\partial \hat{H}^p}{\partial u_n (j)} \; .  
 	\label{eq:derivTaylorExp}
-\end{align}  
-where $A = -i \hat{H} \Delta t$ and $B = -i \hat{H}_n \Delta t$. The factorial in the denominator can be split using
-\begin{equation}
-	\frac{1}{(p+q+1)!} = \frac{1}{p q !} \int_{0}^{1} (1-\alpha)^p \alpha^q \mathrm{d}\alpha \; ,
-\end{equation}
-whereby eq. \eqref{eq:derivTaylorExp} can be expressed as
-\begin{equation}
-	\sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{A^p B A^q}{(p+q+1)!} =  e^{A} \int_{0}^{1} e^{- \alpha A} B e^{ \alpha A} \mathrm{d}\alpha \; .
-	\label{eq:doublesumToInt}
-\end{equation}
-Evaluating the resulting integral yields an iterative series of commutators
-\begin{equation}
-	\int_{0}^{1} e^{- \alpha A} B e^{ \alpha A} \mathrm{d}\alpha = \sum_{k=0}^{\infty} \frac{ (-1)^k}{(k+1)!} \left[ A \; , \; B \right]_k \; , 
-	\label{eq:integralToComm}
-\end{equation}
-where $\left[ A \; , \; B \right]_k = \left[ A \; , \; \left[ A \; , \; B \right]_{k-1} \right]$ and $\left[ A \; , \; B \right]_0 = B$. This is otherwise known as the Baker–Campbell–Hausdorff expansion \cite{Wilcox1967}.\\
-Combining equations \eqref{eq:derivTaylorExp}, \eqref{eq:doublesumToInt}, and \eqref{eq:integralToComm}, the derivative of the propagator can be written as the commutator series 
-\begin{equation}
-	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} = \exp \{ -i \hat{H} \Delta t \} \left( -i \hat{H}_n \Delta t + \frac{(\Delta t)^2}{2} \left[ \hat{H} , \hat{H}_n  \right] + \frac{i (\Delta t)^3}{6} \left[ \hat{H} , \left[ \hat{H} , \hat{H}_n  \right]  \right] - \ldots \right) \; .
-	\label{eq:higherOrderGradient}
-\end{equation}
-For small time-steps the higher order corrections can be neglected, however, choosing a larger time-step reduces the run-time of the time-evolution, which is critical when describing many-body systems. Therefore, including higher order contributions increases the accuracy, whereby larger time-steps can be employed. Computing the higher order corrections can be done efficiently by analytically deriving the commutators beforehand. The increase in accuracy achieved depends on the system, as it is determined by the commutator $\left[ \hat{H} , \hat{H}_n  \right]$.\\
-Lastly, combining equations \eqref{eq:dJTdu}, \eqref{eq:gradientForBack}, and \eqref{eq:higherOrderGradient} produces the final expression for the gradient of $J_T$ for the control at time $t_j$ 
-\begin{equation}
-		\frac{\partial J_T}{\partial u_n (j)}  = - \Re \left( \bra{\chi (t_j)} \hat{H}_n + \mathrm{h.o.}  \ket{\psi (t_{j})} \right)  \Delta t \; ,
-\end{equation}
-where $\mathrm{h.o.}$ denotes higher order terms described in eq. \eqref{eq:higherOrderGradient}.\\
-
-The gradient of the cost function requires the computation of the regularisation term as well. The simplest approach is deriving the gradient from the continuous expression \eqref{eq:grapeCost} by taking the functional derivative
+\end{align}
+As mentioned before the Hamiltonian may not commute with its derivative. Therefore, one must be careful when taking the derivative of $\hat{H}^p$. Retaining the ordering of the operators while taking the derivative yields
 \begin{align}
-	\frac{\delta }{\delta u_n (t')} \left[ \frac{\gamma}{2} \sum_{n=1}^{m} \int_{0}^{T} \left( \pdv{u_n}{t} \right)^2 \mathrm{d}t \right]
-	&= \frac{\gamma}{2} \frac{\delta }{\delta u_n (t')} \left[ u_n \dot{u}_n \Big|_0^T - \int_0^T u_n \ddot{u}_n \mathrm{d}t \right] \nonumber \\
-	&=  - \frac{\gamma}{2} \int_0^T \left( \pdv{u_n}{u_n (t')} \ddot{u}_n + u_n \pdv{\ddot{u}_n}{u_n (t')} \right) \mathrm{d}t  \nonumber \\
-	&=  - \gamma \ddot{u}_n \; . \label{eq:regularisationGradient} 
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} &= \sum_{p=1}^{\infty} \frac{ \left( -i \Delta t \right) ^p }{p!} \sum_{q=0}^{p-1} \hat{H}^q \frac{\partial \hat{H}}{\partial u_n (j)} \hat{H}^{p-q-1} \nonumber \\
+	&= \sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{A^p B A^q}{(p+q+1)!} \; , \label{eq:derivTaylorExp2}
 \end{align} 
-The continuous second derivative $\ddot{u}_n$ can easily be discretized for numerical calculations. Hence, the final expression for the cost gradient elements are given by
+where $A = -i \hat{H} \Delta t$ and $B = -i \partial \hat{H}/\partial u_n (j) \Delta t$ have been defined for notational convenience. Through the standard relations of the gamma function, $\Gamma (z)$, one can derive the identity
 \begin{equation}
-	\frac{\partial J}{\partial u_n (j)}  = - \Re \left( \bra{\chi (t_j)} ( \hat{H}_n + \mathrm{h.o.} )  \ket{\psi (t_{j})} \right)  \Delta t - \gamma \ddot{u}_n \; .
+	\frac{1}{(p+q+1)!} = \frac{1}{p! q !} \int_{0}^{1} (1-\alpha)^p \alpha^q \mathrm{d}\alpha \; .
+\end{equation}
+Thereby eq. \eqref{eq:derivTaylorExp2} can be expressed as
+\begin{align}
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} &= \sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{A^p B A^q}{p! q !}  \int_{0}^{1} (1-\alpha)^p \alpha^q \mathrm{d}\alpha \nonumber \\
+	&= \int_{0}^{1} \sum_{p=0}^{\infty} \sum_{q=0}^{\infty} \frac{(A (1- \alpha))^p}{p!} B \frac{(A \alpha)^q}{q!}  \mathrm{d}\alpha \nonumber \\
+	&= \int_{0}^{1} e^{ (1- \alpha) A} B e^{ \alpha A} \mathrm{d}\alpha \nonumber \\
+	 &= e^A \int_{0}^{1} e^{ - \alpha A} B e^{ \alpha A} \mathrm{d}\alpha \; , \label{eq:eq:derivTaylorExp3}
+\end{align}
+where the expansion of the exponential function has been used to eliminate the sums. Although eq. \eqref{eq:eq:derivTaylorExp3} looks rather simple, however, evaluating the integral in its current form is a fairly hard task. Instead, the integral can be explicitly solved by applying the Baker–Campbell–Hausdorff expansion 
+\begin{equation}
+	e^X Y e^{-X} = \sum_{k = 0}^{\infty} \frac{ [ X,Y  ]_k }{k!} = Y + [ X,Y  ] + \frac{1}{2!} [ X , [ X,Y  ]] + \frac{1}{3!} [X, [ X , [ X,Y  ]]  ] + ...
+\end{equation}
+where $[ X , Y ]_k = [ X ,[ X , Y]]_{k-1}$ and $[X,Y]_0 = Y$ is the definition of the recursive commutator \cite{Wilcox1967}. Thus, eq. \eqref{eq:eq:derivTaylorExp3} reads
+\begin{align}
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (j)} &=  e^A \int_{0}^{1} \sum_{k = 0}^{\infty } \alpha^{k+1} \frac{(-1)^k}{k!} [ A,B  ]_k \mathrm{d}\alpha \nonumber \\
+	&= e^A  \sum_{k = 0}^{\infty }  \frac{(-1)^k}{(k+1)!} [ A,B  ]_k \; .
+\end{align}
+Inserting this final expression for the derivative of the propagator into eq. \eqref{eq:dJTdu}, one finds the exact derivative of the infidelity 
+\begin{align}
+\frac{\partial J_T}{\partial u_n (j)} &=  - \Re  \Braket{\chi (t_j) | i e^{-i \hat{H} \Delta t}  \sum_{k = 0}^{\infty }  \frac{(-1)^k}{(k+1)!} \left[ -i \hat{H} \Delta t , -i \frac{\partial \hat{H}}{\partial u_n (j)} \Delta t  \right]_k | \psi (t_{j-1})}  \nonumber \\
+	&=  - \Re  \Braket{\chi (t_{j-1}) | \sum_{k = 0}^{\infty }  \frac{i^{k+1} \Delta t^{k+1}}{(k+1)!} \left[ \hat{H} , \frac{\partial \hat{H}}{\partial u_n (j)}  \right]_k | \psi (t_{j-1})}  \; . \label{eq:higherOrderGradient}
+\end{align}
+For small time-steps the higher order corrections can be neglected, however, choosing a larger time-step reduces the run-time of the time-evolution, which is critical when describing many-body systems. Therefore, including higher order contributions increases the accuracy, whereby larger time-steps can be employed. Computing the higher order corrections can be done efficiently by analytically deriving the commutators beforehand. The increase in accuracy achieved depends on the system, as it is determined by the commutator $[ \hat{H} , \partial \hat{H} / \partial u_n (j) ]$.\\
+Finally, combining the derivatives of eq. \eqref{eq:regularizationGrad} and \eqref{eq:higherOrderGradient} produces the entries of the gradient vector for the cost function
+\begin{equation}
+	\frac{\partial J (\boldsymbol{u})}{\partial u_n (j)}  = - \Re \Braket{\chi (t_{j-1}) | \left( i \frac{\partial \hat{H}}{\partial u_n (j)} \Delta t + \mathrm{h.o.} \right)  | \psi (t_{j-1})}  + \frac{\gamma}{\Delta t} \left( 2 u_n (j) - u_n (j+1) - u_n (j-1) \right) \; .
 	\label{eq:costGradient}
-\end{equation}\\
+\end{equation}
+Here $\mathrm{h.o.}$ denotes all higher order terms ($k > 0$).\\ 
 
 Through the analytically derived gradient, the cost can be iteratively updated using gradient-based optimization methods until a desired threshold is reached. This forms the framework of the Gradient-Ascent Pulse Engineering (GRAPE) algorithm \cite{Khaneja2005}, which is summarised below:
 

@@ -41,6 +41,9 @@
 \sodef\an{}{0.2em}{.9em plus.6em}{1em plus.1em minus.1em}
 \newcommand\stext[1]{\an{\scshape#1}}
 
+\let\origtau\tau % save the original form of '\tau'
+\renewcommand{\tau}{\scalebox{1.44}{$\origtau$}}
+
 \usepackage{microtype} 
 \usepackage{booktabs}
 
