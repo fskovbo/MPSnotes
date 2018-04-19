@@ -323,7 +323,7 @@ In order to efficiently conduct optimal control of a Bose-Hubbard system, a slig
 \end{equation}
 The number of terms needed in the expansion to accurately describe the exponentiation depends on the operator. Performing the exponentiation through a series expansion is a relatively expensive operator. Therefore, it is crucial to find an easier way of constructing the time evolution operator.
 One method is by considering the form of the Bose-Hubbard Hamiltonian. The most natural choice of control parameter is the lattice depth, $V_0$, as it is controllable experimentally. The lattice depth determines both the tunneling matrix element, $J$ (eq. \eqref{eq:BHparamJ}), and the interaction matrix element, $U$ (eq. \eqref{eq:BHparamU}), and has served as control parameter in other studies CITE.   
-Unfortunately exponentiating the hopping terms of the Bose-Hubbard Hamiltonian was relatively high. Therefore, it was concluded that keeping $J$ fixed and using $U$ as the control parameter was the better option. Due to the diagonal form of the number operator, $\hat{n}_i$, the exponentiation of the interaction term can be built directly without the need for the series expansion of eq. \eqref{eq:exponentialSeries}.
+Unfortunately exponentiating the hopping terms of the Bose-Hubbard Hamiltonian is a relatively costly computation. Therefore, it was concluded that keeping $J$ fixed and using $U$ as the control parameter was the better option. Due to the diagonal form of the number operator, $\hat{n}_i$, the exponentiation of the interaction term can be built directly without the need for the series expansion of eq. \eqref{eq:exponentialSeries}.
 However, simply exponentiating the different terms of the Bose-Hubbard Hamiltonian separately is not possible, as the operators do not commute. Therefore, one must expand the time evolution operator into its components through the Suzuki-Trotter expansion. To second order the Suzuki-Trotter expansion reads
 \begin{equation}
 	\exp\left(  ( \hat{V} + \hat{W}  ) \delta \right) = \exp\left(  \hat{V} \delta /2  \right) \exp\left(  \hat{W} \delta   \right) \exp\left(  \hat{V} \delta /2  \right) + O(\delta^3) \; . \label{eq:SuzukiTrotter}
@@ -367,8 +367,64 @@ A single time step, $\Delta t$, using the expanded operator is represented diagr
 \end{figure}
 The sequence of contractions of the left-to-right sweep is shown in figure \ref{fig:TEBDContraction}. The MPS is initially centered on the first tensor, while its remaining tensors are all right-normalised. By contracting the bonds marked with a bold line, the operators are efficiently applied to the MPS. In step (iii) the two-site tensor, $\Theta$, is split using an SVD, where the bond dimension of the tensors is truncated. This is crucial in order to maintain a reduced dimensionality, which would otherwise result in a significant increase in contraction time. In the final step (iv), the central cite of the MPS is moved to the start of the next two-site operator through another site merge and subsequent SVD. This step is exactly as in the original tDMRG algorithm. Thereby the normalisation of the MPS is "pushed" to the right and contained in a single site, which makes it easy to deal with in the end of the time evolution step.\\
 As the center reaches the end of the MPS, the direction of the sweep is reversed. The right-to-left sweep is very similar to the sequence described above. The main difference is in the order of contractions, as the $\hat{\mathcal{U}}_{J}^{[i,i+1]} (\Delta t)$-operator is applied before the $\hat{\mathcal{U}}_{U}^{[i]} (\Delta t /2)$-operator. As the sweep, and thereby the central cite, reaches the first site of the MPS, the central site is divided by its norm. Thereby the MPS is normalised and in the same configuration as before the time step. Thus, further propagations can be performed readily.\\ 
-Additional precision is achieved when evaluating the potential at the beginning and end points of the time interval CITE DANIEL STECK. Thus, the left-to-right sweep applies the operator $\hat{\mathcal{U}}_{U(t)}^{[i]} (\Delta t /2)$, while the right-to-left sweep applies $\hat{\mathcal{U}}_{U(t + \Delta t)}^{[i]} (\Delta t /2)$.\\
+Additional precision is achieved when evaluating the potential at the beginning and end points of the time interval CITE DANIEL STECK. Thus, the left-to-right sweep applies the operator $\hat{\mathcal{U}}_{U(t)}^{[i]} (\Delta t /2)$, while the right-to-left sweep applies $\hat{\mathcal{U}}_{U(t + \Delta t)}^{[i]} (\Delta t /2)$.
 
+
+\subsubsection{Gradient of Suzuki-Trotter propagator}
+In section \ref{sec:GRAPE} the derivative of the cost function with regards to the control was derived for a general propagator. However, expanding the propagator using the Suzuki-Trotter expansion while having a diagonal control Hamiltonian causes all higher order contributions of the gradient to drop out. Instead, the precision of the gradient is solely determined by the order of the expansion.\\
+Consider the gradient entries for the cost function
+\begin{equation}
+	\frac{\partial J}{\partial u_n (t_j)} = - \Re \Braket{\chi (t_j) | i \frac{ \partial \hat{\mathcal{U}}_{j}}{\partial u_n (t_j)} | \psi (t_{j-1})} \; ,
+\end{equation}
+where the derivative of a general propagator with respect to the control is given by
+\begin{equation}
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (t_j)} = e^{-i \hat{H} (u_n (t_j)) \Delta t}  \sum_{k = 0}^{\infty }  \frac{i^k \Delta t^{k+1}}{(k+1)!} \left[ \hat{H} (u_n (t_j)) , \frac{\partial \hat{H} (u_n (t_j))}{\partial u_n (t_j)}  \right]_k \;.
+\end{equation}
+The algorithm in this instance employs a Suzuki-Trotter expansion of the propagator while considering the control at both start and end of the step. For cleaner notation the Hamiltonian, which in this case is the Bose-Hubbard Hamiltonian of eq. \eqref{BHhamil}, will be parametrized as $\hat{H}(U(t_j)) \equiv \hat{H}_J + U(t_j) \hat{H}_U$. Note, that the control in this instance is the interaction strength, $u_n (t_j) \equiv U (t_j)$. Thus, the full propagator reads
+\begin{equation}
+	\hat{\mathcal{U}}_{j}^{\mathrm{ST}} = \exp \left( -i U(t_j) \hat{H}_U \Delta t /2 \right) \exp \left( -i \hat{H}_J \Delta t \right) \exp \left( -i  U(t_{j-1}) \hat{H}_U  \Delta t /2 \right)  \equiv \hat{\mathcal{U}}_{j}^{U} \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \; .
+\end{equation}
+Since the control at times $t_j$ and $t_{j-1}$ both contribute to $\hat{\mathcal{U}}_{j}^{\mathrm{ST}}$, the elements of the cost gradient are
+\begin{equation}
+	\frac{\partial J}{\partial U (t_j)} = - \Re \Braket{\chi (t_j) | i  \frac{\partial \hat{\mathcal{U}}_{j}^{\mathrm{ST}}}{\partial U (t_j)} | \psi (t_{j-1})} - \Re \Braket{\chi (t_{j+1}) | i \frac{ \partial \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}}}{\partial U (t_j)} | \psi (t_{j})} \; . \label{eq:STcostderiv}
+\end{equation}
+Further examining the derivative of the first propagator reveals
+\begin{align}
+	\frac{\partial \hat{\mathcal{U}}_{j}^{\mathrm{ST}}}{\partial U (t_j)} &=  \frac{\partial \hat{\mathcal{U}}_{j}^{U}}{\partial U (t_j)} \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \nonumber \\
+	&=  \exp \left( -i U (t_j) \hat{H}_U  \Delta t /2 \right)  \sum_{k = 0}^{\infty }  \frac{i^k \Delta t^{k+1}}{(k+1)!} \left[ U (t_j) \hat{H}_U  ,  \hat{H}_U \right]_k \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \nonumber \\
+	&= \left(  \hat{H}_U \Delta t /2 \right) \exp \left( -i U(t_j) \hat{H}_U  \Delta t /2 \right)   \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \nonumber \\
+	&= \left(  \hat{H}_U \Delta t /2 \right) \hat{\mathcal{U}}_{j}^{\mathrm{ST}} \; . \label{eq:STpropderiv1}
+\end{align}
+Since $\hat{H}_U$ is diagonal, the following relation apply for the recursive commutator 
+\begin{equation}
+	\left[ U (t_j) \hat{H}_U  ,  \hat{H}_U \right]_k =  
+	\begin{cases}
+    	\hat{H}_U, & \text{if $k = 0$}.\\
+    	0, & \text{otherwise}.
+  	\end{cases} \; ,
+\end{equation}  
+which causes all higher-order contributions to the derivative of the propagator to drop out.\\
+Likewise, the derivative of the second propagator is
+\begin{equation}
+	\frac{\partial \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}}}{\partial u_n (j)} =  \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}} \left(  \hat{H}_U \Delta t /2 \right) \; . \label{eq:STpropderiv2}
+\end{equation}
+Inserting the derivatives of eq. \eqref{eq:STpropderiv1} and \eqref{eq:STpropderiv2} into the derivative of the cost (eq. \eqref{eq:STcostderiv}) yields
+\begin{align}
+	\frac{\partial J}{\partial U (t_j)} &= - \Re \Braket{\chi (t_j) | i  \left(  \hat{H}_U \Delta t /2 \right) \hat{\mathcal{U}}_{j}^{\mathrm{ST}} | \psi (t_{j-1})} - \Re \Braket{\chi (t_{j+1}) | i \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}} \left(  \hat{H}_U \Delta t /2 \right) | \psi (t_{j})} \nonumber \\
+	&= - \Re \Braket{\chi (t_j) | i    \hat{H}_U \Delta t /2  | \psi (t_{j})} - \Re \Braket{\chi (t_{j}) | i    \hat{H}_U \Delta t /2   | \psi (t_{j})} \nonumber \\
+	&= - \Re \Braket{\chi (t_j) | i \hat{H}_U \Delta t | \psi (t_{j})} \; . \label{eq:STcostgrad}
+\end{align}  
+Thus, the combination of the Suzuki-Trotter expansion and a diagonal control Hamiltonian eliminates all higher order contributions to the gradient. Thereby, the gradient of the cost is exact up to the order of the expansion.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/CompareGradientsGRAPE.pdf}
+    \caption{\textit{\textbf{(a)}: Numerical gradient along with gradient calculated via eq. \eqref{eq:STcostgrad}. \textbf{(b)}: Difference between the two gradients. \textbf{(c)}: Absolute relative difference between the two gradients.}}
+    \label{fig:CompareGradientsGRAPE}
+\end{figure}
+A comparison between a numerically calculated gradient and the analytically derived gradient of eq. \eqref{eq:STcostgrad} can be seen in Figure \ref{fig:CompareGradientsGRAPE}. The difference between the two gradients is largest at the beginning of the sequence, due to the accumulated error from the time evolution, since $\ket{\chi (0)}$ is derived from two time evolutions over the entire duration.
+
+
+\subsubsection{Time complexity of time-evolution algorithms}
 The Suzuki-Trotter expansion \eqref{eq:SuzukiTrotter} does not determine the ordering of the operators. Thus, an alternative algorithm exists, where the half-step is taken through the $\hat{\mathcal{U}}_{J}^{[i,i+1]}$ operator. However, applying the two-site operators are in general more time consuming than applying two single-site operator.
 \begin{figure}[h!]
     \centering
