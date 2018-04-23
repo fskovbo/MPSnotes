@@ -56,7 +56,7 @@ The dipole potential in equation \eqref{eq:dipolepot} scales with the intensity 
  where $V_0 = | \frac{3 \pi c^2}{2 \omega_{0}^3} \frac{\Gamma}{\Delta} 4 I_0 |$ from equation \eqref{eq:dipolepot}. In practise, a one dimensional lattice like that of equation \eqref{eq:standwave} is created by shining a single laser beam at a mirror, whereby it interferes with itself.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.8\columnwidth]{Figures/OpticalLattice.pdf} 
+	\includegraphics[width=0.7\columnwidth]{Figures/OpticalLattice.pdf} 
 	\caption{\textit{\textbf{(a)} Two dimensional optical lattice formed by two mutually orthogonal laser beams. These tubes have a characteristic cigar shape, due to the Gaussian profile of the lasers. \textbf{(b)} Upon using three orthogonal laser beams, the result is a three dimensional lattice reminiscent of a cubic crystal. Figure is adopted from \cite{WideraThesis}.}}
 	\label{fig:OpticalLattice} 
 \end{figure}
@@ -87,11 +87,11 @@ where $N_L$ is the number of primitive cells of the lattice. The Wannier functio
 thus forming a complete basis \cite{manybodyBloch}. 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.8\columnwidth]{Figures/WannierPlot3.pdf} 
-	\caption{\textit{Two one-dimensional Wannier functions plotted for a lattice potential depth of $V_0 = 8 E_r$.}}
+	\includegraphics[width=0.8\columnwidth]{Figures/WannierFunctions.pdf} 
+	\caption{\textit{Two one-dimensional Wannier functions plotted for lattice depths of $V_0 = 4.5 E_r$ \textbf{(a)} and $V_0 = 14 E_r$ \textbf{(b)} respectively.}}
 	\label{fig:WannierPlot} 
 \end{figure}
-Figure \ref{fig:WannierPlot} shows Wannier functions plotted for lattice potential depths within the tight binding limit. As evident from the plot, the functions overlap with only their nearest neighbours. In the case of a more shallow lattice, the functions would extends to further wells, while they will tend towards a Gaussian shape as the lattice depth increases \cite{greiner}.
+Figure \ref{fig:WannierPlot}.a shows Wannier functions plotted for lattice potential depths within the tight binding limit. As evident from the plot, the functions overlap with only their nearest neighbours. In the case of a more shallow lattice, the functions would extends to further wells, while they will tend towards a Gaussian shape as the lattice depth increases \cite{greiner}, which can be seen in figure \ref{fig:WannierPlot}.b.
 
 
 
@@ -197,7 +197,7 @@ The Gross-Pitaevskii equation is very similar to the Schrödinger equation with 
 
 
 
-\section{Bose-Hubbard Model of Interacting Bosons in a Lattice}
+\section{Bose-Hubbard Model of Interacting Bosons in a Lattice} \label{sec:BHmodel}
 The Bose-Hubbard model describes weakly interacting bosons in a periodic lattice within the tight binding limit. The model is perfectly capable of predicting results with good accuracy, however, two conditions must hold in order for the it to be valid: (i) both the thermal energy and the mean interaction energy at a single site must be much smaller than the separation to first excited band, $\hbar \omega_0$, and (ii) the Wannier functions decay essentially within the length of the lattice constant \cite{manybodyBloch}.\\
 Under these conditions one is assured that only the lowest band is taken into account, and that only nearest-neighbour interactions take place.\\
 The Bose-Hubbard model is interesting, as it supports two distinct phases: the Superfluid phase and the Mott-Insulator phase. Furthermore, the model contains effects such as a quantum phase transition between the two phases mentioned above, which can be crossed without any change in external parameters. 
@@ -212,9 +212,8 @@ Consider the Hamiltonian for bosonic particles in a trapping potential (describe
 \end{align}
 where
 \begin{align}
-	J_{i j} &= - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \\
+	J_{i j} &= - \int \mathrm{d}x \ w^*(x-x_i) \left( - \frac{\hbar^2}{2 m} \nabla ^2 + V(x) \right) w(x-x_j) \label{eq:BHparamJ} \\
 	U_{i j k l} &= g \int \mathrm{d}x \ w^*(x-x_i) w^*(x-x_j) w(x-x_k) w(x-x_l) 
-	\label{eq:BHparamJ}
 \end{align}
 Since the system is periodic, one can consider a single site, $i = 0$, as representative for the entire lattice. In this way, the different terms of the Hamiltonian can be interpreted as follows:
 \begin{align}
@@ -230,13 +229,19 @@ Due to the rapid decay of the Wannier functions, the overlap of wavefunctions is
 	\hat{H} = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} + \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) + \sum_{i} \varepsilon_i \hat{n}_i \; ,
 	\label{BHhamil}
 \end{equation}
-where $J = J_{0 1}$, $\langle i,j \rangle$ only counts neighbouring pairs, and
+where $J = J_{0 1}$, the bracket $\langle i,j \rangle$ denotes only counting neighbouring pairs, and
 \begin{equation}
 	U = U_{0 0 0 0} = g \int \mathrm{d}x \ |w(x)|^4 \; .
 	\label{eq:BHparamU}
 \end{equation}
 The first term of the Bose-Hubbard Hamiltonian describes the kinematics within the model, which takes the form of tunneling between neighbouring sites. This is interpreted by annihilating a particle at site $j$ while creating a particle at site $i$. The second term describes the interaction between particles within a single site, and the last term $\sum_{i} \varepsilon_i \hat{n}_i$ takes into account a possible potential offset at different sites.
-
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{Figures/UJparameters.pdf} 
+	\caption{\textit{Tunneling matrix element, $J$, of eq. \eqref{eq:BHparamJ} and interaction strength, $U$, of eq. \eqref{eq:BHparamU} as function of lattice depth. The phase transition between the superfluid and Mott Insulator is marked with a dashed line.}}
+	\label{fig:UJparameters} 
+\end{figure}
+Figure \ref{fig:UJparameters} illustrates the parameters of the Bose-Hubbard model as function of the lattice depth. The tunneling matrix element falls of very quickly with increasing lattice depth, as the Wannier functions become localized to their respective wells, thus reducing their overlap. The localization of the Wannier functions also causes the on-site interaction strength to increase.
 
 \subsection{Phases of the Bose-Hubbard Model}
 
