@@ -238,7 +238,7 @@ The first term of the Bose-Hubbard Hamiltonian describes the kinematics within t
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\columnwidth]{Figures/UJparameters.pdf} 
-	\caption{\textit{Tunneling matrix element, $J$, of eq. \eqref{eq:BHparamJ} and interaction strength, $U$, of eq. \eqref{eq:BHparamU} as function of lattice depth. The phase transition between the superfluid and Mott Insulator is marked with a dashed line.}}
+	\caption{\textit{Tunneling matrix element, $J$, of eq. \eqref{eq:BHparamJ} and interaction strength, $U$, of eq. \eqref{eq:BHparamU} as function of lattice depth. The parameters are calculated for Rubidium-87 atoms in an optical lattice with wavelength $\lambda = 1064 \mathrm{nm}$. The phase transition between the superfluid and Mott Insulator is marked with a dashed line.}}
 	\label{fig:UJparameters} 
 \end{figure}
 Figure \ref{fig:UJparameters} illustrates the parameters of the Bose-Hubbard model as function of the lattice depth. The tunneling matrix element falls of very quickly with increasing lattice depth, as the Wannier functions become localized to their respective wells, thus reducing their overlap. The localization of the Wannier functions also causes the on-site interaction strength to increase.
@@ -351,14 +351,7 @@ Landau theory is a general theory regarding phase transitions, which states that
 \begin{equation}
 	E_{MF} = \text{const. } + a |\psi|^2 + b |\psi|^4 + \ldots \label{eq:landau}
 \end{equation} 
-Plotting this yields an effective potential, seen in figure \ref{fig:landau}, which dictates certain properties of the system.
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.7\columnwidth]{Figures/Landau_theory.pdf} 
-\caption{	\textit{Effective potential as function of the order parameter $\psi$. For $a<0$ the properties of the potential change from having a single, central minimum to having two separated minima. This is an example of spontaneous symmetry breaking associated with a phase transition. \cite{plischke}}}
-\label{fig:landau} 
-\end{figure} 
-
+Plotting this yields an effective potential, which dictates certain properties of the system.
 The potential is symmetric in the complex plane allowing the system to have any phase. Furthermore, at some critical value of $a$, (here $a = 0$), the potential will shift from having a single central minimum to having minima at some $|\psi|$. This is a U(1) spontaneous symmetry breaking, which in Landau theory is associated with a phase transition \cite{plischke}. Thus, one need to compute the parameter $a$ of equation \eqref{eq:landau}.\\
 One method is using second order perturbation theory, where the $\hat{\psi} = 0$ case is solved exactly, followed by adding a small $\hat{\psi}$ as a perturbation
 \begin{equation}
@@ -406,14 +399,14 @@ As stated earlier $U_{crit}$ can be found from $a = 0$:
 \begin{equation}
 	0 \overset{!}{=} 1 + \frac{n}{\bar{U} (n-1) - \bar{\mu}} + \frac{n+1}{\bar{\mu} - \bar{U} n} \; ,
 \end{equation}
-with $\bar{mu} = \frac{\mu}{J z}$ and $\bar{U} = \frac{U}{J z}$. Finally, the solution for the chemical potential is \cite{vanoosten}
+with $\bar{\mu} = \frac{\mu}{J z}$ and $\bar{U} = \frac{U}{J z}$. Finally, the solution for the chemical potential is \cite{vanoosten}
 \begin{equation}
-	\bar{mu}_{\pm} = \frac{1}{2} \left( \bar{U}(2n -1) \pm \frac{1}{2} \sqrt{\bar{U}^2 - 2 \bar{U} (2 n +1)} \right) \; .
+	\bar{\mu}_{\pm} = \frac{1}{2} \left( \bar{U}(2n -1) \pm \frac{1}{2} \sqrt{\bar{U}^2 - 2 \bar{U} (2 n +1)} \right) \; .
 \end{equation}
 Understanding this result can be done be examining figure \ref{fig:SFMOTT}, which displays a phase diagram of the Bose-Hubbard model.  
 \begin{figure}[h]
 	\centering
-	\includegraphics[width = 0.7\textwidth]{Figures/SFMottPhase.pdf}
+	\includegraphics[width = 0.5\textwidth]{Figures/SFMottPhase.pdf}
 	\label{fig:SFMOTT}
 	\caption{\textit{Phase diagram of Bose-Hubbard model for T = 0. Grey areas mark the Mott Insulator phase for different number of particles per site, while white regions mark the superfluid phase. \cite{greiner}}}
 \end{figure}
