@@ -1,0 +1,87 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \numb {2};
+	\def \hdist {1.5};
+	\def \offset {6};
+
+    \foreach \i in {1,...,\numb} {
+        \node[tensorl] (tt\i) at (\i*\hdist, 0) {};
+        \node[operator] (o\i) at (\i*\hdist, -1.5) {};
+        \node[tensorl] (tb\i) at (\i*\hdist, -3) {};  
+        
+        \draw[-] (tt\i) -- (o\i);
+        \draw[-] (o\i) -- (tb\i);
+    };
+    \foreach \i in {1,...,1} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+    \foreach \i in {\offset,...,8} {
+        \node[tensorl] (tt\i) at (\i*\hdist, 0) {};
+        \node[operator] (o\i) at (\i*\hdist, -1.5) {};
+        \node[tensorl] (tb\i) at (\i*\hdist, -3) {};  
+        
+        \draw[-] (tt\i) -- (o\i);
+        \draw[-] (o\i) -- (tb\i);
+    };
+    \foreach \i in {\offset,...,7} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+        \draw[-] (o\i) -- (o\iplusone);
+    };
+    
+    \node[tensor] (tt) at (\numb*\hdist+1.5*\hdist, 0) {$U$};
+    \node[operator] (o) at (\numb*\hdist+1.5*\hdist, -1.5) {};
+    \node[tensor] (tb) at (\numb*\hdist+1.5*\hdist, -3) {$U^{\dag}$};
+
+	\draw[-] (tt) -- (o);
+	\draw[-] (tb) -- (o);
+    
+    \node (at1) at (\numb*\hdist+0.8*\hdist, 0) {$\alpha_{i-1}$};
+    \node (at2) at (\numb*\hdist+2.25*\hdist, 0) {$\alpha_{i}$};
+    \node (ab1) at (\numb*\hdist+0.8*\hdist, -3) {$\alpha_{i-1} '$};
+    \node (ab2) at (\numb*\hdist+2.25*\hdist, -3) {$\alpha_{i} '$};
+    \node (b1) at (\numb*\hdist+0.8*\hdist, -1.5) {$\beta_{i-1}$};
+    \node (b2) at (\numb*\hdist+2.25*\hdist, -1.5) {$\beta_{i}$};
+    
+    \draw[-] (tt\numb) -- (at1);
+    \draw[-] (tb\numb) -- (ab1);
+    \draw[-] (o\numb) -- (b1);
+    \draw[-] (tt) -- (at1);
+    \draw[-] (tb) -- (ab1);
+    \draw[-] (o) -- (b1);
+    \draw[-] (tt) -- (at2);
+    \draw[-] (tb) -- (ab2);
+    \draw[-] (o) -- (b2);
+    
+    
+    \draw[->, line width=1mm] (\numb*\hdist+2.65*\hdist,-1.5) -- (\numb*\hdist+3.55*\hdist,-1.5);
+    
+    \node (at3) at (\offset*\hdist+\numb*\hdist+0.8*\hdist, 0) {$\alpha_{i}$};
+    \node (ab3) at (\offset*\hdist+\numb*\hdist+0.8*\hdist, -3) {$\alpha_{i} '$};
+    \node (b3) at (\offset*\hdist+\numb*\hdist+0.8*\hdist, -1.5) {$\beta_{i}$};
+    \draw[-] (tt8) -- (at3);
+    \draw[-] (tb8) -- (ab3);
+    \draw[-] (o8) -- (b3);
+    
+    \node (L1) at (2.5,-4) {$L^{[i-1]}$};
+    \node (L2) at (\offset*\hdist+\hdist,-4) {$L^{[i]}$};
+
+    
+    \node (eq) at (\offset*\hdist+\numb*\hdist+1.35*\hdist,-1.5) {$\equiv$};
+    
+
+    \node (dummy1) at (\offset*\hdist+\numb*\hdist+2.8*\hdist,0) {$\alpha_{i}$};
+ 	\node (dummy2) at (\offset*\hdist+\numb*\hdist+2.8*\hdist,-3) {$\alpha_{i} '$};
+ 	\node (dummy3) at (\offset*\hdist+\numb*\hdist+2.8*\hdist,-1.5) {$\beta_{i}$};
+	\node[tensor] (mat) at (\offset*\hdist+\numb*\hdist+2*\hdist , -1.5) {};    
+    
+    \draw[-] (dummy1.west) .. controls (\offset*\hdist+\numb*\hdist+2*\hdist, 0) .. (mat.north);
+    \draw[-] (dummy2.west) .. controls (\offset*\hdist+\numb*\hdist+2*\hdist, -3) .. (mat.south);
+	\draw[-] (mat) -- (dummy3);   
+	
+	
+	\node (L3) at (\offset*\hdist+\numb*\hdist+2.25*\hdist,-4) {$L^{[i]}$}; 
+\end{tikzpicture}

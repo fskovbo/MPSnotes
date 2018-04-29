@@ -1,0 +1,25 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\node[tensor, label={\small $A^{[n-2]}$}] (1) at (1, 0) {};
+	\node[tensor, label={\small $A^{[n-1]}$}] (2) at (2, 0) {};
+	\node[tensor, label={\small $A^{[n]}$}] (3) at (3, 0) {};
+	\node[tensor, label={\small $A^{[n+1]}$}] (4) at (4, 0) {};
+	\node[tensor, label={\small $A^{[n+2]}$}] (5) at (5, 0) {};
+	\node (index1) at (1, -0.8) {$j_{n-2}$};
+	\node (index2) at (2, -0.8) {$j_{n-1}$};
+	\node (index3) at (3, -0.8) {$j_{n}$};
+	\node (index4) at (4, -0.8) {$j_{n+1}$};
+	\node (index5) at (5, -0.8) {$j_{n+2}$};	
+	
+	\node (edge1) at (0,0) {\ldots};
+	\node (edge2) at (6.0,0) {\ldots};
+	
+	\foreach \i in  {1,...,5} {
+		\draw[-] (\i) -- (index\i);	
+	};
+	\foreach \i in  {1,...,4} {
+		\pgfmathtruncatemacro{\iplusone}{\i + 1};
+		\draw[-] (\i) -- (\iplusone);	
+	};
+	\draw[-] (1) -- (edge1);
+	\draw[-] (5) -- (edge2);	
+\end{tikzpicture}

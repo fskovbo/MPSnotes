@@ -1,0 +1,20 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\foreach \i in  {1,...,5} {
+		\node[tensor] (t\i) at (\i*2-1, 0) {};
+		\node[tensor] (b\i) at (\i*2-1, -2) {};
+		\draw[-] (t\i) -- (b\i);	
+	};
+	\foreach \i in  {1,...,4} {
+		\pgfmathtruncatemacro{\iplusone}{\i + 1};
+		\draw[-] (t\i) -- (t\iplusone);
+		\draw[-] (b\i) -- (b\iplusone);
+	};
+	
+	\node (node1) at (0.7, -1) {\textbf{1}};
+	\node (node2) at (2, 0.3) {\textbf{2}};
+	\node (node3) at (2, -2.3) {\textbf{3}};
+	\node (node4) at (2.7, -1) {\textbf{4}};
+	
+	\node (psi) at (10, 0) {$\ket{\psi}$};
+	\node (phi) at (10, -2) {$\bra{\phi}$};
+\end{tikzpicture}

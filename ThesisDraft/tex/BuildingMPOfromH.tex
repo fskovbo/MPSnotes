@@ -1,0 +1,38 @@
+\chapter{Example: Building an MPO from a Hamiltonian}
+\label{chap:buildMPO}
+Consider the Bose-Hubbard Hamiltonian , which consists of both nearest-neighbour tunneling terms and on-site interactions terms
+\begin{equation}
+	\hat{H} = - J \sum_{\langle i,j \rangle} \hat{a}_{i}^{\dag} \hat{a}_{j} + \frac{U}{2} \sum_{i} \hat{n}_i \left( \hat{n}_i -1 \right) \; .
+	\label{eq:BHhamil}
+\end{equation}
+The Hamiltonian can be expressed as a sum of strings of operators - most of these being identities just like in equation \ref{eq:localOperator}. Moving through such a string from the right, one will at some point encounter one of 3 non-trivial operators. This can be summarized as 4 different possible states of the string of operators on a given bond:
+\begin{enumerate}
+	\item
+	Only identities to the right of the bond.
+	\item
+	An $\hat{a}^{\dag}$ operator just to the right of the bond.
+	\item
+	An $\hat{a}$ operator just to the right of the bond.
+	\item
+	A completed tunneling \textit{or} the interaction term, $\frac{U}{2} \hat{n} \left( \hat{n} -1 \right)$, somewhere to the right.
+\end{enumerate}
+When moving through the string of operators from the right, only certain transitions between these state are possible. For instance $\boldsymbol{1 \rightarrow 1}$, where one starts in state 1, and the next operator is an identity. Likewise, $\boldsymbol{1 \rightarrow 2,3,4}$ are all possible, since these transitions represent the next operator being non-trivial. Next, $\boldsymbol{2 \rightarrow 4}$ completes the hopping $-J \hat{a}^{\dag} \hat{a}$ - a similar transition exists for the other hopping term $\boldsymbol{3 \rightarrow 4}$. Finally, the transition $\boldsymbol{4 \rightarrow 4}$ is needed to continue iterating through the operator chain after having passed the non-trivial operators. This can be encoded in the operator-valued matrix
+\begin{equation}
+ W^{[i]} \: = \: \begin{pmatrix}
+\hat{I} & 0 & 0 & 0  \\
+\hat{a}^{\dag} & 0 & 0 & 0  \\
+\hat{a} & 0 & 0 & 0 \\
+\frac{U}{2} \hat{n} \left( \hat{n} -1 \right) & -J \hat{a} & -J \hat{a}^{\dag} &  \hat{I}
+\end{pmatrix} \; ,
+\label{eq:MPOmatrix}
+\end{equation}
+which contains all the allowed transitions between the five state \cite{schollwock}. When one starts moving through the operator chain from the right side, one obviously begins in state 1 and ends in state 4. This can be encoded in the two vectors
+\begin{equation*}
+ \vec{v}_{left} = (0 , 0 , 0  , 1) \quad , \quad \vec{v}_{right} = (1  , 0 ,0 , 0)^T \; .
+\end{equation*}
+Thus, the Bose-Hubbard Hamiltonian can be written as an MPO 
+\begin{equation}
+	\hat{H} = \sum_{\boldsymbol{j}, \boldsymbol{j'}} \vec{v}_{left} \; W^{[1] j_1 , j_1 '} W^{[2] j_2 , j_2 '} \ldots W^{[N] j_N , j_N '} \; \vec{v}_{right} \; \ket{\boldsymbol{j}} \bra{\boldsymbol{j'}} \; .
+	\label{eq:MPOhamiltonian}
+\end{equation}
+Often, the two closing vectors are implicitly multiplied unto the outer matrices for a cleaner notation. Observe how all of this was done without having to do a single numerical computation. The resulting MPO can now readily be applied to an MPS.

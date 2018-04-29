@@ -1,0 +1,29 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\node[tensor, minimum width=1.6cm,label={\small $A$}] (tens1) at (1.5, 0) {};
+	\node (node1) at (1, -0.8) {};
+	\node (node2) at (2, -0.8) {};
+	\node (node3) at (0, 0) {};
+	\node (node4) at (3, 0) {};
+	\draw[-] (node1) -- (node1 |-  tens1.south);
+	\draw[-] (node2) -- (node2 |-  tens1.south);
+	\draw[-] (node3) -- (tens1);
+	\draw[-] (node4) -- (tens1);
+		
+	
+	\draw[->, line width=1mm] (4,0) -- (5.5,0);
+	
+	
+	\node[tensor,label={\small $U$}] (blok1) at (7, 0) {};
+	\node[matrix,label={\small $S$}] (mat1) at (8, 0) {};
+	\node[tensor,label={\small $V^{\dag}$}] (blok2) at (9, 0) {};
+	\node (node11) at (7, -0.8) {};
+	\node (node12) at (9, -0.8) {};
+	\node (node13) at (6.2, 0) {};	
+	\node (node14) at (9.8, 0) {};
+	\draw[-] (blok1) -- (node11);
+	\draw[-] (blok1) -- (node13);
+	\draw[-] (blok1) -- (mat1);
+	\draw[-] (mat1) -- (blok2);
+	\draw[-] (blok2) -- (node12);
+	\draw[-] (blok2) -- (node14);			
+\end{tikzpicture}

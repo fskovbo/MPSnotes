@@ -1,0 +1,28 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \hdist {1.5};
+	\def \numb {5};
+	\def \vleg {1};
+	\def \NL {3};
+
+	\foreach \i in  {1,...,\numb} {
+		\node[tensor] (\i) at (\i*\hdist, 0) {};
+		\node (index\i) at (\i*\hdist, -\vleg) {};
+		\draw[-] (\i) -- (index\i);	
+	};
+	
+	\foreach \i in  {1,...,4} {
+		\pgfmathtruncatemacro{\iplusone}{\i + 1};
+		\draw[-] (\i) -- (\iplusone);
+	};
+	
+	\foreach \i in  {1,...,\NL} {
+		\node[tensorl] (\i) at (\i*\hdist, 0) {};
+	};
+	
+	\node[tensorc] (C) at (\numb*\hdist-\hdist, 0) {};
+	\node[tensorr] (R) at (\numb*\hdist, 0) {};
+
+
+	\node (indexL) at (1*\hdist, -\vleg -0.2) {$j_1$};
+	\node (indexR) at (\numb*\hdist, -\vleg -0.2) {$j_N$};		
+\end{tikzpicture}

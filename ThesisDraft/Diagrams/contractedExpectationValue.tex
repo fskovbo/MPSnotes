@@ -1,0 +1,11 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\node[tensor] (tens1) at (1,0) {};
+	\node[tensor] (tens2) at (1,-2) {}; 
+ 	\node[operator] (op) at (1,-1) {O};
+ 	
+ 	\draw[-] (tens1) -- (op);
+ 	\draw[-] (tens2) -- (op);
+ 
+    \draw[-] (tens1.west) .. controls (0, 0) and (0, -2) .. (tens2.west);
+    \draw[-] (tens1.east) .. controls (2, 0) and (2, -2) .. (tens2.east);
+\end{tikzpicture}

@@ -1,0 +1,46 @@
+\input{../config/Preamble}
+\input{../config/TensorPreamble}
+
+\begin{document}
+
+\begin{titlingpage}
+\thispagestyle{empty}
+\centering
+{ \setlength{\baselineskip}{24pt}
+{\large \stext{October 2017}} \par\vspace*{2\onelineskip}
+
+\huge\stext{Master Thesis Draft} 
+
+\par\vspace
+*
+{8\onelineskip} 
+
+\large\stext{Frederik S. M\o ller} \par
+\large\stext{IFA, Aarhus University}\par
+\vspace*{2\onelineskip}
+}
+\end{titlingpage}
+
+\tableofcontents
+\newpage
+
+\input{tex/ColdGases}
+\input{tex/OptimalControl}
+\input{tex/MatrixProductStates}
+\input{tex/TensorAlgorithms}
+\input{tex/Results}
+
+
+\newpage
+
+\bibliography{../config/references}
+\bibliographystyle{plain}
+
+\newpage
+
+\appendix
+\input{tex/LZoptimalControl}
+\input{tex/MPSdiagrammatics}
+\input{tex/BuildingMPOfromH}
+
+\end{document}

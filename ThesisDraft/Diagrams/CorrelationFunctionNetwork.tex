@@ -1,0 +1,33 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \vdist {2.5};
+	\def \hdist {1.5};
+	\def \wid {2};
+	\def \numb {5};
+
+	\node[tensorc] (tt1) at (1*\hdist,0) {};
+	\node[tensorc] (tb1) at (1*\hdist,-\vdist) {};
+	
+	 \foreach \i in {2,...,\numb} {
+        \node[tensorr] (tt\i) at (\i*\hdist, 0) {};
+		\node[tensorr] (tb\i) at (\i*\hdist,-\vdist) {};
+           
+        \draw[-] (tt\i) -- (tb\i);
+    };
+    
+    \foreach \i in {2,...,4} {
+        \pgfmathtruncatemacro{\iplusone}{\i + 1};
+        \draw[-] (tt\i) -- (tt\iplusone);
+        \draw[-] (tb\i) -- (tb\iplusone);
+	};
+
+	\draw[-] (tt1) -- (tb1);
+ 	\draw[-] (tt1) -- (tt2);
+ 	\draw[-] (tb1) -- (tb2);
+ 	 
+ 	\node[operator] (op1) at (1*\hdist,-\vdist/2) {$\hat{O}$};
+	\node[operator] (op2) at (\numb*\hdist,-\vdist/2) { $\hat{Q}$};
+  
+ 
+    \draw[-] (tt1.west) .. controls (\hdist-1, 0) and (\hdist-1, -\vdist) .. (tb1.west);
+    \draw[-] (tt\numb.east) .. controls (1+\numb*\hdist, 0) and (1+\numb*\hdist, -\vdist) .. (tb\numb.east);
+\end{tikzpicture}

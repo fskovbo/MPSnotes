@@ -1,0 +1,40 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \imgcenter {5.25};
+	\def \imgwidth {15};
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+
+
+    \node[tensor] (M1) at (1 , 0) {};
+    \node[tensor] (M2) at (2.5 , 0) {};
+	\node[tensor, minimum width=2cm] (sig) at (9, 0) {};
+	
+	\node (j1) at (1 ,-1) {$j_n$};
+	\node (j2) at (2.5 ,-1) {$j_{n+1}$};
+	\node (a1) at (-0.2 ,0) {$\alpha_{n-1}$};
+	\node (a2) at (3.7 ,0) {$\alpha_{n+1}$};    
+    
+	\draw[-] (M1) -- (j1);
+	\draw[-] (M1) -- (a1);
+	\draw[-] (M1) -- (M2);
+	\draw[-] (M2) -- (j2);
+	\draw[-] (M2) -- (a2);
+	
+	
+	\node (node1) at (8.35, -1) {$j_n$};
+	\node (node2) at (9.65, -1) {$j_{n+1}$};
+	\node (as1) at (7 ,0) {$\alpha_{n-1}$};
+	\node (as2) at (11 ,0) {$\alpha_{n+1}$};
+	
+	\draw[-] (node1) -- (node1 |-  sig.south);
+	\draw[-] (node2) -- (node2 |-  sig.south);
+	\draw[-] (sig) -- (as1);
+	\draw[-] (sig) -- (as2);		
+	
+	\draw[->, line width=1mm] (4.5,0) -- (6,0);
+	
+	\node (Mlab1) at (1,0.8) {$M^{[n]}$};
+	\node (Mlab2) at (2.5,0.8) {$M^{[n+1]}$};
+	\node (Siglab) at (9,0.6) {$\Theta$};
+	
+	
+\end{tikzpicture}

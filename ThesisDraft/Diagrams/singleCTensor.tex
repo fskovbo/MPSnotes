@@ -1,0 +1,10 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\node[tensorc, label={\small $\Psi^{[n]}$}] (tensor1) at (0, 0) {};
+	\node (index1) at (0, -1) {};
+	\node (index2) at (1, 0) {};
+	\node (index3) at (-1, 0) {};
+	
+	\draw[-] (tensor1) -- (index1);
+	\draw[-] (tensor1) -- (index2);
+	\draw[-] (tensor1) -- (index3);
+\end{tikzpicture}

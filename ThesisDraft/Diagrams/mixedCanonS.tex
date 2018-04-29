@@ -1,0 +1,34 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \hdist {1.5};
+	\def \numb {5};
+	\def \vleg {1};
+	\def \NL {3};
+
+	\foreach \i in  {1,...,\NL} {
+		\node[tensorl] (\i) at (\i*\hdist, 0) {};
+		\node (index\i) at (\i*\hdist, -\vleg) {};
+		\draw[-] (\i) -- (index\i);	
+	};
+	
+	\foreach \i in  {1,...,2} {
+		\pgfmathtruncatemacro{\iplusone}{\i + 1};
+		\draw[-] (\i) -- (\iplusone);
+	};
+	
+	\foreach \i in  {5,...,6} {
+		\node[tensorr] (\i) at (\i*\hdist-\hdist/1.5, 0) {};
+		\node (index\i) at (\i*\hdist-\hdist/1.5, -\vleg) {};
+		\draw[-] (\i) -- (index\i);	
+	};
+
+	\foreach \i in  {5,...,5} {
+		\pgfmathtruncatemacro{\iplusone}{\i + 1};
+		\draw[-] (\i) -- (\iplusone);
+	};
+	
+	\node[matrix, label={\small $S$}] (S) at (\NL*\hdist+\hdist/1.5,0) {};
+	\draw[-] (\NL) -- (S);
+	\draw[-] (S) -- (5);
+	\node (indexL) at (1*\hdist, -\vleg -0.2) {$j_1$};
+	\node (indexR) at (6*\hdist-\hdist/1.5 , -\vleg -0.2) {$j_N$};			
+\end{tikzpicture}

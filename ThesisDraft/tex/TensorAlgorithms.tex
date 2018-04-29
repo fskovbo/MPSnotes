@@ -1,0 +1,438 @@
+\chapter{Tensor Network Algorithms}
+Although matrix product states enables analytical treatment of certain classes of quantum states \cite{Baxter1968,Affleck1987}, their real power becomes evident when performing numerical computations. These computations require algorithms, which are capable of exploiting the properties of the matrix product states. The Density-Matrix Renormalization Group (DMRG) was developed as the most powerful numerical method to study one-dimensional quantum lattice systems \cite{White1992,White1993}. Years later the connection between the DMRG method and matrix product states was made, as these two approaches share many features \cite{Ostlund1995, Dukelsky1998}. Formulating the DMRG method in the MPS language made several extensions to the algorithm possible, which would otherwise have been very difficult to express within the DMRG framework \cite{schollwock}. Among these extensions one finds the tDMRG algorithm, which borrows elements from DMRG in order to perform time-evolution of a matrix product state.\\
+This chapter covers variational ground state search through the DMRG method and time-evolution of matrix product states through the tDMRG algorithm.
+
+
+\section{Variational Ground State Search}
+For large systems exact diagonalization of the Hamiltonian is impossible, whereby one must resort to variational methods in order to find ground states. This involves finding the MPS, $\ket{\psi}$, which minimizes
+\begin{equation}
+	E = \frac{\bra{\psi} \hat{H} \ket{\psi}}{\braket{\psi | \psi}} \; .
+\end{equation}
+The most efficient way to do this, is to express the Hamiltonian as an MPO as described in eq. \eqref{eq:MPOrep}, whereby it easily can be applied to an MPS. While this may seem difficult at first, it can actually be done without any lengthy calculations. An example is given in Appendix \ref{chap:buildMPO}, where the Bose-Hubbard Hamiltonian is formulated as tensors.
+
+\subsection{Efficient Application of a Hamiltonian to an MPS}
+In section \ref{sec:MPO} it was explained how to apply an MPO to an MPS, and it was shown how to efficiently evaluate local operators. However, since $\hat{H} \ket{\psi}$ must be evaluated many times during variational methods, one must find even more efficient way of applying the operator.\\
+Consider an MPS in a mixed-canonical form
+\begin{align}
+	\ket{\psi} &= \sum_{\boldsymbol{j}} A^{j_1} \ldots A^{j_{n-1}} \Psi^{j_n} B^{j_{n+1}} \ldots B^{j_{N}} \ket{\boldsymbol{j}} \nonumber \\
+	&= \sum_{\alpha_{n-1} , \alpha_{n}} \ket{\alpha_{n-1}}_A \Psi_{\alpha_{n-1} , \alpha_{n}}^{j_n}  \ket{\alpha_{n}}_B \; ,
+	\label{eq:MPSmixedsingle}
+\end{align}
+where $\Psi^{j_n}$ is the central site, and $\ket{\alpha_{n-1}}_A$ and $\ket{\alpha_{n}}_B$ are block states introduced in eq. \eqref{eq:mixedA} and \eqref{eq:mixedB} respectively.
+Huge reductions in computational cost of the variational search can be found by re-using as many calculations as possible. In the basis $\{ \ket{\alpha_{n-1} } \; , \; \ket{ j_n } \; , \; \ket{\alpha_{n} } \}$ the individual matrix elements of the Hamiltonian can be expressed as
+\begin{equation*}
+	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \sum_{\boldsymbol{j} , \boldsymbol{j'}}  W^{j_1 , j_1 '} \ldots W^{j_N , j_N '}  \braket{\alpha_{n-1} j_n \alpha_{n} | \boldsymbol{j}} \braket{\boldsymbol{j'} | \alpha_{n-1} ' j_n ' \alpha_{n} '} \; . 
+\end{equation*}
+Since the basis of local states $\{ \ket{\boldsymbol{j}} \}$ shares a state with the basis $\{ \ket{\alpha_{n-1} } \; , \; \ket{ j_n } \; , \; \ket{\alpha_{n} } \}$, the above expression can be re-written using $\sum_{\boldsymbol{j}} \braket{j_n | \boldsymbol{j}} = \sum_{\boldsymbol{j *}} \ket{ \boldsymbol{j *}}$, where "$\boldsymbol{*}$" means "excluding $j_n$". Thus,
+\begin{align}
+&	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \nonumber \\
+ &= \sum_{\boldsymbol{j *} , \boldsymbol{j' * }}  W^{j_1 , j_1 '} \ldots W^{j_n , j_n '} \ldots W^{j_N , j_N '} \nonumber \\
+	& \qquad \times \braket{\alpha_{n-1} | j_1 \ldots j_{n-1}} \braket{\alpha_{n} | j_{n+1} \ldots j_{N}} \braket{j_1 ' \ldots j_{n-1} ' | \alpha_{n-1} '} \braket{j_{n+1} ' \ldots j_{N} ' | \alpha_{n} '} \nonumber \\
+	&= \sum_{\boldsymbol{j *} , \boldsymbol{j' * }}  W^{j_1 , j_1 '} \ldots W^{j_n , j_n '} \ldots W^{j_N , j_N '} \nonumber \\
+	& \qquad \times \left( A^{j_1} \ldots A^{j_{n-1}} \right)_{1 , \alpha_{n-1}}^{*} \left( B^{j_{n+1}} \ldots B^{j_{N}} \right)_{ \alpha_{n} , 1}^{*} \left( A^{j_1 '} \ldots A^{j_{n-1} '} \right)_{1 , \alpha_{n-1} '} \left( B^{j_{n+1} '} \ldots B^{j_{N} '} \right)_{ \alpha_{n} ' , 1} \nonumber \\
+	&= \sum_{\alpha_n , \beta_n , \alpha_n '}
+	\left( \sum_{j_1 , j_1 '} A_{1 , \alpha_1}^{j_1 *} W_{1, \beta_1}^{j_1 , j_1 '} A_{1 , \alpha_1 '}^{j_1 '} \right)
+	\left( \sum_{j_2 , j_2 '} A_{\alpha_1 , \alpha_2}^{j_2 *} W_{\beta_1, \beta_2}^{j_2 , j_2 '} A_{\alpha_1 ' , \alpha_2 '}^{j_2 '} \right)
+	\ldots W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \nonumber \\
+	& \qquad \times \left( \sum_{j_{n+1} , j_{n+1} '} B_{\alpha_n , \alpha_{n+1}}^{j_{n+1} *} W_{\beta_n, \beta_{n+1}}^{j_{n+1} , j_{n+1} '} B_{\alpha_n ', \alpha_{n+1} '}^{j_{n+1} '} \right)
+	\left( \sum_{j_{N} , j_{N} '} B_{\alpha_{N-1} , 1}^{j_{N} *} W_{\beta_{N-1}, 1}^{j_{N} , j_{N} '} B_{\alpha_{N-1}' , 1 }^{j_{N} '} \right)  \; .
+\end{align}  
+While this expression may seem terrible complicated due to all the indices, it is actually rather easy to understand. First, the matrix element is written excluding the local basis state $\ket{j_n}$. Next, the Hamilton MPO is projected into the block states of A, $\ket{\alpha_{n-1}}_A$, and B, $\ket{\alpha_{n}}_B$. Finally, the matrices are grouped according to their expansion in the local basis. Working with the above expression appears cumbersome, but it is merely a decoupling of the system into three distinct parts, which can be seen in figure \ref{fig:singleElemHamil}.
+\begin{figure}[h!]
+	\centering
+	\input{Diagrams/singleElementHamiltonian.tex}
+	\caption{\textit{Representation of the matrix element $\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '}$ as an tensor network. Expressing the matrix element in this form decouples the network in three parts: The matrices of the MPO, $W^{[n]}$, connecting the physical sites of the matrix element, and contracted parts L and R consisting of the rest of the MPO and the left- and right-normalised part of the MPS respectively.}}
+	\label{fig:singleElemHamil}
+\end{figure}
+Since both the left and right side of the network is connected, one can contract these parts into two separate tensors $L$ and $R$ called "environments":
+\begin{align}
+	L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} &= \sum_{ \substack{ \{ \alpha_i \beta_i \alpha_i ' \} \\ i < n-1}} \left( \sum_{j_1 , j_1 '} A_{1 , \alpha_1}^{j_1 *} W_{1, \beta_1}^{j_1 , j_1 '} A_{1 , \alpha_1 '}^{j_1 '} \right) \ldots \left( \sum_{j_{n-1} , j_{n-1} '} A_{\alpha_{n-2} , \alpha_{n-1}}^{j_{n-1} *} W_{\beta_{n-2}, \beta_{n-1}}^{j_{n-1} , j_{n-1} '} A_{\alpha_{n-2} ' , \alpha_{n-1} '}^{j_{n-1} '} \right) \label{eq:Ltensor} \\
+	R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} &= \sum_{ \substack{ \{ \alpha_i \beta_i \alpha_i ' \} \\ i > n}} \left( \sum_{j_{n+1} , j_{n+1} '} B_{\alpha_n , \alpha_{n+1}}^{j_{n+1} *} W_{\beta_n, \beta_{n+1}}^{j_{n+1} , j_{n+1} '} B_{\alpha_n ', \alpha_{n+1} '}^{j_{n+1} '} \right) \left( \sum_{j_{N} , j_{N} '} B_{\alpha_{N-1} , 1}^{j_{N} *} W_{\beta_{N-1}, 1}^{j_{N} , j_{N} '} B_{\alpha_{N-1}' , 1 }^{j_{N} '} \right) \label{eq:Rtensor}
+\end{align}
+From these contractions, the obvious tripartite structure of the Hamiltonian matrix element, as seen in figure \ref{fig:singleElemHamil}, can be written in a compact way
+\begin{equation}
+	\bra{\alpha_{n-1} j_n \alpha_{n}} \hat{H} \ket{\alpha_{n-1} ' j_n ' \alpha_{n} '} = \sum_{\beta_{n-1} , \beta_{n}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} \; W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \; R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} \; .
+\end{equation}
+Finally, applying this parametrization of the Hamiltonian to the MPS of eq. \eqref{eq:MPSmixedsingle} yields \cite{schollwock}
+\begin{equation}
+	\hat{H} \ket{\psi} = \sum_{\beta_{n-1} , \beta_{n}} \sum_{\alpha_{n-1}' , j_n ', \alpha_{n}'} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '} \; W_{\beta_{n_1}, \beta_n}^{j_n , j_n '} \; R_{\alpha_{n} ,\beta_{n} , \alpha_{n} '} \; \Psi_{\alpha_{n-1} ' , \alpha_{n} '}^{j_n '} \ket{\alpha_{n-1}}_A \ket{j_n} \ket{\alpha_{n}}_B \; .
+	\label{eq:HPsi}
+\end{equation}
+As mentioned earlier, evaluating $\hat{H} \ket{\psi}$ must be done many times during a variational search of the ground state, hence this operation must be executed as fast as possible. Examining eq. \eqref{eq:HPsi} one will notice, that while the boundaries of $L$ and $R$ will change depending on which site is being optimized, the bulk of the two tensors remain constant through a lot of the calculations. Instead of calculating $L$ and $R$ from eq. \eqref{eq:Ltensor} and \eqref{eq:Rtensor} for every evaluation of eq. \eqref{eq:HPsi}, one can iteratively build them, since they only change by one column of the network at a time. Thus, a large number of computations can be reused.\\
+Consider the construction of the tensor $L^{[i]}$. This can be built iteratively from the left by contracting the previous left-tensor $L^{[i-1]}$ with the i'th column of the network consisting of $A^{[i]}$, $W^{[i]}$ and $A^{[i] \dag}$
+\begin{equation}
+	L_{\alpha_i , \beta_i , \alpha_i '}^{[i]} = \sum_{\substack{ j_i , j_i ' \\ \alpha_{i-1} , \beta_{i-1} , \alpha_{i-1} '}} W_{\beta_{i-1} , \beta_i}^{[i] j_i , j_i '} \left( A^{[i] j_i \dag} \right)_{\alpha_i , \alpha_{i-1}} L_{\alpha_{i-1} , \beta_{i-1} , \alpha_{i-1} '}^{[i-1]} A_{\alpha_{i-1} ' , \alpha_i '}^{[i] j_i '} \; .
+\end{equation}
+This iterative update of $L^{[i]}$ can be seen illustrated in figure \ref{fig:buildLTensor}. The square-bracket notation has been re-introduced to keep track of the tensors relation to the physical sites. In order to remain consistent with notation, the dummy scalars $L_{\alpha_0 , \beta_0 , \alpha_0 '}^{[0]}  = 1  = \alpha_0 , \beta_0 , \alpha_0 '$ has been introduced.\\
+\begin{figure}[h!]
+	\centering
+	\input{Diagrams/buildLTensor.tex}
+	\caption{\textit{Iterative update from $L^{[i-1]}$ to $L^{[i]}$. This is done through a contraction of $L^{[i-1]}$ with $A^{[i]}$, $W^{[i]}$ and $A^{[i] \dag}$. The result is a tensor with three horizontal legs.}}
+	\label{fig:buildLTensor}
+\end{figure}
+It is important to store every iteration of $L^{[i]}$, since $L$ will grow and shrink constantly throughout the variational search of the ground state, whereby every iteration of $L^{[i]}$ will be used multiple times.
+The same applies when building the right environment, $R$. Here one starts from the right and moves left when iteratively contracting the tensor. By applying optimal bracketing, the computational cost of updating the environments scales as $\mathrm{O}(d D^3 D_W)$.
+  
+
+\subsection{Iterative Ground State Search and the DMRG Algorithm} \label{sec:DMRG}
+In order to find the ground state of the system on can introduce a Lagrangian multiplier, $\lambda$, and extremize
+\begin{equation}
+	\bra{\psi} \hat{H} \ket{\psi} - \lambda \braket{\psi | \psi} \; ,
+	\label{eq:lagrange}
+\end{equation}
+whereby the desired ground state, $\ket{\psi}$, and ground state energy, $\lambda^0$, will be reached.\\
+Trying to optimize an entire MPS at once is a highly non-linear problem involving an extremely large number of variables. However, the problem can be linearised by only considering the variables of a single tensor (site) at a time, while keeping the rest of the MPS constant. By varying just a single tensor at a time, one will continuously find states lower in energy, until convergence is reached. However, this procedure is very prone to getting stuck in a local extrema. To circumvent this, one can consider two sites at a time and optimize with regards to a two-site tensor, created by momentarily merging the two sites \cite{White1993}.\\
+Consider the variation of the tensors $M^{[n]}$ and $M^{[n+1]}$. Expressing the minimization problem of eq. \eqref{eq:lagrange} in terms of the left and right environments (as done in eq. \eqref{eq:HPsi}) yields
+\begin{align}
+	\bra{\psi} \hat{H} \ket{\psi} &= \sum_{\substack{j_n , j_n ' \\ j_{n+1} , j_{n+1} '}} \sum_{\alpha_{n-1} ' , \alpha_n ', \alpha_{n+1} '} \sum_{\alpha_{n-1} , \alpha_n , \alpha_{n+1}} \sum_{\beta_{n-1} , \beta_n , \beta_{n+1}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} \; W_{\beta_{n_1}, \beta_n}^{[n] j_n , j_n '} \; W_{\beta_{n}, \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '} \nonumber \\
+	& \qquad \times R_{\alpha_{n+1} ,\beta_{n+1} , \alpha_{n+1} '}^{[n+2]} \; M_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n } \; M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *}  \label{eq:twositeHamil}\\
+	\braket{\psi | \psi} &= \sum_{j_n , j_{n+1} } \sum_{\substack{\alpha_{n-1} ' \\ \alpha_n ', \alpha_{n+1} '}} \sum_{\substack{\alpha_{n-1} , \alpha_n \\ \alpha_{n+1}}} \Psi_{\alpha_{n-1},\alpha_{n-1}'}^{A} \; M_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n } \; M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *} \; \Psi_{\alpha_{n+1},\alpha_{n+1}'}^{B} \; , \label{eq:twositeOverlap}
+\end{align}
+where the Hamiltonian from eq. \eqref{eq:HPsi} has been re-ordered to accommodate examining two sites, $n$ and $n+1$, at a time, and 
+\begin{align}
+\Psi_{\alpha_{n-1},\alpha_{n-1}'}^{A} &= \sum_{j_1 , \ldots , j_{n-1}} \left( M^{j_{n-1} \dag} \ldots M^{j_{1} \dag} M^{j_1} \ldots M^{j_{n-1}} \right) _{\alpha_{n-1} , \alpha_{n-1} '} \label{eq:psiA} \\
+\Psi_{\alpha_{n+1},\alpha_{n+1}'}^{B} &= \sum_{j_{n+2} , \ldots , j_{N}} \left( M^{j_{n+2} } \ldots M^{j_{N} } M^{j_N \dag} \ldots M^{j_{n+2} \dag} \right) _{\alpha_{n+1} ', \alpha_{n+1} } \; .
+\end{align}
+Further simplifications can be made for mixed-canonical forms, if sites $1$ through $n-1$ are left-normalized, and sites $n+2$ through $N$ are right-normalized, whereby
+\begin{equation}
+	\Psi_{\alpha_{n-1},\alpha_{n-1}'}^{A} = \delta_{\alpha_{n-1},\alpha_{n-1}'} \qquad , \qquad \Psi_{\alpha_{n+1},\alpha_{n+1}'}^{B} = \delta_{\alpha_{n+1},\alpha_{n+1}'} \; .
+\end{equation}
+Finding the extremum of eq. \eqref{eq:lagrange} with respect to $M_{\alpha_{n-1} ' , \alpha_{n} '}^{[n] j_n ' *} \; M_{\alpha_{n} ' , \alpha_{n+1} '}^{[n+1] j_{n+1} ' *}$ is done through the following sequence:
+
+\subsubsection{Two-site update for iterative ground state search}
+\begin{enumerate}
+\item
+\textbf{Merge:} Contract the two matrices $M^{[n]}$ and $M^{[n+1]}$ over the bond $\alpha_{n}$ creating a two-site tensor
+\begin{equation}
+\Theta_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}} = \sum_{\alpha_n} M_{\alpha_{n-1} , \alpha_{n}}^{[n] j_n } \;  M_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } 
+\end{equation}
+
+\item
+\textbf{Solve eigenproblem:} This yields an eigenvalue problem, which can be seen by reshaping
+\begin{align}
+	H_{( \alpha_{n-1}  j_n  j_{n+1}, \alpha_{n+1}),(\alpha_{n-1}'  j_n '  j_{n+1}', \alpha_{n+1}')} &= \nonumber \\
+	= \; \sum_{\substack{\beta_{n-1} , \beta_n \\ \beta_{n+1}}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} & \; W_{\beta_{n_1}, \beta_n}^{[n] j_n , j_n '} \; W_{\beta_{n}, \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '}\;  R_{\alpha_{n+1} ,\beta_{n+1} , \alpha_{n+1} '}^{[n+2]} \\
+	v_{ \alpha_{n-1} j_n j_{n+1} \alpha_{n+1}} &= \; \Theta_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}}
+\end{align}
+such that
+\begin{equation}
+	H v - \lambda v = 0 \; .
+	\label{eq:eigprob}
+\end{equation}
+Solving this for the lowest eigenvalue $\lambda_0$ yields $v_{ \alpha_{n-1} j_n j_{n+1} \alpha_{n+1}}^0$, which can be reshaped back to the now optimized two-site tensor, $\tilde{\Theta}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}}$.
+
+\item
+\textbf{Unmerge:} Reshape the updated $\tilde{\Theta}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1}}$ to a matrix and perform an SVD yielding
+\begin{equation}
+	\tilde{\Theta}_{(j_n \alpha_{n-1} ) ,(j_{n+1}  \alpha_{n+1} )} = \sum_{\alpha_n} U_{\alpha_{n-1} , \alpha_{n}}^{j_n} S_{\alpha_n , \alpha_n} (V^{\dag})_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1}} \; .
+\end{equation}
+This causes the bond dimension to increase $D \rightarrow d D$, which must be truncated by keeping only the $D$ largest singular values of $S$. 
+
+\item
+\textbf{Update environments:} The last step depends on which direction, one is iterating trough the chain. Here, the left- and right-normalization of $U$ and $V^{\dag}$ is used to update the environments.\\
+\textit{Going right}: Update the left environment
+\begin{equation}
+	\tilde{L}_{\alpha_{n}, \beta_{n} , \alpha_{n} '}^{[n]} = \sum_{\substack{ j_{n} , j_{n} ' \\ \alpha_{n-1} , \beta_{n-1} , \alpha_{n-1} '}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} \; U_{\alpha_{n-1} , \alpha_{n}}^{j_n} \; W_{\beta_{n-1} , \beta_{n}}^{[n] j_n , j_n '} \; U_{\alpha_{n-1} ', \alpha_{n}'}^{j_n ' *} \; ,
+\label{eq:updateLeft}
+\end{equation}
+and build the matrix of the right site
+\begin{equation}
+	\tilde{M}_{\alpha_{n} , \alpha_{n+1}}^{[n+1] j_{n+1} } = \sum_{\alpha_n}  S_{\alpha_n , \alpha_n} (V^{\dag})_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1}} \; .
+\end{equation}\\ 
+\textit{Going left}: Update the right environment
+\begin{equation}
+	\tilde{R}_{\alpha_{n}, \beta_{n} , \alpha_{n} '}^{[n+1]} = \sum_{\substack{ j_{n+1} , j_{n+1} ' \\ \alpha_{n+1} , \beta_{n+1} , \alpha_{n+1} '}} R_{\alpha_{n+1}, \beta_{n+1} , \alpha_{n+1} '}^{[n+2]} \; \left( V^{\dag} \right)_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1}} \; W_{\beta_{n} , \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '} \; \left( V^{\dag} \right)_{\alpha_{n} , \alpha_{n+1}}^{j_{n+1} *} \; ,
+	\label{eq:updateRight}
+\end{equation}
+and build the matrix of the left site
+\begin{equation}
+	\tilde{M}_{\alpha_{n-1} , \alpha_{n}}^{[n] j_{n} } = \sum_{\alpha_n} U_{\alpha_{n-1} , \alpha_{n}}^{j_n} S_{\alpha_n , \alpha_n}  \; .
+\end{equation} 
+ 
+\end{enumerate}
+This concludes the two-site update sequence, which is illustrated in figure \ref{fig:twoSiteUpdate}. After performing the sequence, one can move \textit{one site} to either left or right, depending on which direction, one is iterating.
+
+\renewcommand{\thesubfigure}{\arabic{subfigure}}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Merge:}}
+		\input{Diagrams/twoSiteUpdateStep1.tex}
+	\end{subfigure}\\[.25cm]
+	
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Solve eigenprobem:}}
+		\input{Diagrams/twoSiteUpdateStep2.tex}
+	\end{subfigure}\\[.25cm]
+
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Unmerge:}}
+		\input{Diagrams/twoSiteUpdateStep3.tex}
+	\end{subfigure}\\[.25cm]
+
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{\textbf{Update environments:}}
+		\input{Diagrams/twoSiteUpdateStep4.tex}
+	\end{subfigure}
+	
+	
+	\caption{\textit{A diagrammatic representation of the two-site update sequence for iterative ground state search. In step \textbf{(4)}, which environment is updated is determined by the direction of iteration.}}
+	\label{fig:twoSiteUpdate}
+\end{figure}
+
+Some comments regarding this sequence are in order: The matrices of the eigenvalue problem have dimensions $( d^2 D^2 \times d^2 D^2)$, which is generally too much for exact diagonalization, however, since only the lowest eigenvalue is of interest, one can use an iterative eigensolver \cite{Lanczos}. Furthermore, if the MPS is not in the proper mixed-canonical form, the eigenvalue problem turns into a generalized eigenvalue problem, which can be numerically quite demanding. Thus, updating the left and right environments in step (4) is necessary, since it leads to great simplifications in step (2). Lastly, one could also consider just a single site when updating, however, this method is very prone to getting stuck \cite{White2005}. By updating two sites at once, one actually optimizes the bond between them. Hence, after updating the two sites, one must only iterate a single site. Optimization is done with regards to the current configuration, whereby it depends on previous updates. To compensate for this, one must sweep through the entire system multiple times, which leads to the following algorithm for iterative ground state search, which follows the structure of the DMRG algorithm:
+
+\begin{algorithm}
+\begin{algorithmic}
+\caption{Iterative ground state search}
+\State Choose $\ket{\psi}$ right-normalized.
+\State Calculate tensor $R^{[i]}$ iteratively for $i = N \ldots 1$.
+\While{Stopping criteria not met} 
+	\For{$n = 1 \ldots N-1$} \Comment{Left sweep}
+		\State Perform two-site update on $M^{[n]}$ and $M^{[n+1]}$.
+		\State Update $L^{[n]}$ according to eq. \eqref{eq:updateLeft}
+	\EndFor
+	\For{$n = N-1 \ldots 1$} \Comment{Right sweep}
+		\State Perform two-site update on $M^{[n]}$ and $M^{[n+1]}$.
+		\State Update $R^{[n]}$ according to eq. \eqref{eq:updateRight}
+	\EndFor
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Calculation of Condensate Fraction using DMRG Algorithm}
+To illustrate the power of the DMRG algorithm, the following numerical analysis was conducted. As the system of interest is the Bose-Hubbard model described in eq. \eqref{BHhamil}, a suitable benchmark for the algorithm is attempting to calculate the critical point of the phase transition between the Superfluid and Mott-Insulator. The critical point was determined using the DMRG algorithm in \cite{Kuhner2000} by studying the correlations of the system. Here, an alternative approach is presented, which examines the correlation function.\\
+
+According to the Penrose-Onsager criterion, a Bose-Einstein condensate, and by extension the Superfluid state, is present if and only if the largest eigenvalue, $\lambda_1$, of the single-particle density matrix, $\rho^{(1)}$, is macroscopic
+\begin{equation}
+	f_c = \frac{\lambda_1}{N_{\mathrm{particles}}} > 0 \; ,
+	\label{eq:condensateFraction}
+\end{equation} 
+where $f_c$ is the condensate fraction, and $N_{\mathrm{particles}}$ is the total number of particles \cite{PenroseOnsager}. The condensate fraction can be used to determine which phase dominates the system, as
+\begin{align}
+	\lim_{N_{\mathrm{particles}} \to \infty} f_{c}^{\mathrm{SF}} &\to 1 \label{eq:SF_lim} \\
+	\lim_{N_{\mathrm{particles}} \to \infty} f_{c}^{\mathrm{MI}} &\to 0 \; , \label{eq:MI_lim}
+\end{align}
+when the filling-fraction, $n = N_{\mathrm{particles}}/N_{\mathrm{sites}}$, is held constant.\\
+
+To calculate the condensate fraction, the ground state of the system was found using the a version of the DMRG algorithm implemented in the ITensor library \cite{ITensor}. Using the computed ground state, $\ket{\psi}$, the entries of the density matrix were calculated
+\begin{equation}
+	\rho_{i,j} = \bra{\psi} \hat{a}_{i}^{\dag} \hat{a}_{j} \ket{\psi} \; .
+\end{equation}
+Lastly, the condensate fraction was determined through eq. \eqref{eq:condensateFraction}.
+The calculation was performed with varying $U/J$ for various system sizes of unit occupancy. The DMRG algorithm was set to perform 5 sweeps with a maximum bond dimension of 200.
+In order to gauge the accuracy of the algorithm, the results for system sizes 4-10 were compared to a similar calculation using exact diagonalisation.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Figures/CondensateFractionCompare.pdf}
+ \caption{\textit{Condensate fraction calculated using the DMRG algorithm with 20 sweeps. The condensate fractions of the smaller systems ($N = 4 \ldots 10$) are compared with result obtained through exact diagonalisation.}}
+ \label{fig:CondensateFraction}
+\end{figure}
+The upper part of figure \ref{fig:CondensateFraction} shows the condensate fraction for various $U/J$ calculated using the DMRG algorithm. In the limit $U/J = 0$, the condensate fraction is unit for the smaller systems, confirming the system is indeed in the Superfluid phase. The condensate fraction never reaches zero, as $U/J$ increases, since this is only achieved in the thermodynamic limit. However, the condensate fraction does decrease with increasing particle number, as would be expected. The lower half of figure \ref{fig:CondensateFraction}  displays the results of the DMRG calculation compared with exact diagonalisation. For small systems the two approaches obtain very similar results.\\
+Attempting to use exact diagonalisation for large systems is futile, due to the exponential scaling of the Hilbert space \cite{Vidal2003}. However, this is not an issue using matrix product states, as the formalism only considers a tiny corner of the Hilbert space by following an area law. 
+The dashed lines of figure \ref{fig:CondensateFraction} shows the results of the DMRG calculations for up to 50 particles. The condensate fraction behaves as expected in the $U/J \gg 1$ limit, as it tends towards zero for larger particle numbers. Note, in the Superfluid limit the condensate fraction does not quite reach 1. This is due to difficulty of describing long-range correlations when using matrix product states. An extensive explanation of this is given in Section \ref{sec:correlationFunctions}.
+This is not an issue for smaller systems, as the correlation length is limited by the system size, due to boundary effects having an influence on a much larger part of the system. \\
+Some measures can be taken to minimize errors, when using the DMRG algorithm. Accurately describing long range correlations requires multiple sweeps, as the algorithm has to iteratively approximate an almost constant function with a series of exponentials. Figure \ref{fig:sweepdependence} displays the condensate fraction in the Superfluid limit as a function of number of sweeps. Clearly, performing more sweeps yields a better result.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Figures/CFsweeps.pdf}
+    \caption{\textit{Condensate fraction as a function of number of sweeps of the DMRG algorithm in the Superfluid limit. A max bond dimension of 250 was used.}}
+    \label{fig:sweepdependence}
+\end{figure}
+Furthermore, increasing the maximal bond dimension, $D$, results in a more accurate long-range representation of correlations. Thus, calculating correlation functions for various values of $D$ is a great way of estimating the convergence of the correlations for a given length scale \cite{schollwock}.\\
+
+In \cite{Kuhner2000} the critical point of phase transition between the Superfluid and Mott-Insulator is determined as $\left( \frac{U}{J} \right)_{crit} = 3.37$. The result is achieved through examining the correlations of the systems. While correlations in Mott-Insulators decay exponentially, Superfluids have a decay of correlations following the power-law given in eq. \eqref{sec:correlationFunctions}. As a result, the interface between the two phases, has correlations following a power law determined by the Luttinger liquid parameter. The critical point, which is located at the tip of the Mott-lobes, is computed by determining the point, at which the Luttinger liquid parameter is $K =  \frac{1}{2}$ \cite{Kuhner2000}.\\
+Examining figure \ref{fig:CondensateFraction}, one notices a hump on the graph in the vicinity of this critical ratio, but no clear indication of a phase transition is present. In the thermodynamic limit, one would expect the condensate fraction to drop to zero, as the critical ratio is reached (as observed in 2D by \cite{Spielman2008}). However, at 50 particles the condensate fraction is only around $ f_c = 0.5$. One could extrapolate data from computations using different particle numbers in order to determine the location of the critical point. However, this would require computations using larger systems in order to minimize the boundary effects.
+
+
+\section{Time Evolution of Matrix Product States}
+A central component of Optimal Control is time evolution. In order to compute any optimal control sequence, it is crucial to have a fast and accurate time evolution algorithm. However, also the construction of the time evolution operator must be taken into account, as exponentiating a tensor spanning the entire system, such as most Hamiltonians, is no easy task. In fact, since the time evolution operator is constantly altered when optimizing control parameters, the time spent exponentiating the Hamiltonian must be taken into account of the total runtime. Thus, both an efficient time evolution algorithm and an efficient operator exponentiation is needed when performing optimal control.\\
+Several algorithms for time evolving matrix product states exist, however, they all origin from the same ideas proposed in \cite{Vidal2003,Vidal2004}. The most widely used of these algorithms is the tDMRG algorithm, which gets its name from its similarity with the ground state search algorithm described in Section \ref{sec:DMRG}. The tDMRG algorithm has been utilized in several instances to simulate the dynamics of one-dimensional systems CITE, and it has even been previously used in conjunction with the CRAB algorithm to perform optimal control of the Superfluid to Mott-Insulator phase transition \cite{FrankBloch,Doria2011}.\\
+Although the standard algorithms for time evolution are quite efficient, further improvements can be made to the algorithms when tailoring to the problem at hand. Therefore, a modified version of the tDMRG algorithm is proposed in Section \ref{sec:modTMDRG}, which directly utilizes the properties of the Bose-Hubbard Hamiltonian.
+
+
+\subsection{The tDMRG Algorithm}
+Consider the time evolution of a quantum state
+\begin{equation}
+	\ket{\psi (t)} = \hat{\mathcal{U}}(t) \ket{\psi (0)} \; ,
+\end{equation}
+where $\hat{\mathcal{U}}(t) = \e^{ - \im \hat{H} t }$ is the time evolution operator. 
+Time evolution of a matrix product states is done in a manner similar to that of ground state search, as the bonds between the tensors are evolved rather than the tensors themselves. Thus, the time evolution operator must be decomposed into two-site tensors. The simplest realisation of this is achieved, when considering a Hamiltonian containing only nearest-neighbour interactions.
+Assume the Hamiltonian is a sum of two-site operators of the form $\hat{H} = \sum_{n} \hat{h}^{[n , n+1]}$. One can decompose this into a sum over even and odd bonds
+\begin{equation}
+	\hat{H} = \hat{H}_{\mathrm{odd}} \; + \; \hat{H}_{\mathrm{even}} = \sum_{n \; \mathrm{odd}} \hat{h}^{[n , n+1]} \; + \; \sum_{n \; \mathrm{even}} \hat{h}^{[n , n+1]} \; .
+\end{equation}  
+Exponentiating the Hamiltonian is non-trivial due to the non-commutativity of the operators
+\begin{equation}
+	[ \hat{h}_{\mathrm{odd}}^{[n , n+1]} \; , \; \hat{h}_{\mathrm{even}}^{[n , n+1]} ] \neq 0 \; .
+\end{equation}
+Considering a small time slice, $\delta t$, the exponentiation can be achieved through the Trotter-Suzuki expansion \cite{Suzuki1991}. To first order this reads
+\begin{equation}
+	\e^{- \im \hat{H} \; \Delta t} = \e^{- \im \hat{H}_{\mathrm{odd}} \; \Delta t } \e^{- \im \hat{H}_{\mathrm{even}} \; \Delta t} \; + \; \;  \mathrm{O}(\Delta t^2) \; ,
+\end{equation}
+where the error is due to the non-commutativity of the bond Hamiltonians. Thus, the time evolution operator can be expressed as the product
+\begin{equation}
+	\hat{\mathcal{U}}(\Delta t) \approx \left( \prod_{n \; \mathrm{odd}} \hat{\mathcal{U}}^{[n,n+1]} (\Delta t) \right) \left( \prod_{n \; \mathrm{even}} \hat{\mathcal{U}}^{[n,n+1]} (\Delta t) \right) \; ,
+\end{equation}
+where
+\begin{equation}
+	\hat{\mathcal{U}}^{[n,n+1]} (\Delta t) = \e^{- \im \hat{h}^{[n , n+1]} \; \Delta t } \; .
+\end{equation}
+The result is an MPO performing an infinitesimal time step on the odd bonds, and another MPO evolving the even bonds. An illustration of this is shown in Figure \ref{fig:oddevenops}.
+\begin{figure}[h!]
+	\centering
+	\input{Diagrams/TEBD.tex}
+	\caption{\textit{Approximation of each time step $\delta t$ using a Trotter-Suzuki decomposition, such that the time evolution operator is expressed as a product of unitary two-site operators.}}
+	\label{fig:oddevenops}
+\end{figure}
+The tDMRG algorithm describes the most efficient and accurate way of contracting the tensor network detailed in Figure \ref{fig:oddevenops}. The algorithm gets its name from its similarity with the DMRG algorithm detailed in Section \ref{sec:DMRG}. In fact, the merge and unmerge procedure of the two algorithms is completely identical, whereby they only differ in the steps of applying the operator and proceeding to the next site. The following procedure details a time evolution step of the $n$'th bond \cite{schollwock}.
+
+\subsubsection{Infinitesimal time-step update for tDMRG}
+\begin{enumerate}
+\item
+\textbf{Merge:} Contract tensors $M^{[n]}$ and $M^{[n+1]}$ over the bond $\alpha_{n}$ creating a two-site tensor $\Theta^{j_n , j_{n+1}}$.
+
+\item
+\textbf{Apply unitary:} The two-site time evolution operator, $\hat{\mathcal{U}}^{[n, n+1]}$, is applied to $\Theta^{j_n , j_{n+1}}$
+\begin{equation}
+	\tilde{\Theta}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n , j_{n+1} } = \sum_{j_n ', j_{n+1}'} U^{j_n  j_{n+1} , j_n '  j_{n+1}'} \; \Phi_{\alpha_{n-1} , \alpha_{n+1}}^{j_n ', j_{n+1} ' } \; .
+\end{equation}
+
+\item
+\textbf{Unmerge:} Reshape $\tilde{\Phi}_{\alpha_{n-1} , \alpha_{n+1}}^{j_n ', j_{n+1} '}$ to a matrix and decompose it through an SVD. Applying $\hat{\mathcal{U}}^{[n, n+1]}$ causes an increase in bond dimension, $D \rightarrow d^2 D$, which must be truncated by keeping only the $D$ largest singular values from the SVD. 
+
+\item
+\textbf{Progress:}  Next, the center cite of the MPS must be shifted by two, in order to update the next even (odd) bond. This is achieved by merging tensors $M^{[n+1]}$ and $M^{[n+2]}$ and performing a second SVD, while reshaping the resulting $U$-matrices to left-normalised tensors to retain the canonical form. The product of the second SVD must be truncated as well, however, no loss of information will occur, as the Schmidt rank of the matrix $S$ will be at most $D$ following the first SVD. 
+\end{enumerate}
+Following the procedure will leave the MPS in position for application ofthe unitary $\hat{\mathcal{U}}^{[n+2 , n+3]}$. The efficiency of the tDMRG algorithm also depends on the sequence in which bonds are evolved. A simple, yet effective way is iterating from left to right when evolving even bonds, while iterating right to left when evolving odd bonds. Thereby, the centered cite of the mixed-canonical form is moved continuously through the MPS, rather than having to be reset when reaching the end of the system.\\
+
+Although the tDMRG algorithm is a very powerful algorithm, an even higher efficiency can be achieved when tailoring the algorithm to the problem. In this case the problem is optimal control of the Superfluid to Mott-Insulator transition. Thus, the Hamiltonian contains both nearest-neighbour and on-site terms. Furthermore, the Hamiltonian is time dependent, and it is continuously modified in the process of searching for optimal control parameters. The following algorithm is a modification of the tDMRG algorithm, which accommodates the requirements of performing optimal control.
+
+
+\subsection{Modified Time Evolution Algorithm for Optimal Control}
+\label{sec:modTMDRG}
+In order to efficiently conduct optimal control of a Bose-Hubbard system, a slightly modified version of the tDMRG algorithm was employed. As the Hamiltonian is changing with every time step, one has to account for the time spent exponentiating the operators when considering the runtime of the algorithm. A general operator $\hat{W}$ can be exponentiated through the series expansion
+\begin{equation}
+	\exp \left( \hat{W} \right) = \sum_{k = 0}^{\infty} \frac{\hat{W}^k}{k!} = \hat{\mathds{1}} + \hat{W} \Bigl(  \hat{\mathds{1}} + \frac{\hat{W}}{2} \Bigl( \hat{\mathds{1}} + \frac{\hat{W}}{3} \Bigl( \ldots
+\label{eq:exponentialSeries}
+\end{equation}
+The number of terms needed in the expansion to accurately describe the exponentiation depends on the operator. Performing the exponentiation through a series expansion is a relatively expensive operator. Therefore, it is crucial to find an easier way of constructing the time evolution operator.
+One method is by considering the form of the Bose-Hubbard Hamiltonian. The most natural choice of control parameter is the lattice depth, $V_0$, as it is controllable experimentally. The lattice depth determines both the tunneling matrix element, $J$ (eq. \eqref{eq:BHparamJ}), and the interaction matrix element, $U$ (eq. \eqref{eq:BHparamU}), and has served as control parameter in other studies CITE.   
+Unfortunately exponentiating the hopping terms of the Bose-Hubbard Hamiltonian is a relatively costly computation. Therefore, it was concluded that keeping $J$ fixed and using $U$ as the control parameter was the better option. Due to the diagonal form of the number operator, $\hat{n}_i$, the exponentiation of the interaction term can be built directly without the need for the series expansion of eq. \eqref{eq:exponentialSeries}.
+However, simply exponentiating the different terms of the Bose-Hubbard Hamiltonian separately is not possible, as the operators do not commute. Therefore, one must expand the time evolution operator into its components through the Suzuki-Trotter expansion. To second order the Suzuki-Trotter expansion reads
+\begin{equation}
+	\exp\left(  ( \hat{V} + \hat{W}  ) \delta \right) = \exp\left(  \hat{V} \delta /2  \right) \exp\left(  \hat{W} \delta   \right) \exp\left(  \hat{V} \delta /2  \right) + O(\delta^3) \; . \label{eq:SuzukiTrotter}
+\end{equation}
+Once again, the error is due to the non-commutativity of operators. Thus, the time evolution operator can be divided into a sequence of tensors, where
+\begin{align}
+	\hat{\mathcal{U}}_{J}^{[i,i+1]} (\Delta t) &= \exp \left( -i J ( \hat{a}_{i}^{\dag} \hat{a}_{i+1} + \hat{a}_{i+1}^{\dag} \hat{a}_{i} ) \Delta t \right) \\
+	\hat{\mathcal{U}}_{U}^{[i]} (\Delta t /2) &= \exp \left( -i \frac{U}{2} \hat{n}_i (\hat{n}_i -1) \Delta t /2 \right) \; .
+\end{align}
+\begin{figure}[h!]
+	\centering
+	\input{Diagrams/ModifiedTDMRG.tex}
+	\caption{\textit{Tensor diagram depicting a single time step of the modified rDMRG algorithm. The time evolution operator has been subjected to a Suzuki-Trotter expansion as detailed in eq. \eqref{eq:SuzukiTrotter}. The tensors of the upper part of the network are contracted with the MPS while sweeping from left to right, whereas the lower part is applied with a right-to-left sweep.}}
+	\label{fig:ModifiedTEBD}
+\end{figure}
+A single time step, $\Delta t$, using the expanded operator is represented diagrammatically in figure \ref{fig:ModifiedTEBD}. At first glance, the tensor network resulting from the Suzuki-Trotter expansion may seem rather extensive, however, it can be contracted in a very efficient manner. The upper part of the network is contracted in a left-to-right sweeping manner, where the position of the center cite, and thereby the normalisation of the MPS, is pushed to the right following each step. Likewise, the lower part of the network is contracted though a right-to-left sweep such that the MPS returns to its original form centered on the first site after applying the final operator. Thereby, the MPS is immediately ready for the subsequent time-propagation.\\
+\begin{figure}[h!]
+\centering % <-- add this
+\begin{subfigure}[b]{0.4\textwidth}
+	\caption{}  
+  	\input{Diagrams/TrotterStep1.tex}
+\end{subfigure}
+\hspace{10mm}
+\begin{subfigure}[b]{0.4\textwidth}
+	\caption{}    
+  	\input{Diagrams/TrotterStep2.tex}
+\end{subfigure}
+\\ % <-- add this
+\vspace{5mm}
+\begin{subfigure}[b]{0.4\textwidth}
+	\caption{}    	
+  	\input{Diagrams/TrotterStep4.tex}
+\end{subfigure}
+\hspace{10mm}
+\begin{subfigure}[b]{0.4\textwidth}
+	\caption{}  
+  	\input{Diagrams/TrotterStep6.tex}
+\end{subfigure}
+\caption{\textit{Sequence of contractions for modified tDMRG algorithm during left to right sweep. Step \textbf{(i)}: MPS is centered on site 1. Tensors $M^{[1]}$ and $M^{[2]}$ are contracted. Step \textbf{(ii)}: Two-site tensor, $\Theta$, is contracted with operators in numbered sequence. The propagated two-site tensor is split using an SVD in step \textbf{(iii)}, followed by a contraction to the right. Lastly, in step \textbf{(iv)}, the two-site tensor of $M^{[2]}$ and $M^{[3]}$ is split using another SVD, whereby the center (and thereby the normalisation) is pushed to site 3.}}
+\label{fig:TEBDContraction}
+\end{figure}
+The sequence of contractions of the left-to-right sweep is shown in figure \ref{fig:TEBDContraction}. The MPS is initially centered on the first tensor, while its remaining tensors are all right-normalised. By contracting the bonds marked with a bold line, the operators are efficiently applied to the MPS. In step (iii) the two-site tensor, $\Theta$, is split using an SVD, where the bond dimension of the tensors is truncated. This is crucial in order to maintain a reduced dimensionality, which would otherwise result in a significant increase in contraction time. In the final step (iv), the central cite of the MPS is moved to the start of the next two-site operator through another site merge and subsequent SVD. This step is exactly as in the original tDMRG algorithm. Thereby the normalisation of the MPS is "pushed" to the right and contained in a single site, which makes it easy to deal with in the end of the time evolution step.\\
+As the center reaches the end of the MPS, the direction of the sweep is reversed. The right-to-left sweep is very similar to the sequence described above. The main difference is in the order of contractions, as the $\hat{\mathcal{U}}_{J}^{[i,i+1]} (\Delta t)$-operator is applied before the $\hat{\mathcal{U}}_{U}^{[i]} (\Delta t /2)$-operator. As the sweep, and thereby the central cite, reaches the first site of the MPS, the central site is divided by its norm. Thereby the MPS is normalised and in the same configuration as before the time step. Thus, further propagations can be performed readily.\\ 
+Additional precision is achieved when evaluating the potential at the beginning and end points of the time interval CITE DANIEL STECK. Thus, the left-to-right sweep applies the operator $\hat{\mathcal{U}}_{U(t)}^{[i]} (\Delta t /2)$, while the right-to-left sweep applies $\hat{\mathcal{U}}_{U(t + \Delta t)}^{[i]} (\Delta t /2)$.
+
+
+\subsubsection{Gradient of Suzuki-Trotter propagator}
+In section \ref{sec:GRAPE} the derivative of the cost function with regards to the control was derived for a general propagator. However, expanding the propagator using the Suzuki-Trotter expansion while having a diagonal control Hamiltonian causes all higher order contributions of the gradient to drop out. Instead, the precision of the gradient is solely determined by the order of the expansion.\\
+Consider the gradient entries for the cost function
+\begin{equation}
+	\frac{\partial J}{\partial u_n (t_j)} = - \Re \Braket{\chi (t_j) | i \frac{ \partial \hat{\mathcal{U}}_{j}}{\partial u_n (t_j)} | \psi (t_{j-1})} \; ,
+\end{equation}
+where the derivative of a general propagator with respect to the control is given by
+\begin{equation}
+	\frac{\partial \hat{\mathcal{U}}_{j}}{\partial u_n (t_j)} = e^{-i \hat{H} (u_n (t_j)) \Delta t}  \sum_{k = 0}^{\infty }  \frac{i^k \Delta t^{k+1}}{(k+1)!} \left[ \hat{H} (u_n (t_j)) , \frac{\partial \hat{H} (u_n (t_j))}{\partial u_n (t_j)}  \right]_k \;.
+\end{equation}
+The algorithm in this instance employs a Suzuki-Trotter expansion of the propagator while considering the control at both start and end of the step. For cleaner notation the Hamiltonian, which in this case is the Bose-Hubbard Hamiltonian of eq. \eqref{BHhamil}, will be parametrized as $\hat{H}(U(t_j)) \equiv \hat{H}_J + U(t_j) \hat{H}_U$. Note, that the control in this instance is the interaction strength, $u_n (t_j) \equiv U (t_j)$. Thus, the full propagator reads
+\begin{equation}
+	\hat{\mathcal{U}}_{j}^{\mathrm{ST}} = \exp \left( -i U(t_j) \hat{H}_U \Delta t /2 \right) \exp \left( -i \hat{H}_J \Delta t \right) \exp \left( -i  U(t_{j-1}) \hat{H}_U  \Delta t /2 \right)  \equiv \hat{\mathcal{U}}_{j}^{U} \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \; .
+\end{equation}
+Since the control at times $t_j$ and $t_{j-1}$ both contribute to $\hat{\mathcal{U}}_{j}^{\mathrm{ST}}$, the elements of the cost gradient are
+\begin{equation}
+	\frac{\partial J}{\partial U (t_j)} = - \Re \Braket{\chi (t_j) | i  \frac{\partial \hat{\mathcal{U}}_{j}^{\mathrm{ST}}}{\partial U (t_j)} | \psi (t_{j-1})} - \Re \Braket{\chi (t_{j+1}) | i \frac{ \partial \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}}}{\partial U (t_j)} | \psi (t_{j})} \; . \label{eq:STcostderiv}
+\end{equation}
+Further examining the derivative of the first propagator reveals
+\begin{align}
+	\frac{\partial \hat{\mathcal{U}}_{j}^{\mathrm{ST}}}{\partial U (t_j)} &=  \frac{\partial \hat{\mathcal{U}}_{j}^{U}}{\partial U (t_j)} \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \nonumber \\
+	&=  \exp \left( -i U (t_j) \hat{H}_U  \Delta t /2 \right)  \sum_{k = 0}^{\infty }  \frac{i^k \Delta t^{k+1}}{(k+1)!} \left[ U (t_j) \hat{H}_U  ,  \hat{H}_U \right]_k \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \nonumber \\
+	&= \left(  \hat{H}_U \Delta t /2 \right) \exp \left( -i U(t_j) \hat{H}_U  \Delta t /2 \right)   \hat{\mathcal{U}}_{j}^{J} \hat{\mathcal{U}}_{j-1}^{U} \nonumber \\
+	&= \left(  \hat{H}_U \Delta t /2 \right) \hat{\mathcal{U}}_{j}^{\mathrm{ST}} \; . \label{eq:STpropderiv1}
+\end{align}
+Since $\hat{H}_U$ is diagonal, the following relation apply for the recursive commutator 
+\begin{equation}
+	\left[ U (t_j) \hat{H}_U  ,  \hat{H}_U \right]_k =  
+	\begin{cases}
+    	\hat{H}_U, & \text{if $k = 0$}.\\
+    	0, & \text{otherwise}.
+  	\end{cases} \; ,
+\end{equation}  
+which causes all higher-order contributions to the derivative of the propagator to drop out.\\
+Likewise, the derivative of the second propagator is
+\begin{equation}
+	\frac{\partial \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}}}{\partial u_n (j)} =  \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}} \left(  \hat{H}_U \Delta t /2 \right) \; . \label{eq:STpropderiv2}
+\end{equation}
+Inserting the derivatives of eq. \eqref{eq:STpropderiv1} and \eqref{eq:STpropderiv2} into the derivative of the cost (eq. \eqref{eq:STcostderiv}) yields
+\begin{align}
+	\frac{\partial J}{\partial U (t_j)} &= - \Re \Braket{\chi (t_j) | i  \left(  \hat{H}_U \Delta t /2 \right) \hat{\mathcal{U}}_{j}^{\mathrm{ST}} | \psi (t_{j-1})} - \Re \Braket{\chi (t_{j+1}) | i \hat{\mathcal{U}}_{j+1}^{\mathrm{ST}} \left(  \hat{H}_U \Delta t /2 \right) | \psi (t_{j})} \nonumber \\
+	&= - \Re \Braket{\chi (t_j) | i    \hat{H}_U \Delta t /2  | \psi (t_{j})} - \Re \Braket{\chi (t_{j}) | i    \hat{H}_U \Delta t /2   | \psi (t_{j})} \nonumber \\
+	&= - \Re \Braket{\chi (t_j) | i \hat{H}_U \Delta t | \psi (t_{j})} \; . \label{eq:STcostgrad}
+\end{align}  
+Thus, the combination of the Suzuki-Trotter expansion and a diagonal control Hamiltonian eliminates all higher order contributions to the gradient. Thereby, the gradient of the cost is exact up to the order of the expansion.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/CompareGradientsGRAPE.pdf}
+    \caption{\textit{\textbf{(a)}: Numerical gradient along with gradient calculated via eq. \eqref{eq:STcostgrad}. \textbf{(b)}: Difference between the two gradients. \textbf{(c)}: Absolute relative difference between the two gradients.}}
+    \label{fig:CompareGradientsGRAPE}
+\end{figure}
+A comparison between a numerically calculated gradient and the analytically derived gradient of eq. \eqref{eq:STcostgrad} can be seen in Figure \ref{fig:CompareGradientsGRAPE}. The difference between the two gradients is largest at the beginning of the sequence, due to the accumulated error from the time evolution, since $\ket{\chi (0)}$ is derived from two time evolutions over the entire duration.
+
+
+\subsubsection{Time complexity of time-evolution algorithms}
+The Suzuki-Trotter expansion \eqref{eq:SuzukiTrotter} does not determine the ordering of the operators. Thus, an alternative algorithm exists, where the half-step is taken through the $\hat{\mathcal{U}}_{J}^{[i,i+1]}$ operator. However, applying the two-site operators are in general more time consuming than applying two single-site operator.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Figures/CompareRuntime.pdf}
+    \caption{\textit{Runtime of performing 100 time steps with various algorithms in Bose Hubbard system with unit occupancy. Solid lines are systems with a local Fock space of dimension $N$, while dashed lines are systems with a constant Fock space dimension of 5.}}
+    \label{fig:CompareRuntime}
+\end{figure}
+A comparison between the run-times of various time-evolution algorithms in shown in Figure \ref{fig:CompareRuntime}. The two tDMRG algorithms are the one described above using a half-step of $\hat{\mathcal{U}}_{J}$ and $\hat{\mathcal{U}}_{U}$ respectively. The MPO-based algorithm builds the propagator using ITensor library methods following \cite{Pollmann2015}, and the resulting MPO is applied to the MPS according to eq. \eqref{eq:optBracketsMPO}. This method has an error of order $O(\Delta t ^2)$, which is less accurate than the second-order Trotter expansion.
+In Section \ref{sec:MPO} the cost of applying an MPO to an MPS was given by $\mathrm{O}(N d^2 D_W ^2 D^2)$. Considering the single-site tensors of the tDMRG algorithms, $D_W$ is zero. Since $d = N$ for the solid lines in Figure \ref{fig:CompareRuntime}, the runtime of the algorithm will have a cubic scaling with the system size. However, a much better scaling can be achieved by truncating the local Hilbert space, such that $d$ is kept constant resulting in a runtime scaling linearly with the system size.
+Consider the case of the Bose Hubbard model, eq. \eqref{BHhamil}. The interaction term scales quadratically with the number of particles at a given site, which causes a huge energy penalty even in low end of the tight binding limit. Thus, for large systems with unit occupation, neglecting contributions from states with a majority of the particles at a single site is a reasonable approximation.
+Therefore, the modified tDMRG algorithm can be applied to very large systems at a low cost, if the dimension of the physical index of the MPS is restricted to a reasonable fraction of the number of particles.   

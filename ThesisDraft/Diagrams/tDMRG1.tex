@@ -1,0 +1,48 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \imgcenter {6};
+	\def \imgwidth {17.5};
+	\def \xdist {1};
+	\def \xstart {1};
+	\def \xoffset {10};
+	\def \width {2};
+	
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+
+
+    \node[tensor] (M1) at (\xstart , 0) {};
+    \node[tensor] (M2) at (\xstart + 2*\xdist , 0) {};
+    \node[matrix] (S) at (\xstart + \xdist , 0) {};
+    
+	\node[tensor, minimum width= \width cm] (phi) at (\xoffset, 0) {};
+	
+	\node (j1) at (\xstart ,-1) {$j_n$};
+	\node (j2) at (\xstart + 2*\xdist ,-1) {$j_{n+1}$};
+	\node (a1) at (\xstart -1.2 ,0) {$\alpha_{n-1}$};
+	\node (a2) at (\xstart + 2*\xdist +1.2 ,0) {$\alpha_{n+1}$};    
+    
+	\draw[-] (M1) -- (j1);
+	\draw[-] (M1) -- (a1);
+	\draw[-] (M1) -- (S);
+	\draw[-] (M2) -- (S);
+	\draw[-] (M2) -- (j2);
+	\draw[-] (M2) -- (a2);
+	
+	
+	\node (node1) at (\xoffset - \width/2 + 0.35, -1) {$j_n$};
+	\node (node2) at (\xoffset + \width/2 - 0.35, -1) {$j_{n+1}$};
+	\node (as1) at (\xoffset - \width/2 - 1 ,0) {$\alpha_{n-1}$};
+	\node (as2) at (\xoffset + \width/2 + 1 ,0) {$\alpha_{n+1}$};
+	
+	\draw[-] (node1) -- (node1 |-  phi.south);
+	\draw[-] (node2) -- (node2 |-  phi.south);
+	\draw[-] (phi) -- (as1);
+	\draw[-] (phi) -- (as2);		
+	
+	\draw[->, line width=1mm] (\imgcenter - 0.75,0) -- (\imgcenter + 0.75,0);
+	
+	\node (Mlab1) at (\xstart,0.6) {$M^{[n]}$};
+	\node (Mlab2) at (\xstart + 2* \xdist +0.2 ,0.6) {$M^{[n+1]}$};
+	\node (Slab) at (\xstart + \xdist ,0.6) {$S$};
+	\node (Siglab) at (\xoffset,0.6) {$\Phi^{[n , n+1]}$};
+	
+\end{tikzpicture}

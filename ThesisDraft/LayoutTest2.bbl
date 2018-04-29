@@ -1,0 +1,2866 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{Affleck1987}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Affleck}{A.}%
+     {Ian}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kennedy}{K.}%
+     {Tom}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lieb}{L.}%
+     {Elliott~H}{E.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tasaki}{T.}%
+     {Hal}{H.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{AI+1}
+  \strng{fullhash}{AIKTLEHTH1}
+  \field{sortinit}{A}
+  \field{number}{7}
+  \field{pages}{799}
+  \field{title}{Rigorous results on valence-bond ground states in
+  antiferromagnets}
+  \field{volume}{59}
+  \field{journaltitle}{Physical review letters}
+  \field{year}{1987}
+\endentry
+
+\entry{Aharonov}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Anandan}{A.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Aharonov}{A.}%
+     {Y.}{Y.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{AJAY1}
+  \strng{fullhash}{AJAY1}
+  \field{sortinit}{A}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.65.1697
+  \endverb
+  \field{issue}{14}
+  \field{pages}{1697\bibrangedash 1700}
+  \field{title}{Geometry of quantum evolution}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.65.1697
+  \endverb
+  \field{volume}{65}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{1990}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{WiemanCornell1995}{article}{}
+  \true{moreauthor}
+  \name{author}{5}{}{%
+    {{}%
+     {Anderson}{A.}%
+     {Mike~H}{M.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ensher}{E.}%
+     {Jason~R}{J.~R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Matthews}{M.}%
+     {Michael~R}{M.~R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wieman}{W.}%
+     {Carl~E}{C.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cornell}{C.}%
+     {Eric~A}{E.~A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {JSTOR}%
+  }
+  \strng{namehash}{AMH+1}
+  \strng{fullhash}{AMHEJRMMRWCECEA+1}
+  \field{sortinit}{A}
+  \field{number}{5221}
+  \field{pages}{198\bibrangedash 201}
+  \field{title}{Observation of Bose-Einstein condensation in a dilute atomic
+  vapor}
+  \field{volume}{269}
+  \field{journaltitle}{science}
+  \field{year}{1995}
+\endentry
+
+\entry{Baxter1968}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Baxter}{B.}%
+     {RJ}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {AIP}%
+  }
+  \strng{namehash}{BR1}
+  \strng{fullhash}{BR1}
+  \field{sortinit}{B}
+  \field{number}{4}
+  \field{pages}{650\bibrangedash 654}
+  \field{title}{Dimers on a rectangular lattice}
+  \field{volume}{9}
+  \field{journaltitle}{Journal of Mathematical Physics}
+  \field{year}{1968}
+\endentry
+
+\entry{Bloch2012}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Bloch}{B.}%
+     {Immanuel}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dalibard}{D.}%
+     {Jean}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Nascimbene}{N.}%
+     {Sylvain}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Nature Research}%
+  }
+  \strng{namehash}{BIDJNS1}
+  \strng{fullhash}{BIDJNS1}
+  \field{sortinit}{B}
+  \field{number}{4}
+  \field{pages}{267\bibrangedash 276}
+  \field{title}{Quantum simulations with ultracold quantum gases}
+  \field{volume}{8}
+  \field{journaltitle}{Nature Physics}
+  \field{year}{2012}
+\endentry
+
+\entry{manybodyBloch}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Bloch}{B.}%
+     {Immanuel}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dalibard}{D.}%
+     {Jean}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zwerger}{Z.}%
+     {Wilhelm}{W.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{BIDJZW1}
+  \strng{fullhash}{BIDJZW1}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1103/RevModPhys.80.885
+  \endverb
+  \field{issue}{3}
+  \field{pages}{885\bibrangedash 964}
+  \field{title}{Many-body physics with ultracold gases}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/RevModPhys.80.885
+  \endverb
+  \field{volume}{80}
+  \field{journaltitle}{Rev. Mod. Phys.}
+  \field{year}{2008}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{BECcontrol}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Borzì}{B.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hohenester}{H.}%
+     {U.}{U.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BAHU1}
+  \strng{fullhash}{BAHU1}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1137/070686135
+  \endverb
+  \verb{eprint}
+  \verb https://doi.org/10.1137/070686135
+  \endverb
+  \field{number}{1}
+  \field{pages}{441\bibrangedash 462}
+  \field{title}{Multigrid Optimization Schemes for Solving Bose–Einstein
+  Condensate Control Problems}
+  \verb{url}
+  \verb https://doi.org/10.1137/070686135
+  \endverb
+  \field{volume}{30}
+  \field{journaltitle}{SIAM Journal on Scientific Computing}
+  \field{year}{2008}
+\endentry
+
+\entry{bruus}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Bruus}{B.}%
+     {H.}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Flensberg}{F.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {OUP Oxford}%
+  }
+  \strng{namehash}{BHFK1}
+  \strng{fullhash}{BHFK1}
+  \field{sortinit}{B}
+  \field{isbn}{9780198566335}
+  \field{series}{Oxford Graduate Texts}
+  \field{title}{Many-Body Quantum Theory in Condensed Matter Physics: An
+  Introduction}
+  \verb{url}
+  \verb https://books.google.dk/books?id=v5vhg1tYLC8C
+  \endverb
+  \field{year}{2004}
+\endentry
+
+\entry{Caneva2009}{article}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Caneva}{C.}%
+     {T.}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Murphy}{M.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calarco}{C.}%
+     {T.}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fazio}{F.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Montangero}{M.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Giovannetti}{G.}%
+     {V.}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Santoro}{S.}%
+     {G.~E.}{G.~E.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{CT+1}
+  \strng{fullhash}{CTMMCTFRMSGVSGE1}
+  \field{sortinit}{C}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.103.240501
+  \endverb
+  \field{issue}{24}
+  \field{pages}{240501}
+  \field{title}{Optimal Control at the Quantum Speed Limit}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.103.240501
+  \endverb
+  \field{volume}{103}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{2009}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Caneva2011crab}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Caneva}{C.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calarco}{C.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Montangero}{M.}%
+     {Simone}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{CTCTMS1}
+  \strng{fullhash}{CTCTMS1}
+  \field{sortinit}{C}
+  \field{number}{2}
+  \field{pages}{022326}
+  \field{title}{Chopped random-basis quantum optimization}
+  \field{volume}{84}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2011}
+\endentry
+
+\entry{Caneva2011}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Caneva}{C.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calarco}{C.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fazio}{F.}%
+     {Rosario}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Santoro}{S.}%
+     {Giuseppe~E.}{G.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Montangero}{M.}%
+     {Simone}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{CT+2}
+  \strng{fullhash}{CTCTFRSGEMS1}
+  \field{sortinit}{C}
+  \verb{doi}
+  \verb 10.1103/PhysRevA.84.012312
+  \endverb
+  \field{issue}{1}
+  \field{pages}{012312}
+  \field{title}{Speeding up critical system dynamics through optimized
+  evolution}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevA.84.012312
+  \endverb
+  \field{volume}{84}
+  \field{journaltitle}{Phys. Rev. A}
+  \field{year}{2011}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{cohen1992atom}{book}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Cohen-Tannoudji}{C.-T.}%
+     {Claude}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dupont-Roc}{D.-R.}%
+     {Jacques}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Grynberg}{G.}%
+     {Gilbert}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Thickstun}{T.}%
+     {Patricia}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley Online Library}%
+  }
+  \strng{namehash}{CTC+1}
+  \strng{fullhash}{CTCDRJGGTP1}
+  \field{sortinit}{C}
+  \field{title}{Atom-photon interactions: basic processes and applications}
+  \field{year}{1992}
+\endentry
+
+\entry{Dalibard2011}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Dalibard}{D.}%
+     {Jean}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gerbier}{G.}%
+     {Fabrice}{F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Juzeli{\=u}nas}{J.}%
+     {Gediminas}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{\"O}hberg}{{\"O}.}%
+     {Patrik}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{DJ+1}
+  \strng{fullhash}{DJGFJGOP1}
+  \field{sortinit}{D}
+  \field{number}{4}
+  \field{pages}{1523}
+  \field{title}{Colloquium: Artificial gauge potentials for neutral atoms}
+  \field{volume}{83}
+  \field{journaltitle}{Reviews of Modern Physics}
+  \field{year}{2011}
+\endentry
+
+\entry{deFouquieres2011}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {De~Fouquieres}{D.~F.}%
+     {P}{P}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schirmer}{S.}%
+     {SG}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Glaser}{G.}%
+     {SJ}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kuprov}{K.}%
+     {Ilya}{I.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier}%
+  }
+  \strng{namehash}{DFP+1}
+  \strng{fullhash}{DFPSSGSKI1}
+  \field{sortinit}{D}
+  \field{number}{2}
+  \field{pages}{412\bibrangedash 417}
+  \field{title}{Second order gradient ascent pulse engineering}
+  \field{volume}{212}
+  \field{journaltitle}{Journal of Magnetic Resonance}
+  \field{year}{2011}
+\endentry
+
+\entry{Doria2011}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Doria}{D.}%
+     {Patrick}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calarco}{C.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Montangero}{M.}%
+     {Simone}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{DPCTMS1}
+  \strng{fullhash}{DPCTMS1}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.106.190501
+  \endverb
+  \field{issue}{19}
+  \field{pages}{190501}
+  \field{title}{Optimal Control Technique for Many-Body Quantum Dynamics}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.106.190501
+  \endverb
+  \field{volume}{106}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{2011}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Dukelsky1998}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Dukelsky}{D.}%
+     {J}{J}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DJ1}
+  \strng{fullhash}{DJ1}
+  \field{sortinit}{D}
+  \field{pages}{457}
+  \field{title}{J. Dukelsky, MA Mart{\'\i}n-Delgado, T. Nishino, and G. Sierra,
+  Europhys. Lett. 43, 457 (1998).}
+  \field{volume}{43}
+  \field{journaltitle}{Europhys. Lett.}
+  \field{year}{1998}
+\endentry
+
+\entry{Cramer}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Eisert}{E.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cramer}{C.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Plenio}{P.}%
+     {M.~B.}{M.~B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{EJCMPMB1}
+  \strng{fullhash}{EJCMPMB1}
+  \field{sortinit}{E}
+  \verb{doi}
+  \verb 10.1103/RevModPhys.82.277
+  \endverb
+  \field{issue}{1}
+  \field{pages}{277\bibrangedash 306}
+  \field{title}{Colloquium: Area laws for the entanglement entropy}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/RevModPhys.82.277
+  \endverb
+  \field{volume}{82}
+  \field{journaltitle}{Rev. Mod. Phys.}
+  \field{year}{2010}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{characPhases}{article}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Ejima}{E.}%
+     {Satoshi}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fehske}{F.}%
+     {Holger}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gebhard}{G.}%
+     {Florian}{F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {M\"unster}{M.}%
+     {Kevin}{K.}%
+     {zu}{z.}%
+     {}{}}%
+    {{}%
+     {Knap}{K.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Arrigoni}{A.}%
+     {Enrico}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Linden}{L.}%
+     {Wolfgang}{W.}%
+     {von~der}{v.~d.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{ES+1}
+  \strng{fullhash}{ESFHGFMKzKMAELWvd1}
+  \field{sortinit}{E}
+  \verb{doi}
+  \verb 10.1103/PhysRevA.85.053644
+  \endverb
+  \field{issue}{5}
+  \field{pages}{053644}
+  \field{title}{Characterization of Mott-insulating and superfluid phases in
+  the one-dimensional Bose-Hubbard model}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevA.85.053644
+  \endverb
+  \field{volume}{85}
+  \field{journaltitle}{Phys. Rev. A}
+  \field{year}{2012}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{beyondQSL}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Gajdacz}{G.}%
+     {Miroslav}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Das}{D.}%
+     {Kunal~K.}{K.~K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Arlt}{A.}%
+     {Jan}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sherson}{S.}%
+     {Jacob~F.}{J.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Opatrn\'y}{O.}%
+     {Tom\'a\ifmmode \check{s}\else~\v{s}\fi{}}{T.~c.~v.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{GM+1}
+  \strng{fullhash}{GMDKKAJSJFOTcv1}
+  \field{sortinit}{G}
+  \verb{doi}
+  \verb 10.1103/PhysRevA.92.062106
+  \endverb
+  \field{issue}{6}
+  \field{pages}{062106}
+  \field{title}{Time-limited optimal dynamics beyond the quantum speed limit}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevA.92.062106
+  \endverb
+  \field{volume}{92}
+  \field{journaltitle}{Phys. Rev. A}
+  \field{year}{2015}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Gemelke2009}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Gemelke}{G.}%
+     {Nathan}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zhang}{Z.}%
+     {Xibo}{X.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hung}{H.}%
+     {Chen-Lung}{C.-L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chin}{C.}%
+     {Cheng}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Nature Publishing Group}%
+  }
+  \strng{namehash}{GN+1}
+  \strng{fullhash}{GNZXHCLCC1}
+  \field{sortinit}{G}
+  \field{number}{7258}
+  \field{pages}{995}
+  \field{title}{In situ observation of incompressible mott-insulating domains
+  in ultracold atomic gases}
+  \field{volume}{460}
+  \field{journaltitle}{Nature}
+  \field{year}{2009}
+\endentry
+
+\entry{greiner}{thesis}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Greiner}{G.}%
+     {Markus}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Ludwig-Maximilians-Universit{\"a}t M{\"u}nchen}%
+  }
+  \keyw{BEC, Mott, optical lattice, Bose-Einstein condensate,
+  Bose-Einstein-Kondensat}
+  \strng{namehash}{GM1}
+  \strng{fullhash}{GM1}
+  \field{sortinit}{G}
+  \field{title}{Ultracold quantum gases in three-dimensional optical lattice
+  potentials}
+  \verb{url}
+  \verb http://nbn-resolving.de/urn:nbn:de:bvb:19-9683
+  \endverb
+  \field{type}{phdthesis}
+  \field{year}{2003}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{grimm}{incollection}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Grimm}{G.}%
+     {Rudolf}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weidemüller}{W.}%
+     {Matthias}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ovchinnikov}{O.}%
+     {Yurii~B.}{Y.~B.}%
+     {}{}%
+     {}{}}%
+  }
+  \name{editor}{2}{}{%
+    {{}%
+     {Bederson}{B.}%
+     {Benjamin}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Walther}{W.}%
+     {Herbert}{H.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Academic Press}%
+  }
+  \strng{namehash}{GRWMOYB1}
+  \strng{fullhash}{GRWMOYB1}
+  \field{sortinit}{G}
+  \verb{doi}
+  \verb https://doi.org/10.1016/S1049-250X(08)60186-X
+  \endverb
+  \field{issn}{1049-250X}
+  \field{number}{Supplement C}
+  \field{pages}{95 \bibrangedash  170}
+  \field{series}{Advances In Atomic, Molecular, and Optical Physics}
+  \field{title}{Optical Dipole Traps for Neutral Atoms}
+  \verb{url}
+  \verb http://www.sciencedirect.com/science/article/pii/S1049250X0860186X
+  \endverb
+  \field{volume}{42}
+  \field{year}{2000}
+\endentry
+
+\entry{Gross1961}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Gross}{G.}%
+     {E.~P.}{E.~P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{GEP1}
+  \strng{fullhash}{GEP1}
+  \field{sortinit}{G}
+  \verb{doi}
+  \verb 10.1007/BF02731494
+  \endverb
+  \field{issn}{1827-6121}
+  \field{number}{3}
+  \field{pages}{454\bibrangedash 477}
+  \field{title}{Structure of a quantized vortex in boson systems}
+  \verb{url}
+  \verb https://doi.org/10.1007/BF02731494
+  \endverb
+  \field{volume}{20}
+  \field{journaltitle}{Il Nuovo Cimento (1955-1965)}
+  \field{year}{1961}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Hastings2007}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Hastings}{H.}%
+     {M.~B.}{M.~B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HMB1}
+  \strng{fullhash}{HMB1}
+  \field{sortinit}{H}
+  \field{number}{08}
+  \field{pages}{P08024}
+  \field{title}{An area law for one-dimensional quantum systems}
+  \field{volume}{2007}
+  \field{journaltitle}{Journal of Statistical Mechanics: Theory and Experiment}
+  \field{year}{2007}
+\endentry
+
+\entry{Hohenester2007}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Hohenester}{H.}%
+     {Ulrich}{U.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rekdal}{R.}%
+     {Per~Kristian}{P.~K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Borz{\`\i}}{B.}%
+     {Alfio}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schmiedmayer}{S.}%
+     {J{\"o}rg}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{HU+1}
+  \strng{fullhash}{HURPKBASJ1}
+  \field{sortinit}{H}
+  \field{number}{2}
+  \field{pages}{023602}
+  \field{title}{Optimal quantum control of Bose-Einstein condensates in
+  magnetic microtraps}
+  \field{volume}{75}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2007}
+\endentry
+
+\entry{Huang1983}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Huang}{H.}%
+     {Garng~M}{G.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tarn}{T.}%
+     {Tzyh~J}{T.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Clark}{C.}%
+     {John~W}{J.~W.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {AIP}%
+  }
+  \strng{namehash}{HGMTTJCJW1}
+  \strng{fullhash}{HGMTTJCJW1}
+  \field{sortinit}{H}
+  \field{number}{11}
+  \field{pages}{2608\bibrangedash 2618}
+  \field{title}{On the controllability of quantum-mechanical systems}
+  \field{volume}{24}
+  \field{journaltitle}{Journal of Mathematical Physics}
+  \field{year}{1983}
+\endentry
+
+\entry{Jager2014}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {J{\"a}ger}{J.}%
+     {Georg}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Reich}{R.}%
+     {Daniel~M}{D.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Goerz}{G.}%
+     {Michael~H}{M.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Koch}{K.}%
+     {Christiane~P}{C.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hohenester}{H.}%
+     {Ulrich}{U.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{JG+1}
+  \strng{fullhash}{JGRDMGMHKCPHU1}
+  \field{sortinit}{J}
+  \field{number}{3}
+  \field{pages}{033628}
+  \field{title}{Optimal quantum control of Bose-Einstein condensates in
+  magnetic microtraps: Comparison of gradient-ascent-pulse-engineering and
+  Krotov optimization schemes}
+  \field{volume}{90}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2014}
+\endentry
+
+\entry{JakschZoller}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Jaksch}{J.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zoller}{Z.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{03.75.−b, 32.80.Pj, 32.80.Qk, 03.67.Lx, Cold atom, Optical lattice,
+  Hubbard model, Quantum computing, Atomic quantum dot}
+  \strng{namehash}{JDZP1}
+  \strng{fullhash}{JDZP1}
+  \field{sortinit}{J}
+  \verb{doi}
+  \verb https://doi.org/10.1016/j.aop.2004.09.010
+  \endverb
+  \field{issn}{0003-4916}
+  \field{note}{Special Issue}
+  \field{number}{1}
+  \field{pages}{52 \bibrangedash  79}
+  \field{title}{The cold atom Hubbard toolbox}
+  \verb{url}
+  \verb http://www.sciencedirect.com/science/article/pii/S0003491604001782
+  \endverb
+  \field{volume}{315}
+  \field{journaltitle}{Annals of Physics}
+  \field{year}{2005}
+\endentry
+
+\entry{Jaksch}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Jaksch}{J.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bruder}{B.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cirac}{C.}%
+     {J.~I.}{J.~I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gardiner}{G.}%
+     {C.~W.}{C.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zoller}{Z.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{JD+1}
+  \strng{fullhash}{JDBCCJIGCWZP1}
+  \field{sortinit}{J}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.81.3108
+  \endverb
+  \field{issue}{15}
+  \field{pages}{3108\bibrangedash 3111}
+  \field{title}{Cold Bosonic Atoms in Optical Lattices}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.81.3108
+  \endverb
+  \field{volume}{81}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{1998}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Zoller1999}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Jaksch}{J.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Briegel}{B.}%
+     {H.-J.}{H.-J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cirac}{C.}%
+     {J.~I.}{J.~I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gardiner}{G.}%
+     {C.~W.}{C.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zoller}{Z.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{JD+1}
+  \strng{fullhash}{JDBHJCJIGCWZP1}
+  \field{sortinit}{J}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.82.1975
+  \endverb
+  \field{issue}{9}
+  \field{pages}{1975\bibrangedash 1978}
+  \field{title}{Entanglement of Atoms via Cold Controlled Collisions}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.82.1975
+  \endverb
+  \field{volume}{82}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{1999}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{MajaJulie}{thesis}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Juhl}{J.}%
+     {Maja}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kryger}{K.}%
+     {Julie}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{JMKJ1}
+  \strng{fullhash}{JMKJ1}
+  \field{sortinit}{J}
+  \field{title}{Optimisation Method Development and Testing for Highly Complex
+  Quantum Dynamics}
+  \list{institution}{2}{%
+    {Department of Physics}%
+    {Astronomy, Aarhus Univercity}%
+  }
+  \field{type}{mathesis}
+  \field{year}{2018}
+\endentry
+
+\entry{Khaneja2005}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Khaneja}{K.}%
+     {Navin}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Reiss}{R.}%
+     {Timo}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kehlet}{K.}%
+     {Cindie}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schulte-Herbr{\"u}ggen}{S.-H.}%
+     {Thomas}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Glaser}{G.}%
+     {Steffen~J}{S.~J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier}%
+  }
+  \strng{namehash}{KN+1}
+  \strng{fullhash}{KNRTKCSHTGSJ1}
+  \field{sortinit}{K}
+  \field{number}{2}
+  \field{pages}{296\bibrangedash 305}
+  \field{title}{Optimal control of coupled spin dynamics: design of NMR pulse
+  sequences by gradient ascent algorithms}
+  \field{volume}{172}
+  \field{journaltitle}{Journal of magnetic resonance}
+  \field{year}{2005}
+\endentry
+
+\entry{kittel}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Kittel}{K.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley}%
+  }
+  \strng{namehash}{KC1}
+  \strng{fullhash}{KC1}
+  \field{sortinit}{K}
+  \field{isbn}{9780471415268}
+  \field{title}{Introduction to Solid State Physics}
+  \verb{url}
+  \verb https://books.google.dk/books?id=kym4QgAACAAJ
+  \endverb
+  \field{year}{2004}
+\endentry
+
+\entry{kittel1963}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Kittel}{K.}%
+     {Charles}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fong}{F.}%
+     {Ching-yao}{C.-y.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley New York}%
+  }
+  \strng{namehash}{KCFCy1}
+  \strng{fullhash}{KCFCy1}
+  \field{sortinit}{K}
+  \field{title}{Quantum theory of solids}
+  \field{volume}{3}
+  \field{year}{1963}
+\endentry
+
+\entry{kohn1959analyticWannier}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Kohn}{K.}%
+     {Walter}{W.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{KW1}
+  \strng{fullhash}{KW1}
+  \field{sortinit}{K}
+  \field{number}{4}
+  \field{pages}{809}
+  \field{title}{Analytic properties of Bloch waves and Wannier functions}
+  \field{volume}{115}
+  \field{journaltitle}{Physical Review}
+  \field{year}{1959}
+\endentry
+
+\entry{Kuhner2000}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {K\"uhner}{K.}%
+     {Till~D.}{T.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {White}{W.}%
+     {Steven~R.}{S.~R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Monien}{M.}%
+     {H.}{H.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{KTDWSRMH1}
+  \strng{fullhash}{KTDWSRMH1}
+  \field{sortinit}{K}
+  \verb{doi}
+  \verb 10.1103/PhysRevB.61.12474
+  \endverb
+  \field{issue}{18}
+  \field{pages}{12474\bibrangedash 12489}
+  \field{title}{One-dimensional Bose-Hubbard model with nearest-neighbor
+  interaction}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevB.61.12474
+  \endverb
+  \field{volume}{61}
+  \field{journaltitle}{Phys. Rev. B}
+  \field{year}{2000}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Lanczos}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Lanczos}{L.}%
+     {Cornelius}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{LC1}
+  \strng{fullhash}{LC1}
+  \field{sortinit}{L}
+  \verb{doi}
+  \verb 10.6028/jres.045.026
+  \endverb
+  \field{pages}{255\bibrangedash 282}
+  \field{title}{{An iteration method for the solution of the eigenvalue problem
+  of linear differential and integral operators}}
+  \field{volume}{45}
+  \field{journaltitle}{J. Res. Natl. Bur. Stand. B}
+  \field{year}{1950}
+\endentry
+
+\entry{QSLtoffoli}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Levitin}{L.}%
+     {Lev~B.}{L.~B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Toffoli}{T.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{LLBTT1}
+  \strng{fullhash}{LLBTT1}
+  \field{sortinit}{L}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.103.160502
+  \endverb
+  \field{issue}{16}
+  \field{pages}{160502}
+  \field{title}{Fundamental Limit on the Rate of Quantum Dynamics: The Unified
+  Bound Is Tight}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.103.160502
+  \endverb
+  \field{volume}{103}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{2009}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{lewenstein}{article}{}
+  \name{author}{6}{}{%
+    {{}%
+     {Lewenstein}{L.}%
+     {Maciej}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sanpera}{S.}%
+     {Anna}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ahufinger}{A.}%
+     {Veronica}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Damski}{D.}%
+     {Bogdan}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sen(De)}{S.}%
+     {Aditi}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sen}{S.}%
+     {Ujjwal}{U.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Taylor & Francis}%
+  }
+  \strng{namehash}{LM+1}
+  \strng{fullhash}{LMSAAVDBSASU1}
+  \field{sortinit}{L}
+  \verb{doi}
+  \verb 10.1080/00018730701223200
+  \endverb
+  \verb{eprint}
+  \verb https://doi.org/10.1080/00018730701223200
+  \endverb
+  \field{number}{2}
+  \field{pages}{243\bibrangedash 379}
+  \field{title}{Ultracold atomic gases in optical lattices: mimicking condensed
+  matter physics and beyond}
+  \verb{url}
+  \verb https://doi.org/10.1080/00018730701223200
+  \endverb
+  \field{volume}{56}
+  \field{journaltitle}{Advances in Physics}
+  \field{year}{2007}
+\endentry
+
+\entry{Liu1989}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Liu}{L.}%
+     {Dong~C}{D.~C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Nocedal}{N.}%
+     {Jorge}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{LDCNJ1}
+  \strng{fullhash}{LDCNJ1}
+  \field{sortinit}{L}
+  \field{number}{1-3}
+  \field{pages}{503\bibrangedash 528}
+  \field{title}{On the limited memory BFGS method for large scale optimization}
+  \field{volume}{45}
+  \field{journaltitle}{Mathematical programming}
+  \field{year}{1989}
+\endentry
+
+\entry{Lloyd2014}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Lloyd}{L.}%
+     {S}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Montangero}{M.}%
+     {S}{S}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{LSMS1}
+  \strng{fullhash}{LSMS1}
+  \field{sortinit}{L}
+  \field{number}{1}
+  \field{pages}{010502}
+  \field{title}{Information theoretical analysis of quantum optimal control}
+  \field{volume}{113}
+  \field{journaltitle}{Physical review letters}
+  \field{year}{2014}
+\endentry
+
+\entry{Mandelstam1991}{inbook}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Mandelstam}{M.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tamm}{T.}%
+     {Ig.}{I.}%
+     {}{}%
+     {}{}}%
+  }
+  \name{editor}{3}{}{%
+    {{}%
+     {Bolotovskii}{B.}%
+     {Boris~M.}{B.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Frenkel}{F.}%
+     {Victor~Ya.}{V.~Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Peierls}{P.}%
+     {Rudolf}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer Berlin Heidelberg}%
+  }
+  \strng{namehash}{MLTI1}
+  \strng{fullhash}{MLTI1}
+  \field{sortinit}{M}
+  \field{abstract}{%
+  An uncertainty relation between energy and time having a simple physical
+  meaning is rigorously deduced from the principles of quantum mechanics. Some
+  examples of its application are discussed.%
+  }
+  \field{booktitle}{Selected Papers}
+  \verb{doi}
+  \verb 10.1007/978-3-642-74626-0_8
+  \endverb
+  \field{isbn}{978-3-642-74626-0}
+  \field{pages}{115\bibrangedash 123}
+  \field{title}{The Uncertainty Relation Between Energy and Time in
+  Non-relativistic Quantum Mechanics}
+  \verb{url}
+  \verb https://doi.org/10.1007/978-3-642-74626-0_8
+  \endverb
+  \list{location}{1}{%
+    {Berlin, Heidelberg}%
+  }
+  \field{year}{1991}
+\endentry
+
+\entry{McCulloch2007}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {McCulloch}{M.}%
+     {Ian~P}{I.~P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{MIP1}
+  \strng{fullhash}{MIP1}
+  \field{sortinit}{M}
+  \field{number}{10}
+  \field{pages}{P10014}
+  \field{title}{From density-matrix renormalization group to matrix product
+  states}
+  \field{volume}{2007}
+  \field{journaltitle}{Journal of Statistical Mechanics: Theory and Experiment}
+  \field{year}{2007}
+\endentry
+
+\entry{wright}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Nocedal}{N.}%
+     {Jorge}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W.}%
+     {Stephen~J.}{S.~J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{NJWSJ1}
+  \strng{fullhash}{NJWSJ1}
+  \field{sortinit}{N}
+  \field{edition}{second}
+  \field{title}{Numerical Optimization}
+  \list{location}{1}{%
+    {New York, NY, USA}%
+  }
+  \field{year}{2006}
+\endentry
+
+\entry{vanoosten}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Oosten}{O.}%
+     {D.}{D.}%
+     {van}{v.}%
+     {}{}}%
+    {{}%
+     {Straten}{S.}%
+     {P.}{P.}%
+     {van~der}{v.~d.}%
+     {}{}}%
+    {{}%
+     {Stoof}{S.}%
+     {H.~T.~C.}{H.~T.~C.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{ODvSPvdSHTC1}
+  \strng{fullhash}{ODvSPvdSHTC1}
+  \field{sortinit}{O}
+  \verb{doi}
+  \verb 10.1103/PhysRevA.63.053601
+  \endverb
+  \field{issue}{5}
+  \field{pages}{053601}
+  \field{title}{Quantum phases in an optical lattice}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevA.63.053601
+  \endverb
+  \field{volume}{63}
+  \field{journaltitle}{Phys. Rev. A}
+  \field{year}{2001}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Ostlund1995}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{\"O}stlund}{{\"O}.}%
+     {Stellan}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rommer}{R.}%
+     {Stefan}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{OSRS1}
+  \strng{fullhash}{OSRS1}
+  \field{sortinit}{O}
+  \field{number}{19}
+  \field{pages}{3537}
+  \field{title}{Thermodynamic limit of density matrix renormalization}
+  \field{volume}{75}
+  \field{journaltitle}{Physical review letters}
+  \field{year}{1995}
+\endentry
+
+\entry{PenroseOnsager}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Penrose}{P.}%
+     {Oliver}{O.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Onsager}{O.}%
+     {Lars}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{POOL1}
+  \strng{fullhash}{POOL1}
+  \field{sortinit}{P}
+  \verb{doi}
+  \verb 10.1103/PhysRev.104.576
+  \endverb
+  \field{issue}{3}
+  \field{pages}{576\bibrangedash 584}
+  \field{title}{Bose-Einstein Condensation and Liquid Helium}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRev.104.576
+  \endverb
+  \field{volume}{104}
+  \field{journaltitle}{Phys. Rev.}
+  \field{year}{1956}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{pethick2002bose}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Pethick}{P.}%
+     {Christopher~J}{C.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Smith}{S.}%
+     {Henrik}{H.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Cambridge university press}%
+  }
+  \strng{namehash}{PCJSH1}
+  \strng{fullhash}{PCJSH1}
+  \field{sortinit}{P}
+  \field{title}{Bose-Einstein condensation in dilute gases}
+  \field{year}{2002}
+\endentry
+
+\entry{Pitaevskii}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Pitaevskii}{P.}%
+     {L.P.}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{PL1}
+  \strng{fullhash}{PL1}
+  \field{sortinit}{P}
+  \field{number}{2}
+  \field{pages}{451\bibrangedash 454}
+  \field{title}{Vortex Lines in an Imperfect Bose Gas}
+  \field{volume}{13}
+  \field{journaltitle}{Soviet Physics JETP}
+  \field{year}{1961}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{plischke}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Plischke}{P.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bergersen}{B.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {World Scientific}%
+  }
+  \strng{namehash}{PMBB1}
+  \strng{fullhash}{PMBB1}
+  \field{sortinit}{P}
+  \field{isbn}{9789812560483}
+  \field{title}{Equilibrium Statistical Physics}
+  \verb{url}
+  \verb https://books.google.dk/books?id=KYu7igYEkhwC
+  \endverb
+  \field{year}{2006}
+\endentry
+
+\entry{Rach2015}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Rach}{R.}%
+     {Niklas}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {M{\"u}ller}{M.}%
+     {Matthias~M}{M.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calarco}{C.}%
+     {Tommaso}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Montangero}{M.}%
+     {Simone}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{RN+1}
+  \strng{fullhash}{RNMMMCTMS1}
+  \field{sortinit}{R}
+  \field{number}{6}
+  \field{pages}{062343}
+  \field{title}{Dressing the chopped-random-basis optimization: A
+  bandwidth-limited access to the trap-free landscape}
+  \field{volume}{92}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2015}
+\endentry
+
+\entry{Ramakrishna1995}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Ramakrishna}{R.}%
+     {Viswanath}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Salapaka}{S.}%
+     {Murti~V}{M.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dahleh}{D.}%
+     {Mohammed}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rabitz}{R.}%
+     {Herschel}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Peirce}{P.}%
+     {Anthony}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{RV+1}
+  \strng{fullhash}{RVSMVDMRHPA1}
+  \field{sortinit}{R}
+  \field{number}{2}
+  \field{pages}{960}
+  \field{title}{Controllability of molecular systems}
+  \field{volume}{51}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{1995}
+\endentry
+
+\entry{Rice2000}{book}{}
+  \true{moreauthor}
+  \name{author}{2}{}{%
+    {{}%
+     {Rice}{R.}%
+     {Stuart~Alan}{S.~A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zhao}{Z.}%
+     {Meishan}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {John Wiley}%
+  }
+  \strng{namehash}{RSAZM+1}
+  \strng{fullhash}{RSAZM+1}
+  \field{sortinit}{R}
+  \field{title}{Optical control of molecular dynamics}
+  \field{year}{2000}
+\endentry
+
+\entry{ipnote}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Robere}{R.}%
+     {Robert}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{RR1}
+  \strng{fullhash}{RR1}
+  \field{sortinit}{R}
+  \field{title}{Interior Point Methods and Linear Programming}
+  \list{institution}{1}{%
+    {University of Toronto}%
+  }
+  \field{year}{2012}
+\endentry
+
+\entry{Sachdev2007QPT}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Sachdev}{S.}%
+     {Subir}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley Online Library}%
+  }
+  \strng{namehash}{SS1}
+  \strng{fullhash}{SS1}
+  \field{sortinit}{S}
+  \field{title}{Quantum phase transitions}
+  \field{year}{2007}
+\endentry
+
+\entry{Molmer2010}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Saffman}{S.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Walker}{W.}%
+     {T.~G.}{T.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {M\o{}lmer}{M.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{SMWTGMK1}
+  \strng{fullhash}{SMWTGMK1}
+  \field{sortinit}{S}
+  \verb{doi}
+  \verb 10.1103/RevModPhys.82.2313
+  \endverb
+  \field{issue}{3}
+  \field{pages}{2313\bibrangedash 2363}
+  \field{title}{Quantum information with Rydberg atoms}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/RevModPhys.82.2313
+  \endverb
+  \field{volume}{82}
+  \field{journaltitle}{Rev. Mod. Phys.}
+  \field{year}{2010}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Schirmer2001}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Schirmer}{S.}%
+     {Sonia~G}{S.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fu}{F.}%
+     {H}{H}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Solomon}{S.}%
+     {Allan~I}{A.~I.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{SSGFHSAI1}
+  \strng{fullhash}{SSGFHSAI1}
+  \field{sortinit}{S}
+  \field{number}{6}
+  \field{pages}{063410}
+  \field{title}{Complete controllability of quantum systems}
+  \field{volume}{63}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2001}
+\endentry
+
+\entry{schollwock}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Schollwöck}{S.}%
+     {Ulrich}{U.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SU1}
+  \strng{fullhash}{SU1}
+  \field{sortinit}{S}
+  \verb{doi}
+  \verb https://doi.org/10.1016/j.aop.2010.09.012
+  \endverb
+  \field{issn}{0003-4916}
+  \field{note}{January 2011 Special Issue}
+  \field{number}{1}
+  \field{pages}{96 \bibrangedash  192}
+  \field{title}{The density-matrix renormalization group in the age of matrix
+  product states}
+  \verb{url}
+  \verb http://www.sciencedirect.com/science/article/pii/S0003491610001752
+  \endverb
+  \field{volume}{326}
+  \field{journaltitle}{Annals of Physics}
+  \field{year}{2011}
+\endentry
+
+\entry{EntropyScaling}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Schuch}{S.}%
+     {Norbert}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wolf}{W.}%
+     {Michael~M.}{M.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Verstraete}{V.}%
+     {Frank}{F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cirac}{C.}%
+     {J.~Ignacio}{J.~I.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{SN+1}
+  \strng{fullhash}{SNWMMVFCJI1}
+  \field{sortinit}{S}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.100.030504
+  \endverb
+  \field{issue}{3}
+  \field{pages}{030504}
+  \field{title}{Entropy Scaling and Simulability by Matrix Product States}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.100.030504
+  \endverb
+  \field{volume}{100}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{2008}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Shapiro2003}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Shapiro}{S.}%
+     {Moshe}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brumer}{B.}%
+     {Paul}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SMBP1}
+  \strng{fullhash}{SMBP1}
+  \field{sortinit}{S}
+  \field{pages}{250}
+  \field{title}{Principles of the quantum control of molecular processes}
+  \field{journaltitle}{Principles of the Quantum Control of Molecular
+  Processes, by Moshe Shapiro, Paul Brumer, pp. 250. ISBN 0-471-24184-9.
+  Wiley-VCH, February 2003.}
+  \field{year}{2003}
+\endentry
+
+\entry{Simon2011}{article}{}
+  \name{author}{6}{}{%
+    {{}%
+     {Simon}{S.}%
+     {Jonathan}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bakr}{B.}%
+     {Waseem~S}{W.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ma}{M.}%
+     {Ruichao}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tai}{T.}%
+     {M~Eric}{M.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Preiss}{P.}%
+     {Philipp~M}{P.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Greiner}{G.}%
+     {Markus}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Nature Research}%
+  }
+  \strng{namehash}{SJ+1}
+  \strng{fullhash}{SJBWSMRTMEPPMGM1}
+  \field{sortinit}{S}
+  \field{number}{7343}
+  \field{pages}{307\bibrangedash 312}
+  \field{title}{Quantum simulation of antiferromagnetic spin chains in an
+  optical lattice}
+  \field{volume}{472}
+  \field{journaltitle}{Nature}
+  \field{year}{2011}
+\endentry
+
+\entry{Sorensen2016}{article}{}
+  \true{moreauthor}
+  \name{author}{10}{}{%
+    {{}%
+     {S{\o}rensen}{S.}%
+     {Jens Jakob~WH}{J.~J.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pedersen}{P.}%
+     {Mads~Kock}{M.~K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Munch}{M.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Haikka}{H.}%
+     {Pinja}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jensen}{J.}%
+     {Jesper~Halkj{\ae}r}{J.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Planke}{P.}%
+     {Tilo}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Andreasen}{A.}%
+     {Morten~Ginnerup}{M.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gajdacz}{G.}%
+     {Miroslav}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {M{\o}lmer}{M.}%
+     {Klaus}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lieberoth}{L.}%
+     {Andreas}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Nature Publishing Group}%
+  }
+  \strng{namehash}{SJJW+1}
+  \strng{fullhash}{SJJWPMKMMHPJJHPTAMGGMMKLA+1}
+  \field{sortinit}{S}
+  \field{number}{7598}
+  \field{pages}{210}
+  \field{title}{Exploring the quantum speed limit with computer games}
+  \field{volume}{532}
+  \field{journaltitle}{Nature}
+  \field{year}{2016}
+\endentry
+
+\entry{Spielman2008}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Spielman}{S.}%
+     {I.~B.}{I.~B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Phillips}{P.}%
+     {W.~D.}{W.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Porto}{P.}%
+     {J.~V.}{J.~V.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{SIBPWDPJV1}
+  \strng{fullhash}{SIBPWDPJV1}
+  \field{sortinit}{S}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.100.120402
+  \endverb
+  \field{issue}{12}
+  \field{pages}{120402}
+  \field{title}{Condensate Fraction in a 2D Bose Gas Measured across the
+  Mott-Insulator Transition}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.100.120402
+  \endverb
+  \field{volume}{100}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{2008}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{ITensor}{misc}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Stoudenmire}{S.}%
+     {E.~Miles}{E.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {White}{W.}%
+     {Steven~R.}{S.~R.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SEMWSR1}
+  \strng{fullhash}{SEMWSR1}
+  \field{sortinit}{S}
+  \field{title}{ITensor Library}
+  \verb{url}
+  \verb http://itensor.org/index.html
+  \endverb
+\endentry
+
+\entry{Suzuki1991}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Suzuki}{S.}%
+     {Masuo}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SM1}
+  \strng{fullhash}{SM1}
+  \field{sortinit}{S}
+  \field{title}{General theory of fractal path integrals with applications to
+  many-body theories and statistical physics}
+  \field{journaltitle}{Journal of Mathematical Physics}
+  \field{year}{1991}
+\endentry
+
+\entry{Tarruell2012}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Tarruell}{T.}%
+     {Leticia}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Greif}{G.}%
+     {Daniel}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Uehlinger}{U.}%
+     {Thomas}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jotzu}{J.}%
+     {Gregor}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Esslinger}{E.}%
+     {Tilman}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Nature Research}%
+  }
+  \strng{namehash}{TL+1}
+  \strng{fullhash}{TLGDUTJGET1}
+  \field{sortinit}{T}
+  \field{number}{7389}
+  \field{pages}{302\bibrangedash 305}
+  \field{title}{Creating, moving and merging Dirac points with a Fermi gas in a
+  tunable honeycomb lattice}
+  \field{volume}{483}
+  \field{journaltitle}{Nature}
+  \field{year}{2012}
+\endentry
+
+\entry{FrankBloch}{article}{}
+  \true{moreauthor}
+  \name{author}{10}{}{%
+    {{}%
+     {Van~Frank}{V.~F.}%
+     {S}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bonneau}{B.}%
+     {M}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schmiedmayer}{S.}%
+     {J}{J}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hild}{H.}%
+     {Sebastian}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gross}{G.}%
+     {Christian}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cheneau}{C.}%
+     {Marc}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bloch}{B.}%
+     {Immanuel}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pichler}{P.}%
+     {T}{T}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Negretti}{N.}%
+     {A}{A}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calarco}{C.}%
+     {T}{T}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Nature Publishing Group}%
+  }
+  \strng{namehash}{VFS+1}
+  \strng{fullhash}{VFSBMSJHSGCCMBIPTNACT+1}
+  \field{sortinit}{V}
+  \field{title}{Optimal control of complex atomic quantum systems}
+  \field{volume}{6}
+  \field{journaltitle}{Scientific reports}
+  \field{year}{2016}
+\endentry
+
+\entry{Vidal2007}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Vidal}{V.}%
+     {G.}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{VG1}
+  \strng{fullhash}{VG1}
+  \field{sortinit}{V}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.98.070201
+  \endverb
+  \field{issue}{7}
+  \field{pages}{070201}
+  \field{title}{Classical Simulation of Infinite-Size Quantum Lattice Systems
+  in One Spatial Dimension}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.98.070201
+  \endverb
+  \field{volume}{98}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{2007}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Vidal2003}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Vidal}{V.}%
+     {Guifr{\'e}}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{VG2}
+  \strng{fullhash}{VG2}
+  \field{sortinit}{V}
+  \field{number}{14}
+  \field{pages}{147902}
+  \field{title}{Efficient classical simulation of slightly entangled quantum
+  computations}
+  \field{volume}{91}
+  \field{journaltitle}{Physical review letters}
+  \field{year}{2003}
+\endentry
+
+\entry{Vidal2004}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Vidal}{V.}%
+     {Guifr{\'e}}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{VG2}
+  \strng{fullhash}{VG2}
+  \field{sortinit}{V}
+  \field{number}{4}
+  \field{pages}{040502}
+  \field{title}{Efficient simulation of one-dimensional quantum many-body
+  systems}
+  \field{volume}{93}
+  \field{journaltitle}{Physical review letters}
+  \field{year}{2004}
+\endentry
+
+\entry{Winckel2008}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Von~Winckel}{V.~W.}%
+     {Gregory}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Borz{\`\i}}{B.}%
+     {A}{A}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IOP Publishing}%
+  }
+  \strng{namehash}{VWGBA1}
+  \strng{fullhash}{VWGBA1}
+  \field{sortinit}{V}
+  \field{number}{3}
+  \field{pages}{034007}
+  \field{title}{Computational techniques for a quantum control problem with
+  H1-cost}
+  \field{volume}{24}
+  \field{journaltitle}{Inverse Problems}
+  \field{year}{2008}
+\endentry
+
+\entry{ipopt}{inproceedings}{}
+  \name{author}{1}{}{%
+    {{}%
+     {W{\"a}chter}{W.}%
+     {Andreas}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \name{editor}{4}{}{%
+    {{}%
+     {Naumann}{N.}%
+     {Uwe}{U.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schenk}{S.}%
+     {Olaf}{O.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Simon}{S.}%
+     {Horst~D.}{H.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Toledo}{T.}%
+     {Sivan}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Schloss Dagstuhl - Leibniz-Zentrum fuer Informatik, Germany}%
+  }
+  \strng{namehash}{WA1}
+  \strng{fullhash}{WA1}
+  \field{sortinit}{W}
+  \field{booktitle}{Combinatorial Scientific Computing}
+  \field{issn}{1862-4405}
+  \field{number}{09061}
+  \field{series}{Dagstuhl Seminar Proceedings}
+  \field{title}{Short Tutorial: Getting Started With Ipopt in 90 Minutes}
+  \verb{url}
+  \verb http://drops.dagstuhl.de/opus/volltexte/2009/2089
+  \endverb
+  \list{location}{1}{%
+    {Dagstuhl, Germany}%
+  }
+  \field{annotation}{%
+  Keywords: Nonlinear Optimization, Tutorial, Ipopt, COIN-OR%
+  }
+  \field{year}{2009}
+\endentry
+
+\entry{Wachter2006}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {W{\"a}chter}{W.}%
+     {Andreas}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Biegler}{B.}%
+     {Lorenz~T}{L.~T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{WABLT1}
+  \strng{fullhash}{WABLT1}
+  \field{sortinit}{W}
+  \field{number}{1}
+  \field{pages}{25\bibrangedash 57}
+  \field{title}{On the implementation of an interior-point filter line-search
+  algorithm for large-scale nonlinear programming}
+  \field{volume}{106}
+  \field{journaltitle}{Mathematical programming}
+  \field{year}{2006}
+\endentry
+
+\entry{Werschnik2007}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Werschnik}{W.}%
+     {J}{J}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gross}{G.}%
+     {EKU}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IOP Publishing}%
+  }
+  \strng{namehash}{WJGE1}
+  \strng{fullhash}{WJGE1}
+  \field{sortinit}{W}
+  \field{number}{18}
+  \field{pages}{R175}
+  \field{title}{Quantum optimal control theory}
+  \field{volume}{40}
+  \field{journaltitle}{Journal of Physics B: Atomic, Molecular and Optical
+  Physics}
+  \field{year}{2007}
+\endentry
+
+\entry{White1993}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {White}{W.}%
+     {Steven~R}{S.~R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{WSR2}
+  \strng{fullhash}{WSR2}
+  \field{sortinit}{W}
+  \field{number}{14}
+  \field{pages}{10345}
+  \field{title}{Density-matrix algorithms for quantum renormalization groups}
+  \field{volume}{48}
+  \field{journaltitle}{Physical Review B}
+  \field{year}{1993}
+\endentry
+
+\entry{White1992}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {White}{W.}%
+     {Steven~R.}{S.~R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{WSR1}
+  \strng{fullhash}{WSR1}
+  \field{sortinit}{W}
+  \verb{doi}
+  \verb 10.1103/PhysRevLett.69.2863
+  \endverb
+  \field{issue}{19}
+  \field{pages}{2863\bibrangedash 2866}
+  \field{title}{Density matrix formulation for quantum renormalization groups}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevLett.69.2863
+  \endverb
+  \field{volume}{69}
+  \field{journaltitle}{Phys. Rev. Lett.}
+  \field{year}{1992}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{White2005}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {White}{W.}%
+     {Steven~R.}{S.~R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{WSR3}
+  \strng{fullhash}{WSR3}
+  \field{sortinit}{W}
+  \verb{doi}
+  \verb 10.1103/PhysRevB.72.180403
+  \endverb
+  \field{issue}{18}
+  \field{pages}{180403}
+  \field{title}{Density matrix renormalization group algorithms with a single
+  center site}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevB.72.180403
+  \endverb
+  \field{volume}{72}
+  \field{journaltitle}{Phys. Rev. B}
+  \field{year}{2005}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{WideraThesis}{thesis}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Widera}{W.}%
+     {Artur}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{WA2}
+  \strng{fullhash}{WA2}
+  \field{sortinit}{W}
+  \field{title}{Constructing correlated spin states with neutral atoms in
+  optical lattices}
+  \list{institution}{1}{%
+    {Ph. D. thesis, Johannes Gutenberg-Universit{\"a}t, Mainz}%
+  }
+  \field{type}{phdthesis}
+  \field{year}{2008}
+\endentry
+
+\entry{Wilcox1967}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wilcox}{W.}%
+     {R.~M.}{R.~M.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{WRM1}
+  \strng{fullhash}{WRM1}
+  \field{sortinit}{W}
+  \verb{doi}
+  \verb 10.1063/1.1705306
+  \endverb
+  \verb{eprint}
+  \verb https://doi.org/10.1063/1.1705306
+  \endverb
+  \field{number}{4}
+  \field{pages}{962\bibrangedash 982}
+  \field{title}{Exponential Operators and Parameter Differentiation in Quantum
+  Physics}
+  \verb{url}
+  \verb https://doi.org/10.1063/1.1705306
+  \endverb
+  \field{volume}{8}
+  \field{journaltitle}{Journal of Mathematical Physics}
+  \field{year}{1967}
+\endentry
+
+\entry{Zakrzewski2009}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Zakrzewski}{Z.}%
+     {Jakub}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Delande}{D.}%
+     {Dominique}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{ZJDD1}
+  \strng{fullhash}{ZJDD1}
+  \field{sortinit}{Z}
+  \field{number}{1}
+  \field{pages}{013602}
+  \field{title}{Breakdown of adiabaticity when loading ultracold atoms in
+  optical lattices}
+  \field{volume}{80}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2009}
+\endentry
+
+\entry{Pollmann2015}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Zaletel}{Z.}%
+     {Michael~P.}{M.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mong}{M.}%
+     {Roger S.~K.}{R.~S.~K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Karrasch}{K.}%
+     {Christoph}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Moore}{M.}%
+     {Joel~E.}{J.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pollmann}{P.}%
+     {Frank}{F.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Physical Society}%
+  }
+  \strng{namehash}{ZMP+1}
+  \strng{fullhash}{ZMPMRSKKCMJEPF1}
+  \field{sortinit}{Z}
+  \verb{doi}
+  \verb 10.1103/PhysRevB.91.165112
+  \endverb
+  \field{issue}{16}
+  \field{pages}{165112}
+  \field{title}{Time-evolving a matrix product state with long-ranged
+  interactions}
+  \verb{url}
+  \verb https://link.aps.org/doi/10.1103/PhysRevB.91.165112
+  \endverb
+  \field{volume}{91}
+  \field{journaltitle}{Phys. Rev. B}
+  \field{year}{2015}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Dong}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{Zhang}}{Z.}%
+     {J.~M.}{J.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Dong}}{D.}%
+     {R.~X.}{R.~X.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{ZJMDRX1}
+  \strng{fullhash}{ZJMDRX1}
+  \field{sortinit}{Z}
+  \verb{doi}
+  \verb 10.1088/0143-0807/31/3/016
+  \endverb
+  \verb{eprint}
+  \verb 1102.4006
+  \endverb
+  \field{pages}{591\bibrangedash 602}
+  \field{title}{{Exact diagonalization: the Bose-Hubbard model as an example}}
+  \field{volume}{31}
+  \field{journaltitle}{European Journal of Physics}
+  \field{eprinttype}{arXiv}
+  \field{eprintclass}{cond-mat.stat-mech}
+  \field{month}{05}
+  \field{year}{2010}
+\endentry
+
+\entry{Zhdanov2015}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Zhdanov}{Z.}%
+     {Dmitry~V}{D.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Seideman}{S.}%
+     {Tamar}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {APS}%
+  }
+  \strng{namehash}{ZDVST1}
+  \strng{fullhash}{ZDVST1}
+  \field{sortinit}{Z}
+  \field{number}{5}
+  \field{pages}{052109}
+  \field{title}{Role of control constraints in quantum optimal control}
+  \field{volume}{92}
+  \field{journaltitle}{Physical Review A}
+  \field{year}{2015}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

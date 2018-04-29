@@ -1,0 +1,120 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \imgcenter {7.75};
+	\def \imgwidth {17.5};
+	\def \xdist {1};
+	\def \xstart {1};
+	\def \xoffset {10.5};
+	\def \yoffset {-4};
+	\def \width {2};
+	
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+
+	
+	\SVD{\xstart}{0}{\xdist};
+	
+	\node (node1) at (\xstart , -1) {$j_n$};
+	\node (node2) at (\xstart + 2*\xdist, -1) {$j_{n+1}$};
+	\node (as1) at (\xstart -1.3 ,0) {$\alpha_{n-1}$};
+	
+	\node[tensor] (B1) at (\xstart + 3 * \xdist,0) {};
+	\node[tensor] (B2) at (\xstart + 4 * \xdist,0) {};
+	\node (j3) at (\xstart + 3 * \xdist , -1) {$j_{n+2}$};
+	\node (j4) at (\xstart + 4 * \xdist , -1) {$j_{n+3}$};
+	\node (a4) at (\xstart + 4 * \xdist +1.1 , 0) {$\alpha_{n+3}$};
+	
+	\node (B1lab) at (\xstart + 3 * \xdist -0.1 ,0.6) {$B^{[n+2]}$};
+	\node (B2lab) at (\xstart + 4 * \xdist +0.2 ,0.6) {$B^{[n+3]}$};
+	
+	\draw[-] (j3) -- (B1);
+	\draw[-] (j4) -- (B2);
+	\draw[-] (B2) -- (B1);
+	\draw[-] (a4) -- (B2);
+	
+	
+	\draw[->, line width=1mm] (\imgcenter - 0.75,0) -- (\imgcenter + 0.75,0);	
+	
+	
+	\node[tensor] (A1) at (\xoffset , 0) {};
+	\node[tensor, minimum width= \width cm] (phi1) at (\xoffset + 0.75 * \xdist + \width/2, 0) {};
+	\node[tensor] (B3) at (\xoffset + 1.5* \xdist + \width , 0) {};	
+	
+	\node (j1) at (\xoffset , -1) {$j_{n}$};
+	\node (j2) at (\xoffset + 0.75*\xdist + 0.35, -1) {$j_{n+1}$};
+	\node (j3) at (\xoffset + 0.75*\xdist + \width - 0.35, -1) {$j_{n+2}$};
+	\node (j4) at (\xoffset + 1.5*\xdist + \width, -1) {$j_{n+3}$};
+	
+	\node (a1) at (\xoffset -1.2 , 0) {$\alpha_{n-1}$};
+	\node (a4) at (\xoffset + 1.5* \xdist + \width + 1.1, 0) {$\alpha_{n+3}$};	
+	
+	\node (A1lab) at (\xoffset , 0.6) {$A^{[n]}$};
+	\node (B3lab) at (\xoffset + 1.5* \xdist + \width +0.2 , 0.6) {$B^{[n+3]}$};
+	\node (phi1lab) at (\xoffset + 0.75 * \xdist + \width/2, 0.6) {$\Phi^{[n+1,n+2]}$};	
+	
+	\draw[-] (j2) -- (j2 |-  phi1.south);
+	\draw[-] (j3) -- (j3 |-  phi1.south);	
+	\draw[-] (j1) -- (A1);
+	\draw[-] (a1) -- (A1);
+	\draw[-] (j4) -- (B3);
+	\draw[-] (B3) -- (a4);
+	\draw[-] (A1) -- (phi1);
+	\draw[-] (B3) -- (phi1);
+	
+	
+	%% --------------------------%%
+	
+	
+	\node[tensor] (A1) at (\xstart , \yoffset) {};
+	\SVD{\xstart + \xdist}{\yoffset}{\xdist};
+	\node[tensor] (B3) at (\xstart + 4* \xdist , \yoffset) {};	
+	
+	\node (j1) at (\xstart , \yoffset -1) {$j_{n}$};
+	\node (j2) at (\xstart + \xdist, \yoffset -1) {$j_{n+1}$};
+	\node (j3) at (\xstart + 3*\xdist , \yoffset -1) {$j_{n+2}$};
+	\node (j4) at (\xstart + 4*\xdist, \yoffset -1) {$j_{n+3}$};
+	
+	\node (a1) at (\xstart -1.3 , \yoffset) {$\alpha_{n-1}$};
+	\node (a4) at (\xstart + 4* \xdist + 1.1, \yoffset) {$\alpha_{n+3}$};	
+	
+	\node (A1lab) at (\xstart , \yoffset+ 0.6) {$A^{[n]}$};
+	\node (B3lab) at (\xstart + 4* \xdist , \yoffset+ 0.6) {$B^{[n+3]}$};
+	
+	\draw[-] (j1) -- (A1);
+	\draw[-] (a1) -- (A1);
+	\draw[-] (j4) -- (B3);
+	\draw[-] (B3) -- (a4);
+	
+	
+	\draw[->, line width=1mm] (\imgcenter - 0.75, \yoffset) -- (\imgcenter + 0.75, \yoffset);	
+	\node (svdlab) at (\imgcenter - 0.15 , 0.3 + \yoffset) {SVD};
+	
+	\node[tensor] (A1) at (\xoffset , \yoffset) {};
+	\node[tensor] (A2) at (\xoffset + \xdist , \yoffset) {};
+	\node[tensor, minimum width= \width cm] (phi2) at (\xoffset + 1.75 * \xdist + \width/2, \yoffset) {};
+	
+	
+	\node (j1) at (\xoffset , \yoffset -1) {$j_{n}$};
+	\node (j2) at (\xoffset + \xdist , \yoffset -1) {$j_{n+1}$};
+	\node (j3) at (\xoffset + 1.75*\xdist + 0.35, \yoffset -1) {$j_{n+2}$};
+	\node (j4) at (\xoffset + 1.75* \xdist + \width - 0.35, \yoffset -1) {$j_{n+3}$};
+	
+	\node (a1) at (\xoffset -1.2 , \yoffset) {$\alpha_{n-1}$};
+	\node (a4) at (\xoffset + 1.75 \xdist + \width + 0.9, \yoffset) {$\alpha_{n+3}$};	
+	
+	\node (A1lab) at (\xoffset , 0.6 + \yoffset) {$A^{[n]}$};
+	\node (A2lab) at (\xoffset + \xdist , 0.6 + \yoffset) {$A^{[n+1]}$};
+	\node (phi2lab) at (\xoffset + 1.75 * \xdist + \width/2, \yoffset + 0.6) {$\Phi^{[n+2,n+3]}$};	
+	
+	\draw[-] (j4) -- (j4 |-  phi2.south);
+	\draw[-] (j3) -- (j3 |-  phi2.south);	
+	\draw[-] (j1) -- (A1);
+	\draw[-] (a1) -- (A1);
+	\draw[-] (j2) -- (A2);
+	\draw[-] (phi2) -- (a4);
+	\draw[-] (A1) -- (A2);
+	\draw[-] (A2) -- (phi2);
+	
+	
+	\draw[->, line width=1mm] (\imgcenter +2 , \yoffset /4 ) -- (\imgcenter - 2, 3*\yoffset/4);	
+	\node (svdlab) at (\imgcenter -0.3 ,  \yoffset/2 +0.3) {SVD};
+	
+\end{tikzpicture}

@@ -1,0 +1,401 @@
+\begin{thebibliography}{10}
+
+\bibitem{Aharonov}
+J.~Anandan and Y.~Aharonov.
+\newblock Geometry of quantum evolution.
+\newblock {\em Phys. Rev. Lett.}, 65:1697--1700, Oct 1990.
+
+\bibitem{WiemanCornell1995}
+Mike~H Anderson, Jason~R Ensher, Michael~R Matthews, Carl~E Wieman, Eric~A
+  Cornell, et~al.
+\newblock Observation of bose-einstein condensation in a dilute atomic vapor.
+\newblock {\em science}, 269(5221):198--201, 1995.
+
+\bibitem{Baxter1968}
+RJ~Baxter.
+\newblock Dimers on a rectangular lattice.
+\newblock {\em Journal of Mathematical Physics}, 9(4):650--654, 1968.
+
+\bibitem{Bloch2012}
+Immanuel Bloch, Jean Dalibard, and Sylvain Nascimbene.
+\newblock Quantum simulations with ultracold quantum gases.
+\newblock {\em Nature Physics}, 8(4):267--276, 2012.
+
+\bibitem{manybodyBloch}
+Immanuel Bloch, Jean Dalibard, and Wilhelm Zwerger.
+\newblock Many-body physics with ultracold gases.
+\newblock {\em Rev. Mod. Phys.}, 80:885--964, Jul 2008.
+
+\bibitem{BECcontrol}
+A.~Borzì and U.~Hohenester.
+\newblock Multigrid optimization schemes for solving bose–einstein condensate
+  control problems.
+\newblock {\em SIAM Journal on Scientific Computing}, 30(1):441--462, 2008.
+
+\bibitem{bruus}
+H.~Bruus and K.~Flensberg.
+\newblock {\em Many-Body Quantum Theory in Condensed Matter Physics: An
+  Introduction}.
+\newblock Oxford Graduate Texts. OUP Oxford, 2004.
+
+\bibitem{Caneva2009}
+T.~Caneva, M.~Murphy, T.~Calarco, R.~Fazio, S.~Montangero, V.~Giovannetti, and
+  G.~E. Santoro.
+\newblock Optimal control at the quantum speed limit.
+\newblock {\em Phys. Rev. Lett.}, 103:240501, Dec 2009.
+
+\bibitem{cohen1992atom}
+Claude Cohen-Tannoudji, Jacques Dupont-Roc, Gilbert Grynberg, and Patricia
+  Thickstun.
+\newblock {\em Atom-photon interactions: basic processes and applications}.
+\newblock Wiley Online Library, 1992.
+
+\bibitem{Dalibard2011}
+Jean Dalibard, Fabrice Gerbier, Gediminas Juzeli{\=u}nas, and Patrik
+  {\"O}hberg.
+\newblock Colloquium: Artificial gauge potentials for neutral atoms.
+\newblock {\em Reviews of Modern Physics}, 83(4):1523, 2011.
+
+\bibitem{deFouquieres2011}
+P~De~Fouquieres, SG~Schirmer, SJ~Glaser, and Ilya Kuprov.
+\newblock Second order gradient ascent pulse engineering.
+\newblock {\em Journal of Magnetic Resonance}, 212(2):412--417, 2011.
+
+\bibitem{Doria2011}
+Patrick Doria, Tommaso Calarco, and Simone Montangero.
+\newblock Optimal control technique for many-body quantum dynamics.
+\newblock {\em Phys. Rev. Lett.}, 106:190501, May 2011.
+
+\bibitem{Dukelsky1998}
+J~Dukelsky.
+\newblock J. dukelsky, ma mart{\'\i}n-delgado, t. nishino, and g. sierra,
+  europhys. lett. 43, 457 (1998).
+\newblock {\em Europhys. Lett.}, 43:457, 1998.
+
+\bibitem{Cramer}
+J.~Eisert, M.~Cramer, and M.~B. Plenio.
+\newblock Colloquium: Area laws for the entanglement entropy.
+\newblock {\em Rev. Mod. Phys.}, 82:277--306, Feb 2010.
+
+\bibitem{characPhases}
+Satoshi Ejima, Holger Fehske, Florian Gebhard, Kevin zu~M\"unster, Michael
+  Knap, Enrico Arrigoni, and Wolfgang von~der Linden.
+\newblock Characterization of mott-insulating and superfluid phases in the
+  one-dimensional bose-hubbard model.
+\newblock {\em Phys. Rev. A}, 85:053644, May 2012.
+
+\bibitem{beyondQSL}
+Miroslav Gajdacz, Kunal~K. Das, Jan Arlt, Jacob~F. Sherson, and Tom\'a\ifmmode
+  \check{s}\else~\v{s}\fi{} Opatrn\'y.
+\newblock Time-limited optimal dynamics beyond the quantum speed limit.
+\newblock {\em Phys. Rev. A}, 92:062106, Dec 2015.
+
+\bibitem{Gemelke2009}
+Nathan Gemelke, Xibo Zhang, Chen-Lung Hung, and Cheng Chin.
+\newblock In situ observation of incompressible mott-insulating domains in
+  ultracold atomic gases.
+\newblock {\em Nature}, 460(7258):995, 2009.
+
+\bibitem{greiner}
+Markus Greiner.
+\newblock {\em Ultracold quantum gases in three-dimensional optical lattice
+  potentials}.
+\newblock PhD thesis, April 2003.
+
+\bibitem{grimm}
+Rudolf Grimm, Matthias Weidemüller, and Yurii~B. Ovchinnikov.
+\newblock Optical dipole traps for neutral atoms.
+\newblock volume~42 of {\em Advances In Atomic, Molecular, and Optical
+  Physics}, pages 95 -- 170. Academic Press, 2000.
+
+\bibitem{Gross1961}
+E.~P. Gross.
+\newblock Structure of a quantized vortex in boson systems.
+\newblock {\em Il Nuovo Cimento (1955-1965)}, 20(3):454--477, May 1961.
+
+\bibitem{Hastings2007}
+M.~B. Hastings.
+\newblock An area law for one-dimensional quantum systems.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2007(08):P08024, 2007.
+
+\bibitem{Hohenester2007}
+Ulrich Hohenester, Per~Kristian Rekdal, Alfio Borz{\`\i}, and J{\"o}rg
+  Schmiedmayer.
+\newblock Optimal quantum control of bose-einstein condensates in magnetic
+  microtraps.
+\newblock {\em Physical Review A}, 75(2):023602, 2007.
+
+\bibitem{Huang1983}
+Garng~M Huang, Tzyh~J Tarn, and John~W Clark.
+\newblock On the controllability of quantum-mechanical systems.
+\newblock {\em Journal of Mathematical Physics}, 24(11):2608--2618, 1983.
+
+\bibitem{Jager2014}
+Georg J{\"a}ger, Daniel~M Reich, Michael~H Goerz, Christiane~P Koch, and Ulrich
+  Hohenester.
+\newblock Optimal quantum control of bose-einstein condensates in magnetic
+  microtraps: Comparison of gradient-ascent-pulse-engineering and krotov
+  optimization schemes.
+\newblock {\em Physical Review A}, 90(3):033628, 2014.
+
+\bibitem{Zoller1999}
+D.~Jaksch, H.-J. Briegel, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
+\newblock Entanglement of atoms via cold controlled collisions.
+\newblock {\em Phys. Rev. Lett.}, 82:1975--1978, Mar 1999.
+
+\bibitem{Jaksch}
+D.~Jaksch, C.~Bruder, J.~I. Cirac, C.~W. Gardiner, and P.~Zoller.
+\newblock Cold bosonic atoms in optical lattices.
+\newblock {\em Phys. Rev. Lett.}, 81:3108--3111, Oct 1998.
+
+\bibitem{JakschZoller}
+D.~Jaksch and P.~Zoller.
+\newblock The cold atom hubbard toolbox.
+\newblock {\em Annals of Physics}, 315(1):52 -- 79, 2005.
+\newblock Special Issue.
+
+\bibitem{Khaneja2005}
+Navin Khaneja, Timo Reiss, Cindie Kehlet, Thomas Schulte-Herbr{\"u}ggen, and
+  Steffen~J Glaser.
+\newblock Optimal control of coupled spin dynamics: design of nmr pulse
+  sequences by gradient ascent algorithms.
+\newblock {\em Journal of magnetic resonance}, 172(2):296--305, 2005.
+
+\bibitem{kittel}
+C.~Kittel.
+\newblock {\em Introduction to Solid State Physics}.
+\newblock Wiley, 2004.
+
+\bibitem{kittel1963}
+Charles Kittel and Ching-yao Fong.
+\newblock {\em Quantum theory of solids}, volume~3.
+\newblock Wiley New York, 1963.
+
+\bibitem{kohn1959analyticWannier}
+Walter Kohn.
+\newblock Analytic properties of bloch waves and wannier functions.
+\newblock {\em Physical Review}, 115(4):809, 1959.
+
+\bibitem{Kuhner2000}
+Till~D. K\"uhner, Steven~R. White, and H.~Monien.
+\newblock One-dimensional bose-hubbard model with nearest-neighbor interaction.
+\newblock {\em Phys. Rev. B}, 61:12474--12489, May 2000.
+
+\bibitem{Lanczos}
+Cornelius Lanczos.
+\newblock {An iteration method for the solution of the eigenvalue problem of
+  linear differential and integral operators}.
+\newblock {\em J. Res. Natl. Bur. Stand. B}, 45:255--282, 1950.
+
+\bibitem{QSLtoffoli}
+Lev~B. Levitin and Tommaso Toffoli.
+\newblock Fundamental limit on the rate of quantum dynamics: The unified bound
+  is tight.
+\newblock {\em Phys. Rev. Lett.}, 103:160502, Oct 2009.
+
+\bibitem{lewenstein}
+Maciej Lewenstein, Anna Sanpera, Veronica Ahufinger, Bogdan Damski, Aditi
+  Sen(De), and Ujjwal Sen.
+\newblock Ultracold atomic gases in optical lattices: mimicking condensed
+  matter physics and beyond.
+\newblock {\em Advances in Physics}, 56(2):243--379, 2007.
+
+\bibitem{Mandelstam1991}
+L.~Mandelstam and Ig. Tamm.
+\newblock {\em The Uncertainty Relation Between Energy and Time in
+  Non-relativistic Quantum Mechanics}, pages 115--123.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1991.
+
+\bibitem{McCulloch2007}
+Ian~P McCulloch.
+\newblock From density-matrix renormalization group to matrix product states.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2007(10):P10014, 2007.
+
+\bibitem{wright}
+Jorge Nocedal and Stephen~J. Wright.
+\newblock {\em Numerical Optimization}.
+\newblock Springer, New York, NY, USA, second edition, 2006.
+
+\bibitem{Ostlund1995}
+Stellan {\"O}stlund and Stefan Rommer.
+\newblock Thermodynamic limit of density matrix renormalization.
+\newblock {\em Physical review letters}, 75(19):3537, 1995.
+
+\bibitem{PenroseOnsager}
+Oliver Penrose and Lars Onsager.
+\newblock Bose-einstein condensation and liquid helium.
+\newblock {\em Phys. Rev.}, 104:576--584, Nov 1956.
+
+\bibitem{pethick2002bose}
+Christopher~J Pethick and Henrik Smith.
+\newblock {\em Bose-Einstein condensation in dilute gases}.
+\newblock Cambridge university press, 2002.
+
+\bibitem{Pitaevskii}
+L.P. Pitaevskii.
+\newblock Vortex lines in an imperfect bose gas.
+\newblock {\em Soviet Physics JETP}, 13(2):451--454, August 1961.
+
+\bibitem{plischke}
+M.~Plischke and B.~Bergersen.
+\newblock {\em Equilibrium Statistical Physics}.
+\newblock World Scientific, 2006.
+
+\bibitem{Ramakrishna1995}
+Viswanath Ramakrishna, Murti~V Salapaka, Mohammed Dahleh, Herschel Rabitz, and
+  Anthony Peirce.
+\newblock Controllability of molecular systems.
+\newblock {\em Physical Review A}, 51(2):960, 1995.
+
+\bibitem{Rice2000}
+Stuart~Alan Rice, Meishan Zhao, et~al.
+\newblock {\em Optical control of molecular dynamics}.
+\newblock John Wiley, 2000.
+
+\bibitem{ipnote}
+Robert Robere.
+\newblock Interior point methods and linear programming, 2012.
+
+\bibitem{Sachdev2007QPT}
+Subir Sachdev.
+\newblock {\em Quantum phase transitions}.
+\newblock Wiley Online Library, 2007.
+
+\bibitem{Molmer2010}
+M.~Saffman, T.~G. Walker, and K.~M\o{}lmer.
+\newblock Quantum information with rydberg atoms.
+\newblock {\em Rev. Mod. Phys.}, 82:2313--2363, Aug 2010.
+
+\bibitem{Schirmer2001}
+Sonia~G Schirmer, H~Fu, and Allan~I Solomon.
+\newblock Complete controllability of quantum systems.
+\newblock {\em Physical Review A}, 63(6):063410, 2001.
+
+\bibitem{schollwock}
+Ulrich Schollwöck.
+\newblock The density-matrix renormalization group in the age of matrix product
+  states.
+\newblock {\em Annals of Physics}, 326(1):96 -- 192, 2011.
+\newblock January 2011 Special Issue.
+
+\bibitem{EntropyScaling}
+Norbert Schuch, Michael~M. Wolf, Frank Verstraete, and J.~Ignacio Cirac.
+\newblock Entropy scaling and simulability by matrix product states.
+\newblock {\em Phys. Rev. Lett.}, 100:030504, Jan 2008.
+
+\bibitem{Shapiro2003}
+Moshe Shapiro and Paul Brumer.
+\newblock Principles of the quantum control of molecular processes.
+\newblock {\em Principles of the Quantum Control of Molecular Processes, by
+  Moshe Shapiro, Paul Brumer, pp. 250. ISBN 0-471-24184-9. Wiley-VCH, February
+  2003.}, page 250, 2003.
+
+\bibitem{Simon2011}
+Jonathan Simon, Waseem~S Bakr, Ruichao Ma, M~Eric Tai, Philipp~M Preiss, and
+  Markus Greiner.
+\newblock Quantum simulation of antiferromagnetic spin chains in an optical
+  lattice.
+\newblock {\em Nature}, 472(7343):307--312, 2011.
+
+\bibitem{Spielman2008}
+I.~B. Spielman, W.~D. Phillips, and J.~V. Porto.
+\newblock Condensate fraction in a 2d bose gas measured across the
+  mott-insulator transition.
+\newblock {\em Phys. Rev. Lett.}, 100:120402, Mar 2008.
+
+\bibitem{ITensor}
+E.~Miles Stoudenmire and Steven~R. White.
+\newblock Itensor library.
+
+\bibitem{Tarruell2012}
+Leticia Tarruell, Daniel Greif, Thomas Uehlinger, Gregor Jotzu, and Tilman
+  Esslinger.
+\newblock Creating, moving and merging dirac points with a fermi gas in a
+  tunable honeycomb lattice.
+\newblock {\em Nature}, 483(7389):302--305, 2012.
+
+\bibitem{FrankBloch}
+S~Van~Frank, M~Bonneau, J~Schmiedmayer, Sebastian Hild, Christian Gross, Marc
+  Cheneau, Immanuel Bloch, T~Pichler, A~Negretti, T~Calarco, et~al.
+\newblock Optimal control of complex atomic quantum systems.
+\newblock {\em Scientific reports}, 6, 2016.
+
+\bibitem{vanoosten}
+D.~van Oosten, P.~van~der Straten, and H.~T.~C. Stoof.
+\newblock Quantum phases in an optical lattice.
+\newblock {\em Phys. Rev. A}, 63:053601, Apr 2001.
+
+\bibitem{Vidal2007}
+G.~Vidal.
+\newblock Classical simulation of infinite-size quantum lattice systems in one
+  spatial dimension.
+\newblock {\em Phys. Rev. Lett.}, 98:070201, Feb 2007.
+
+\bibitem{Vidal2003}
+Guifr{\'e} Vidal.
+\newblock Efficient classical simulation of slightly entangled quantum
+  computations.
+\newblock {\em Physical review letters}, 91(14):147902, 2003.
+
+\bibitem{Vidal2004}
+Guifr{\'e} Vidal.
+\newblock Efficient simulation of one-dimensional quantum many-body systems.
+\newblock {\em Physical review letters}, 93(4):040502, 2004.
+
+\bibitem{Winckel2008}
+G~von Winckel and A~Borzì.
+\newblock Computational techniques for a quantum control problem with h 1
+  -cost.
+\newblock {\em Inverse Problems}, 24(3):034007, 2008.
+
+\bibitem{ipopt}
+Andreas W{\"a}chter.
+\newblock Short tutorial: Getting started with ipopt in 90 minutes.
+\newblock In Uwe Naumann, Olaf Schenk, Horst~D. Simon, and Sivan Toledo,
+  editors, {\em Combinatorial Scientific Computing}, number 09061 in Dagstuhl
+  Seminar Proceedings, Dagstuhl, Germany, 2009. Schloss Dagstuhl -
+  Leibniz-Zentrum fuer Informatik, Germany.
+
+\bibitem{Werschnik2007}
+J~Werschnik and EKU Gross.
+\newblock Quantum optimal control theory.
+\newblock {\em Journal of Physics B: Atomic, Molecular and Optical Physics},
+  40(18):R175, 2007.
+
+\bibitem{White1992}
+Steven~R. White.
+\newblock Density matrix formulation for quantum renormalization groups.
+\newblock {\em Phys. Rev. Lett.}, 69:2863--2866, Nov 1992.
+
+\bibitem{White1993}
+Steven~R White.
+\newblock Density-matrix algorithms for quantum renormalization groups.
+\newblock {\em Physical Review B}, 48(14):10345, 1993.
+
+\bibitem{WideraThesis}
+Artur Widera.
+\newblock {\em Constructing correlated spin states with neutral atoms in
+  optical lattices}.
+\newblock PhD thesis, Ph. D. thesis, Johannes Gutenberg-Universit{\"a}t, Mainz,
+  2008.
+
+\bibitem{Wilcox1967}
+R.~M. Wilcox.
+\newblock Exponential operators and parameter differentiation in quantum
+  physics.
+\newblock {\em Journal of Mathematical Physics}, 8(4):962--982, 1967.
+
+\bibitem{Pollmann2015}
+Michael~P. Zaletel, Roger S.~K. Mong, Christoph Karrasch, Joel~E. Moore, and
+  Frank Pollmann.
+\newblock Time-evolving a matrix product state with long-ranged interactions.
+\newblock {\em Phys. Rev. B}, 91:165112, Apr 2015.
+
+\bibitem{Dong}
+J.~M. {Zhang} and R.~X. {Dong}.
+\newblock {Exact diagonalization: the Bose-Hubbard model as an example}.
+\newblock {\em European Journal of Physics}, 31:591--602, May 2010.
+
+\end{thebibliography}

@@ -1,0 +1,39 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \imgcenter {4.75};
+	\def \imgwidth {17.5};
+	\def \xdist {1};
+	\def \xstart {1};
+	\def \xoffset {7.75};
+	\def \width {2};
+	
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+
+
+	\node[tensor, minimum width= \width cm] (phi1) at (\xstart, 0) {};	
+	
+	\node (node1) at (\xstart - \width/2 + 0.35, -1) {$j_n$};
+	\node (node2) at (\xstart + \width/2 - 0.35, -1) {$j_{n+1}$};
+	\node (as1) at (\xstart - \width/2 - 1 ,0) {$\alpha_{n-1}$};
+	\node (as2) at (\xstart + \width/2 + 1 ,0) {$\alpha_{n+1}$};
+	
+	\draw[-] (node1) -- (node1 |-  phi1.south);
+	\draw[-] (node2) -- (node2 |-  phi1.south);
+	\draw[-] (phi1) -- (as1);
+	\draw[-] (phi1) -- (as2);		
+	
+		
+	\draw[->, line width=1mm] (\imgcenter - 0.75,0) -- (\imgcenter + 0.75,0);
+	\node (svdlab) at (\imgcenter - 0.15 , 0.3) {SVD};
+	
+	
+	\SVD{\xoffset}{0}{\xdist};
+	
+	\node (node1) at (\xoffset , -1) {$j_n$};
+	\node (node2) at (\xoffset + 2*\xdist, -1) {$j_{n+1}$};
+	\node (as1) at (\xoffset -1.3 ,0) {$\alpha_{n-1}$};
+	\node (as2) at (\xoffset + 2*\xdist + 1.4 ,0) {$\alpha_{n+1}$};
+
+	
+	\node (phi1lab) at (\xstart,0.6) {$\tilde{\Phi}^{[n , n+1]}$};
+
+\end{tikzpicture}

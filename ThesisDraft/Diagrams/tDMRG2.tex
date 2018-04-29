@@ -1,0 +1,45 @@
+\begin{tikzpicture}[inner sep=1mm]
+	\def \imgcenter {4.5};
+	\def \imgwidth {17.5};
+	\def \xdist {1};
+	\def \xstart {1};
+	\def \xoffset {8};
+	\def \width {2};
+	\def \length {-1.8};
+	
+	\node[minimum width=\imgwidth cm] (fake) at (\imgcenter ,0) {};
+
+
+	\node[tensor, minimum width= \width cm] (phi1) at (\xstart, 0) {};	
+	
+	\node (node1) at (\xstart - \width/2 + 0.35, \length) {$j_n$};
+	\node (node2) at (\xstart + \width/2 - 0.35, \length) {$j_{n+1}$};
+	\node (as1) at (\xstart - \width/2 - 1 ,0) {$\alpha_{n-1}$};
+	\node (as2) at (\xstart + \width/2 + 1 ,0) {$\alpha_{n+1}$};
+	
+	\draw[-] (node1) -- (node1 |-  phi1.south);
+	\draw[-] (node2) -- (node2 |-  phi1.south);
+	\draw[-] (phi1) -- (as1);
+	\draw[-] (phi1) -- (as2);		
+	
+		
+	\node (eq) at (\imgcenter , 0) {$=$};
+
+
+	\node[tensor, minimum width= \width cm] (phi2) at (\xoffset, 0) {};
+	
+	\node (node1) at (\xoffset - \width/2 + 0.35, \length) {$j_n$};
+	\node (node2) at (\xoffset + \width/2 - 0.35, \length) {$j_{n+1}$};
+	\node (as1) at (\xoffset - \width/2 - 1 ,0) {$\alpha_{n-1}$};
+	\node (as2) at (\xoffset + \width/2 + 1 ,0) {$\alpha_{n+1}$};
+    
+	\draw[-] (node1) -- (node1 |-  phi2.south);
+	\draw[-] (node2) -- (node2 |-  phi2.south);
+	\draw[-] (phi2) -- (as1);
+	\draw[-] (phi2) -- (as2);		
+	
+	\node[twositeop, minimum width= \width cm] (U) at (\xoffset, -1) {$U^{[n,n+1]}$};
+	
+	\node (phi1lab) at (\xstart,0.6) {$\tilde{\Phi}^{[n , n+1]}$};
+	\node (phi2lab) at (\xoffset,0.6) {$\Phi^{[n , n+1]}$};
+\end{tikzpicture}
