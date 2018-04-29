@@ -1,0 +1,84 @@
+\documentclass[english,a4paper,twoside,onecolumn,11pt]{memoir}
+	\usepackage[english]{babel}
+	\usepackage[T1]{fontenc}	
+	\usepackage[utf8]{inputenc}
+
+%% Figures
+	\usepackage{graphicx}
+	\usepackage{subcaption}
+%	\usepackage[labelfont=bf,textfont={it},size=small]{caption}
+%	\usepackage[labelfont=bf,textfont={it}]{subcaption}
+%	\usepackage{circuitikz}
+	\usepackage{pgfplots}
+		\newlength\figureheight
+		\newlength\figurewidth
+		\pgfplotsset{compat=newest}
+		\usepgfplotslibrary{external}
+		\usepgfplotslibrary{groupplots}
+		\usetikzlibrary{pgfplots.external}
+		\usetikzlibrary{fadings}
+%		\tikzexternalize % Used to externalize tikz figure such they are not recreated every day
+%		%\tikzset{external/force remake} % Use when all figure must be remade
+%		\tikzsetexternalprefix{tikz2pdf/}
+	
+	
+	\captionsetup[subfigure]{labelfont=bf,textfont=normalfont,singlelinecheck=off,justification=raggedright}
+
+%% Index
+\usepackage{idxlayout}
+\makeindex
+		
+%% Math
+	\usepackage{mathtools,mathrsfs}
+	\usepackage{amsmath,amssymb}
+	\usepackage{bbold}
+	\usepackage{bm,bbm}
+	\usepackage{siunitx}
+	\usepackage{physics}
+	\usepackage{braket}
+	\usepackage{dsfont}
+	\newtheorem{theorem}{Theorem}
+	
+	\DeclareMathOperator{\e}{e}
+	\DeclareMathOperator{\im}{i}
+	
+%	\let\origtau\tau % save the original form of '\tau'
+%	\renewcommand{\tau}{\scalebox{1.44}{$\origtau$}}
+
+%% Fonts
+	\usepackage{palatino}
+	%\usepackage{mathpazo}
+	\usepackage{csquotes}
+
+%% Drafts
+	\usepackage{lipsum}
+	\usepackage[draft]{fixme}
+	\usepackage{xspace}
+	
+%% Algorithms
+	\usepackage{algorithm}
+	\usepackage{algpseudocode}
+
+%% Pagesetup
+	\usepackage{geometry}
+	\usepackage{microtype}
+
+%% Bibliography
+	\usepackage[backend=biber,sorting=none,maxcitenames=2,style=numeric]{biblatex}
+	\addbibresource{references.bib}
+
+%% Links and refs
+	\usepackage{url}
+	\usepackage[colorlinks=true,linkcolor=black,citecolor=black]{hyperref}
+	\usepackage{cleveref}
+
+%% Layout
+	\setsecnumdepth{subsection}
+	\setcounter{tocdepth}{2}
+	\chapterstyle{veelo}
+	%\chapterstyle{ell}
+
+%% For quote
+	\epigraphfontsize{\small\itshape}
+	\setlength\epigraphwidth{8cm}
+	\setlength\epigraphrule{0pt}

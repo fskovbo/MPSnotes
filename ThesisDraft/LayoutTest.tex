@@ -1,0 +1,62 @@
+\input{../config/StigPreamble}
+\input{../config/TensorPreamble}
+
+%% Defines thesistitle, authorname, studentnumber, supervisor, and all other personal stuff
+\newcommand{\thesistitle}{Superconducting circuits as a platform for tailored quantum dynamics}
+\renewcommand{\author}{Stig Elkjær Rasmussen}
+\newcommand{\studentNo}{201303692 -- au475570}
+\newcommand{\supervisor}{Nikolaj Thomas Zinner}
+\newcommand{\email}{\url{stig.elkjaer.rasmussen@post.au.dk}}
+\newcommand{\afldate}{1st of June, }
+\newcommand{\aflyear}{2018}
+% Replace by a nice picture related to the thesis
+\newcommand{\coverPicPath}{Figures/logo.pdf}
+\newcommand{\coverPicDescription}{The old and nice logo of Aarhus University, which does not look like a penis.}
+\newcommand{\personalquote}{\epigraph{Das ist nicht nur nicht richtig; es ist nicht einmal falsch! (That is not only not right; it is not even wrong!)}{--- \textup{Wolfgang Pauli (1900 - 1958)}}}  
+
+\begin{document}
+	%% Coverpage, titlepage, colophon
+	\frontmatter
+		\input{frontmatter/coverPage} 
+		\input{frontmatter/titlePage} 
+		\input{frontmatter/colophon} 	
+		\restoregeometry
+	
+	%% Outline, table of contents, acknowledgements and preface
+		\pagestyle{plain}
+		\include{frontmatter/outline}
+			
+		\thispagestyle{empty} % This page is intentional left blank
+		\phantom{blabla}
+		\clearpage
+		\tableofcontents 
+		\clearpage
+		\input{frontmatter/acknowledgements}
+	
+	%% The actual thesis
+	\mainmatter
+		\pagestyle{headings}
+		\input{tex/ColdGases}
+		\input{tex/OptimalControl}
+		\input{tex/MatrixProductStates}
+		\input{tex/TensorAlgorithms}
+		\input{tex/Results}
+	
+	%% Appenix and other shit
+	\appendix
+	\input{tex/LZoptimalControl}
+	\input{tex/MPSdiagrammatics}
+	\input{tex/BuildingMPOfromH}
+		
+	\backmatter
+	%% Bibliography
+	\printbibliography
+	\renewcommand*{\bibfont}{\raggedright}
+	%\clearpage
+	%\listoffigures % prints list of figures
+	%\clearpage
+	%\listoftables % prints list of tables
+	%\clearpage
+	\printindex % Prints an index (if any word are indexed using \index{...})
+
+\end{document}

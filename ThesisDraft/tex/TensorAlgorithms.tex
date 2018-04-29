@@ -81,7 +81,7 @@ In order to find the ground state of the system on can introduce a Lagrangian mu
 	\label{eq:lagrange}
 \end{equation}
 whereby the desired ground state, $\ket{\psi}$, and ground state energy, $\lambda^0$, will be reached.\\
-Trying to optimize an entire MPS at once is a highly non-linear problem involving an extremely large number of variables. However, the problem can be linearised by only considering the variables of a single tensor (site) at a time, while keeping the rest of the MPS constant. By varying just a single tensor at a time, one will continuously find states lower in energy, until convergence is reached. However, this procedure is very prone to getting stuck in a local extrema. To circumvent this, one can consider two sites at a time and optimize with regards to a two-site tensor, created by momentarily merging the two sites \cite{WhiteDMRG}.\\
+Trying to optimize an entire MPS at once is a highly non-linear problem involving an extremely large number of variables. However, the problem can be linearised by only considering the variables of a single tensor (site) at a time, while keeping the rest of the MPS constant. By varying just a single tensor at a time, one will continuously find states lower in energy, until convergence is reached. However, this procedure is very prone to getting stuck in a local extrema. To circumvent this, one can consider two sites at a time and optimize with regards to a two-site tensor, created by momentarily merging the two sites \cite{White1993}.\\
 Consider the variation of the tensors $M^{[n]}$ and $M^{[n+1]}$. Expressing the minimization problem of eq. \eqref{eq:lagrange} in terms of the left and right environments (as done in eq. \eqref{eq:HPsi}) yields
 \begin{align}
 	\bra{\psi} \hat{H} \ket{\psi} &= \sum_{\substack{j_n , j_n ' \\ j_{n+1} , j_{n+1} '}} \sum_{\alpha_{n-1} ' , \alpha_n ', \alpha_{n+1} '} \sum_{\alpha_{n-1} , \alpha_n , \alpha_{n+1}} \sum_{\beta_{n-1} , \beta_n , \beta_{n+1}} L_{\alpha_{n-1}, \beta_{n-1} , \alpha_{n-1} '}^{[n-1]} \; W_{\beta_{n_1}, \beta_n}^{[n] j_n , j_n '} \; W_{\beta_{n}, \beta_{n+1}}^{[n+1] j_{n+1} , j_{n+1} '} \nonumber \\
@@ -159,19 +159,19 @@ This concludes the two-site update sequence, which is illustrated in figure \ref
 		\centering
 		\caption{\textbf{Merge:}}
 		\input{Diagrams/twoSiteUpdateStep1.tex}
-	\end{subfigure}\\[.8cm]
+	\end{subfigure}\\[.25cm]
 	
 	\begin{subfigure}{\textwidth}
 		\centering
 		\caption{\textbf{Solve eigenprobem:}}
 		\input{Diagrams/twoSiteUpdateStep2.tex}
-	\end{subfigure}\\[.8cm]
+	\end{subfigure}\\[.25cm]
 
 	\begin{subfigure}{\textwidth}
 		\centering
 		\caption{\textbf{Unmerge:}}
 		\input{Diagrams/twoSiteUpdateStep3.tex}
-	\end{subfigure}\\[.8cm]
+	\end{subfigure}\\[.25cm]
 
 	\begin{subfigure}{\textwidth}
 		\centering
@@ -184,7 +184,7 @@ This concludes the two-site update sequence, which is illustrated in figure \ref
 	\label{fig:twoSiteUpdate}
 \end{figure}
 
-Some comments regarding this sequence are in order: The matrices of the eigenvalue problem have dimensions $( d^2 D^2 \times d^2 D^2)$, which is generally too much for exact diagonalization, however, since only the lowest eigenvalue is of interest, one can use an iterative eigensolver \cite{Lanczos}. Furthermore, if the MPS is not in the proper mixed-canonical form, the eigenvalue problem turns into a generalized eigenvalue problem, which can be numerically quite demanding. Thus, updating the left and right environments in step (4) is necessary, since it leads to great simplifications in step (2). Lastly, one could also consider just a single site when updating, however, this method is very prone to getting stuck \cite{WhiteSingleSite}. By updating two sites at once, one actually optimizes the bond between them. Hence, after updating the two sites, one must only iterate a single site. Optimization is done with regards to the current configuration, whereby it depends on previous updates. To compensate for this, one must sweep through the entire system multiple times, which leads to the following algorithm for iterative ground state search, which follows the structure of the DMRG algorithm:
+Some comments regarding this sequence are in order: The matrices of the eigenvalue problem have dimensions $( d^2 D^2 \times d^2 D^2)$, which is generally too much for exact diagonalization, however, since only the lowest eigenvalue is of interest, one can use an iterative eigensolver \cite{Lanczos}. Furthermore, if the MPS is not in the proper mixed-canonical form, the eigenvalue problem turns into a generalized eigenvalue problem, which can be numerically quite demanding. Thus, updating the left and right environments in step (4) is necessary, since it leads to great simplifications in step (2). Lastly, one could also consider just a single site when updating, however, this method is very prone to getting stuck \cite{White2005}. By updating two sites at once, one actually optimizes the bond between them. Hence, after updating the two sites, one must only iterate a single site. Optimization is done with regards to the current configuration, whereby it depends on previous updates. To compensate for this, one must sweep through the entire system multiple times, which leads to the following algorithm for iterative ground state search, which follows the structure of the DMRG algorithm:
 
 \begin{algorithm}
 \begin{algorithmic}
@@ -271,7 +271,7 @@ Exponentiating the Hamiltonian is non-trivial due to the non-commutativity of th
 \begin{equation}
 	[ \hat{h}_{\mathrm{odd}}^{[n , n+1]} \; , \; \hat{h}_{\mathrm{even}}^{[n , n+1]} ] \neq 0 \; .
 \end{equation}
-Considering a small time slice, $\delta t$, the exponentiation can be achieved through the Trotter-Suzuki expansion \cite{Suzuki}. To first order this reads
+Considering a small time slice, $\delta t$, the exponentiation can be achieved through the Trotter-Suzuki expansion \cite{Suzuki1991}. To first order this reads
 \begin{equation}
 	\e^{- \im \hat{H} \; \Delta t} = \e^{- \im \hat{H}_{\mathrm{odd}} \; \Delta t } \e^{- \im \hat{H}_{\mathrm{even}} \; \Delta t} \; + \; \;  \mathrm{O}(\Delta t^2) \; ,
 \end{equation}
@@ -415,7 +415,7 @@ Inserting the derivatives of eq. \eqref{eq:STpropderiv1} and \eqref{eq:STpropder
 	&= - \Re \Braket{\chi (t_j) | i \hat{H}_U \Delta t | \psi (t_{j})} \; . \label{eq:STcostgrad}
 \end{align}  
 Thus, the combination of the Suzuki-Trotter expansion and a diagonal control Hamiltonian eliminates all higher order contributions to the gradient. Thereby, the gradient of the cost is exact up to the order of the expansion.
-\begin{figure}[h!]
+\begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/CompareGradientsGRAPE.pdf}
     \caption{\textit{\textbf{(a)}: Numerical gradient along with gradient calculated via eq. \eqref{eq:STcostgrad}. \textbf{(b)}: Difference between the two gradients. \textbf{(c)}: Absolute relative difference between the two gradients.}}
